@@ -6,7 +6,7 @@ import slide2 from './slide2.jpg';
 import slide3 from './slide3.jpg';
 import slide4 from './slide4.jpg';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext'; 
+import { useAuth } from '../../context/AuthContext';
 import HomePage from '../home page/HomePage';
 import MenuBar from '../menu-bar/MenuBar';
 
@@ -16,7 +16,7 @@ const FrontPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const { token } = useAuth(); 
+  const { token } = useAuth();
   const homePageRef = useRef(null);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const FrontPage = () => {
     if (!isLoading) {
       const interval = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-      }, 3000); 
+      }, 3000);
 
       return () => clearInterval(interval);
     }

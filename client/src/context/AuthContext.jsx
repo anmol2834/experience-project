@@ -10,29 +10,35 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const validateToken = async () => {
-      if (token) {
-        try {
-          const response = await fetch('http://localhost:5000/validate-token', {
-            headers: {
-              'Authorization': `Bearer ${token}`
-            }
-          });
-          const result = await response.json();
-          if (!result.valid) {
-            setToken(null);
-            localStorage.removeItem('token');
-          }
-        } catch (error) {
-          console.error('Token validation error:', error);
+      if (!token) {
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:5000/validate-token', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
+        const result = await response.json();
+        if (!result.valid) {
           setToken(null);
           localStorage.removeItem('token');
+          navigate('/signin');
         }
+      } catch (error) {
+        console.error('Token validation error:', error);
+        setToken(null);
+        localStorage.removeItem('token');
+        navigate('/signin');
       }
       setIsLoading(false);
     };
 
     validateToken();
-  }, [token]);
+  }, [token, navigate]);
 
   const login = async (email, password) => {
     try {

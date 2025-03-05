@@ -164,7 +164,7 @@ app.post('/google-signin', async (req, res) => {
   }
 });
 
-// New route to validate token
+// Validate token route
 app.get('/validate-token', verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
