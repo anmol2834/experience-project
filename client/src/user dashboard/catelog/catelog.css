@@ -1,0 +1,128 @@
+.catelogs {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    padding: 50px 50px 60px 50px;
+}
+
+.catelog-contain h1 {
+    font-weight: 400;
+}
+
+.catelog-contain .catelog-aligner {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 50px;
+    padding: 0 10px;
+    row-gap: 80px;
+}
+
+.catelog-aligner>*:nth-child(odd) {
+    transform: translateX(200px);
+    opacity: 0;
+}
+
+.catelog-aligner>*:nth-child(even) {
+    transform: translateX(-200px);
+    opacity: 0;
+}
+
+.animate .catelog-aligner>*:nth-child(odd) {
+    animation: toggleLeft 1s ease-in-out forwards;
+}
+
+.animate .catelog-aligner>*:nth-child(even) {
+    animation: toggRight 1s ease-in-out forwards;
+}
+
+@keyframes toggleLeft {
+    0% {
+        transform: translateX(200px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes toggRight {
+    0% {
+        transform: translateX(-200px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+
+
+/*! Extra Small Devices (Portrait Phones) */
+@media only screen and (max-width: 575px) {
+
+    .catelogs {
+        padding: 60px 10px 60px 10px;
+    }
+
+    .catelog-contain .catelog-aligner {
+        width: 100%;
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+        column-gap: 10px;
+    }
+
+}
+
+/*! Small devices (phones, 576px and up) */
+@media (min-width: 575px) and (max-width: 768px) {
+
+    .catelogs {
+        padding: 60px 20px 60px 20px;
+    }
+
+    .catelog-contain .catelog-aligner {
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 10px;
+    }
+
+}
+
+/*! Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 992px) {
+
+    .catelogs {
+        padding: 60px 30px 60px 30px;
+    }
+
+    .catelog-contain .catelog-aligner {
+        width: 100%;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 50px;
+    }
+
+}
+
+/*! Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+
+    .catelogs {
+        padding: 60px 40px 60px 40px;
+    }
+
+    .catelog-contain .catelog-aligner {
+        width: 100%;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 50px;
+    }
+
+}

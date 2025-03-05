@@ -1,0 +1,241 @@
+.catelog-card {
+    position: relative;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.19);
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    backdrop-filter: blur(3.5px);
+    -webkit-backdrop-filter: blur(3.5px);
+    overflow: hidden;
+}
+
+.catelog-img {
+    position: relative;
+    width: 100%;
+    height: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 15px;
+}
+
+.catelog-details {
+    width: 100%;
+    height: 40%;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    word-break: break-all;
+}
+
+.heading {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    container-type: inline-size;
+}
+
+.heading h2 {
+    text-transform: capitalize;
+    font-weight: 400;
+    font-size: clamp(1.2rem, 4cqi, 2.5rem);
+}
+
+.heading section {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    text-transform: capitalize;
+    container-type: inline-size;
+}
+
+.heading section p {
+    font-size: clamp(1rem, 3cqi, 1.2rem);
+}
+
+.catelog-details .price {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.catelog-details .price section {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.catelog-details .price section {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.price .mrp {
+    color: #888;
+    text-decoration: line-through;
+}
+
+.booknow {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.booknow .left {
+    color: red;
+}
+
+.booknow button {
+    width: 40%;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    color: white;
+    background: #222;
+    cursor: pointer;
+}
+
+.booknow button:hover {
+    background: #222222d1;
+}
+
+.heart-contain {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.heart-contain svg {
+    fill: rgb(255, 0, 0);
+}
+
+.star-ratings {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.star-ratings span {
+    font-size: 1.8rem;
+    color: rgb(231, 231, 0);
+}
+
+.star-ratings .star {
+    font-size: 1.5rem;
+    color: #d8d8d8;
+}
+
+.star-ratings .filled {
+    color: rgb(231, 231, 0);
+}
+
+.star-ratings .half-filled {
+    color: #FFD700;
+    background: linear-gradient(to right, #FFD700 50%, #d8d8d8 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/*! Extra Small Devices (Portrait Phones) */
+@media only screen and (max-width: 575px) {
+
+    .catelog-card {
+        height: 350px;
+    }
+
+    .heart-contain {
+        cursor: none;
+    }
+
+    .catelog-details p {
+        font-size: small;
+    }
+
+    .star-ratings span {
+        font-size: 1.5rem;
+    }
+
+    .star-ratings .star {
+        font-size: 1.2rem;
+    }
+
+    .catelog-details .left {
+        font-size: small;
+    }
+
+}
+
+/*! Small devices (phones, 576px and up) */
+@media (min-width: 575px) and (max-width: 768px) {
+
+    .catelog-card {
+        height: 350px;
+    }
+
+    .heart-contain {
+        cursor: none;
+    }
+
+    .catelog-details p {
+        font-size: small;
+    }
+
+    .star-ratings {
+        gap: 10px;
+    }
+
+    .star-ratings span {
+        font-size: 1.5rem;
+    }
+
+    .star-ratings .star {
+        font-size: 1.3rem;
+    }
+
+}
+
+/*! Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 992px) {
+
+    .catelog-card {
+        height: 350px;
+    }
+
+    .heart-contain {
+        cursor: none;
+    }
+
+}
+
+/*! Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+
+    .catelog-card {
+        height: 350px;
+    }
+
+}

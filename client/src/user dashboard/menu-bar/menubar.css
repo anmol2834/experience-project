@@ -1,0 +1,53 @@
+
+.menu-div {
+  width: 100%;
+  height: 8%;
+  background: rgba(0, 0, 0, 0.54);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.534);
+  backdrop-filter: blur(5.5px);
+  position: fixed; /* Ensure it stays on screen */
+  top: 0;
+  left: 0;
+  color: var(--color1);
+  z-index: 100;
+  transform: translateY(100%); /* Hide initially */
+  transition: transform 0.4s ease-in-out;
+}
+
+.menu-bar-contain{
+  width: 100%;
+  height: 100%;
+}
+
+.menu-div.show {
+  transform: translateY(0);
+}
+
+.menu-div.hide {
+  transform: translateY(-105%);
+}
+
+.filter-contain {
+  width: 5%;
+  height: 100%;
+  background: rgb(255, 255, 255);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: black;
+}
+
+.filter-contain:hover {
+  background: var(--secondary-color);
+}
+
+/*! Responsive Adjustments */
+@media only screen and (max-width: 575px) {
+.menu-div {
+  height: 6%;
+}
+.filter-contain {
+  width: 15%;
+}
+}

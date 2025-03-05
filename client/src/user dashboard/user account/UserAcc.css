@@ -1,0 +1,10 @@
+
+.user-acc-contain{
+    width: 100vw;
+    height: 100vh;
+    background: #222;
+    color: white;
+    padding: 20px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
