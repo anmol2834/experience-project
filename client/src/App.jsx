@@ -10,6 +10,25 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './ProtectedRoute';
 
 function App() {
+
+  //! Preventing Zoom on Ctrl + or Ctrl -
+  document.addEventListener('keydown', function (event) {
+    if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '-' || event.key === '0')) {
+      event.preventDefault();
+    }
+  });
+
+  //! Preventing Zoom on Pinch Gestures
+  document.addEventListener('wheel', function (event) {
+    if (event.ctrlKey) {
+      event.preventDefault();
+    }
+  }, { passive: false });
+
+  document.addEventListener('gesturestart', function (event) {
+    event.preventDefault();
+  });
+
   return (
     <Router>
       <AuthProvider>
@@ -18,7 +37,7 @@ function App() {
             <Route path="/" element={<DashboardLayout />}>
               <Route index element={<UserDashboard />} />
               <Route path="/home" element={<UserDashboard />} />
-              <Route path="/account" element={<ProtectedRoute><UserAcc /></ProtectedRoute> }/>
+              <Route path="/account" element={<ProtectedRoute><UserAcc /></ProtectedRoute>} />
             </Route>
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
