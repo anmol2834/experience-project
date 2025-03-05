@@ -3,9 +3,9 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
 import User from './models/model.js';
-import bcrypt from 'bcrypt'
-import dotenv from 'dotenv'
-import { generateToken } from './middlewares/middleware.js'; 
+import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+import { generateToken, verifyToken } from './middlewares/middleware.js';
 
 const app = express();
 app.use(cors());
@@ -14,7 +14,7 @@ dotenv.config();
 
 mongoose.connect(process.env.MONGO_CONNECTION_STRING)
   .then(() => console.log('MongoDB connected successfully'))
-  .catch(err => console.log('MongoDB connection error:', err))
+  .catch(err => console.log('MongoDB connection error:', err));
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -25,7 +25,6 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASS,
   },
 });
-
 
 // Register route
 app.post('/register', async (req, res) => {
@@ -64,10 +63,10 @@ app.post('/register', async (req, res) => {
   }
 });
 
+// Login route
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
-
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'User not found' });
@@ -82,7 +81,6 @@ app.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Email not verified' });
     }
 
-    // Generate JWT token
     const token = generateToken(user);
     res.status(200).json({ token });
   } catch (err) {
@@ -109,7 +107,7 @@ app.post('/verify', async (req, res) => {
   }
 });
 
-
+// Resend verification code
 app.post('/resend', async (req, res) => {
   const { email } = req.body;
   try {
@@ -143,7 +141,7 @@ app.post('/resend', async (req, res) => {
   }
 });
 
-
+// Google sign-in route
 app.post('/google-signin', async (req, res) => {
   const { email, name } = req.body;
   try {
@@ -163,6 +161,20 @@ app.post('/google-signin', async (req, res) => {
     res.status(200).json({ token });
   } catch (err) {
     res.status(500).send('Server error');
+  }
+});
+
+// New route to validate token
+app.get('/validate-token', verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (user) {
+      res.status(200).json({ valid: true });
+    } else {
+      res.status(404).json({ valid: false, message: 'User not found' });
+    }
+  } catch (err) {
+    res.status(500).json({ valid: false, message: 'Server error' });
   }
 });
 

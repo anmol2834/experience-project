@@ -5,7 +5,12 @@ import './UserAcc.css'
 function UserAcc() {
   return (
     <div className='user-acc-contain'>
-      user account
+      <div className="account-menu">
+
+      </div>
+      <div className="account-render">
+        
+      </div>
     </div>
   )
 }

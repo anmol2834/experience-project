@@ -7,4 +7,19 @@
     padding: 20px;
     overflow-y: scroll;
     scrollbar-width: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.account-menu{
+    width: 30%;
+    height: 100%;
+    background: red;
+}
+
+.account-render{
+    width: 70%;
+    height: 100%;
+    background: yellow;
 }

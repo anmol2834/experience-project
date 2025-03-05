@@ -1,12 +1,38 @@
-
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const validateToken = async () => {
+      if (token) {
+        try {
+          const response = await fetch('http://localhost:5000/validate-token', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          const result = await response.json();
+          if (!result.valid) {
+            setToken(null);
+            localStorage.removeItem('token');
+          }
+        } catch (error) {
+          console.error('Token validation error:', error);
+          setToken(null);
+          localStorage.removeItem('token');
+        }
+      }
+      setIsLoading(false);
+    };
+
+    validateToken();
+  }, [token]);
 
   const login = async (email, password) => {
     try {
@@ -19,7 +45,7 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         setToken(result.token);
         localStorage.setItem('token', result.token);
-        navigate('/home'); 
+        navigate('/home');
         return { success: true };
       } else {
         return { success: false, message: result.message || 'Login failed' };
@@ -30,15 +56,14 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Logout function
   const logout = () => {
     setToken(null);
     localStorage.removeItem('token');
-    navigate('/signin'); 
+    navigate('/signin');
   };
 
   return (
-    <AuthContext.Provider value={{ token, login, logout }}>
+    <AuthContext.Provider value={{ token, login, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

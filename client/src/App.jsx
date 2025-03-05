@@ -7,6 +7,7 @@ import UserDashboard from './user dashboard/UserDashboard';
 import DashboardLayout from './components/outlets/DashboardLayout';
 import UserAcc from './user dashboard/user account/UserAcc';
 import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
             <Route path="/" element={<DashboardLayout />}>
               <Route index element={<UserDashboard />} />
               <Route path="/home" element={<UserDashboard />} />
-              <Route path="/account" element={<UserAcc />} />
+              <Route path="/account" element={<ProtectedRoute><UserAcc /></ProtectedRoute> }/>
             </Route>
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
