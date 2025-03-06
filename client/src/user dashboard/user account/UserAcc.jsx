@@ -1,8 +1,14 @@
 
-import React from 'react'
-import './UserAcc.css'
+import './UserAcc.css';
+import { useAuth } from '../../context/AuthContext'; // Adjust path based on your structure
 
 function UserAcc() {
+  const { logout } = useAuth(); // Get logout function from AuthContext
+
+  const handleLogout = () => {
+    logout(); 
+  };
+
   return (
     <div className='user-acc-contain'>
       <div className="account-menu">
@@ -10,16 +16,25 @@ function UserAcc() {
           <section>
             <h2>firstname lastname</h2>
             <span className='edit-profile-icon'>
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+                <path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />
+              </svg>
             </span>
+          </section>
+
+          <section>
+            <p>Email :- useremail@gmail.com</p>
+          </section>
+
+          <section>
+            <button className='logout-btn' onClick={handleLogout}>Logout</button>
           </section>
         </div>
       </div>
       <div className="account-render">
-
       </div>
     </div>
-  )
+  );
 }
 
-export default UserAcc
+export default UserAcc;
