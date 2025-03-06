@@ -3,3 +3,17 @@
   height: auto;
   background: var(--bg-color);
 }
+
+input:-webkit-autofill {
+  background-color: transparent !important;
+  box-shadow: 0 0 0px 1000px #151515 inset !important; /* Match your background */
+  color: white !important;
+}
+
+input:-webkit-autofill::first-line {
+  color: white !important; /* Ensures text remains visible */
+}
+
+input:focus {
+  outline: none !important;
+}

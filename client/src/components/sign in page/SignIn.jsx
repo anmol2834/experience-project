@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext'; // Adjust path based on your structure
+import { useAuth } from '../../context/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './signin.css';
 import signinBanner from './signin-banner.jpg';
 
@@ -11,7 +13,6 @@ function SignIn() {
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [eye, setEye] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
 
   const { register, handleSubmit, control, formState: { errors } } = useForm();
 
@@ -27,13 +28,22 @@ function SignIn() {
   const onSubmit = async (data) => {
     const result = await login(data.email, data.password);
     if (!result.success) {
-      setErrorMessage(result.message);
+      toast.dismiss('login-error');
+      toast.error(result.message, { toastId: 'login-error' });
+    }
+  };
+
+  const onError = (errors) => {
+    toast.dismiss('login-error');
+    const firstError = Object.values(errors)[0];
+    if (firstError) {
+      toast.error(firstError.message, { toastId: 'login-error' });
     }
   };
 
   return (
     <div className='signin-contain'>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit, onError)}>
         <button type='button' className='back-btn' onClick={(e) => { e.preventDefault(); navigate('/home') }}>
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" /></svg>
         </button>
@@ -57,7 +67,6 @@ function SignIn() {
               onBlur={handleEmailBlur}
             />
             <span className='bottom-border'></span>
-            {errors.email && <span className='error'>{errors.email.message}</span>}
           </div>
 
           <div className={`input input-pass ${passwordFocused || passwordValue ? 'focused' : ''}`}>
@@ -80,12 +89,10 @@ function SignIn() {
               <svg style={{ display: eye ? 'block' : 'none' }} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" /></svg>
             </div>
             <span className='bottom-border'></span>
-            {errors.password && <span className='error'>{errors.password.message}</span>}
           </div>
           <span className='forgot'>Forgot Password ?</span>
 
         </div>
-        {errorMessage && <div className='error'>{errorMessage}</div>}
         <div className="submit-container">
 
           <button type='submit' className='submit'>Login</button>
@@ -100,6 +107,20 @@ function SignIn() {
         </div>
       </form>
       <div className="signin-banner" style={{ backgroundImage: `url(${signinBanner})` }}></div>
+      <div style={{ position: "absolute" }}>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+      </div>
     </div>
   );
 }

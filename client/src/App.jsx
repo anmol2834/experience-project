@@ -29,6 +29,7 @@ function App() {
     event.preventDefault();
   });
 
+
   return (
     <Router>
       <AuthProvider>
