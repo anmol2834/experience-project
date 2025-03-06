@@ -1,17 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+
 .container {
   width: 100%;
   height: auto;
   background: var(--bg-color);
+  font-family: "League Spartan", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 input:-webkit-autofill {
   background-color: transparent !important;
-  box-shadow: 0 0 0px 1000px #151515 inset !important; /* Match your background */
+  box-shadow: 0 0 0px 1000px #151515 inset !important; 
   color: white !important;
 }
 
 input:-webkit-autofill::first-line {
-  color: white !important; /* Ensures text remains visible */
+  color: white !important; 
 }
 
 input:focus {

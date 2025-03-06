@@ -85,6 +85,7 @@ function SignUp() {
       const result = await response.json();
       if (response.ok) {
         setVerifyBox(false);
+        navigate("/signin")
         toast.success('Registration successful!');
       } else {
         toast.error(result.message || 'Invalid code', { toastId: 'verify-error' })
