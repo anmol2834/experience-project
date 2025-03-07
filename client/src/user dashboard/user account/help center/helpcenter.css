@@ -1,0 +1,169 @@
+.help-center {
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.help-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    background: linear-gradient(45deg, #00b4d8, #0077b6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.contact-card {
+    background: #404040;
+    padding: 2rem;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(145deg, #404040, #383838);
+}
+
+.contact-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.contact-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.contact-card p {
+    color: #a0a0a0;
+    margin-bottom: 1.5rem;
+}
+
+.contact-action {
+    background: transparent;
+    border: 2px solid #007bff;
+    color: #007bff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.contact-action:hover {
+    background: #007bff;
+    color: white;
+}
+
+.faq-section h2 {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    color: #00b4d8;
+}
+
+.faq-grid {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.faq-item {
+    background: #404040;
+    border-radius: 10px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.faq-item.active {
+    background: #007bff20;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+}
+
+.toggle-icon {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.faq-answer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #505050;
+    color: #cccccc;
+}
+
+.support-form {
+    background: #404040;
+    padding: 2rem;
+    border-radius: 15px;
+}
+
+.support-form h2 {
+    margin-bottom: 1.5rem;
+    color: #00b4d8;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    background: #333;
+    border: 2px solid #505050;
+    border-radius: 8px;
+    color: white;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.support-form button {
+    background: #007bff;
+    color: white;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.support-form button:hover {
+    background: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .help-center {
+        padding: 1rem;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .help-title {
+        font-size: 2rem;
+    }
+}

@@ -61,8 +61,8 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings }) {
             </section>
           </div>
 
-          <div className="booknow">
-            <button>book now</button>
+          <div className="add-to-cart">
+            <button>Add To Cart</button>
             <span className="left">{stock} Left</span>
           </div>
 

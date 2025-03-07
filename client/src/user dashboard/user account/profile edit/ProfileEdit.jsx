@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ProfileEdit.css';
+import {motion} from 'framer-motion'
 import { useAuth } from '../../../context/AuthContext'; // Adjust path as needed
 
 function ProfileEdit() {
@@ -94,7 +95,12 @@ function ProfileEdit() {
   }
 
   return (
-    <div className="profile-edit-container">
+      <motion.div 
+      className="profile-edit-container"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+    >
       <div className="form-section">
         <div className="input-row">
           <div className="input-group">
@@ -172,7 +178,7 @@ function ProfileEdit() {
           <span className="btn-text">Update Profile</span>
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

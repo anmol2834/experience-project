@@ -8,6 +8,8 @@ import DashboardLayout from './components/outlets/DashboardLayout';
 import UserAcc from './user dashboard/user account/UserAcc';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './ProtectedRoute';
+import ProfileEdit from './user dashboard/user account/profile edit/ProfileEdit';
+import HelpCenter from './user dashboard/user account/help center/HelpCenter';
 
 function App() {
 
@@ -38,7 +40,11 @@ function App() {
             <Route path="/" element={<DashboardLayout />}>
               <Route index element={<UserDashboard />} />
               <Route path="/home" element={<UserDashboard />} />
-              <Route path="/account" element={<ProtectedRoute><UserAcc /></ProtectedRoute>} />
+              <Route path="/account" element={<ProtectedRoute><UserAcc /></ProtectedRoute>}>
+                <Route index element={<ProfileEdit />} />
+                <Route path='edit_account' element={<ProfileEdit/>}/>
+                <Route path='help_center' element={<HelpCenter/>}/>
+              </Route>
             </Route>
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
@@ -46,7 +52,7 @@ function App() {
         </div>
       </AuthProvider>
     </Router>
-  );
+  )
 }
 
 export default App;

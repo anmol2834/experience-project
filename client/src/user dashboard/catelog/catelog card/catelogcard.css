@@ -84,7 +84,7 @@
     text-decoration: line-through;
 }
 
-.booknow {
+.add-to-cart {
     width: 100%;
     height: auto;
     display: flex;
@@ -92,11 +92,11 @@
     justify-content: space-between;
 }
 
-.booknow .left {
+.add-to-cart .left {
     color: red;
 }
 
-.booknow button {
+.add-to-cart button {
     width: 40%;
     height: 40px;
     border-radius: 5px;
@@ -107,7 +107,7 @@
     cursor: pointer;
 }
 
-.booknow button:hover {
+.add-to-cart button:hover {
     background: #222222d1;
 }
 

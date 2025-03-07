@@ -25,13 +25,11 @@ export const AuthProvider = ({ children }) => {
         const result = await response.json();
         if (!result.valid) {
           setToken(null);
-          localStorage.removeItem('token');
           navigate('/signin');
         }
       } catch (error) {
         console.error('Token validation error:', error);
         setToken(null);
-        localStorage.removeItem('token');
         navigate('/signin');
       }
       setIsLoading(false);
