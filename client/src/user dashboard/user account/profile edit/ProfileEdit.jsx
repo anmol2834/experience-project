@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './ProfileEdit.css';
-import {motion} from 'framer-motion'
-import { useAuth } from '../../../context/AuthContext'; // Adjust path as needed
+import { motion } from 'framer-motion'
+import { useAuth } from '../../../context/AuthContext';
 
 function ProfileEdit() {
-  const { token } = useAuth(); // Get token from AuthContext
+  const { token } = useAuth();
   const [userData, setUserData] = useState({
-    firstname: '', // Changed to match backend schema
-    lastname: '',  // Changed to match backend schema
+    firstname: '',
+    lastname: '',
     email: '',
     phone: '',
     dob: '',
@@ -15,7 +15,7 @@ function ProfileEdit() {
   });
   const [loading, setLoading] = useState(true);
 
-  // Fetch user data when the component mounts
+
   useEffect(() => {
     const fetchUserData = async () => {
       if (!token) return;
@@ -31,7 +31,7 @@ function ProfileEdit() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log('Fetched user data:', data); // Debug log
+          console.log('Fetched user data:', data);
           setUserData({
             firstname: data.firstname || '',
             lastname: data.lastname || '',
@@ -53,13 +53,11 @@ function ProfileEdit() {
     fetchUserData();
   }, [token]);
 
-  // Handle changes to form inputs
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setUserData((prev) => ({ ...prev, [id]: value }));
   };
 
-  // Submit updated profile data to the server
   const handleProfileUpdate = async () => {
     try {
       const updateData = {
@@ -90,12 +88,38 @@ function ProfileEdit() {
     }
   };
 
+  const [nextMethod, setNextMethod] = useState(false);
+  const [passwordBox, setPasswordBox] = useState(false)
+
+  const handleNextMethod = () => {
+    setNextMethod(true)
+  }
+
+  const handlePreviousMethod = () => {
+    setNextMethod(false)
+  }
+
+  const handleBackBtn = () => {
+    setPasswordBox(false)
+  }
+
+  const openPasswordBox = () => {
+    setPasswordBox(true)
+  }
+
+  const closePasswordBox = (e) => {
+    if(e.target.closest('.change-password-box')){
+      return;
+    }
+    setPasswordBox(false)
+  }
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
-      <motion.div 
+    <motion.div
       className="profile-edit-container"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -109,7 +133,7 @@ function ProfileEdit() {
               type="text"
               id="firstname"
               onChange={handleInputChange}
-              placeholder={userData.firstname?userData.firstname:"john"}
+              placeholder={userData.firstname ? userData.firstname : "john"}
               className="modern-input"
             />
           </div>
@@ -119,7 +143,7 @@ function ProfileEdit() {
               type="text"
               id="lastname"
               onChange={handleInputChange}
-              placeholder={userData.lastname?userData.lastname:"doe"}
+              placeholder={userData.lastname ? userData.lastname : "doe"}
               className="modern-input"
             />
           </div>
@@ -143,7 +167,7 @@ function ProfileEdit() {
               type="tel"
               id="phone"
               onChange={handleInputChange}
-              placeholder={userData.phone?userData.phone:"8379777564"}
+              placeholder={userData.phone ? userData.phone : "8379777564"}
               className="modern-input icon-input phone"
             />
           </div>
@@ -177,6 +201,48 @@ function ProfileEdit() {
         <button className="edit-profile-btn" onClick={handleProfileUpdate}>
           <span className="btn-text">Update Profile</span>
         </button>
+        <button className='change-password' onClick={openPasswordBox}>Change Password</button>
+
+        <div onClick={closePasswordBox} className="change-password-container" style={{display: `${passwordBox?"flex":"none"}`}}>
+          <div className="change-password-box">
+
+            <div className="back-btn-section">
+              <svg onClick={handleBackBtn} xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000"><path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" /></svg>
+            </div>
+
+            <div className="first-method" style={{ display: `${nextMethod == false ? "block" : "none"}` }}>
+              <form>
+                <h2>Change To Your New Password</h2>
+                <input type="password" placeholder='Old Password' />
+                <input type="password" placeholder='New Password' />
+                <button type='submit'>Submit</button>
+              </form>
+            </div>
+
+            <div className="second-method" style={{ display: `${nextMethod == true ? "block" : "none"}` }}>
+              <form>
+                <h2>OTP Sent To Your Email</h2>
+                <input type="password" placeholder='Enter OTP' />
+                <button type='submit'>Submit</button>
+                <button className="resend-otp">Resend OTP</button>
+              </form>
+            </div>
+
+            {
+              nextMethod ?
+                <div className="next-method-btn" onClick={handlePreviousMethod}>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M540-327.69 387.69-480 540-632.31v304.62Z" /></svg>
+                  <span>Previous Way</span>
+                </div> :
+                <div className="next-method-btn" onClick={handleNextMethod}>
+                  <span>Try Another Way</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000"><path d="M420-327.69v-304.62L572.31-480 420-327.69Z" /></svg>
+                </div>
+            }
+
+          </div>
+        </div>
+
       </div>
     </motion.div>
   );

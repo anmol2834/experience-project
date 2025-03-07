@@ -138,13 +138,7 @@
 
 .profile-menu-btn:hover {
     transition: 0.5s;
-    background: #333;
-}
-
-.profile-menu-btn:hover * {
-    transition: 0.3s;
-    color: white;
-    fill: white;
+    background: #d8e9ff;
 }
 
 .address-section {
@@ -228,7 +222,6 @@
 }
 
 .account-render {
-    position: relative;
     width: 60%;
     height: 100%;
     background: #333;
