@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
-import bcrypt from 'bcrypt'
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const userSchema = new mongoose.Schema({
   firstname: { type: String, required: true },
@@ -9,6 +9,8 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   verificationCode: { type: String },
   verified: { type: Boolean, default: false },
+  dob: { type: Date },
+  gender: { type: String }
 });
 
 userSchema.pre('save', async function (next) {

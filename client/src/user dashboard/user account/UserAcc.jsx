@@ -1,25 +1,84 @@
-
+import React, { useState, useEffect } from 'react';
 import './UserAcc.css';
-import { useAuth } from '../../context/AuthContext'; 
+import { useAuth } from '../../context/AuthContext'; // Adjust path as needed
 import { useNavigate } from 'react-router-dom';
+import ProfileEdit from './profile edit/ProfileEdit';
 
 function UserAcc() {
-  const { logout } = useAuth();
+  const { logout, token } = useAuth();
   const navigate = useNavigate();
+  const [userData, setUserData] = useState({
+    firstname: '',
+    lastname: '',
+    email: ''
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (!token) {
+        navigate('/signin');
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:5000/user', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setUserData({
+            firstname: data.firstname || '',
+            lastname: data.lastname || '',
+            email: data.email || ''
+          });
+        } else {
+          throw new Error('Failed to fetch user data');
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        logout(); // Log out if token is invalid or fetch fails
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [token, navigate, logout]);
 
   const handleLogout = () => {
     logout();
   };
 
+  if (loading) {
+    return <div className="loading">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  }
+
   return (
     <div className='user-acc-contain'>
       <div className="account-menu">
-        <div className="home-btn" onClick={() => navigate('/home')}>
-          <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000"><path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" /></svg>
+        <div className="home-btn">
+          <svg onClick={() => navigate('/home')} xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000"><path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" /></svg>
+          <span>Profile</span>
         </div>
         <div className="profile">
           <section>
-            <h2>firstname lastname</h2>
+            <h2>{userData.firstname} {userData.lastname}</h2>
             <span className='edit-profile-icon'>
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
                 <path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />
@@ -27,10 +86,13 @@ function UserAcc() {
             </span>
           </section>
           <section>
-            <p>Email :- useremail@gmail.com</p>
+            <p>Email :- {userData.email}</p>
           </section>
           <section>
-            <button className='logout-btn' onClick={handleLogout}>Logout</button>
+            <button className='logout-btn' onClick={handleLogout}>
+              Logout
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M212.31-140Q182-140 161-161q-21-21-21-51.31v-535.38Q140-778 161-799q21-21 51.31-21h268.07v60H212.31q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v535.38q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85h268.07v60H212.31Zm436.92-169.23-41.54-43.39L705.08-450H363.85v-60h341.23l-97.39-97.38 41.54-43.39L820-480 649.23-309.23Z" /></svg>
+            </button>
           </section>
         </div>
 
@@ -76,6 +138,7 @@ function UserAcc() {
 
       </div>
       <div className="account-render">
+        <ProfileEdit />
       </div>
     </div>
   );

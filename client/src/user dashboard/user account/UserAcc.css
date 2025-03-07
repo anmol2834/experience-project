@@ -23,15 +23,16 @@
     gap: 15px;
 }
 
-.home-btn{
+.home-btn {
     width: 100%;
     height: 5%;
     padding: 0 10px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
-.home-btn svg{
+.home-btn svg {
     width: 10%;
     height: 100%;
     fill: white;
@@ -39,7 +40,7 @@
     transition: 0.5s;
 }
 
-.home-btn svg:hover{
+.home-btn svg:hover {
     transition: 0.5s;
     transform: scale(1.1);
 }
@@ -55,7 +56,7 @@
     background: rgba(255, 40, 40, 0.864);
 }
 
-.profile section:nth-child(1){
+.profile section:nth-child(1) {
     width: 100%;
     height: auto;
     display: flex;
@@ -64,34 +65,38 @@
     justify-content: space-between;
 }
 
-.profile section:nth-child(3){
+.profile section:nth-child(3) {
     width: 100%;
     height: 50%;
     display: flex;
     align-items: center;
 }
 
-.logout-btn{
+.logout-btn {
     width: 100px;
     height: 35px;
     border: none;
     outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     border-radius: 5px;
     transition: 0.5s;
     cursor: pointer;
 }
 
-.logout-btn:hover{
+.logout-btn:hover {
     transition: 0.5s;
     transform: scale(1.1);
 }
 
-.profile h2{
+.profile h2 {
     text-transform: capitalize;
     font-weight: 400;
 }
 
-.edit-profile-icon{
+.edit-profile-icon {
     width: 40px;
     height: 40px;
     display: flex;
@@ -103,12 +108,12 @@
     transition: 0.5s;
 }
 
-.edit-profile-icon:hover{
+.edit-profile-icon:hover {
     transition: 0.5s;
     transform: scale(1.2);
 }
 
-.profile-menu{
+.profile-menu {
     width: 100%;
     height: 20%;
     display: grid;
@@ -118,7 +123,7 @@
     padding: 10px;
 }
 
-.profile-menu .profile-menu-btn{
+.profile-menu .profile-menu-btn {
     background: white;
     color: black;
     border-radius: 5px;
@@ -131,18 +136,18 @@
     transition: 0.5s;
 }
 
-.profile-menu-btn:hover{
+.profile-menu-btn:hover {
     transition: 0.5s;
     background: #333;
 }
 
-.profile-menu-btn:hover *{
+.profile-menu-btn:hover * {
     transition: 0.3s;
     color: white;
     fill: white;
 }
 
-.address-section{
+.address-section {
     width: 100%;
     height: 25%;
     display: flex;
@@ -151,7 +156,7 @@
     padding: 10px;
 }
 
-.address-section section:nth-child(1){
+.address-section section:nth-child(1) {
     width: 100%;
     height: auto;
     display: flex;
@@ -159,17 +164,17 @@
     justify-content: space-between;
 }
 
-.address-section section:nth-child(1) h2{
+.address-section section:nth-child(1) h2 {
     font-weight: 400;
 }
 
-.address-section .add-address svg{
+.address-section .add-address svg {
     fill: white;
     cursor: pointer;
     transition: 0.5s;
 }
 
-.address-section section:nth-child(2){
+.address-section section:nth-child(2) {
     width: 100%;
     height: 60%;
     padding: 10px;
@@ -177,12 +182,12 @@
     border-radius: 10px;
 }
 
-.add-address svg:hover{
+.add-address svg:hover {
     transition: 0.5s;
     transform: scale(1.1);
 }
 
-.my-activity-section{
+.my-activity-section {
     width: 100%;
     height: 25%;
     display: flex;
@@ -191,11 +196,11 @@
     padding: 0 10px;
 }
 
-.my-activity-section h2{
+.my-activity-section h2 {
     font-weight: 400;
 }
 
-.activity{
+.activity {
     width: 100%;
     height: 90%;
     display: flex;
@@ -205,7 +210,7 @@
     padding: 10px;
 }
 
-.activity section{
+.activity section {
     height: calc(100%/3);
     display: flex;
     align-items: center;
@@ -217,17 +222,64 @@
     transition: 0.5s;
 }
 
-.activity section:hover{
+.activity section:hover {
     transition: 0.5s;
     background: rgba(255, 255, 255, 0.359);
 }
 
 .account-render {
+    position: relative;
     width: 60%;
     height: 100%;
     background: #333;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    padding: 20px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
+/*! Extra Small Devices (Portrait Phones) */
+@media only screen and (max-width: 575px) {
+
+    .account-render {
+        display: none;
+    }
+
+    .user-acc-contain {
+        padding: 0px;
+    }
+
+    .account-menu {
+        width: 100%;
+        border-radius: 0;
+    }
+
+    .home-btn svg {
+        cursor: none;
+    }
+
+    .logout-btn {
+        cursor: none;
+    }
+
+    .edit-profile-icon {
+        cursor: none;
+    }
+
+    .profile-menu .profile-menu-btn {
+        cursor: none;
+    }
+
+    .address-section .add-address svg {
+        cursor: none;
+    }
+
+    .activity section {
+        cursor: none;
+    }
+
+}

@@ -178,6 +178,37 @@ app.get('/validate-token', verifyToken, async (req, res) => {
   }
 });
 
+// Get user details
+app.get('/user', verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('firstname lastname email phone dob gender');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Update user profile
+app.put('/user', verifyToken, async (req, res) => {
+  try {
+    const { firstname, lastname, email, phone, dob, gender } = req.body;
+    const updateData = { firstname, lastname, email, phone, dob, gender };
+
+    const user = await User.findByIdAndUpdate(req.user.id, updateData, { new: true });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(user);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 app.listen(process.env.PORT, () => {
   console.log('Server is running');
 });
