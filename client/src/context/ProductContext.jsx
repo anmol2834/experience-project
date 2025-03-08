@@ -8,6 +8,7 @@ export const context_of_product = createContext();
 function ProductContext({children}) {
 
     const {token} = useAuth();
+    const [productLoading, setProductLoading] = useState(true);
     
     const [productInfo, setProductInfo] = useState([]);
 
@@ -28,7 +29,8 @@ function ProductContext({children}) {
                     }
     
                     let data = await res.json()
-                    setProductInfo(data)
+                    setProductInfo(data);
+                    setProductLoading(false)
     
                 } catch (error) {
                     console.error(error)
@@ -39,7 +41,7 @@ function ProductContext({children}) {
         }, [token])
 
   return (
-    <context_of_product.Provider value={productInfo}>
+    <context_of_product.Provider value={{ productInfo, productLoading }}>
         {children}
     </context_of_product.Provider>
   )

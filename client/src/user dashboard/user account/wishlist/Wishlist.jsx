@@ -6,8 +6,15 @@ import { context_of_product } from '../../../context/ProductContext';
 
 const Wishlist = () => {
 
-    const productInfo = useContext(context_of_product);
-    
+    const { productInfo, productLoading } = useContext(context_of_product);
+
+    if (productLoading) {
+        return <div className='wishlist-loading'>
+            Loading...
+        </div>
+    }
+
+
     return (
         <motion.div
             className="help-center"
