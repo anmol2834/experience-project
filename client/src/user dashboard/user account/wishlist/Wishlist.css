@@ -1,5 +1,5 @@
 
-/* Wishlist.css */
+
 .wishlist-container {
     width: 100%;
     height: 100%;
@@ -17,12 +17,13 @@
   
   .wishlist-header h2 {
     font-size: 1.8rem;
+    text-transform: capitalize;
     color: #00ff88;
   }
   
   .item-count {
     font-size: 0.9rem;
-    color: #aaa;
+    color: #c8c8c8;
   }
   
   .wishlist-grid {
@@ -68,7 +69,6 @@
   
   .wishlist-remove-btn:hover {
     background: #ff4444;
-    transform: scale(1.1);
   }
   
   .item-details {
@@ -78,6 +78,7 @@
   .item-name {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
+    text-transform: capitalize;
     color: #fff;
   }
   
@@ -92,7 +93,7 @@
     display: flex;
     gap: 1rem;
     font-size: 0.9rem;
-    color: #aaa;
+    color: #c8c8c8;
     margin-bottom: 1.5rem;
   }
   

@@ -11,6 +11,7 @@ import ProtectedRoute from './ProtectedRoute';
 import ProfileEdit from './user dashboard/user account/profile edit/ProfileEdit';
 import HelpCenter from './user dashboard/user account/help center/HelpCenter';
 import Wishlist from './user dashboard/user account/wishlist/Wishlist';
+import ProductContext from './context/ProductContext';
 
 function App() {
 
@@ -36,22 +37,24 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <div className="container">
-          <Routes>
-            <Route path="/" element={<DashboardLayout />}>
-              <Route index element={<UserDashboard />} />
-              <Route path="/home" element={<UserDashboard />} />
-              <Route path="/account" element={<ProtectedRoute><UserAcc /></ProtectedRoute>}>
-                <Route index element={<ProfileEdit />} />
-                <Route path='edit_profile' element={<ProfileEdit/>}/>
-                <Route path='help_center' element={<HelpCenter/>}/>
-                <Route path='wishlist' element={<Wishlist/>}/>
+        <ProductContext>
+          <div className="container">
+            <Routes>
+              <Route path="/" element={<DashboardLayout />}>
+                <Route index element={<UserDashboard />} />
+                <Route path="/home" element={<UserDashboard />} />
+                <Route path="/account" element={<ProtectedRoute><UserAcc /></ProtectedRoute>}>
+                  <Route index element={<ProfileEdit />} />
+                  <Route path='edit_profile' element={<ProfileEdit />} />
+                  <Route path='help_center' element={<HelpCenter />} />
+                  <Route path='wishlist' element={<Wishlist />} />
+                </Route>
               </Route>
-            </Route>
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-          </Routes>
-        </div>
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/signup" element={<SignUp />} />
+            </Routes>
+          </div>
+        </ProductContext>
       </AuthProvider>
     </Router>
   )

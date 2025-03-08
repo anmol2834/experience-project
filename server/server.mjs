@@ -356,6 +356,17 @@ app.post('/change-password-otp', verifyToken, async (req, res) => {
   }
 });
 
+//connection to db for products collection
+app.get("/products", verifyToken, async (req, res) => {
+  try {
+    const db = mongoose.connection.db;
+    const products = await db.collection("products").find().toArray();
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching products" });
+  }
+});
+
 
 app.listen(process.env.PORT, () => {
   console.log('Server is running');
