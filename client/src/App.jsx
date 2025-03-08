@@ -10,6 +10,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './ProtectedRoute';
 import ProfileEdit from './user dashboard/user account/profile edit/ProfileEdit';
 import HelpCenter from './user dashboard/user account/help center/HelpCenter';
+import Wishlist from './user dashboard/user account/wishlist/Wishlist';
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
                 <Route index element={<ProfileEdit />} />
                 <Route path='edit_profile' element={<ProfileEdit/>}/>
                 <Route path='help_center' element={<HelpCenter/>}/>
+                <Route path='wishlist' element={<Wishlist/>}/>
               </Route>
             </Route>
             <Route path="/signin" element={<SignIn />} />
