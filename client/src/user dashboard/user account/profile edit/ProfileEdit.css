@@ -132,7 +132,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .change-password-box .back-btn-section{
@@ -151,7 +151,7 @@
     transform: translateX(-5px);
 }
 
-.first-method, .second-method{
+.first-method, .second-method, .new-password-contain{
     width: 100%;
     height: 80%;
     display: flex;
@@ -188,7 +188,7 @@
     fill: red;
 }
 
-.first-method form, .second-method form{
+.first-method form, .second-method form, .new-password-contain form{
     width: 100%;
     height: 100%;
     display: flex;
@@ -198,13 +198,13 @@
     gap: 20px;
 }
 
-.first-method h2, .second-method h2{
+.first-method h2, .second-method h2, .new-password-contain h2{
     color: black;
     font-weight: 400;
     margin-bottom: 10px;
 }
 
-.first-method form input, .second-method form input{
+.first-method form input, .second-method form input, .new-password-contain form input{
     width: 60%;
     height: 40px;
     padding: 0 10px;
@@ -214,7 +214,7 @@
     outline: none;
 }
 
-.first-method form button, .second-method form button{
+.first-method form button, .second-method form button, .new-password-contain form button{
     width: 60%;
     height: 40px;
     padding: 0 10px;
@@ -228,7 +228,7 @@
     transition: 0.5s;
 }
 
-.first-method form button:hover, .second-method form button:hover{
+.first-method form button:hover, .second-method form button:hover, .new-password-contain form button:hover{
     transition: 0.5s;
     background: #0066cc;
 }

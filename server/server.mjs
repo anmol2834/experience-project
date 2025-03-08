@@ -26,6 +26,18 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Helper functions
+const generateOTP = () => {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+};
+
+const isValidOTP = (user, providedOTP) => {
+  if (!user.otp || !user.otpExpiration || new Date() > user.otpExpiration) {
+    return false;
+  }
+  return user.otp === providedOTP;
+};
+
 // Register route
 app.post('/register', async (req, res) => {
   const { firstname, lastname, phone, email, password } = req.body;
@@ -63,7 +75,6 @@ app.post('/register', async (req, res) => {
   }
 });
 
-// Login route
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -208,6 +219,143 @@ app.put('/user', verifyToken, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
+// Change password using old password
+app.post('/change-password-old', verifyToken, async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) return res.status(400).json({ message: 'Old password is incorrect' });
+
+    user.password = newPassword; // Pre-save hook will hash it
+    await user.save();
+    res.status(200).json({ message: 'Password updated successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Send OTP for password change
+app.post('/send-otp', verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    if (user.lastOtpSent && (new Date() - user.lastOtpSent) < 5 * 60 * 1000) {
+      return res.status(400).json({ message: 'Please wait 5 minutes before requesting a new OTP' });
+    }
+
+    const otp = generateOTP();
+    const expiration = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
+
+    user.otp = otp;
+    user.otpExpiration = expiration;
+    user.lastOtpSent = new Date();
+    await user.save();
+
+    const mailOptions = {
+      from: 'anmolsinha4321@gmail.com',
+      to: user.email,
+      subject: 'Password Change OTP',
+      text: `Your OTP is: ${otp}`
+    };
+
+    transporter.sendMail(mailOptions, (error) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).send('Error sending OTP');
+      }
+      res.status(200).send('OTP sent successfully');
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Resend OTP (with 5-minute rule and multiple resend prevention)
+app.post('/resend-otp', verifyToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    if (!user.lastOtpSent) {
+      return res.status(400).json({ message: 'No OTP has been sent yet' });
+    }
+
+    if ((new Date() - user.lastOtpSent) < 5 * 60 * 1000) {
+      return res.status(400).json({ message: 'You can only resend OTP after 5 minutes' });
+    }
+
+    const otp = generateOTP();
+    const expiration = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
+
+    user.otp = otp;
+    user.otpExpiration = expiration;
+    user.lastOtpSent = new Date();
+    await user.save();
+
+    const mailOptions = {
+      from: 'anmolsinha4321@gmail.com',
+      to: user.email,
+      subject: 'Password Change OTP',
+      text: `Your new OTP is: ${otp}`
+    };
+
+    transporter.sendMail(mailOptions, (error) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).send('Error sending OTP');
+      }
+      res.status(200).send('OTP resent successfully');
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Verify OTP
+app.post('/verify-otp', verifyToken, async (req, res) => {
+  const { otp } = req.body;
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    if (isValidOTP(user, otp)) {
+      res.status(200).json({ message: 'OTP verified successfully' });
+    } else {
+      res.status(400).json({ message: 'Invalid or expired OTP' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Change password using OTP
+app.post('/change-password-otp', verifyToken, async (req, res) => {
+  const { newPassword } = req.body;
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    user.password = newPassword; // Pre-save hook will hash it
+    user.otp = undefined;
+    user.otpExpiration = undefined;
+    user.lastOtpSent = undefined;
+    await user.save();
+    res.status(200).json({ message: 'Password updated successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 app.listen(process.env.PORT, () => {
   console.log('Server is running');

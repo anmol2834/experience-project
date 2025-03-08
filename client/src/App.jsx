@@ -42,7 +42,7 @@ function App() {
               <Route path="/home" element={<UserDashboard />} />
               <Route path="/account" element={<ProtectedRoute><UserAcc /></ProtectedRoute>}>
                 <Route index element={<ProfileEdit />} />
-                <Route path='edit_account' element={<ProfileEdit/>}/>
+                <Route path='edit_profile' element={<ProfileEdit/>}/>
                 <Route path='help_center' element={<HelpCenter/>}/>
               </Route>
             </Route>

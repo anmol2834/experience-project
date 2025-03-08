@@ -9,7 +9,7 @@ const HelpCenter = () => {
   const faqItems = [
     {
       question: "How do I reset my password?",
-      answer: "Visit the profile edit page and click 'Forgot Password'. You'll receive a reset OTP via email."
+      answer: "Visit the profile edit page and click 'Change Password'"
     },
     {
       question: "What payment methods do you accept?",

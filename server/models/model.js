@@ -10,7 +10,10 @@ const userSchema = new mongoose.Schema({
   verificationCode: { type: String },
   verified: { type: Boolean, default: false },
   dob: { type: Date },
-  gender: { type: String }
+  gender: { type: String },
+  otp: { type: String },
+  otpExpiration: { type: Date },
+  lastOtpSent: { type: Date }
 });
 
 userSchema.pre('save', async function (next) {

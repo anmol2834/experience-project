@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './ProfileEdit.css';
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
 import { useAuth } from '../../../context/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ProfileEdit() {
   const { token } = useAuth();
@@ -15,6 +17,13 @@ function ProfileEdit() {
   });
   const [loading, setLoading] = useState(true);
 
+  const [nextMethod, setNextMethod] = useState(false);
+  const [passwordBox, setPasswordBox] = useState(false);
+  const [newPassContain, setNewPassContain] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [otp, setOtp] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -31,7 +40,6 @@ function ProfileEdit() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log('Fetched user data:', data);
           setUserData({
             firstname: data.firstname || '',
             lastname: data.lastname || '',
@@ -40,8 +48,6 @@ function ProfileEdit() {
             dob: data.dob ? new Date(data.dob).toISOString().split('T')[0] : '',
             gender: data.gender || ''
           });
-        } else {
-          throw new Error('Failed to fetch user data');
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -60,63 +66,170 @@ function ProfileEdit() {
 
   const handleProfileUpdate = async () => {
     try {
-      const updateData = {
-        firstname: userData.firstname,
-        lastname: userData.lastname,
-        email: userData.email,
-        phone: userData.phone,
-        dob: userData.dob,
-        gender: userData.gender
-      };
       const response = await fetch('http://localhost:5000/user', {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(updateData)
+        body: JSON.stringify(userData)
       });
 
       if (response.ok) {
-        alert('Profile updated successfully');
+        toast.success('Profile updated successfully');
       } else {
-        throw new Error('Failed to update profile');
+        toast.error('Failed to update profile');
       }
     } catch (error) {
       console.error('Error updating profile:', error);
-      alert('Failed to update profile');
+      toast.error('An error occurred while updating profile');
     }
   };
 
-  const [nextMethod, setNextMethod] = useState(false);
-  const [passwordBox, setPasswordBox] = useState(false)
+  const handleChangePasswordWithOld = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5000/change-password-old', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ oldPassword, newPassword })
+      });
+      if (response.ok) {
+        toast.success('Password updated successfully');
+        setPasswordBox(false);
+        setOldPassword('');
+        setNewPassword('');
+      } else {
+        toast.error('Old password is incorrect');
+      }
+    } catch (error) {
+      console.error('Error changing password:', error);
+      toast.error('An error occurred while changing password');
+    }
+  };
+
+  const handleSendOtp = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/send-otp', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (response.ok) {
+        setOtpSent(true);
+        toast.success('OTP sent to your email');
+      } else {
+        const data = await response.json();
+        toast.error(data.message || 'Failed to send OTP');
+      }
+    } catch (error) {
+      console.error('Error sending OTP:', error);
+      toast.error('An error occurred while sending OTP');
+    }
+  };
+
+  const handleVerifyOtp = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5000/verify-otp', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ otp })
+      });
+      if (response.ok) {
+        setNewPassContain(true);
+        toast.success('OTP verified successfully');
+      } else {
+        toast.error('Invalid OTP');
+      }
+    } catch (error) {
+      console.error('Error verifying OTP:', error);
+      toast.error('An error occurred while verifying OTP');
+    }
+  };
+
+  const handleResendOtp = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5000/resend-otp', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (response.ok) {
+        toast.success('OTP resent successfully');
+      } else {
+        const data = await response.json();
+        toast.error(data.message || 'Failed to resend OTP');
+      }
+    } catch (error) {
+      console.error('Error resending OTP:', error);
+      toast.error('An error occurred while resending OTP');
+    }
+  };
+
+  const handleChangePasswordWithOtp = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5000/change-password-otp', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ newPassword })
+      });
+      if (response.ok) {
+        toast.success('Password updated successfully');
+        setPasswordBox(false);
+        setNextMethod(false);
+        setNewPassContain(false);
+        setOtpSent(false);
+        setOtp('');
+        setNewPassword('');
+      } else {
+        toast.error('Failed to update password');
+      }
+    } catch (error) {
+      console.error('Error changing password with OTP:', error);
+      toast.error('An error occurred while changing password');
+    }
+  };
 
   const handleNextMethod = () => {
-    setNextMethod(true)
-  }
-
-  const handlePreviousMethod = () => {
-    setNextMethod(false)
-  }
-
-  const handleBackBtn = () => {
-    setPasswordBox(false)
-  }
-
-  const openPasswordBox = () => {
-    setPasswordBox(true)
-  }
-
-  const closePasswordBox = (e) => {
-    if(e.target.closest('.change-password-box')){
-      return;
+    if (!otpSent) {
+      handleSendOtp();
     }
-    setPasswordBox(false)
-  }
+    setNextMethod(true);
+  };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  const handlePreviousMethod = () => setNextMethod(false);
+  const handleBackBtn = () => {
+    setPasswordBox(false);
+    setNextMethod(false);
+    setNewPassContain(false);
+    setOtpSent(false);
+    setOtp('');
+    setOldPassword('');
+    setNewPassword('');
+  };
+  const openPasswordBox = () => setPasswordBox(true);
+  const closePasswordBox = (e) => {
+    if (e.target.closest('.change-password-box')) return;
+    setPasswordBox(false);
+    setNextMethod(false);
+    setNewPassContain(false);
+    setOtpSent(false);
+    setOtp('');
+    setOldPassword('');
+    setNewPassword('');
+  };
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <motion.div
@@ -203,47 +316,102 @@ function ProfileEdit() {
         </button>
         <button className='change-password' onClick={openPasswordBox}>Change Password</button>
 
-        <div onClick={closePasswordBox} className="change-password-container" style={{display: `${passwordBox?"flex":"none"}`}}>
+        <div
+          onClick={closePasswordBox}
+          className="change-password-container"
+          style={{ display: passwordBox ? "flex" : "none" }}
+        >
           <div className="change-password-box">
-
-            <div className="back-btn-section">
-              <svg onClick={handleBackBtn} xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000"><path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" /></svg>
+            <div
+              className="back-btn-section"
+              style={{ display: newPassContain ? "none" : "block" }}
+            >
+              <svg onClick={handleBackBtn} xmlns="http://www.w3.org/2000/svg"
+                height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000">
+                <path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" />
+              </svg>
             </div>
 
-            <div className="first-method" style={{ display: `${nextMethod == false ? "block" : "none"}` }}>
-              <form>
+            <div
+              className="first-method"
+              style={{ display: !newPassContain && !nextMethod ? "block" : "none" }}
+            >
+              <form onSubmit={handleChangePasswordWithOld}>
                 <h2>Change To Your New Password</h2>
-                <input type="password" placeholder='Old Password' />
-                <input type="password" placeholder='New Password' />
+                <input
+                  type="password"
+                  placeholder='Old Password'
+                  value={oldPassword}
+                  onChange={(e) => setOldPassword(e.target.value)}
+                />
+                <input
+                  type="password"
+                  placeholder='New Password'
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
                 <button type='submit'>Submit</button>
               </form>
             </div>
 
-            <div className="second-method" style={{ display: `${nextMethod == true ? "block" : "none"}` }}>
-              <form>
+            <div
+              className="second-method"
+              style={{ display: !newPassContain && nextMethod ? "block" : "none" }}
+            >
+              <form onSubmit={handleVerifyOtp}>
                 <h2>OTP Sent To Your Email</h2>
-                <input type="password" placeholder='Enter OTP' />
-                <button type='submit'>Submit</button>
-                <button className="resend-otp">Resend OTP</button>
+                <input
+                  type="password"
+                  placeholder='Enter OTP'
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                />
+                <button type='submit'>Verify OTP</button>
+                {otpSent && (
+                  <button className="resend-otp" onClick={handleResendOtp}>Resend OTP</button>
+                )}
               </form>
             </div>
 
-            {
-              nextMethod ?
+            <div
+              className="new-password-contain"
+              style={{ display: newPassContain ? "block" : "none" }}
+            >
+              <form onSubmit={handleChangePasswordWithOtp}>
+                <h2>Enter Your New Password</h2>
+                <input
+                  type="password"
+                  placeholder='Enter Your New Password'
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+                <button type='submit'>Submit</button>
+              </form>
+            </div>
+
+            {!newPassContain && (
+              nextMethod ? (
                 <div className="next-method-btn" onClick={handlePreviousMethod}>
-                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M540-327.69 387.69-480 540-632.31v304.62Z" /></svg>
-                  <span>Previous Way</span>
-                </div> :
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                    viewBox="0 -960 960 960" width="24px" fill="#000000">
+                    <path d="M540-327.69 387.69-480 540-632.31v304.62Z" />
+                  </svg>
+                  <span>Previous Method</span>
+                </div>
+              ) : (
                 <div className="next-method-btn" onClick={handleNextMethod}>
                   <span>Try Another Way</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000"><path d="M420-327.69v-304.62L572.31-480 420-327.69Z" /></svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="30px"
+                    viewBox="0 -960 960 960" width="30px" fill="#000000">
+                    <path d="M420-327.69v-304.62L572.31-480 420-327.69Z" />
+                  </svg>
                 </div>
-            }
-
+              )
+            )}
           </div>
         </div>
-
       </div>
+      <ToastContainer />
     </motion.div>
   );
 }
