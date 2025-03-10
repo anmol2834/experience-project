@@ -9,9 +9,8 @@ const productSchema = new mongoose.Schema({
   stock: Number,
   mrp: Number,
   rating: Number,
-  // Add other fields as needed to match your "products" collection
-}, { strict: false }); // Optional: allows extra fields not in schema
+}, { strict: false });
 
-const Product = mongoose.model('Product', productSchema); // Changed from 'products' to 'Product'
+const Product = mongoose.model('Product', productSchema);
 
 export default Product;

@@ -6,7 +6,6 @@ export const context_of_product = createContext();
 function ProductContext({ children }) {
   const { token } = useAuth();
   const [productLoading, setProductLoading] = useState(true);
-  const [wishlistLoading, setWishlistLoading] = useState(true);
   const [productInfo, setProductInfo] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
 
@@ -14,58 +13,71 @@ function ProductContext({ children }) {
     const fetchData = async () => {
       if (!token) {
         setProductLoading(false);
-        setWishlistLoading(false);
         return;
       }
-
       try {
-        // Fetch products
         setProductLoading(true);
         const productRes = await fetch('http://localhost:5000/products', {
           method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
         });
-
-        if (!productRes.ok) {
-          throw new Error(`HTTP error! Status: ${productRes.status}`);
-        }
-
         const productData = await productRes.json();
         setProductInfo(productData);
 
-        // Fetch wishlist
-        setWishlistLoading(true);
         const wishlistRes = await fetch('http://localhost:5000/wishlist', {
           method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
         });
-
-        if (!wishlistRes.ok) {
-          throw new Error(`HTTP error! Status: ${wishlistRes.status}`);
-        }
-
         const wishlistData = await wishlistRes.json();
         setWishlistItems(wishlistData);
-
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
         setProductLoading(false);
-        setWishlistLoading(false);
       }
     };
-
     fetchData();
   }, [token]);
 
+  const addToWishlist = async (productId) => {
+    if (!token) return;
+    try {
+      const res = await fetch('http://localhost:5000/wishlist/add', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId }),
+      });
+      if (res.ok) {
+        const newWishlistItem = await res.json();
+        setWishlistItems((prevItems) => [...prevItems, newWishlistItem]);
+      }
+    } catch (error) {
+      console.error('Error adding to wishlist:', error);
+    }
+  };
+
+  const removeFromWishlist = async (productId) => {
+    if (!token) return;
+    try {
+      const res = await fetch('http://localhost:5000/wishlist/remove', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ productId }),
+      });
+      if (res.ok) {
+        setWishlistItems((prevItems) =>
+          prevItems.filter((item) => item.productId._id !== productId)
+        );
+      }
+    } catch (error) {
+      console.error('Error removing from wishlist:', error);
+    }
+  };
+
   return (
-    <context_of_product.Provider value={{ productInfo, productLoading, wishlistItems, wishlistLoading }}>
+    <context_of_product.Provider
+      value={{ productInfo, productLoading, wishlistItems, addToWishlist, removeFromWishlist }}
+    >
       {children}
     </context_of_product.Provider>
   );

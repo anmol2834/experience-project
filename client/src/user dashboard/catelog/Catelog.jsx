@@ -4,9 +4,9 @@ import Catelogcard from './catelog card/Catelogcard';
 import { context_of_product } from '../../context/ProductContext';
 
 function Catelog() {
-  const { productInfo, productLoading, wishlistItems, wishlistLoading } = useContext(context_of_product);
+  const { productInfo, productLoading, wishlistItems } = useContext(context_of_product);
 
-  if (productLoading || wishlistLoading) {
+  if (productLoading) {
     return <div className="catelog-loading">Loading...</div>;
   }
 
@@ -15,7 +15,7 @@ function Catelog() {
       <h1>Explore Experiences</h1>
       <div className="catelog-aligner">
         {productInfo.map((value, index) => {
-          const isLiked = wishlistItems.some((item) => item.productId._id === value._id);
+          const isLiked = wishlistItems.some((item) => item.productId && item.productId._id === value._id);
           return (
             <Catelogcard
               key={index}
@@ -28,7 +28,7 @@ function Catelog() {
               mrp={value.mrp}
               ratings={value.rating}
               productId={value._id}
-              isLiked={isLiked} // Pass initial like status
+              isLiked={isLiked}
             />
           );
         })}

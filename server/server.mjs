@@ -358,7 +358,7 @@ app.post('/change-password-otp', verifyToken, async (req, res) => {
   }
 });
 
-// Fetch all products using Mongoose Product model
+// Fetch all products
 app.get('/products', verifyToken, async (req, res) => {
   try {
     const products = await Product.find();
@@ -369,7 +369,7 @@ app.get('/products', verifyToken, async (req, res) => {
   }
 });
 
-// Add to wishlist
+// Add to wishlist - Updated to return populated item
 app.post('/wishlist/add', verifyToken, async (req, res) => {
   const { productId } = req.body;
   try {
@@ -380,7 +380,8 @@ app.post('/wishlist/add', verifyToken, async (req, res) => {
     }
     const wishlistItem = new Wishlist({ userId, productId });
     await wishlistItem.save();
-    res.status(200).json({ message: 'Product added to wishlist' });
+    const populatedItem = await Wishlist.findById(wishlistItem._id).populate('productId');
+    res.status(200).json(populatedItem);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
