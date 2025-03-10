@@ -31,6 +31,7 @@ function ProductContext({children}) {
                     let data = await res.json()
                     setProductInfo(data);
                     setProductLoading(false)
+                    
     
                 } catch (error) {
                     console.error(error)

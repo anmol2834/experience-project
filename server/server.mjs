@@ -2,7 +2,9 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
-import User from './models/model.js';
+import User from './models/users.js';
+import Wishlist from './models/wishlist.js';
+import Product from './models/products.js';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { generateToken, verifyToken } from './middlewares/middleware.js';
@@ -261,7 +263,7 @@ app.post('/send-otp', verifyToken, async (req, res) => {
       from: 'anmolsinha4321@gmail.com',
       to: user.email,
       subject: 'Password Change OTP',
-      text: `Your OTP is: ${otp}`
+      text: `Your OTP is: ${otp}`,
     };
 
     transporter.sendMail(mailOptions, (error) => {
@@ -277,7 +279,7 @@ app.post('/send-otp', verifyToken, async (req, res) => {
   }
 });
 
-// Resend OTP (with 5-minute rule and multiple resend prevention)
+// Resend OTP
 app.post('/resend-otp', verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
@@ -303,7 +305,7 @@ app.post('/resend-otp', verifyToken, async (req, res) => {
       from: 'anmolsinha4321@gmail.com',
       to: user.email,
       subject: 'Password Change OTP',
-      text: `Your new OTP is: ${otp}`
+      text: `Your new OTP is: ${otp}`,
     };
 
     transporter.sendMail(mailOptions, (error) => {
@@ -356,18 +358,61 @@ app.post('/change-password-otp', verifyToken, async (req, res) => {
   }
 });
 
-//connection to db for products collection
-app.get("/products", verifyToken, async (req, res) => {
+// Fetch all products using Mongoose Product model
+app.get('/products', verifyToken, async (req, res) => {
   try {
-    const db = mongoose.connection.db;
-    const products = await db.collection("products").find().toArray();
+    const products = await Product.find();
     res.json(products);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching products" });
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching products' });
   }
 });
 
+// Add to wishlist
+app.post('/wishlist/add', verifyToken, async (req, res) => {
+  const { productId } = req.body;
+  try {
+    const userId = req.user.id;
+    const existingItem = await Wishlist.findOne({ userId, productId });
+    if (existingItem) {
+      return res.status(400).json({ message: 'Product already in wishlist' });
+    }
+    const wishlistItem = new Wishlist({ userId, productId });
+    await wishlistItem.save();
+    res.status(200).json({ message: 'Product added to wishlist' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
+// Remove from wishlist
+app.post('/wishlist/remove', verifyToken, async (req, res) => {
+  const { productId } = req.body;
+  try {
+    const userId = req.user.id;
+    await Wishlist.deleteOne({ userId, productId });
+    res.status(200).json({ message: 'Product removed from wishlist' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Get wishlist with populated product details
+app.get('/wishlist', verifyToken, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const wishlistItems = await Wishlist.find({ userId }).populate('productId');
+    res.status(200).json(wishlistItems);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Start the server
 app.listen(process.env.PORT, () => {
   console.log('Server is running');
 });
