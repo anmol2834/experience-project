@@ -1,19 +1,194 @@
-.product-slidshow-container {
+.product-slideshow-container {
     position: fixed;
     width: 100vw;
     height: 100vh;
     background: #222;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 20px;
     z-index: 10;
 }
 
-.product-slidshow-box {
+.product-slideshow-container .back-btn svg{
+    fill: white;
+}
+
+/* Remove animation from base class */
+.product-slideshow-box {
     width: 60%;
     height: 60%;
     background: white;
     border-radius: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     overflow: hidden;
     box-shadow: 0 0 10px black;
+    transform-origin: center center;
+    /* Remove animation from here */
+}
+
+/* Keep only the animated class */
+.product-slideshow-box.slide-in {
+    animation: slideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.product-slideshow-box span{
+    width: 5%;
+    height: 16%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    cursor: pointer;
+}
+
+.product-slideshow-box span:nth-child(1){
+    border-radius: 0 10% 10% 0;
+}
+
+.product-slideshow-box span:nth-child(2){
+    border-radius: 10% 0% 0% 10%;
+}
+
+.product-slideshow-box span {
+    transition: transform 0.3s, opacity 0.3s;
+    opacity: 0.8;
+}
+
+.product-slideshow-box span:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+/* Add parallax effect on hover */
+@media (hover: hover) {
+    .product-slideshow-box:hover {
+        transform: translateZ(10px);
+    }
+}
+
+/* Mobile swipe animation */
+@media (max-width: 768px) {
+    .product-slideshow-box {
+        transition: transform 0.3s ease-out;
+    }
+    
+    .product-slideshow-box.swipe-left {
+        transform: translateX(-10%);
+    }
+    
+    .product-slideshow-box.swipe-right {
+        transform: translateX(10%);
+    }
+}
+
+.thumbnail-slides {
+    width: 60%;
+    height: 20%;
+    padding: 10px;
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+}
+
+.thumbnail-slides .thumb {
+    width: 20%;
+    height: 100%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    border-radius: 5px;
+    border: 1px solid white;
+    scroll-snap-align: start;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.thumbnail-slides .thumb.active-thumb {
+    transform: scale(1.1);
+    border: 2px solid #fff !important;
+    opacity: 1 !important;
+    animation: thumbActive 0.4s ease-out forwards;
+    box-shadow: 0 8px 20px rgba(255,255,255,0.2);
+}
+
+.thumbnail-slides .thumb:not(.active-thumb):hover {
+    transform: translateY(-5px);
+}
+
+.thumbnail-slides .thumb:not(.active-thumb) {
+    opacity: 0.7;
+}
+
+.thumbnail-slides::-webkit-scrollbar {
+    height: 5px;
+}
+
+.thumbnail-slides::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+}
+
+@media (hover: hover) {
+    .thumbnail-slides .thumb:hover:not(.active-thumb) {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+@keyframes slideIn {
+    0% { opacity: 0.5; transform: scale(0.98); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes thumbActive {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1.1); }
+}
+
+
+@media (max-width: 480px) {
+    .product-slideshow-box {
+        width: 90%;
+        height: 50%;
+    }
+
+    .thumbnail-slides {
+        width: 90%;
+    }
+
+    .thumbnail-slides .thumb {
+        width: 40%;
+    }
+    .product-slideshow-box span{
+        width: 10%;
+        cursor: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-slideshow-box {
+        width: 90%;
+        height: 50%;
+    }
+
+    .thumbnail-slides {
+        width: 90%;
+    }
+
+    .thumbnail-slides .thumb {
+        width: 40%;
+    }
 }

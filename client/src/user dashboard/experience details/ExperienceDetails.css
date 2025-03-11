@@ -32,6 +32,10 @@
   margin-bottom: 1rem;
   position: relative;
   overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: transform 0.5s ease-in-out;
 }
 
 .wishlist-icon {
@@ -51,6 +55,7 @@
 }
 
 .thumbnail-grid {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0.5rem;
@@ -62,6 +67,27 @@
   border-radius: 0.5rem;
   cursor: pointer;
   transition: transform 0.2s;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.thumbnail-grid .thumb.active-thumb {
+  transform: scale(1.05);
+  border: 2px solid #fff !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .main-image.swipe-left {
+    transform: translateX(-10%);
+  }
+  
+  .main-image.swipe-right {
+    transform: translateX(10%);
+  }
 }
 
 .thumb:hover {
@@ -69,12 +95,18 @@
 }
 
 .more-images {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.6);
   color: white;
   font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.more-images:hover {
+  transform: scale(1.05);
 }
 
 .details-section {
@@ -242,7 +274,7 @@
     cursor: none;
   }
 
-  .book-now{
+  .book-now {
     cursor: none;
   }
 
@@ -258,7 +290,7 @@
     cursor: none;
   }
 
-  .locate-icon{
+  .locate-icon {
     cursor: none;
   }
 
@@ -294,7 +326,7 @@
     cursor: none;
   }
 
-  .locate-icon{
+  .locate-icon {
     cursor: none;
   }
 
