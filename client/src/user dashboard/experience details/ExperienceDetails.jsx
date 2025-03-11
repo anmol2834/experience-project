@@ -54,7 +54,7 @@ function ExperienceDetails() {
 
   return (
     <div className='experience-details-container'>
-      <div className="back-btn" onClick={() => navigate(-1)}>
+      <div className="back-btn">
         <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
           <path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z"/>
         </svg>
@@ -74,6 +74,7 @@ function ExperienceDetails() {
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
+            onClick={() => navigate('/product-slideshow', { state: { initialSlide: currentSlide } })}
           >
             <span className='wishlist-icon' onClick={handleLike}>
               {like ? (
@@ -100,7 +101,7 @@ function ExperienceDetails() {
             {showMoreThumb && (
               <div 
                 className="thumb more-images" 
-                onClick={() => navigate('/product-slideshow')}
+                onClick={() => navigate('/product-slideshow', { state: { initialSlide: currentSlide } })}
               >
                 +{images.length - 3}
               </div>

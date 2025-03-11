@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import './ProductSlideshow.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 function ProductSlideshow() {
     const navigate = useNavigate();
-    const [currentSlide, setCurrentSlide] = useState(0);
+    const location = useLocation();
+    const [currentSlide, setCurrentSlide] = useState(location.state?.initialSlide || 0);
     const [touchStart, setTouchStart] = useState(0);
     const [touchEnd, setTouchEnd] = useState(0);
     const [animate, setAnimate] = useState(false);
