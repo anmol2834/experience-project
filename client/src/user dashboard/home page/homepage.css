@@ -2,11 +2,11 @@
 .home-contain{
     width: 100%;
     height: 100%;
-    color: black;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: white;
+    background: #222;
 }
 
 .catelog-contain{

@@ -9,7 +9,7 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
   const { addToWishlist, removeFromWishlist } = useContext(context_of_product);
   const [like, setLike] = useState(isLiked);
   const [wishlistLoading, setWishlistLoading] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLike(isLiked);
@@ -32,17 +32,16 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
     } catch (error) {
       console.error('Error updating wishlist:', error);
     } finally {
-      setWishlistLoading(false); // Hide spinner
+      setWishlistLoading(false); 
     }
   };
 
-  const handleAddToCart = () => {
+  const handleViewDetails = () => {
     if (!token) {
-      navigate('/signin'); // Redirect to sign-in if not authenticated
+      navigate('/signin'); 
       return;
     }
-    // Placeholder for add-to-cart logic (implement as needed)
-    console.log('Add to cart clicked for product:', productId);
+    navigate('/experience-details')
   };
 
   const rating = ratings;
@@ -64,6 +63,8 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
   return (
     <div className="catelog-card">
       <div className="catelog-img" style={{ backgroundImage: `url(${img || ''})` }}>
+      </div>
+      <div className="catelog-details">
         <div className="heart-contain" onClick={handleLike}>
           {wishlistLoading ? (
             <div className="spinner"></div> // Replace with your spinner CSS or component
@@ -77,14 +78,8 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
             </svg>
           )}
         </div>
-        <div className="star-ratings">
-          <span>{rating}</span>
-          <div>{handleStars(rating)}</div>
-        </div>
-      </div>
-      <div className="catelog-details">
         <div className="heading">
-          <h2>{title}</h2>
+          <h1>{title}</h1>
           <section>
             <p>{state},</p>
             <p>{city}</p>
@@ -92,13 +87,15 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
         </div>
         <div className="price">
           <section>
-            <p className="mrp">${mrp}</p>
-            <p className="selling-price">${price}</p>
+            <p className="selling-price">${price}/Person</p>
           </section>
         </div>
         <div className="add-to-cart">
-          <button onClick={handleAddToCart}>Add To Cart</button>
-          <span className="left">{stock} Left</span>
+          <div className="star-ratings">
+            <span>{rating}</span>
+            <div>{handleStars(rating)}</div>
+          </div>
+          <button onClick={handleViewDetails}>View Details</button>
         </div>
       </div>
     </div>

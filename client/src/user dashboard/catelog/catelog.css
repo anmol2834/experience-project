@@ -16,8 +16,8 @@
 .catelog-contain .catelog-aligner {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    column-gap: 50px;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 80px;
     padding: 0 10px;
     row-gap: 80px;
 }
@@ -88,7 +88,7 @@
 
 @keyframes toggleLeft {
     0% {
-        transform: translateX(200px);
+        transform: translateY(100px);
         opacity: 0;
     }
 
@@ -100,7 +100,7 @@
 
 @keyframes toggRight {
     0% {
-        transform: translateX(-200px);
+        transform: translateY(100px);
         opacity: 0;
     }
 
@@ -152,7 +152,7 @@
 
     .catelog-contain .catelog-aligner {
         width: 100%;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         column-gap: 50px;
     }
 
