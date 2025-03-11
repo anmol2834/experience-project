@@ -1,0 +1,332 @@
+/* ExperienceDetails.css */
+.experience-details-container {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+}
+
+.experience-card {
+  max-width: 1200px;
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+  overflow: hidden;
+}
+
+.image-gallery {
+  position: relative;
+  padding: 1rem;
+}
+
+.main-image {
+  height: 400px;
+  background: linear-gradient(45deg, #6c757d, #adb5bd);
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.wishlist-icon {
+  position: absolute;
+  right: 0;
+  margin: 10px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.wishlist-icon svg {
+  fill: rgb(255, 41, 41);
+}
+
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.thumb {
+  height: 80px;
+  background: #e9ecef;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.thumb:hover {
+  transform: scale(1.05);
+}
+
+.more-images {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-weight: bold;
+}
+
+.details-section {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  color: #212529;
+}
+
+.title-and-map {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6c757d;
+}
+
+.locate-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.locate-icon:hover {
+  transition: 0.5s;
+  transform: scale(1.1);
+}
+
+.price-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.price .amount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2b8a3e;
+}
+
+.per-person {
+  color: #868e96;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+  color: #f48a00;
+}
+
+.book-and-cart {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.book-now,
+.addCart {
+  width: 50%;
+  height: 50px;
+  text-transform: capitalize;
+  background: #2b8a3e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.addCart svg {
+  fill: white;
+}
+
+.book-now:hover,
+.addCart:hover {
+  transform: translateY(-2px);
+}
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.cart-icon {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.cart-icon:hover {
+  transition: 0.5s;
+  transform: scale(1.1);
+}
+
+.cart-icon::after {
+  content: attr(data-content);
+  position: absolute;
+  top: -10px;
+  right: -15px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.back-btn:hover {
+  transition: 0.5s;
+  transform: scale(1.1);
+}
+
+.product-slidshow-container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.product-slidshow-box {
+  width: 60%;
+  height: 60%;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px black;
+}
+
+
+@media (max-width: 768px) {
+  .experience-card {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin-top: 20px;
+    padding: 20px 0;
+  }
+
+  .details-section {
+    padding: 0rem 1rem;
+  }
+
+  .main-image {
+    height: 300px;
+  }
+
+  .back-btn {
+    cursor: none;
+  }
+
+  .book-now{
+    cursor: none;
+  }
+
+  .addCart {
+    cursor: pointer;
+  }
+
+  .thumb {
+    cursor: none;
+  }
+
+  .cart-icon {
+    cursor: none;
+  }
+
+  .locate-icon{
+    cursor: none;
+  }
+
+  .product-slidshow-box {
+    width: 90%;
+    height: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience-details-container {
+    padding: 0rem;
+    margin-top: 10px;
+  }
+
+  .details-section {
+    padding: 0rem 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .price .amount {
+    font-size: 1.5rem;
+  }
+
+  .book-now {
+    cursor: none;
+  }
+
+  .addCart {
+    cursor: none;
+  }
+
+  .locate-icon{
+    cursor: none;
+  }
+
+  .back-btn {
+    cursor: none;
+  }
+
+  .wishlist-icon {
+    cursor: none;
+  }
+
+  .cart-icon {
+    cursor: none;
+  }
+}

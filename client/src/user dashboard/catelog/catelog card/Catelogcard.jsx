@@ -2,19 +2,24 @@ import React, { useEffect, useState, useContext } from 'react';
 import './catelogcard.css';
 import { useAuth } from '../../../context/AuthContext';
 import { context_of_product } from '../../../context/ProductContext';
+import { useNavigate } from 'react-router-dom'; // Added for navigation
 
 function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, productId, isLiked }) {
   const { token } = useAuth();
   const { addToWishlist, removeFromWishlist } = useContext(context_of_product);
   const [like, setLike] = useState(isLiked);
   const [wishlistLoading, setWishlistLoading] = useState(false);
+  const navigate = useNavigate(); // Initialize navigation hook
 
   useEffect(() => {
     setLike(isLiked);
   }, [isLiked]);
 
   const handleLike = async () => {
-    if (!token) return;
+    if (!token) {
+      navigate('/signin'); // Redirect to sign-in if not authenticated
+      return;
+    }
     setWishlistLoading(true); // Show spinner
     try {
       if (like) {
@@ -29,6 +34,15 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
     } finally {
       setWishlistLoading(false); // Hide spinner
     }
+  };
+
+  const handleAddToCart = () => {
+    if (!token) {
+      navigate('/signin'); // Redirect to sign-in if not authenticated
+      return;
+    }
+    // Placeholder for add-to-cart logic (implement as needed)
+    console.log('Add to cart clicked for product:', productId);
   };
 
   const rating = ratings;
@@ -83,7 +97,7 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
           </section>
         </div>
         <div className="add-to-cart">
-          <button>Add To Cart</button>
+          <button onClick={handleAddToCart}>Add To Cart</button>
           <span className="left">{stock} Left</span>
         </div>
       </div>

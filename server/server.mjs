@@ -359,7 +359,7 @@ app.post('/change-password-otp', verifyToken, async (req, res) => {
 });
 
 // Fetch all products
-app.get('/products', verifyToken, async (req, res) => {
+app.get('/products', async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);

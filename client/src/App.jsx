@@ -12,6 +12,7 @@ import ProfileEdit from './user dashboard/user account/profile edit/ProfileEdit'
 import HelpCenter from './user dashboard/user account/help center/HelpCenter';
 import Wishlist from './user dashboard/user account/wishlist/Wishlist';
 import ProductContext from './context/ProductContext';
+import ExperienceDetails from './user dashboard/experience details/ExperienceDetails';
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
                   <Route path='help_center' element={<HelpCenter />} />
                   <Route path='wishlist' element={<Wishlist />} />
                 </Route>
+                <Route path='/experience-details' element={<ExperienceDetails/>}/>
               </Route>
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />

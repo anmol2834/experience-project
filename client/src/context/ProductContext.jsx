@@ -11,25 +11,28 @@ function ProductContext({ children }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!token) {
-        setProductLoading(false);
-        return;
-      }
       try {
         setProductLoading(true);
+        // Fetch products without authentication
         const productRes = await fetch('http://localhost:5000/products', {
           method: 'GET',
-          headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
         });
         const productData = await productRes.json();
         setProductInfo(productData);
 
-        const wishlistRes = await fetch('http://localhost:5000/wishlist', {
-          method: 'GET',
-          headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-        });
-        const wishlistData = await wishlistRes.json();
-        setWishlistItems(wishlistData);
+        // Fetch wishlist only if the user is authenticated
+        if (token) {
+          const wishlistRes = await fetch('http://localhost:5000/wishlist', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+          });
+          const wishlistData = await wishlistRes.json();
+          setWishlistItems(wishlistData);
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
@@ -40,11 +43,14 @@ function ProductContext({ children }) {
   }, [token]);
 
   const addToWishlist = async (productId) => {
-    if (!token) return;
+    if (!token) return; // Only authenticated users can add to wishlist
     try {
       const res = await fetch('http://localhost:5000/wishlist/add', {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ productId }),
       });
       if (res.ok) {
@@ -57,11 +63,14 @@ function ProductContext({ children }) {
   };
 
   const removeFromWishlist = async (productId) => {
-    if (!token) return;
+    if (!token) return; // Only authenticated users can remove from wishlist
     try {
       const res = await fetch('http://localhost:5000/wishlist/remove', {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ productId }),
       });
       if (res.ok) {
