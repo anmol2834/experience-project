@@ -13,6 +13,7 @@ import HelpCenter from './user dashboard/user account/help center/HelpCenter';
 import Wishlist from './user dashboard/user account/wishlist/Wishlist';
 import ProductContext from './context/ProductContext';
 import ExperienceDetails from './user dashboard/experience details/ExperienceDetails';
+import ProductSlideshow from './user dashboard/experience details/product slideshow/ProductSlideshow';
 
 function App() {
 
@@ -44,14 +45,15 @@ function App() {
               <Route path="/" element={<DashboardLayout />}>
                 <Route index element={<UserDashboard />} />
                 <Route path="/home" element={<UserDashboard />} />
-                <Route path="/account" element={<ProtectedRoute><UserAcc /></ProtectedRoute>}>
-                  <Route index element={<ProfileEdit />} />
-                  <Route path='edit_profile' element={<ProfileEdit />} />
-                  <Route path='help_center' element={<HelpCenter />} />
-                  <Route path='wishlist' element={<Wishlist />} />
-                </Route>
-                <Route path='/experience-details' element={<ExperienceDetails/>}/>
+                <Route path='/experience-details' element={<ExperienceDetails />} />
               </Route>
+              <Route path="/account" element={<ProtectedRoute><UserAcc /></ProtectedRoute>}>
+                <Route index element={<ProfileEdit />} />
+                <Route path='edit_profile' element={<ProfileEdit />} />
+                <Route path='help_center' element={<HelpCenter />} />
+                <Route path='wishlist' element={<Wishlist />} />
+              </Route>
+              <Route path='/product-slideshow' element={<ProductSlideshow />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
             </Routes>

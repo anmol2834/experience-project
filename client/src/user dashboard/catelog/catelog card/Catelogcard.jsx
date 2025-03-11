@@ -9,7 +9,7 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
   const { addToWishlist, removeFromWishlist } = useContext(context_of_product);
   const [like, setLike] = useState(isLiked);
   const [wishlistLoading, setWishlistLoading] = useState(false);
-  const navigate = useNavigate(); // Initialize navigation hook
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     setLike(isLiked);

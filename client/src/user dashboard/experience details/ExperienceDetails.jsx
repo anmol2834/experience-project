@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './ExperienceDetails.css';
+import { useNavigate } from 'react-router-dom';
 
 function ExperienceDetails() {
 
   const [like, setLike] = useState(false);
-  const [productSlides, setProductSlide] = useState(false)
+  const [productSlides, setProductSlide] = useState(false);
+  const navigate = useNavigate();
 
   const handleLike = () => {
     if (like) {
@@ -25,15 +27,6 @@ function ExperienceDetails() {
       window.removeEventListener('popstate', handleBackButton);
     };
   }, []);
-
-  if (productSlides) {
-    return (
-      <div className="product-slidshow-container">
-        <div className="product-slidshow-box">
-          sd
-        </div>
-      </div>)
-  }
 
   return (
     <div className='experience-details-container'>
@@ -61,7 +54,7 @@ function ExperienceDetails() {
             <div className="thumb"></div>
             <div className="thumb"></div>
             <div className="thumb"></div>
-            <div className="thumb more-images" onClick={() => setProductSlide(true)}>+5</div>
+            <div className="thumb more-images" onClick={() => navigate('/product-slideshow')}>+5</div>
           </div>
         </div>
 
