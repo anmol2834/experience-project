@@ -74,7 +74,7 @@ function ExperienceDetails() {
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            onClick={() => navigate('/product-slideshow', { state: { initialSlide: currentSlide } })}
+            onClick={(e) => { if(e.target.closest('.wishlist-icon')){return;} navigate('/product-slideshow', { state: { initialSlide: currentSlide } })}}
           >
             <span className='wishlist-icon' onClick={handleLike}>
               {like ? (

@@ -8,6 +8,7 @@ function ProductContext({ children }) {
   const [productLoading, setProductLoading] = useState(true);
   const [productInfo, setProductInfo] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
+  const [userUpdated, setUserUpdated] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,9 +84,13 @@ function ProductContext({ children }) {
     }
   };
 
+  const incrementUserUpdated = () => {
+    setUserUpdated((prev) => prev + 1); // Increment the counter on each update
+  };
+
   return (
     <context_of_product.Provider
-      value={{ productInfo, productLoading, wishlistItems, addToWishlist, removeFromWishlist }}
+      value={{ productInfo, productLoading, wishlistItems, addToWishlist, removeFromWishlist, userUpdated, incrementUserUpdated }}
     >
       {children}
     </context_of_product.Provider>

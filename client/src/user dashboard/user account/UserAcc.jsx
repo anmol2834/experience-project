@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './UserAcc.css';
-import { useAuth } from '../../context/AuthContext'; 
+import { useAuth } from '../../context/AuthContext';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { context_of_product } from '../../context/ProductContext'; // Import the context
 
 function UserAcc() {
   const { logout, token } = useAuth();
+  const { userUpdated } = useContext(context_of_product); // Access userUpdated from context
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     firstname: '',
@@ -41,31 +43,33 @@ function UserAcc() {
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
-        logout(); 
+        logout();
       } finally {
         setLoading(false);
       }
     };
 
     fetchUserData();
-  }, [token, navigate, logout]);
+  }, [token, navigate, logout, userUpdated]); // Add userUpdated to dependencies
 
   const handleLogout = () => {
     logout();
   };
 
   if (loading) {
-    return <div className="loading">
-      <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-    </div>
+    return (
+      <div className="loading">
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    );
   }
 
   return (
@@ -134,10 +138,9 @@ function UserAcc() {
             <section>Transaction History</section>
           </div>
         </div>
-
       </div>
       <div className="account-render">
-        <Outlet/>
+        <Outlet />
       </div>
     </div>
   );

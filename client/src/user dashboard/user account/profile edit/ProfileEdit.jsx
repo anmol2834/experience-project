@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './ProfileEdit.css';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../../context/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { context_of_product } from '../../../context/ProductContext';
 
 function ProfileEdit() {
   const { token } = useAuth();
+  const { incrementUserUpdated } = useContext(context_of_product);
   const [userData, setUserData] = useState({
     firstname: '',
     lastname: '',
@@ -61,7 +63,15 @@ function ProfileEdit() {
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-    setUserData((prev) => ({ ...prev, [id]: value }));
+    if (id === 'phone') {
+      // Allow only numeric input and enforce exactly 10 digits
+      const numericValue = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+      if (numericValue.length <= 10) {
+        setUserData((prev) => ({ ...prev, [id]: numericValue }));
+      }
+    } else {
+      setUserData((prev) => ({ ...prev, [id]: value }));
+    }
   };
 
   const handleProfileUpdate = async () => {
@@ -77,14 +87,19 @@ function ProfileEdit() {
 
       if (response.ok) {
         toast.success('Profile updated successfully');
+        incrementUserUpdated(); // Increment the counter to trigger UserAcc update
       } else {
-        toast.error('Failed to update profile');
+        // Extract the error message from the server response
+        const errorData = await response.json();
+        const errorMessage = errorData.message || 'Failed to update profile';
+        toast.error(errorMessage);
       }
     } catch (error) {
       console.error('Error updating profile:', error);
       toast.error('An error occurred while updating profile');
     }
   };
+
 
   const handleChangePasswordWithOld = async (e) => {
     e.preventDefault();
@@ -281,6 +296,7 @@ function ProfileEdit() {
               id="phone"
               onChange={handleInputChange}
               placeholder={userData.phone ? userData.phone : "8379777564"}
+              maxLength="10"
               className="modern-input icon-input phone"
             />
           </div>

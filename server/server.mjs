@@ -209,6 +209,24 @@ app.get('/user', verifyToken, async (req, res) => {
 app.put('/user', verifyToken, async (req, res) => {
   try {
     const { firstname, lastname, email, phone, dob, gender } = req.body;
+
+    // Check if email is provided and already exists for another user
+    if (email) {
+      const emailExists = await User.findOne({ email, _id: { $ne: req.user.id } });
+      if (emailExists) {
+        return res.status(400).json({ message: 'User email already exists' });
+      }
+    }
+
+    // Check if phone is provided and already exists for another user
+    if (phone) {
+      const phoneExists = await User.findOne({ phone, _id: { $ne: req.user.id } });
+      if (phoneExists) {
+        return res.status(400).json({ message: 'User phone number already exists' });
+      }
+    }
+
+    // Prepare update data with provided fields
     const updateData = { firstname, lastname, email, phone, dob, gender };
 
     const user = await User.findByIdAndUpdate(req.user.id, updateData, { new: true });
