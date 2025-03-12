@@ -31,7 +31,7 @@ const Wishlist = () => {
           >
             <div className="item-image-container">
               <img
-                src={item.productId.experience_img}
+                src={item.productId.img1}
                 alt={item.productId.title}
                 className="item-image"
               />

@@ -66,8 +66,15 @@ function ProductSlideshow() {
         }
     }, [currentSlide]);
 
+    const handleContainerBack = (e) => {
+        if(e.target.closest('.product-slideshow-box') || e.target.closest('.thumbnail-slides')){
+            return;
+        }
+        navigate('/experience-details')
+    }
+
     return (
-        <div className="product-slideshow-container">
+        <div className="product-slideshow-container" onClick={handleContainerBack}>
             <div className="back-btn" onClick={() => navigate('/experience-details')}>
                 <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
                     <path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" />
@@ -82,14 +89,14 @@ function ProductSlideshow() {
                 onTouchEnd={handleTouchEnd}
             >
                 <span className='left-slide' onClick={() => handleSlideChange(currentSlide - 1)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000000">
-                        <path d="M432.31-307.31v-345L262.69-480l169.62 172.69ZM520-140h60v-680h-60v680Z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000">
+                        <path d="M560-253.85 333.85-480 560-706.15 602.15-664l-184 184 184 184L560-253.85Z" />
                     </svg>
                 </span>
 
                 <span className='right-slide' onClick={() => handleSlideChange(currentSlide + 1)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000000">
-                        <path d="M380-140v-680h60v680h-60Zm147.69-167.31v-345L697.31-480 527.69-307.31Z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000">
+                        <path d="m517.85-480-184-184L376-706.15 602.15-480 376-253.85 333.85-296l184-184Z" />
                     </svg>
                 </span>
             </div>

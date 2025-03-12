@@ -23,7 +23,7 @@ function Catelog() {
               city={value.city}
               title={value.title}
               price={value.price}
-              img={value.experience_img}
+              img={value.img1}
               stock={value.stock}
               mrp={value.mrp}
               ratings={value.rating}

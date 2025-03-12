@@ -1,17 +1,18 @@
 /* ExperienceDetails.css */
 .experience-details-container {
-  width: 100%;
+  width: 100vw;
   min-height: 100vh;
   padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f9fa;
+  background: #222;
+  color: white;
 }
 
 .experience-card {
   max-width: 1200px;
-  background: white;
+  background: #333;
   border-radius: 1.5rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   display: grid;
@@ -37,9 +38,6 @@
   background-repeat: no-repeat;
   transition: transform 0.5s ease-in-out;
 }
-
-
-
 
 .loader-container {
   position: absolute;
@@ -84,7 +82,7 @@
 }
 
 .wishlist-icon svg {
-  fill: rgb(255, 41, 41);
+  fill: white;
 }
 
 .thumbnail-grid {
@@ -151,7 +149,7 @@
 
 .title {
   font-size: 2rem;
-  color: #212529;
+  color: white;
 }
 
 .title-and-map {
@@ -163,11 +161,15 @@
   align-items: center;
 }
 
+.locate-icon svg{
+  fill: white;
+}
+
 .location {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #6c757d;
+  color: #bdbdbd;
 }
 
 .locate-icon {
@@ -193,11 +195,11 @@
 .price .amount {
   font-size: 2rem;
   font-weight: 700;
-  color: #2b8a3e;
+  color: white;
 }
 
 .per-person {
-  color: #868e96;
+  color: #bdbdbd;
 }
 
 .rating {
@@ -223,8 +225,8 @@
   width: 50%;
   height: 50px;
   text-transform: capitalize;
-  background: #2b8a3e;
-  color: white;
+  background: white;
+  color: black;
   border: none;
   border-radius: 10px;
   display: flex;
@@ -237,7 +239,7 @@
 }
 
 .addCart svg {
-  fill: white;
+  fill: black;
 }
 
 .book-now:hover,
@@ -253,12 +255,20 @@
   transition: 0.5s;
 }
 
+.back-btn svg{
+  fill: white;
+}
+
 .cart-icon {
   position: absolute;
   top: 25px;
   right: 40px;
   cursor: pointer;
   transition: 0.5s;
+}
+
+.cart-icon svg{
+  fill: white;
 }
 
 .cart-icon:hover {
