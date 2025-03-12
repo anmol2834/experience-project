@@ -7,6 +7,7 @@ function ExperienceDetails() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
+  const [imageLoading, setImageLoading] = useState(true); // New state for image loading
   const navigate = useNavigate();
 
   const slide_img = {
@@ -24,13 +25,15 @@ function ExperienceDetails() {
   const showMoreThumb = images.length > 3;
 
   const handleSlideChange = (index) => {
-    if(index < 0) index = images.length - 1;
-    if(index >= images.length) index = 0;
+    if (index < 0) index = images.length - 1;
+    if (index >= images.length) index = 0;
     setCurrentSlide(index);
+    setImageLoading(true); // Reset loading state when slide changes
   };
 
   const handleThumbClick = (index) => {
     setCurrentSlide(index);
+    setImageLoading(true); // Reset loading state when thumb is clicked
   };
 
   const handleTouchStart = (e) => {
@@ -42,15 +45,19 @@ function ExperienceDetails() {
   };
 
   const handleTouchEnd = () => {
-    if(!touchStart || !touchEnd) return;
+    if (!touchStart || !touchEnd) return;
     const diff = touchStart - touchEnd;
-    if(diff > 5) handleSlideChange(currentSlide + 1);
-    if(diff < -5) handleSlideChange(currentSlide - 1);
+    if (diff > 5) handleSlideChange(currentSlide + 1);
+    if (diff < -5) handleSlideChange(currentSlide - 1);
     setTouchStart(0);
     setTouchEnd(0);
   };
 
   const handleLike = () => setLike(!like);
+
+  const handleImageLoad = () => {
+    setImageLoading(false); // Set loading to false when image is loaded
+  };
 
   return (
     <div className='experience-details-container'>
@@ -61,7 +68,7 @@ function ExperienceDetails() {
       </div>
 
       <div className="cart-icon" data-content={0}>
-        <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000000">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
           <path d="M252.31-100Q222-100 201-121q-21-21-21-51.31v-455.38Q180-658 201-679q21-21 51.31-21H330v-10q0-62.15 43.92-106.08Q417.85-860 480-860t106.08 43.92Q630-772.15 630-710v10h77.69Q738-700 759-679q21 21 21 51.31v455.38Q780-142 759-121q-21 21-51.31 21H252.31Zm0-60h455.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46v-455.38q0-4.62-3.85-8.46-3.84-3.85-8.46-3.85H630v90q0 12.77-8.62 21.38Q612.77-520 600-520t-21.38-8.62Q570-537.23 570-550v-90H390v90q0 12.77-8.62 21.38Q372.77-520 360-520t-21.38-8.62Q330-537.23 330-550v-90h-77.69q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v455.38q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85ZM390-700h180v-10q0-37.61-26.19-63.81Q517.62-800 480-800q-37.62 0-63.81 26.19Q390-747.61 390-710v10ZM240-160v-480 480Z"/>
         </svg>
       </div>
@@ -76,6 +83,17 @@ function ExperienceDetails() {
             onTouchEnd={handleTouchEnd}
             onClick={(e) => { if(e.target.closest('.wishlist-icon')){return;} navigate('/product-slideshow', { state: { initialSlide: currentSlide } })}}
           >
+            {imageLoading && (
+              <div className="loader-container">
+                <div className="loader"></div>
+              </div>
+            )}
+            <img
+              src={images[currentSlide]}
+              alt="Main"
+              style={{ display: 'none' }} // Hide the img element
+              onLoad={handleImageLoad}
+            />
             <span className='wishlist-icon' onClick={handleLike}>
               {like ? (
                 <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000">
