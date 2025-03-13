@@ -38,6 +38,9 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
   };
 
   const handleViewDetails = () => {
+    // Capture the current scroll position and pass productId
+    const scrollPosition = window.scrollY;
+
     navigate('/experience-details', {
       state: {
         product: {
@@ -47,8 +50,11 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
           price,
           rating: ratings,
           productId,
-          img1: img, // Assuming img is img1; adjust if needed
+          img1: img,
         },
+        from: '/',
+        scrollPosition,
+        productId, // Pass productId to identify the specific card
       },
     });
   };
@@ -70,7 +76,7 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
   };
 
   return (
-    <div className="catelog-card">
+    <div className="catelog-card" data-product-id={productId}>
       <div className="catelog-img" style={{ backgroundImage: `url(${img || ''})` }}></div>
       <div className="catelog-details">
         <div className="heart-contain" onClick={handleLike}>

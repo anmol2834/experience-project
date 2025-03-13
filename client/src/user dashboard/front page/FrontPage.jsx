@@ -5,7 +5,7 @@ import slide1 from './slide1.jpg';
 import slide2 from './slide2.jpg';
 import slide3 from './slide3.jpg';
 import slide4 from './slide4.jpg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import HomePage from '../home page/HomePage';
 import MenuBar from '../menu-bar/MenuBar';
@@ -16,8 +16,34 @@ const FrontPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
   const { token } = useAuth();
   const homePageRef = useRef(null);
+
+  // Restore scroll position or scroll to specific product card
+  useEffect(() => {
+    const scrollToProductId = location.state?.scrollToProductId;
+    const fallbackScrollPosition = location.state?.fallbackScrollPosition || 0;
+
+    if (scrollToProductId) {
+      const targetCard = document.querySelector(`[data-product-id="${scrollToProductId}"]`);
+      if (targetCard) {
+        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        // Fallback to scroll position if card not found (e.g., due to loading delay)
+        setTimeout(() => {
+          window.scrollTo({ top: fallbackScrollPosition, behavior: 'smooth' });
+        }, 500); // Delay to allow content to render
+      }
+    } else {
+      window.scrollTo({ top: fallbackScrollPosition, behavior: 'smooth' });
+    }
+
+    // Clear the state to prevent re-scrolling on subsequent renders
+    if (location.state?.scrollToProductId || location.state?.fallbackScrollPosition) {
+      navigate('/', { replace: true, state: {} });
+    }
+  }, [location, navigate]);
 
   useEffect(() => {
     const preloadImages = slides.map((slide) => {

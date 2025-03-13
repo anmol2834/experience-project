@@ -16,13 +16,16 @@ function ExperienceDetails() {
   const { token } = useAuth();
   const { productInfo, addToWishlist, removeFromWishlist } = useContext(context_of_product);
 
-  // Get product data from navigation state or fetch from productInfo
+  // Get product data, origin route, scroll position, and productId from navigation state
   const productFromState = location.state?.product;
+  const from = location.state?.from || '/';
+  const scrollPosition = location.state?.scrollPosition || 0;
+  const productId = location.state?.productId;
+
   const product = productFromState
     ? { ...productFromState, ...productInfo.find((p) => p._id === productFromState.productId) }
     : null;
 
-  // Extract images dynamically (img1 to img8)
   const images = product
     ? [
         product.img1,
@@ -33,7 +36,7 @@ function ExperienceDetails() {
         product.img6,
         product.img7,
         product.img8,
-      ].filter(Boolean) // Remove undefined/null values
+      ].filter(Boolean)
     : [];
 
   const showMoreThumb = images.length > 3;
@@ -89,18 +92,24 @@ function ExperienceDetails() {
     setImageLoading(false);
   };
 
-  // Redirect to catalog if no product data
   useEffect(() => {
-    if (!product) {
+    if (!productFromState && !product) {
       navigate('/catelog');
     }
-  }, [product, navigate]);
+  }, [productFromState, navigate]);
+
+  const handleBack = () => {
+    navigate(from, {
+      state: { scrollToProductId: productId, fallbackScrollPosition: scrollPosition },
+      replace: true,
+    });
+  };
 
   if (!product) return null;
 
   return (
-    <div className='experience-details-container'>
-      <div className="back-btn">
+    <div className="experience-details-container">
+      <div className="back-btn" onClick={handleBack}>
         <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
           <path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" />
         </svg>
@@ -120,7 +129,12 @@ function ExperienceDetails() {
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
-            onClick={(e) => { if (e.target.closest('.wishlist-icon')) { return; } navigate('/product-slideshow', { state: { initialSlide: currentSlide } }) }}
+            onClick={(e) => {
+              if (e.target.closest('.wishlist-icon')) {
+                return;
+              }
+              navigate('/product-slideshow', { state: { initialSlide: currentSlide, product } });
+            }}
           >
             {imageLoading && (
               <div className="loader-container">
@@ -133,7 +147,7 @@ function ExperienceDetails() {
               style={{ display: 'none' }}
               onLoad={handleImageLoad}
             />
-            <span className='wishlist-icon' onClick={handleLike}>
+            <span className="wishlist-icon" onClick={handleLike}>
               {like ? (
                 <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000">
                   <path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z" />
@@ -158,7 +172,7 @@ function ExperienceDetails() {
             {showMoreThumb && (
               <div
                 className="thumb more-images"
-                onClick={() => navigate('/product-slideshow', { state: { initialSlide: currentSlide } })}
+                onClick={() => navigate('/product-slideshow', { state: { initialSlide: currentSlide, product } })}
               >
                 +{images.length - 3}
               </div>
@@ -170,25 +184,27 @@ function ExperienceDetails() {
           <div className="header">
             <div className="title-and-map">
               <h1 className="title">{product.title}</h1>
-              <span className='locate-icon'>
+              <span className="locate-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
                   <path d="M480.07-485.39q29.85 0 51.04-21.26 21.2-21.26 21.2-51.11 0-29.85-21.26-51.05Q509.79-630 479.93-630q-29.85 0-51.04 21.26-21.2 21.26-21.2 51.12 0 29.85 21.26 51.04 21.26 21.19 51.12 21.19ZM480-179.46q117.38-105.08 179.65-201.58 62.27-96.5 62.27-169.04 0-109.38-69.5-179.84-69.5-70.46-172.42-70.46-102.92 0-172.42 70.46-69.5 70.46-69.5 179.84 0 72.54 62.27 169.04 62.27 96.5 179.65 201.58Zm0 79.84Q329-230.46 253.54-343.15q-75.46-112.7-75.46-206.93 0-138.46 89.57-224.19Q357.23-860 480-860t212.35 85.73q89.57 85.73 89.57 224.19 0 94.23-75.46 206.93Q631-230.46 480-99.62Zm0-458.07Z" />
                 </svg>
               </span>
             </div>
             <div className="location">
-              <p className='state'>{product.state} ,</p>
-              <p className='city'>{product.city}</p>
+              <p className="state">{product.state} ,</p>
+              <p className="city">{product.city}</p>
             </div>
           </div>
 
-          <p className="description">
-            {product.description || 'No description available.'}
-          </p>
+          <p className="description">{product.description || 'No description available.'}</p>
 
           <div className="price-rating">
             <div className="rating">
-              <span><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000000"><path d="m307.61-226.15 64.54-213.23L204.61-560h208.62L480-781.54 546.77-560h208.62L587.85-439.38l64.54 213.23L480-357.23 307.61-226.15Z"/></svg></span>
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000000">
+                  <path d="m307.61-226.15 64.54-213.23L204.61-560h208.62L480-781.54 546.77-560h208.62L587.85-439.38l64.54 213.23L480-357.23 307.61-226.15Z" />
+                </svg>
+              </span>
               <span>{product.rating || 'N/A'}</span>
               <span className="reviews">(0 reviews)</span>
             </div>
