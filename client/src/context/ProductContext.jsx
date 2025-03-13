@@ -14,7 +14,6 @@ function ProductContext({ children }) {
     const fetchData = async () => {
       try {
         setProductLoading(true);
-        // Fetch products without authentication
         const productRes = await fetch('http://localhost:5000/products', {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
@@ -22,7 +21,6 @@ function ProductContext({ children }) {
         const productData = await productRes.json();
         setProductInfo(productData);
 
-        // Fetch wishlist only if the user is authenticated
         if (token) {
           const wishlistRes = await fetch('http://localhost:5000/wishlist', {
             method: 'GET',
@@ -33,6 +31,8 @@ function ProductContext({ children }) {
           });
           const wishlistData = await wishlistRes.json();
           setWishlistItems(wishlistData);
+        } else {
+          setWishlistItems([]);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -44,7 +44,7 @@ function ProductContext({ children }) {
   }, [token]);
 
   const addToWishlist = async (productId) => {
-    if (!token) return; // Only authenticated users can add to wishlist
+    if (!token) return;
     try {
       const res = await fetch('http://localhost:5000/wishlist/add', {
         method: 'POST',
@@ -57,6 +57,9 @@ function ProductContext({ children }) {
       if (res.ok) {
         const newWishlistItem = await res.json();
         setWishlistItems((prevItems) => [...prevItems, newWishlistItem]);
+      } else {
+        const errorData = await res.json();
+        console.error('Failed to add to wishlist:', errorData.message);
       }
     } catch (error) {
       console.error('Error adding to wishlist:', error);
@@ -64,7 +67,7 @@ function ProductContext({ children }) {
   };
 
   const removeFromWishlist = async (productId) => {
-    if (!token) return; // Only authenticated users can remove from wishlist
+    if (!token) return;
     try {
       const res = await fetch('http://localhost:5000/wishlist/remove', {
         method: 'POST',
@@ -76,8 +79,11 @@ function ProductContext({ children }) {
       });
       if (res.ok) {
         setWishlistItems((prevItems) =>
-          prevItems.filter((item) => item.productId._id !== productId)
+          prevItems.filter((item) => item.productId && item.productId._id !== productId)
         );
+      } else {
+        const errorData = await res.json();
+        console.error('Failed to remove from wishlist:', errorData.message);
       }
     } catch (error) {
       console.error('Error removing from wishlist:', error);
@@ -85,7 +91,7 @@ function ProductContext({ children }) {
   };
 
   const incrementUserUpdated = () => {
-    setUserUpdated((prev) => prev + 1); // Increment the counter on each update
+    setUserUpdated((prev) => prev + 1);
   };
 
   return (

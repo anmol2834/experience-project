@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import './Wishlist.css';
 import { context_of_product } from '../../../context/ProductContext';
 
 const Wishlist = () => {
-  const { wishlistItems, wishlistLoading, removeFromWishlist } = useContext(context_of_product);
+  const { wishlistItems, productLoading: wishlistLoading, removeFromWishlist } = useContext(context_of_product);
 
   if (wishlistLoading) {
     return <div className="wishlist-loading">Loading...</div>;
@@ -22,9 +22,9 @@ const Wishlist = () => {
         <span className="item-count">{wishlistItems.length} items found</span>
       </div>
       <div className="wishlist-grid">
-        {wishlistItems.filter(item => item.productId).map((item, index) => (
+        {wishlistItems.filter(item => item.productId).map((item) => (
           <motion.div
-            key={index}
+            key={item._id}
             className="wishlist-item"
             whileHover={{ scale: 1 }}
             transition={{ duration: 0.2 }}

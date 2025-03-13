@@ -1,16 +1,24 @@
 import mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema({
+  _id: { type: String, required: true }, // Define _id as String explicitly
+  provider_Name: String,
+  company_Name: String,
   title: String,
   state: String,
   city: String,
-  price: Number,
-  experience_img: String,
-  stock: Number,
   mrp: Number,
+  price: Number,
   rating: Number,
-}, { strict: false });
+  description: String,
+  img1: String,
+  img2: String,
+  img3: String,
+  img4: String,
+  img5: String,
+  img6: String,
+  img7: String,
+  img8: String,
+}, { collection: 'products' }); // Explicitly set collection name
 
-const Product = mongoose.model('Product', productSchema);
-
-export default Product;
+export default mongoose.model('Product', productSchema);

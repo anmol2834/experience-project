@@ -380,6 +380,7 @@ app.post('/change-password-otp', verifyToken, async (req, res) => {
 app.get('/products', async (req, res) => {
   try {
     const products = await Product.find();
+    console.log('Fetched products:', products.map(p => p._id));
     res.json(products);
   } catch (error) {
     console.error(error);
@@ -387,11 +388,15 @@ app.get('/products', async (req, res) => {
   }
 });
 
-// Add to wishlist - Updated to return populated item
 app.post('/wishlist/add', verifyToken, async (req, res) => {
   const { productId } = req.body;
   try {
     const userId = req.user.id;
+    const product = await Product.findOne({ _id: productId });
+    if (!product) {
+      console.log('Product not found for ID:', productId);
+      return res.status(404).json({ message: 'Product not found' });
+    }
     const existingItem = await Wishlist.findOne({ userId, productId });
     if (existingItem) {
       return res.status(400).json({ message: 'Product already in wishlist' });
@@ -406,7 +411,6 @@ app.post('/wishlist/add', verifyToken, async (req, res) => {
   }
 });
 
-// Remove from wishlist
 app.post('/wishlist/remove', verifyToken, async (req, res) => {
   const { productId } = req.body;
   try {
@@ -419,12 +423,12 @@ app.post('/wishlist/remove', verifyToken, async (req, res) => {
   }
 });
 
-// Get wishlist with populated product details
 app.get('/wishlist', verifyToken, async (req, res) => {
   try {
     const userId = req.user.id;
     const wishlistItems = await Wishlist.find({ userId }).populate('productId');
-    res.status(200).json(wishlistItems);
+    const validItems = wishlistItems.filter(item => item.productId !== null);
+    res.status(200).json(validItems);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });

@@ -14,11 +14,11 @@ function Catelog() {
     <div className="catelogs">
       <h1>Explore Experiences</h1>
       <div className="catelog-aligner">
-        {productInfo.map((value, index) => {
+        {productInfo.map((value) => {
           const isLiked = wishlistItems.some((item) => item.productId && item.productId._id === value._id);
           return (
             <Catelogcard
-              key={index}
+              key={value._id}
               state={value.state}
               city={value.city}
               title={value.title}

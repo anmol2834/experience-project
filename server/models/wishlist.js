@@ -8,7 +8,7 @@ const wishlistSchema = new mongoose.Schema({
   },
   productId: { 
     type: mongoose.Schema.Types.ObjectId, 
-    ref: 'Product', // Matches the model name in products.js
+    ref: 'Product',
     required: true 
   },
   addedAt: { 

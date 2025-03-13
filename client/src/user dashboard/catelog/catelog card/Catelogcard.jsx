@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import './catelogcard.css';
 import { useAuth } from '../../../context/AuthContext';
 import { context_of_product } from '../../../context/ProductContext';
-import { useNavigate } from 'react-router-dom'; // Added for navigation
+import { useNavigate } from 'react-router-dom';
 
 function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, productId, isLiked }) {
   const { token } = useAuth();
@@ -17,10 +17,10 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
 
   const handleLike = async () => {
     if (!token) {
-      navigate('/signin'); // Redirect to sign-in if not authenticated
+      navigate('/signin');
       return;
     }
-    setWishlistLoading(true); // Show spinner
+    setWishlistLoading(true);
     try {
       if (like) {
         await removeFromWishlist(productId);
@@ -31,17 +31,18 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
       }
     } catch (error) {
       console.error('Error updating wishlist:', error);
+      setLike(isLiked);
     } finally {
-      setWishlistLoading(false); 
+      setWishlistLoading(false);
     }
   };
 
   const handleViewDetails = () => {
     if (!token) {
-      navigate('/signin'); 
+      navigate('/signin');
       return;
     }
-    navigate('/experience-details')
+    navigate('/experience-details');
   };
 
   const rating = ratings;
@@ -62,12 +63,11 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
 
   return (
     <div className="catelog-card">
-      <div className="catelog-img" style={{ backgroundImage: `url(${img || ''})` }}>
-      </div>
+      <div className="catelog-img" style={{ backgroundImage: `url(${img || ''})` }}></div>
       <div className="catelog-details">
         <div className="heart-contain" onClick={handleLike}>
           {wishlistLoading ? (
-            <div className="spinner"></div> // Replace with your spinner CSS or component
+            <div className="spinner"></div>
           ) : !like ? (
             <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000">
               <path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z" />
