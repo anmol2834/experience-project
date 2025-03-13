@@ -10,6 +10,10 @@
   scrollbar-width: none;
 }
 
+body{
+  background: #222;
+}
+
 :root {
   --font : "Lexend Deca", serif;
   --bg-color: linear-gradient(to left, #222, #111);

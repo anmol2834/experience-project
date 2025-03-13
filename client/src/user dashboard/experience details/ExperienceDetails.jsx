@@ -149,7 +149,7 @@ function ExperienceDetails() {
 
           <div className="price-rating">
             <div className="rating">
-              <span className="material-icons">star</span>
+              <span><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000000"><path d="m307.61-226.15 64.54-213.23L204.61-560h208.62L480-781.54 546.77-560h208.62L587.85-439.38l64.54 213.23L480-357.23 307.61-226.15Z"/></svg></span>
               <span>4.8</span>
               <span className="reviews">(128 reviews)</span>
             </div>
