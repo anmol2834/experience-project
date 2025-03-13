@@ -15,14 +15,6 @@ function Category() {
         <CategoryCard/>
         <CategoryCard/>
         <CategoryCard/>
-        <CategoryCard/>
-        <CategoryCard/>
-        <CategoryCard/>
-        <CategoryCard/>
-        <CategoryCard/>
-        <CategoryCard/>
-        <CategoryCard/>
-        <CategoryCard/>
       </div>
     </div>
   )

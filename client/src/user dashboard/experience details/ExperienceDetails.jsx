@@ -6,15 +6,10 @@ import { context_of_product } from '../../context/ProductContext';
 import { useContext } from 'react';
 
 function ExperienceDetails() {
-  const [like, setLike] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
-  const [imageLoading, setImageLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const { token } = useAuth();
-  const { productInfo, addToWishlist, removeFromWishlist } = useContext(context_of_product);
+  const { productInfo, wishlistItems, addToWishlist, removeFromWishlist } = useContext(context_of_product);
 
   // Get product data, origin route, scroll position, and productId from navigation state
   const productFromState = location.state?.product;
@@ -25,6 +20,15 @@ function ExperienceDetails() {
   const product = productFromState
     ? { ...productFromState, ...productInfo.find((p) => p._id === productFromState.productId) }
     : null;
+
+  // Initialize like state based on whether the product is in the wishlist
+  const [like, setLike] = useState(
+    wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId))
+  );
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [imageLoading, setImageLoading] = useState(true);
 
   const images = product
     ? [
@@ -78,13 +82,15 @@ function ExperienceDetails() {
     try {
       if (like) {
         await removeFromWishlist(product.productId);
-        setLike(false);
+        setLike(false); // Update state after successful removal
       } else {
         await addToWishlist(product.productId);
-        setLike(true);
+        setLike(true); // Update state after successful addition
       }
     } catch (error) {
       console.error('Error updating wishlist:', error);
+      // Revert to the current wishlist state in case of error
+      setLike(wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId)));
     }
   };
 
@@ -97,6 +103,11 @@ function ExperienceDetails() {
       navigate('/catelog');
     }
   }, [productFromState, navigate]);
+
+  // Sync like state with wishlistItems when they change
+  useEffect(() => {
+    setLike(wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId)));
+  }, [wishlistItems, productId]);
 
   const handleBack = () => {
     navigate(from, {
