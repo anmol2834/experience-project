@@ -12,7 +12,7 @@ function Catelog() {
 
   return (
     <div className="catelogs">
-      <h1>Explore Experiences</h1>
+      <h1>Explore Experiences :</h1>
       <div className="catelog-aligner">
         {productInfo.map((value) => {
           const isLiked = wishlistItems.some((item) => item.productId && item.productId._id === value._id);

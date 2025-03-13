@@ -38,11 +38,19 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
   };
 
   const handleViewDetails = () => {
-    if (!token) {
-      navigate('/signin');
-      return;
-    }
-    navigate('/experience-details');
+    navigate('/experience-details', {
+      state: {
+        product: {
+          title,
+          state,
+          city,
+          price,
+          rating: ratings,
+          productId,
+          img1: img, // Assuming img is img1; adjust if needed
+        },
+      },
+    });
   };
 
   const rating = ratings;

@@ -1,39 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import './ExperienceDetails.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { context_of_product } from '../../context/ProductContext';
+import { useContext } from 'react';
 
 function ExperienceDetails() {
   const [like, setLike] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
-  const [imageLoading, setImageLoading] = useState(true); // New state for image loading
+  const [imageLoading, setImageLoading] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { token } = useAuth();
+  const { productInfo, addToWishlist, removeFromWishlist } = useContext(context_of_product);
 
-  const slide_img = {
-    img1: "https://www.enepaltreks.com/wp-content/uploads/2018/05/chitwan.jpg",
-    img2: "https://virtualnewsnation.com/wp-content/uploads/2023/05/cheetah-on-car-safari-scaled.jpg",
-    img3: "https://i.pinimg.com/originals/02/7c/69/027c69839f6f4cec1240e10ccf62fa1b.jpg",
-    img4: "https://www.travelbays.com/uploads/package_tours/tour_trip/tourtrip_15730198191905772652.jpg",
-    img5: "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/df/c0/ed.jpg",
-    img6: "https://www.tourism-of-india.com/blog/wp-content/uploads/2017/09/ranthambore-tiger-reserve.jpg",
-    img7: "https://media.aspirationadventure.com/uploads/fullbanner/chitwan-jungle-safari-tour.webp",
-    img8: "https://ugandarwandagorillatours.com/wp-content/uploads/2021/12/lion_sighting_morukuru_madikwe.jpg"
-  };
+  // Get product data from navigation state or fetch from productInfo
+  const productFromState = location.state?.product;
+  const product = productFromState
+    ? { ...productFromState, ...productInfo.find((p) => p._id === productFromState.productId) }
+    : null;
 
-  const images = Object.values(slide_img);
+  // Extract images dynamically (img1 to img8)
+  const images = product
+    ? [
+        product.img1,
+        product.img2,
+        product.img3,
+        product.img4,
+        product.img5,
+        product.img6,
+        product.img7,
+        product.img8,
+      ].filter(Boolean) // Remove undefined/null values
+    : [];
+
   const showMoreThumb = images.length > 3;
 
   const handleSlideChange = (index) => {
     if (index < 0) index = images.length - 1;
     if (index >= images.length) index = 0;
     setCurrentSlide(index);
-    setImageLoading(true); // Reset loading state when slide changes
+    setImageLoading(true);
   };
 
   const handleThumbClick = (index) => {
     setCurrentSlide(index);
-    setImageLoading(true); // Reset loading state when thumb is clicked
+    setImageLoading(true);
   };
 
   const handleTouchStart = (e) => {
@@ -53,11 +67,36 @@ function ExperienceDetails() {
     setTouchEnd(0);
   };
 
-  const handleLike = () => setLike(!like);
+  const handleLike = async () => {
+    if (!token) {
+      navigate('/signin');
+      return;
+    }
+    try {
+      if (like) {
+        await removeFromWishlist(product.productId);
+        setLike(false);
+      } else {
+        await addToWishlist(product.productId);
+        setLike(true);
+      }
+    } catch (error) {
+      console.error('Error updating wishlist:', error);
+    }
+  };
 
   const handleImageLoad = () => {
-    setImageLoading(false); // Set loading to false when image is loaded
+    setImageLoading(false);
   };
+
+  // Redirect to catalog if no product data
+  useEffect(() => {
+    if (!product) {
+      navigate('/catelog');
+    }
+  }, [product, navigate]);
+
+  if (!product) return null;
 
   return (
     <div className='experience-details-container'>
@@ -91,7 +130,7 @@ function ExperienceDetails() {
             <img
               src={images[currentSlide]}
               alt="Main"
-              style={{ display: 'none' }} // Hide the img element
+              style={{ display: 'none' }}
               onLoad={handleImageLoad}
             />
             <span className='wishlist-icon' onClick={handleLike}>
@@ -130,7 +169,7 @@ function ExperienceDetails() {
         <div className="details-section">
           <div className="header">
             <div className="title-and-map">
-              <h1 className="title">St. Regis Bora Bora</h1>
+              <h1 className="title">{product.title}</h1>
               <span className='locate-icon'>
                 <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
                   <path d="M480.07-485.39q29.85 0 51.04-21.26 21.2-21.26 21.2-51.11 0-29.85-21.26-51.05Q509.79-630 479.93-630q-29.85 0-51.04 21.26-21.2 21.26-21.2 51.12 0 29.85 21.26 51.04 21.26 21.19 51.12 21.19ZM480-179.46q117.38-105.08 179.65-201.58 62.27-96.5 62.27-169.04 0-109.38-69.5-179.84-69.5-70.46-172.42-70.46-102.92 0-172.42 70.46-69.5 70.46-69.5 179.84 0 72.54 62.27 169.04 62.27 96.5 179.65 201.58Zm0 79.84Q329-230.46 253.54-343.15q-75.46-112.7-75.46-206.93 0-138.46 89.57-224.19Q357.23-860 480-860t212.35 85.73q89.57 85.73 89.57 224.19 0 94.23-75.46 206.93Q631-230.46 480-99.62Zm0-458.07Z" />
@@ -138,23 +177,23 @@ function ExperienceDetails() {
               </span>
             </div>
             <div className="location">
-              <p>state ,</p>
-              <p>city</p>
+              <p className='state'>{product.state} ,</p>
+              <p className='city'>{product.city}</p>
             </div>
           </div>
 
           <p className="description">
-            Bora Bora is an island in the Leeward group of the Community Islands,
+            {product.description || 'No description available.'}
           </p>
 
           <div className="price-rating">
             <div className="rating">
               <span><svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#000000"><path d="m307.61-226.15 64.54-213.23L204.61-560h208.62L480-781.54 546.77-560h208.62L587.85-439.38l64.54 213.23L480-357.23 307.61-226.15Z"/></svg></span>
-              <span>4.8</span>
-              <span className="reviews">(128 reviews)</span>
+              <span>{product.rating || 'N/A'}</span>
+              <span className="reviews">(0 reviews)</span>
             </div>
             <div className="price">
-              <span className="amount">$25</span>
+              <span className="amount">${product.price}</span>
               <span className="per-person">/person</span>
             </div>
           </div>

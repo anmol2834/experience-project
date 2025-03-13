@@ -18,7 +18,7 @@ function HomePage() {
       {
         threshold: 0.1,
       }
-    );
+    )
 
     if (catelogRef.current) {
       observer.observe(catelogRef.current);

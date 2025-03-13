@@ -380,7 +380,6 @@ app.post('/change-password-otp', verifyToken, async (req, res) => {
 app.get('/products', async (req, res) => {
   try {
     const products = await Product.find();
-    console.log('Fetched products:', products.map(p => p._id));
     res.json(products);
   } catch (error) {
     console.error(error);

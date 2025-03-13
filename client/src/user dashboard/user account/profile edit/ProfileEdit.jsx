@@ -17,6 +17,8 @@ function ProfileEdit() {
     dob: '',
     gender: ''
   });
+  const [originalData, setOriginalData] = useState({}); // Store original fetched data
+  const [changedFields, setChangedFields] = useState({}); // Track changed fields
   const [loading, setLoading] = useState(true);
 
   const [nextMethod, setNextMethod] = useState(false);
@@ -42,14 +44,16 @@ function ProfileEdit() {
 
         if (response.ok) {
           const data = await response.json();
-          setUserData({
+          const fetchedData = {
             firstname: data.firstname || '',
             lastname: data.lastname || '',
             email: data.email || '',
             phone: data.phone || '',
             dob: data.dob ? new Date(data.dob).toISOString().split('T')[0] : '',
             gender: data.gender || ''
-          });
+          };
+          setUserData(fetchedData);
+          setOriginalData(fetchedData); // Store original data for comparison
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -63,18 +67,38 @@ function ProfileEdit() {
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
+    let updatedValue = value;
+
     if (id === 'phone') {
       // Allow only numeric input and enforce exactly 10 digits
-      const numericValue = value.replace(/[^0-9]/g, ''); // Remove non-numeric characters
+      const numericValue = value.replace(/[^0-9]/g, '');
       if (numericValue.length <= 10) {
-        setUserData((prev) => ({ ...prev, [id]: numericValue }));
+        updatedValue = numericValue;
+      } else {
+        return; // Prevent updating if exceeding 10 digits
       }
+    }
+
+    setUserData((prev) => ({ ...prev, [id]: updatedValue }));
+
+    // Check if the value differs from the original
+    if (updatedValue !== originalData[id]) {
+      setChangedFields((prev) => ({ ...prev, [id]: updatedValue }));
     } else {
-      setUserData((prev) => ({ ...prev, [id]: value }));
+      setChangedFields((prev) => {
+        const { [id]: _, ...rest } = prev;
+        return rest;
+      });
     }
   };
 
   const handleProfileUpdate = async () => {
+    // If no fields have changed, skip the update
+    if (Object.keys(changedFields).length === 0) {
+      toast.info('No changes to update');
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:5000/user', {
         method: 'PUT',
@@ -82,14 +106,16 @@ function ProfileEdit() {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(userData)
+        body: JSON.stringify(changedFields) // Send only changed fields
       });
 
       if (response.ok) {
         toast.success('Profile updated successfully');
-        incrementUserUpdated(); // Increment the counter to trigger UserAcc update
+        incrementUserUpdated();
+        // Update originalData with the new values
+        setOriginalData((prev) => ({ ...prev, ...changedFields }));
+        setChangedFields({}); // Reset changed fields after successful update
       } else {
-        // Extract the error message from the server response
         const errorData = await response.json();
         const errorMessage = errorData.message || 'Failed to update profile';
         toast.error(errorMessage);
@@ -99,7 +125,6 @@ function ProfileEdit() {
       toast.error('An error occurred while updating profile');
     }
   };
-
 
   const handleChangePasswordWithOld = async (e) => {
     e.preventDefault();
