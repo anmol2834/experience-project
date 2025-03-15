@@ -4,7 +4,7 @@ import { useAuth } from '../../../context/AuthContext';
 import { context_of_product } from '../../../context/ProductContext';
 import { useNavigate } from 'react-router-dom';
 
-function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, productId, isLiked }) {
+function Catelogcard({ title, state, city, price, img, ratings, productId, isLiked }) {
   const { token } = useAuth();
   const { addToWishlist, removeFromWishlist } = useContext(context_of_product);
   const [like, setLike] = useState(isLiked);
@@ -38,7 +38,6 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
   };
 
   const handleViewDetails = () => {
-    // Capture the current scroll position and pass productId
     const scrollPosition = window.scrollY;
 
     navigate('/experience-details', {
@@ -54,7 +53,7 @@ function Catelogcard({ title, state, city, price, img, stock, mrp, ratings, prod
         },
         from: '/',
         scrollPosition,
-        productId, // Pass productId to identify the specific card
+        productId,
       },
     });
   };

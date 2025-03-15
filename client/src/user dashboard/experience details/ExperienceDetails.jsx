@@ -11,7 +11,6 @@ function ExperienceDetails() {
   const { token } = useAuth();
   const { productInfo, wishlistItems, addToWishlist, removeFromWishlist } = useContext(context_of_product);
 
-  // Get product data, origin route, scroll position, and productId from navigation state
   const productFromState = location.state?.product;
   const from = location.state?.from || '/';
   const scrollPosition = location.state?.scrollPosition || 0;
@@ -21,7 +20,6 @@ function ExperienceDetails() {
     ? { ...productFromState, ...productInfo.find((p) => p._id === productFromState.productId) }
     : null;
 
-  // Initialize like state based on whether the product is in the wishlist
   const [like, setLike] = useState(
     wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId))
   );
@@ -82,14 +80,13 @@ function ExperienceDetails() {
     try {
       if (like) {
         await removeFromWishlist(product.productId);
-        setLike(false); // Update state after successful removal
+        setLike(false);
       } else {
         await addToWishlist(product.productId);
-        setLike(true); // Update state after successful addition
+        setLike(true);
       }
     } catch (error) {
       console.error('Error updating wishlist:', error);
-      // Revert to the current wishlist state in case of error
       setLike(wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId)));
     }
   };
@@ -104,7 +101,6 @@ function ExperienceDetails() {
     }
   }, [productFromState, navigate]);
 
-  // Sync like state with wishlistItems when they change
   useEffect(() => {
     setLike(wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId)));
   }, [wishlistItems, productId]);
@@ -144,7 +140,7 @@ function ExperienceDetails() {
               if (e.target.closest('.wishlist-icon')) {
                 return;
               }
-              navigate('/product-slideshow', { state: { initialSlide: currentSlide, product } });
+              navigate('/product-slideshow', { state: { ...location.state, initialSlide: currentSlide } });
             }}
           >
             {imageLoading && (
@@ -183,7 +179,7 @@ function ExperienceDetails() {
             {showMoreThumb && (
               <div
                 className="thumb more-images"
-                onClick={() => navigate('/product-slideshow', { state: { initialSlide: currentSlide, product } })}
+                onClick={() => navigate('/product-slideshow', { state: { ...location.state, initialSlide: currentSlide } })}
               >
                 +{images.length - 3}
               </div>

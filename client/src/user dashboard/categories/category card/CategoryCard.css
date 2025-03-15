@@ -1,13 +1,13 @@
 
 .category-card-contain{
     flex-shrink: 0;
-    width: 10%;
-    height: 90%;
+    width: 150px;
+    height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #666;
-    border-radius: 5px;
+    border-radius: 50%;
     color: white;
     transition: 0.5s;
 }

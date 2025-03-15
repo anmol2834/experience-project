@@ -2,13 +2,43 @@ import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
 import './Wishlist.css';
 import { context_of_product } from '../../../context/ProductContext';
+import { useNavigate } from 'react-router-dom';
 
 const Wishlist = () => {
   const { wishlistItems, productLoading: wishlistLoading, removeFromWishlist } = useContext(context_of_product);
+  const navigate = useNavigate();
 
   if (wishlistLoading) {
     return <div className="wishlist-loading">Loading...</div>;
   }
+
+  const handleViewDetails = (product) => {
+    const scrollPosition = window.scrollY;
+
+    navigate('/experience-details', {
+      state: {
+        product: {
+          title: product.title,
+          state: product.state,
+          city: product.city,
+          price: product.price,
+          rating: product.rating || product.ratings,
+          productId: product._id,
+          img1: product.img1,
+          img2: product.img2,
+          img3: product.img3,
+          img4: product.img4,
+          img5: product.img5,
+          img6: product.img6,
+          img7: product.img7,
+          img8: product.img8,
+        },
+        from: '/account/wishlist',
+        scrollPosition,
+        productId: product._id,
+      },
+    });
+  };
 
   return (
     <motion.div
@@ -49,11 +79,11 @@ const Wishlist = () => {
                 <span>State: {item.productId.state}</span>
                 <span>City: {item.productId.city}</span>
               </div>
-              <button className="add-to-bag-btn">
-                Add to Cart
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19 7h-3l-1-1-1 1h-3V5h-2v2H6l-1 1v12h16V8l-1-1zm-8 8H9v-2h2v2zm0-4H9V9h2v2zm4 4h-2v-2h2v2zm0-4h-2V9h2v2z" />
-                </svg>
+              <button
+                onClick={() => handleViewDetails(item.productId)}
+                className="view-details-btn"
+              >
+                View Details
               </button>
             </div>
           </motion.div>

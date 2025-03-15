@@ -97,7 +97,7 @@
     margin-bottom: 1.5rem;
   }
   
-  .add-to-bag-btn {
+  .view-details-btn {
     width: 100%;
     padding: 0.8rem;
     background: linear-gradient(45deg, #00ff88, #00cc6a);
@@ -113,12 +113,12 @@
     transition: all 0.3s ease;
   }
   
-  .add-to-bag-btn:hover {
+  .view-details-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 255, 136, 0.2);
   }
   
-  .add-to-bag-btn svg {
+  .view-details-btn svg {
     width: 18px;
     height: 18px;
   }

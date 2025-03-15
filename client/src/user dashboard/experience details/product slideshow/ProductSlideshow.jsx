@@ -13,13 +13,11 @@ function ProductSlideshow() {
   const [touchEnd, setTouchEnd] = useState(0);
   const [animate, setAnimate] = useState(false);
 
-  // Get product data from navigation state and merge with productInfo
   const productFromState = location.state?.product;
   const product = productFromState
     ? { ...productFromState, ...productInfo.find((p) => p._id === productFromState.productId) }
     : null;
 
-  // Extract images dynamically (img1 to img8)
   const images = product
     ? [
         product.img1,
@@ -30,7 +28,7 @@ function ProductSlideshow() {
         product.img6,
         product.img7,
         product.img8,
-      ].filter(Boolean) // Remove undefined/null values
+      ].filter(Boolean)
     : [];
 
   const handleSlideChange = (index) => {
@@ -58,8 +56,8 @@ function ProductSlideshow() {
     if (!touchStart || !touchEnd) return;
 
     const diff = touchStart - touchEnd;
-    if (diff > 5) handleSlideChange(currentSlide + 1); // Swipe left
-    if (diff < -5) handleSlideChange(currentSlide - 1); // Swipe right
+    if (diff > 5) handleSlideChange(currentSlide + 1);
+    if (diff < -5) handleSlideChange(currentSlide - 1);
 
     setTouchStart(0);
     setTouchEnd(0);
@@ -80,10 +78,9 @@ function ProductSlideshow() {
     if (e.target.closest('.product-slideshow-box') || e.target.closest('.thumbnail-slides')) {
       return;
     }
-    navigate('/experience-details', { state: { product } });
+    navigate('/experience-details', { state: location.state });
   };
 
-  // Redirect to experience-details if no product data
   useEffect(() => {
     if (!product) {
       navigate('/experience-details');
@@ -94,7 +91,7 @@ function ProductSlideshow() {
 
   return (
     <div className="product-slideshow-container" onClick={handleContainerBack}>
-      <div className="back-btn" onClick={() => navigate('/experience-details', { state: { product } })}>
+      <div className="back-btn" onClick={() => navigate('/experience-details', { state: location.state })}>
         <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
           <path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" />
         </svg>
