@@ -234,6 +234,21 @@
     align-items: center;
 }
 
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.back-button svg {
+    fill: white;
+    transition: 0.5s;
+}
+
+.back-button svg:hover {
+    transform: scale(1.1);
+}
 
 /*! Extra Small Devices (Portrait Phones) */
 @media only screen and (max-width: 575px) {
