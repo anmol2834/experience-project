@@ -272,33 +272,36 @@ function ProfileEdit() {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <motion.div
-      className="profile-edit-container"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-    >
-      <div className="form-section">
+    <div className="profile-edit-container">
+      <motion.div
+        className="form-section"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+      >
+        <h1>Edit Profile</h1>
         <div className="input-row">
-          <div className="input-group">
-            <label htmlFor="firstname">First Name</label>
-            <input
-              type="text"
-              id="firstname"
-              onChange={handleInputChange}
-              placeholder={userData.firstname ? userData.firstname : "john"}
-              className="modern-input"
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="lastname">Last Name</label>
-            <input
-              type="text"
-              id="lastname"
-              onChange={handleInputChange}
-              placeholder={userData.lastname ? userData.lastname : "doe"}
-              className="modern-input"
-            />
+          <div className="inline-input-group">
+            <div className="input-group">
+              <label htmlFor="firstname">First Name</label>
+              <input
+                type="text"
+                id="firstname"
+                onChange={handleInputChange}
+                placeholder={userData.firstname ? userData.firstname : "john"}
+                className="modern-input"
+              />
+            </div>
+            <div className="input-group">
+              <label htmlFor="lastname">Last Name</label>
+              <input
+                type="text"
+                id="lastname"
+                onChange={handleInputChange}
+                placeholder={userData.lastname ? userData.lastname : "doe"}
+                className="modern-input"
+              />
+            </div>
           </div>
         </div>
 
@@ -313,7 +316,7 @@ function ProfileEdit() {
           />
         </div>
 
-        <div className="input-row">
+        <div className="inline-input-group">
           <div className="input-group">
             <label htmlFor="phone">Phone Number</label>
             <input
@@ -451,9 +454,9 @@ function ProfileEdit() {
             )}
           </div>
         </div>
-      </div>
+      </motion.div>
       <ToastContainer />
-    </motion.div>
+    </div>
   );
 }
 

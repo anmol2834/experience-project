@@ -12,11 +12,11 @@
     width: 100%;
 }
 
-.input-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+.form-section h1 {
+   
+    font-weight: 600;
     margin-bottom: 1.5rem;
+    text-align: center;
 }
 
 .input-group {
@@ -30,6 +30,18 @@
     font-size: 0.9rem;
     color: #a0a0a0;
     font-weight: 500;
+}
+
+.inline-input-group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.inline-input-group .input-group {
+    width: 100%;
 }
 
 .modern-input {
@@ -254,12 +266,8 @@
 
 
 @media (max-width: 480px) {
-    .input-row {
-        grid-template-columns: 1fr;
-    }
-    
-    .profile-edit-container {
-        padding: 1.5rem;
-        margin-top: 5rem;
+    .change-password{
+        width: 100%;
+        height: 50px;
     }
 }

@@ -15,6 +15,7 @@ import ProductContext from './context/ProductContext';
 import ExperienceDetails from './user dashboard/experience details/ExperienceDetails';
 import ProductSlideshow from './user dashboard/experience details/product slideshow/ProductSlideshow';
 import BookingsPage from './user dashboard/user account/bookings page/BookingsPage';
+import Rewards from './user dashboard/user account/rewards page/Rewards';
 
 function App() {
 
@@ -54,6 +55,7 @@ function App() {
                 <Route path='help_center' element={<HelpCenter />} />
                 <Route path='wishlist' element={<Wishlist />} />
                 <Route path='bookings' element={<BookingsPage/>}/>
+                <Route path='rewards' element={<Rewards/>} />
               </Route>
               <Route path='/product-slideshow' element={<ProductSlideshow />} />
               <Route path="/signin" element={<SignIn />} />

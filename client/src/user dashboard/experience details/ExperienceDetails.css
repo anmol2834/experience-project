@@ -312,6 +312,8 @@
     max-width: 500px;
     margin-top: 20px;
     padding: 20px 0;
+    background: transparent;
+    box-shadow: none;
   }
 
   .details-section {
@@ -350,9 +352,15 @@
     width: 90%;
     height: 50%;
   }
+  
 }
 
 @media (max-width: 480px) {
+  .experience-card{
+    background: transparent;
+    box-shadow: none;
+  }
+  
   .experience-details-container {
     padding: 0rem;
     margin-top: 10px;

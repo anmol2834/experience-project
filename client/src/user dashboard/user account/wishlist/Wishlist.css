@@ -134,12 +134,14 @@
   @media (max-width: 768px) {
     .wishlist-grid {
       grid-template-columns: 1fr;
+      padding: 0px;
     }
   
     .wishlist-header {
       flex-direction: column;
       align-items: flex-start;
       gap: 0.5rem;
+      padding: 0px;
     }
     
     .item-image-container {
