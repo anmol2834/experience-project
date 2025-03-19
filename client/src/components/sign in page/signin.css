@@ -18,7 +18,6 @@
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5.5px);
   -webkit-backdrop-filter: blur(5.5px);
-  border: 1px solid rgba(0, 0, 0, 0.04);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -307,14 +306,29 @@ input[type="password"]::-webkit-password-suggestion-button {
 
   .forgot {
     margin-left: 10%;
+    cursor: none;
   }
 
   .submit {
     width: 80%;
+    cursor: none;
   }
 
   .google {
     width: 80%;
+    cursor: none;
+  }
+
+  .signin-contain p span {
+    cursor: none;
+  }
+
+  form .back-btn {
+    cursor: none;
+  }
+
+  .eye-container svg {
+    cursor: none;
   }
 
 }
@@ -342,14 +356,29 @@ input[type="password"]::-webkit-password-suggestion-button {
 
   .forgot {
     margin-left: 10%;
+    cursor: none;
   }
 
   .submit {
     width: 80%;
+    cursor: none;
   }
 
   .google {
     width: 80%;
+    cursor: none;
+  }
+
+  .signin-contain p span {
+    cursor: none;
+  }
+
+  form .back-btn {
+    cursor: none;
+  }
+
+  .eye-container svg {
+    cursor: none;
   }
 
 }
@@ -377,10 +406,28 @@ input[type="password"]::-webkit-password-suggestion-button {
 
   .submit {
     width: 50%;
+    cursor: none;
   }
 
   .google {
     width: 50%;
+    cursor: none;
+  }
+
+  .forgot {
+    cursor: none;
+  }
+
+  .signin-contain p span {
+    cursor: none;
+  }
+
+  form .back-btn {
+    cursor: none;
+  }
+
+  .eye-container svg {
+    cursor: none;
   }
 
 }

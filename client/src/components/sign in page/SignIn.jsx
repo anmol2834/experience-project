@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './signin.css';
 import signinBanner from './signin-banner.jpg';
+import e from 'cors';
 
 function SignIn() {
   const navigate = useNavigate();
@@ -25,6 +26,14 @@ function SignIn() {
   const handlePasswordBlur = () => setPasswordFocused(false);
   const handleEye = () => setEye(!eye);
 
+  const [nextMethod, setNextMethod] = useState(false);
+  const [passwordBox, setPasswordBox] = useState(false);
+  const [newPassContain, setNewPassContain] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [otp, setOtp] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+
   const onSubmit = async (data) => {
     const result = await login(data.email, data.password);
     if (!result.success) {
@@ -39,6 +48,149 @@ function SignIn() {
     if (firstError) {
       toast.error(firstError.message, { toastId: 'login-error' });
     }
+  };
+
+  const handleChangePasswordWithOld = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5000/change-password-old', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ oldPassword, newPassword })
+      });
+      if (response.ok) {
+        toast.success('Password updated successfully');
+        setPasswordBox(false);
+        setOldPassword('');
+        setNewPassword('');
+      } else {
+        toast.error('Old password is incorrect');
+      }
+    } catch (error) {
+      console.error('Error changing password:', error);
+      toast.error('An error occurred while changing password');
+    }
+  };
+
+  const handleSendOtp = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/send-otp', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (response.ok) {
+        setOtpSent(true);
+        toast.success('OTP sent to your email');
+      } else {
+        const data = await response.json();
+        toast.error(data.message || 'Failed to send OTP');
+      }
+    } catch (error) {
+      console.error('Error sending OTP:', error);
+      toast.error('An error occurred while sending OTP');
+    }
+  };
+
+  const handleVerifyOtp = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5000/verify-otp', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ otp })
+      });
+      if (response.ok) {
+        setNewPassContain(true);
+        toast.success('OTP verified successfully');
+      } else {
+        toast.error('Invalid OTP');
+      }
+    } catch (error) {
+      console.error('Error verifying OTP:', error);
+      toast.error('An error occurred while verifying OTP');
+    }
+  };
+
+  const handleResendOtp = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5000/resend-otp', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (response.ok) {
+        toast.success('OTP resent successfully');
+      } else {
+        const data = await response.json();
+        toast.error(data.message || 'Failed to resend OTP');
+      }
+    } catch (error) {
+      console.error('Error resending OTP:', error);
+      toast.error('An error occurred while resending OTP');
+    }
+  };
+
+  const handleChangePasswordWithOtp = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:5000/change-password-otp', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ newPassword })
+      });
+      if (response.ok) {
+        toast.success('Password updated successfully');
+        setPasswordBox(false);
+        setNextMethod(false);
+        setNewPassContain(false);
+        setOtpSent(false);
+        setOtp('');
+        setNewPassword('');
+      } else {
+        toast.error('Failed to update password');
+      }
+    } catch (error) {
+      console.error('Error changing password with OTP:', error);
+      toast.error('An error occurred while changing password');
+    }
+  };
+
+  const handleNextMethod = () => {
+    if (!otpSent) {
+      handleSendOtp();
+    }
+    setNextMethod(true);
+  };
+
+  const handlePreviousMethod = () => setNextMethod(false);
+  const handleBackBtn = () => {
+    setPasswordBox(false);
+    setNextMethod(false);
+    setNewPassContain(false);
+    setOtpSent(false);
+    setOtp('');
+    setOldPassword('');
+    setNewPassword('');
+  };
+  const openPasswordBox = () => setPasswordBox(true);
+  const closePasswordBox = (e) => {
+    if (e.target.closest('.change-password-box')) return;
+    setPasswordBox(false);
+    setNextMethod(false);
+    setNewPassContain(false);
+    setOtpSent(false);
+    setOtp('');
+    setOldPassword('');
+    setNewPassword('');
   };
 
   return (
@@ -90,7 +242,7 @@ function SignIn() {
             </div>
             <span className='bottom-border'></span>
           </div>
-          <span className='forgot'>Forgot Password ?</span>
+          <span className='forgot' onClick={openPasswordBox}>Forgot Password ?</span>
 
         </div>
         <div className="submit-container">
@@ -107,6 +259,102 @@ function SignIn() {
         </div>
       </form>
       <div className="signin-banner" style={{ backgroundImage: `url(${signinBanner})` }}></div>
+
+      <div
+        onClick={closePasswordBox}
+        className="change-password-container"
+        style={{ display: passwordBox ? "flex" : "none" }}
+      >
+        <div className="change-password-box">
+          <div
+            className="back-btn-section"
+            style={{ display: newPassContain ? "none" : "block" }}
+          >
+            <svg onClick={handleBackBtn} xmlns="http://www.w3.org/2000/svg"
+              height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000">
+              <path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" />
+            </svg>
+          </div>
+
+          <div
+            className="first-method"
+            style={{ display: !newPassContain && !nextMethod ? "block" : "none" }}
+          >
+            <form onSubmit={handleChangePasswordWithOld}>
+              <h2>Change To Your New Password</h2>
+              <input
+                type="password"
+                placeholder='Old Password'
+                value={oldPassword}
+                onChange={(e) => setOldPassword(e.target.value)}
+              />
+              <input
+                type="password"
+                placeholder='New Password'
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+              <button type='submit' onClick={(e) => e.preventDefault()}>Submit</button>
+            </form>
+          </div>
+
+          <div
+            className="second-method"
+            style={{ display: !newPassContain && nextMethod ? "block" : "none" }}
+          >
+            <form onSubmit={handleVerifyOtp}>
+              <h2>OTP Sent To Your Email</h2>
+              <input
+                type="password"
+                placeholder='Enter OTP'
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+              />
+              <button type='submit' onClick={(e) => e.preventDefault()}>Verify OTP</button>
+              {otpSent && (
+                <button className="resend-otp" onClick={handleResendOtp}>Resend OTP</button>
+              )}
+            </form>
+          </div>
+
+          <div
+            className="new-password-contain"
+            style={{ display: newPassContain ? "block" : "none" }}
+          >
+            <form onSubmit={handleChangePasswordWithOtp}>
+              <h2>Enter Your New Password</h2>
+              <input
+                type="password"
+                placeholder='Enter Your New Password'
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+              <button type='submit' onClick={(e) => e.preventDefault()}>Submit</button>
+            </form>
+          </div>
+
+          {!newPassContain && (
+            nextMethod ? (
+              <div className="next-method-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                  viewBox="0 -960 960 960" width="24px" fill="#000000">
+                  <path d="M540-327.69 387.69-480 540-632.31v304.62Z" />
+                </svg>
+                <span onClick={handlePreviousMethod}>Previous Method</span>
+              </div>
+            ) : (
+              <div className="next-method-btn">
+                <span onClick={handleNextMethod}>Try Another Way</span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="30px"
+                  viewBox="0 -960 960 960" width="30px" fill="#000000">
+                  <path d="M420-327.69v-304.62L572.31-480 420-327.69Z" />
+                </svg>
+              </div>
+            )
+          )}
+        </div>
+      </div>
+
       <div style={{ position: "absolute" }}>
         <ToastContainer
           position="top-right"

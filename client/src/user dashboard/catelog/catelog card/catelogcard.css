@@ -227,6 +227,10 @@
         font-size: 1.3rem;
     }
 
+    .add-to-cart button{
+        cursor: none;
+    }
+
 }
 
 /*! Medium devices (tablets, 768px and up) */
@@ -237,6 +241,10 @@
     }
 
     .heart-contain {
+        cursor: none;
+    }
+
+    .add-to-cart button{
         cursor: none;
     }
 

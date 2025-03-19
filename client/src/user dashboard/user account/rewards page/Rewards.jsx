@@ -70,6 +70,7 @@ const Rewards = ({ isMobile, handleBack }) => {
                             </div>
                         ))}
                     </div>
+                        <button className='view-more'>more</button>
                 </div>
 
                 <div className="experience-gallery">

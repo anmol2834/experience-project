@@ -191,7 +191,6 @@
 
 .next-method-btn svg{
     fill: blue;
-    cursor: pointer;
 }
 
 .next-method-btn span:hover~ svg,
@@ -208,6 +207,8 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
+    background: white;
+    box-shadow: none;
 }
 
 .first-method h2, .second-method h2, .new-password-contain h2{
@@ -269,5 +270,35 @@
     .change-password{
         width: 100%;
         height: 50px;
+        cursor: none;
     }
+
+    .edit-profile-btn{
+        cursor: none;
+    }
+
+    .change-password-box{
+        width: 90%;
+    }
+
+    .next-method-btn span{
+        cursor: none;
+    }
+
+    .first-method form button, .second-method form button, .new-password-contain form button{
+        cursor: none;
+    }
+
+    .edit-profile-btn{
+        cursor: none;
+    }
+
+    .resend-otp{
+        cursor: none;
+    }
+
+    .back-btn-section svg{
+        cursor: none;
+    }
+
 }
