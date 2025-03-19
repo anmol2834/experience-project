@@ -50,7 +50,7 @@ function App() {
                 <Route path='/experience-details' element={<ExperienceDetails />} />
               </Route>
               <Route path="/account" element={<ProtectedRoute><UserAcc /></ProtectedRoute>}>
-                <Route index element={<ProfileEdit />} />
+                <Route index element={<Rewards />} />
                 <Route path='edit_profile' element={<ProfileEdit />} />
                 <Route path='help_center' element={<HelpCenter />} />
                 <Route path='wishlist' element={<Wishlist />} />

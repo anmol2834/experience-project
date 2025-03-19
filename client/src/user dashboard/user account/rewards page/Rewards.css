@@ -138,7 +138,7 @@
     gap: 20px;
   }
   
-  .experience-card {
+  .gallery-grid .experience-card {
     height: 180px;
     border-radius: 15px;
     background-size: cover;
@@ -190,4 +190,13 @@
     .feed-item:hover {
       transform: none;
     }
+
+    .mobile-back-button{
+      cursor: none;
+    }
+
+    .action-card{
+      cursor: none;
+    }
+
   }
