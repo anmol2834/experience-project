@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './frontpage.css';
 import exproLogo from '../../assets/exproLogo.png';
 import slide1 from './slide1.jpg';
@@ -9,6 +9,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import HomePage from '../home page/HomePage';
 import MenuBar from '../menu-bar/MenuBar';
+import Footer from '../../components/footer/Footer';
 
 const slides = [slide1, slide2, slide3, slide4];
 
@@ -178,6 +179,11 @@ const FrontPage = () => {
       <div className='homepage' ref={homePageRef}>
         <HomePage />
       </div>
+
+      <div>
+        <Footer homeRef={homePageRef}/>
+      </div>
+
       <div className={`menu-div ${showMenu ? "show" : "hide"}`}>
         <MenuBar />
       </div>
