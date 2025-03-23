@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
 
 export const context_of_product = createContext();

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './frontpage.css';
 import exproLogo from '../../assets/exproLogo.png';
 import slide1 from './slide1.jpg';

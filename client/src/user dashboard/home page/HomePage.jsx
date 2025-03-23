@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import './homepage.css';
 import Category from '../categories/Category';
 import Catelog from '../catelog/Catelog';
