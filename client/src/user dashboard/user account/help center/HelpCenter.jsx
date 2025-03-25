@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import './HelpCenter.css';
+import './Helpcenter.css';
 
 const HelpCenter = () => {
   const [activeIndex, setActiveIndex] = useState(null);
