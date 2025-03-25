@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import './frontpage.css';
-import exproLogo from '../../assets/exproLogo.png';
 import slide1 from './slide1.jpg';
 import slide2 from './slide2.jpg';
 import slide3 from './slide3.jpg';
@@ -21,7 +20,7 @@ const FrontPage = () => {
   const { token } = useAuth();
   const homePageRef = useRef(null);
 
-  // Restore scroll position or scroll to specific product card
+
   useEffect(() => {
     const scrollToProductId = location.state?.scrollToProductId;
     const fallbackScrollPosition = location.state?.fallbackScrollPosition || 0;
@@ -31,16 +30,16 @@ const FrontPage = () => {
       if (targetCard) {
         targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
-        // Fallback to scroll position if card not found (e.g., due to loading delay)
+
         setTimeout(() => {
           window.scrollTo({ top: fallbackScrollPosition, behavior: 'smooth' });
-        }, 500); // Delay to allow content to render
+        }, 500);
       }
     } else {
       window.scrollTo({ top: fallbackScrollPosition, behavior: 'smooth' });
     }
 
-    // Clear the state to prevent re-scrolling on subsequent renders
+
     if (location.state?.scrollToProductId || location.state?.fallbackScrollPosition) {
       navigate('/', { replace: true, state: {} });
     }
@@ -121,16 +120,21 @@ const FrontPage = () => {
           <li></li>
         </ul>
       </div>
-    );
+    )
   }
 
   return (
     <div className='front-contain'>
       <div className="headers">
-        <div className="logo" style={{ backgroundImage: `url(${exproLogo})` }}></div>
+        <div className="logo">
+          WanderCall
+        </div>
 
         <div className="app-info-menu">
-          <span>Home</span>
+          <span>Experience</span>
+          <span>About Us</span>
+          <span>Contact</span>
+          <span>FAQ</span>
         </div>
 
         <div className="header-btn">
@@ -181,7 +185,7 @@ const FrontPage = () => {
       </div>
 
       <div>
-        <Footer homeRef={homePageRef}/>
+        <Footer homeRef={homePageRef} />
       </div>
 
       <div className={`menu-div ${showMenu ? "show" : "hide"}`}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import './catelogcard.css';
 import { useAuth } from '../../../context/AuthContext';
 import { context_of_product } from '../../../context/ProductContext';

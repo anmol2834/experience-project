@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { motion } from 'framer-motion';
 import './Wishlist.css';
 import { context_of_product } from '../../../context/ProductContext';

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import './catelog.css';
 import Catelogcard from './catelog card/Catelogcard';
 import { context_of_product } from '../../context/ProductContext';
