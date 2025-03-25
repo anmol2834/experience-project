@@ -127,7 +127,7 @@ const FrontPage = () => {
     <div className='front-contain'>
       <div className="headers">
         <div className="logo">
-          WanderCall
+          Wandercall
         </div>
 
         <div className="app-info-menu">

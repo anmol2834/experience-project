@@ -291,3 +291,22 @@
     }
 
 }
+
+@media (min-width: 575px) and (max-width: 768px) {
+
+    .account-menu {
+        width: 70%;
+        border-radius: 0;
+    }
+
+}
+
+
+@media (min-width: 768px) and (max-width: 1070px) {
+
+    .account-menu {
+        width: 50%;
+        border-radius: 0;
+    }
+
+}
