@@ -70,16 +70,11 @@
     font-size: clamp(1.6rem, 4cqi, 2.5rem);
 }
 
-.heading section {
+.place_title{
     width: 100%;
+    height: auto;
     display: flex;
-    gap: 10px;
-    text-transform: capitalize;
-    container-type: inline-size;
-}
-
-.heading section p {
-    font-size: clamp(1rem, 3cqi, 1.2rem);
+    flex-direction: row;
 }
 
 .catelog-details .price {
@@ -204,7 +199,7 @@
 @media (min-width: 575px) and (max-width: 768px) {
 
     .catelog-card {
-        height: 350px;
+        height: 450px;
     }
 
     .heart-contain {
@@ -237,7 +232,7 @@
 @media (min-width: 768px) and (max-width: 992px) {
 
     .catelog-card {
-        height: 350px;
+        height: 400px;
     }
 
     .heart-contain {
@@ -254,7 +249,7 @@
 @media (min-width: 992px) and (max-width: 1199.98px) {
 
     .catelog-card {
-        height: 350px;
+        height: 450px;
     }
 
 }

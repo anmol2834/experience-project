@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import './UserAcc.css';
 import { useAuth } from '../../context/AuthContext';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
@@ -16,13 +16,13 @@ function UserAcc() {
     email: ''
   });
   const [loading, setLoading] = useState(true);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Detect mobile/tablet
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1070); // Detect mobile/tablet
   const [showMenu, setShowMenu] = useState(true); // Control menu visibility
 
   // Detect device size changes
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1070);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
