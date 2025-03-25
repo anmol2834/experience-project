@@ -4,7 +4,7 @@ import './HelpCenter.css';
 
 const HelpCenter = () => {
   const [activeIndex, setActiveIndex] = useState(null);
-  const [formData, setFormData] = useState({ email: '', message: '' });
+  const [formData, setFormData] = useState({ email: '', message: '' })
 
   const faqItems = [
     {
