@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import './homepage.css';
-import Category from '../categories/Category';
+// import Category from '../categories/Category'; 
 import Catelog from '../catelog/Catelog';
 
 function HomePage() {
@@ -33,7 +33,7 @@ function HomePage() {
 
   return (
     <div className='home-contain'>
-      <Category />
+      {/* <Category /> */}
       <div className='catelog-contain' ref={catelogRef}>
         <Catelog />
       </div>

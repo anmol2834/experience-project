@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import './catelogcard.css';
 import { useAuth } from '../../../context/AuthContext';
 import { context_of_product } from '../../../context/ProductContext';
@@ -91,18 +92,22 @@ function Catelogcard({ title, state, city, price, img, ratings, productId, isLik
             </svg>
           )}
         </div>
+
         <div className="heading">
           <h1>{title}</h1>
-          <section>
-            <p>{state},</p>
-            <p>{city}</p>
-          </section>
         </div>
+
+        <div className='place_title'>
+          <p>{state},</p>
+          <p>{city}</p>
+        </div>
+
         <div className="price">
           <section>
             <p className="selling-price">${price}/Person</p>
           </section>
         </div>
+
         <div className="add-to-cart">
           <div className="star-ratings">
             <span>{rating}</span>
@@ -110,9 +115,20 @@ function Catelogcard({ title, state, city, price, img, ratings, productId, isLik
           </div>
           <button onClick={handleViewDetails}>View Details</button>
         </div>
+
       </div>
     </div>
   );
 }
+Catelogcard.propTypes = {
+  title: PropTypes.string.isRequired,
+  state: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  img: PropTypes.string,
+  ratings: PropTypes.number.isRequired,
+  productId: PropTypes.string.isRequired,
+  isLiked: PropTypes.bool.isRequired,
+};
 
 export default Catelogcard;

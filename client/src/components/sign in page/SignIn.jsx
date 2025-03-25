@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -6,7 +6,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './signin.css';
 import signinBanner from './signin-banner.jpg';
-import e from 'cors';
 
 function SignIn() {
   const navigate = useNavigate();
@@ -15,7 +14,7 @@ function SignIn() {
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [eye, setEye] = useState(false);
 
-  const { register, handleSubmit, control, formState: { errors } } = useForm();
+  const { register, handleSubmit, control } = useForm();
 
   const emailValue = useWatch({ control, name: 'email' }) || '';
   const passwordValue = useWatch({ control, name: 'password' }) || '';
@@ -56,7 +55,7 @@ function SignIn() {
       const response = await fetch('http://localhost:5000/change-password-old', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ oldPassword, newPassword })
@@ -79,7 +78,7 @@ function SignIn() {
     try {
       const response = await fetch('http://localhost:5000/send-otp', {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` }
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       if (response.ok) {
         setOtpSent(true);
@@ -100,7 +99,7 @@ function SignIn() {
       const response = await fetch('http://localhost:5000/verify-otp', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ otp })
@@ -122,7 +121,7 @@ function SignIn() {
     try {
       const response = await fetch('http://localhost:5000/resend-otp', {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` }
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
       if (response.ok) {
         toast.success('OTP resent successfully');
@@ -142,7 +141,7 @@ function SignIn() {
       const response = await fetch('http://localhost:5000/change-password-otp', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ newPassword })
@@ -200,7 +199,7 @@ function SignIn() {
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" /></svg>
         </button>
         <h1>sign in</h1>
-        <p>Don't have an Account? <span onClick={() => navigate('/signup')}>sign up</span></p>
+        <p>Don&apos;t have an Account? <span onClick={() => navigate('/signup')}>sign up</span></p>
         <div className='input-area'>
 
           <div className={`input input-email ${emailFocused || emailValue ? 'focused' : ''}`}>

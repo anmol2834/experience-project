@@ -178,6 +178,13 @@
 
   .card-footer {
     flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .card-footer .btns{
+    width: 100%;
+    gap: 20px;
   }
 
   .action-btn {

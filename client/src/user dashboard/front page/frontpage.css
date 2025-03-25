@@ -207,6 +207,7 @@ ul li:nth-child(7) {
   align-items: center;
   justify-content: space-between;
   padding: 0 30px;
+  color: white;
 }
 
 .header-btn {
@@ -239,19 +240,37 @@ ul li:nth-child(7) {
 }
 
 .logo {
-  width: 15%;
+  width: auto;
   height: 100%;
-  background-position: center;
-  background-size: cover;
+  font-size: 2rem;
+  font-family: "Alatsi", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
-.logo img {
-  width: 100%;
+.app-info-menu{
+  width: auto;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.app-info-menu span{
+  transition: 0.5s;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.app-info-menu span:hover{
+  transition: 0.5s;
+  transform: scale(1.1);
+  color: #ff6f61;
 }
 
 .homepage {
@@ -277,12 +296,7 @@ ul li:nth-child(7) {
 @media only screen and (max-width: 575px) {
 
   .headers {
-    padding: 10px;
-  }
-
-  .header-btn {
-    width: 50%;
-    gap: 20px;
+    padding: 20px;
   }
 
   .sign-btn {
@@ -327,18 +341,25 @@ ul li:nth-child(7) {
     cursor: none;
   }
 
+  .app-info-menu{
+    display: none;
+  }
+
+  .logo{
+    font-size: 2rem;
+  }
+
+  .sign-btn {
+    width: 80px;
+  }
+
 }
 
 /*! Small devices (phones, 576px and up) */
 @media (min-width: 575px) and (max-width: 768px) {
 
   .headers {
-    padding: 10px;
-  }
-
-  .header-btn {
-    width: 50%;
-    gap: 20px;
+    padding: 20px;
   }
 
   .sign-btn {
@@ -370,15 +391,22 @@ ul li:nth-child(7) {
     cursor: none;
   }
 
+  .app-info-menu{
+    display: none;
+  }
+
+  .logo{
+    font-size: 2rem;
+  }
+
+  .sign-btn {
+    width: 80px;
+  }
+
 }
 
 /*! Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 992px) {
-
-  .header-btn {
-    width: 30%;
-    gap: 20px;
-  }
 
   .user-icon {
     cursor: none;
@@ -403,16 +431,6 @@ ul li:nth-child(7) {
 
   .user-icon {
     cursor: none;
-  }
-
-}
-
-/*! Large devices (desktops, 992px and up) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-
-  .header-btn {
-    width: 20%;
-    gap: 20px;
   }
 
 }

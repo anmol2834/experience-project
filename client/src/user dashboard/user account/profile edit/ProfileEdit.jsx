@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import './ProfileEdit.css';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../../context/AuthContext';
