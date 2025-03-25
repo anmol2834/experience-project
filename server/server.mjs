@@ -8,11 +8,15 @@ import Product from './models/products.js';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { generateToken, verifyToken } from './middlewares/middleware.js';
+import path from 'path';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 dotenv.config();
+
+const __dirname = path.resolve();
+
 
 mongoose.connect(process.env.MONGO_CONNECTION_STRING)
   .then(() => console.log('MongoDB connected successfully'))
@@ -434,7 +438,14 @@ app.get('/wishlist', verifyToken, async (req, res) => {
   }
 });
 
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (_, res) => {
+  res.sendFile(path.join(__dirname, '/client/dist/index.html'));
+});
+
 // Start the server
 app.listen(process.env.PORT, () => {
-  console.log('Server is running');
+  console.log('Server is running on localhost:5000');
 });

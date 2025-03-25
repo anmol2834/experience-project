@@ -4,7 +4,9 @@
   "main": "server.mjs",
   "type": "module",
   "scripts": {
-    "start": "node server.mjs"
+    "dev": "nodemon server/server.mjs",
+    "start": "node server/server.mjs",
+    "build": "npm install && npm install --prefix client && npm run build --prefix client"
   },
   "devDependencies": {
     "@types/bun": "latest"
