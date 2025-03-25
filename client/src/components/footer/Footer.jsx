@@ -58,8 +58,8 @@ function Footer({ homeRef }) {
         <div className='footer-section social'>
           <h2>Follow Us</h2>
           <div className='social-icons'>
-            <a href='https://instagram.com' target='_blank' rel='noopener noreferrer'>
-              <FontAwesomeIcon icon={faInstagram} />
+            <a href='https://www.instagram.com/sinha_anmol_/' target='_blank' rel='noopener noreferrer'>
+              <FontAwesomeIcon icon={faInstagram} />  
             </a>
             <a href='https://twitter.com' target='_blank' rel='noopener noreferrer'>
               <FontAwesomeIcon icon={faTwitter} />
