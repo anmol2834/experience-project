@@ -1,4 +1,4 @@
 
 [build]
-  publish = "client/dist" # or "client/build" depending on your setup
+  publish = "/dist" # or "client/build" depending on your setup
   command = "echo 'Skipping build, using pre-built files.'"
