@@ -1,7 +1,11 @@
 {
   "name": "server",
-  "module": "server.cjs",
+  "version": "1.0.0",
+  "main": "server.mjs",
   "type": "module",
+  "scripts": {
+    "start": "node server.mjs"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
