@@ -123,7 +123,8 @@ const FrontPage = () => {
       </div>
     )
   }
- 
+
+  console.log(process.env.REACT_APP_API_URL);
 
   return (
     <div className='front-contain'>

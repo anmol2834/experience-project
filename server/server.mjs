@@ -13,7 +13,8 @@ import path from 'path';
 const app = express();
 
 app.use(cors({
-  origin: 'https://wandercall.onrender.com',
+  origin: ['http://localhost:3000', 'https://wandercall.onrender.com'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
 }));
 
