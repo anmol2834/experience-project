@@ -12,6 +12,7 @@ export default defineConfig({
     'process.env': process.env, 
   },
   build: {
-    chunkSizeWarningLimit: 1000, // Set limit in KB (e.g., 1000 KB = 1 MB)
+    chunkSizeWarningLimit: 1000,
+    minify: false,
   },
 });
