@@ -27,7 +27,7 @@ function SignUp() {
     setLoading(true)
     toast.dismiss('signup-error')
     try {
-      const response = await fetch('http://localhost:5000/register', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -76,7 +76,7 @@ function SignUp() {
   const handleVerify = async () => {
     toast.dismiss('verify-error')
     try {
-      const response = await fetch('http://localhost:5000/verify', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/verify`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: registeredEmail, code: verificationCode })
@@ -99,7 +99,7 @@ function SignUp() {
   const handleResend = async () => {
     toast.dismiss('resend-error')
     try {
-      const response = await fetch('http://localhost:5000/resend', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/resend`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: registeredEmail })

@@ -10,6 +10,7 @@ import HomePage from '../home page/HomePage';
 import MenuBar from '../menu-bar/MenuBar';
 import Footer from '../../components/footer/Footer';
 
+
 const slides = [slide1, slide2, slide3, slide4];
 
 const FrontPage = () => {
@@ -122,6 +123,7 @@ const FrontPage = () => {
       </div>
     )
   }
+ 
 
   return (
     <div className='front-contain'>

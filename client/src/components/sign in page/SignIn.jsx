@@ -52,7 +52,7 @@ function SignIn() {
   const handleChangePasswordWithOld = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/change-password-old', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/change-password-old`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -76,7 +76,7 @@ function SignIn() {
 
   const handleSendOtp = async () => {
     try {
-      const response = await fetch('http://localhost:5000/send-otp', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/send-otp`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
@@ -96,7 +96,7 @@ function SignIn() {
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/verify-otp', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/verify-otp`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -119,7 +119,7 @@ function SignIn() {
   const handleResendOtp = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/resend-otp', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/resend-otp`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
       });
@@ -138,7 +138,7 @@ function SignIn() {
   const handleChangePasswordWithOtp = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/change-password-otp', {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/change-password-otp`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
