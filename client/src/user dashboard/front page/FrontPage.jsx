@@ -15,7 +15,7 @@ const slides = [slide1, slide2, slide3, slide4];
 
 const FrontPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { token } = useAuth();
