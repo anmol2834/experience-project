@@ -14,7 +14,7 @@ function ProductContext({ children }) {
     const fetchData = async () => {
       try {
         setProductLoading(true);
-        const productRes = await fetch('http://localhost:5000/products', {
+        const productRes = await fetch(`${process.env.REACT_APP_API_URL}/products`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
         });
@@ -22,7 +22,7 @@ function ProductContext({ children }) {
         setProductInfo(productData);
 
         if (token) {
-          const wishlistRes = await fetch('http://localhost:5000/wishlist', {
+          const wishlistRes = await fetch(`${process.env.REACT_APP_API_URL}/wishlist`, {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -46,7 +46,7 @@ function ProductContext({ children }) {
   const addToWishlist = async (productId) => {
     if (!token) return;
     try {
-      const res = await fetch('http://localhost:5000/wishlist/add', {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/wishlist/add`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -69,7 +69,7 @@ function ProductContext({ children }) {
   const removeFromWishlist = async (productId) => {
     if (!token) return;
     try {
-      const res = await fetch('http://localhost:5000/wishlist/remove', {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/wishlist/remove`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
