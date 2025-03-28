@@ -94,7 +94,7 @@ function Catelogcard({ title, state, city, price, img, ratings, productId, isLik
         </div>
 
         <div className="heading">
-          <h1>{title}</h1>
+          <h2>{title}</h2>
         </div>
 
         <div className='place_title'>
