@@ -21,7 +21,6 @@ const FrontPage = () => {
   const { token } = useAuth();
   const homePageRef = useRef(null);
 
-
   useEffect(() => {
     const scrollToProductId = location.state?.scrollToProductId;
     const fallbackScrollPosition = location.state?.fallbackScrollPosition || 0;
