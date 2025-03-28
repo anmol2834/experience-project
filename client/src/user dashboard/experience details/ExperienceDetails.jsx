@@ -4,13 +4,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { context_of_product } from '../../context/ProductContext';
 import { useContext } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot, faShare, faShareAlt, faShareAltSquare, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 function ExperienceDetails() {
   const navigate = useNavigate();
   const location = useLocation();
   const { token } = useAuth();
   const { productInfo, wishlistItems, addToWishlist, removeFromWishlist } = useContext(context_of_product);
-
   const productFromState = location.state?.product;
   const from = location.state?.from || '/';
   const scrollPosition = location.state?.scrollPosition || 0;
@@ -27,21 +28,53 @@ function ExperienceDetails() {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [imageLoading, setImageLoading] = useState(true);
+  const [wishlistLoading, setWishlistLoading] = useState(false);
 
   const images = product
     ? [
-        product.img1,
-        product.img2,
-        product.img3,
-        product.img4,
-        product.img5,
-        product.img6,
-        product.img7,
-        product.img8,
-      ].filter(Boolean)
+      product.img1,
+      product.img2,
+      product.img3,
+      product.img4,
+      product.img5,
+      product.img6,
+      product.img7,
+      product.img8,
+    ].filter(Boolean)
     : [];
 
   const showMoreThumb = images.length > 3;
+
+  // Sample reviews data (since actual data isn't provided)
+  const sampleReviews = [
+    {
+      name: 'Towhidur Rahman',
+      avatar: 'https://via.placeholder.com/50',
+      rating: 5,
+      text: 'My first and only mala ordered on Etsy, and I’M beyond delighted! I requested a custom mala based on two stones I was called to invite together in this kind of creation. The fun and genuine joy I invite together in this kind of creation.',
+      date: '24-10-2022',
+      totalSpend: '$200',
+      totalReviews: 14,
+    },
+    {
+      name: 'Jane Smith',
+      avatar: 'https://via.placeholder.com/50',
+      rating: 4,
+      text: 'Great experience overall. The service was excellent, though it felt a bit pricey for what was offered.',
+      date: '15-01-2023',
+      totalSpend: '$150',
+      totalReviews: 8,
+    },
+    {
+      name: 'Alex Johnson',
+      avatar: 'https://via.placeholder.com/50',
+      rating: 5,
+      text: 'Absolutely fantastic! Exceeded all my expectations, and I’ll definitely be coming back.',
+      date: '10-02-2023',
+      totalSpend: '$300',
+      totalReviews: 20,
+    },
+  ];
 
   const handleSlideChange = (index) => {
     if (index < 0) index = images.length - 1;
@@ -77,6 +110,7 @@ function ExperienceDetails() {
       navigate('/signin');
       return;
     }
+    setWishlistLoading(true);
     try {
       if (like) {
         await removeFromWishlist(product.productId);
@@ -88,6 +122,8 @@ function ExperienceDetails() {
     } catch (error) {
       console.error('Error updating wishlist:', error);
       setLike(wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId)));
+    } finally {
+      setWishlistLoading(false);
     }
   };
 
@@ -116,18 +152,20 @@ function ExperienceDetails() {
 
   return (
     <div className="experience-details-container">
-      <div className="back-btn" onClick={handleBack}>
-        <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
-          <path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" />
-        </svg>
+      <div className="headers">
+        <div className="back-btn" onClick={handleBack}>
+          <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
+            <path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" />
+          </svg>
+        </div>
+
+        <div className="cart-icon" data-content={0}>
+          <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
+            <path d="M252.31-100Q222-100 201-121q-21-21-21-51.31v-455.38Q180-658 201-679q21-21 51.31-21H330v-10q0-62.15 43.92-106.08Q417.85-860 480-860t106.08 43.92Q630-772.15 630-710v10h77.69Q738-700 759-679q21 21 21 51.31v455.38Q780-142 759-121q-21 21-51.31 21H252.31Zm0-60h455.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46v-455.38q0-4.62-3.85-8.46-3.84-3.85-8.46-3.85H630v90q0 12.77-8.62 21.38Q612.77-520 600-520t-21.38-8.62Q570-537.23 570-550v-90H390v90q0 12.77-8.62 21.38Q372.77-520 360-520t-21.38-8.62Q330-537.23 330-550v-90h-77.69q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v455.38q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85ZM390-700h180v-10q0-37.61-26.19-63.81Q517.62-800 480-800q-37.62 0-63.81 26.19Q390-747.61 390-710v10ZM240-160v-480 480Z" />
+          </svg>
+        </div>
       </div>
 
-      <div className="cart-icon" data-content={0}>
-        <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
-          <path d="M252.31-100Q222-100 201-121q-21-21-21-51.31v-455.38Q180-658 201-679q21-21 51.31-21H330v-10q0-62.15 43.92-106.08Q417.85-860 480-860t106.08 43.92Q630-772.15 630-710v10h77.69Q738-700 759-679q21 21 21 51.31v455.38Q780-142 759-121q-21 21-51.31 21H252.31Zm0-60h455.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46v-455.38q0-4.62-3.85-8.46-3.84-3.85-8.46-3.85H630v90q0 12.77-8.62 21.38Q612.77-520 600-520t-21.38-8.62Q570-537.23 570-550v-90H390v90q0 12.77-8.62 21.38Q372.77-520 360-520t-21.38-8.62Q330-537.23 330-550v-90h-77.69q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v455.38q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85ZM390-700h180v-10q0-37.61-26.19-63.81Q517.62-800 480-800q-37.62 0-63.81 26.19Q390-747.61 390-710v10ZM240-160v-480 480Z" />
-        </svg>
-      </div>
-      
       <div className="experience-card">
         <div className="image-gallery">
           <div
@@ -155,7 +193,9 @@ function ExperienceDetails() {
               onLoad={handleImageLoad}
             />
             <span className="wishlist-icon" onClick={handleLike}>
-              {like ? (
+              {wishlistLoading ? (
+                <div className="spinner"></div>
+              ) : like ? (
                 <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000">
                   <path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z" />
                 </svg>
@@ -191,10 +231,12 @@ function ExperienceDetails() {
           <div className="header">
             <div className="title-and-map">
               <h1 className="title">{product.title}</h1>
-              <span className="locate-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
-                  <path d="M480.07-485.39q29.85 0 51.04-21.26 21.2-21.26 21.2-51.11 0-29.85-21.26-51.05Q509.79-630 479.93-630q-29.85 0-51.04 21.26-21.2 21.26-21.2 51.12 0 29.85 21.26 51.04 21.26 21.19 51.12 21.19ZM480-179.46q117.38-105.08 179.65-201.58 62.27-96.5 62.27-169.04 0-109.38-69.5-179.84-69.5-70.46-172.42-70.46-102.92 0-172.42 70.46-69.5 70.46-69.5 179.84 0 72.54 62.27 169.04 62.27 96.5 179.65 201.58Zm0 79.84Q329-230.46 253.54-343.15q-75.46-112.7-75.46-206.93 0-138.46 89.57-224.19Q357.23-860 480-860t212.35 85.73q89.57 85.73 89.57 224.19 0 94.23-75.46 206.93Q631-230.46 480-99.62Zm0-458.07Z" />
-                </svg>
+              <span className="locate-and-share-icon">
+
+                <FontAwesomeIcon className='shareAlt' icon={faShareAlt} />
+
+                <FontAwesomeIcon className='location-dot' icon={faLocationDot} />
+
               </span>
             </div>
             <div className="location">
@@ -231,6 +273,79 @@ function ExperienceDetails() {
             </button>
           </div>
         </div>
+      </div>
+
+      <div className="reviews-container">
+        <div className="reviews-header">
+          <h2>Reviews</h2>
+          <span className="review-period">March 2021 - February 2022</span>
+        </div>
+        <div className="reviews-summary">
+          <div className="total-reviews">
+            <h3>10.0K</h3>
+            <p>
+              Total Reviews <span className="growth">21% <span className="growth-icon">↗</span></span>
+            </p>
+          </div>
+          <div className="average-rating">
+            <h3>4.0 <span className="stars">★★★★★</span></h3>
+            <p>Average rating on this year</p>
+          </div>
+          <div className="rating-distribution">
+            <div className="rating-bar">
+              <span>5</span>
+              <div className="bar"><div className="fill" style={{ width: '80%' }}></div></div>
+              <span>2.0K</span>
+            </div>
+            <div className="rating-bar">
+              <span>4</span>
+              <div className="bar"><div className="fill" style={{ width: '40%' }}></div></div>
+              <span>1.0K</span>
+            </div>
+            <div className="rating-bar">
+              <span>3</span>
+              <div className="bar"><div className="fill" style={{ width: '20%' }}></div></div>
+              <span>500</span>
+            </div>
+            <div className="rating-bar">
+              <span>2</span>
+              <div className="bar"><div className="fill" style={{ width: '10%' }}></div></div>
+              <span>200</span>
+            </div>
+            <div className="rating-bar">
+              <span>1</span>
+              <div className="bar"><div className="fill" style={{ width: '5%' }}></div></div>
+              <span>0K</span>
+            </div>
+          </div>
+        </div>
+        <div className="reviews-list">
+          {sampleReviews.map((review, index) => (
+            <div key={index} className="review-item">
+              <div className="reviewer-info">
+                <FontAwesomeIcon icon={faUserCircle} style={{ fontSize: '50px', width: '50px', height: '50px' }} />
+                <div className="reviewer-details">
+                  <h4>{review.name}</h4>
+                  <p>Total Spend: {review.totalSpend} • Total Reviews: {review.totalReviews}</p>
+                </div>
+                <div className="review-meta">
+                  <span className="review-rating">
+                    {Array.from({ length: 5 }, (_, i) => (
+                      <span key={i} className={i < review.rating ? 'star filled' : 'star'}>★</span>
+                    ))}
+                  </span>
+                  <span className="review-date">{review.date}</span>
+                </div>
+              </div>
+              <p className="review-text">{review.text}</p>
+              <div className="review-actions">
+                <button className="action-btn">Public Comment</button>
+                <button className="action-btn">Direct Message</button>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button className="see-more-reviews">See More Reviews</button>
       </div>
     </div>
   );

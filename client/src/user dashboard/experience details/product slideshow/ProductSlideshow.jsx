@@ -91,7 +91,7 @@ function ProductSlideshow() {
 
   return (
     <div className="product-slideshow-container" onClick={handleContainerBack}>
-      <div className="back-btn" onClick={() => navigate('/experience-details', { state: location.state })}>
+      <div className="back-to-experience-details" onClick={() => navigate('/experience-details', { state: location.state })}>
         <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
           <path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" />
         </svg>
