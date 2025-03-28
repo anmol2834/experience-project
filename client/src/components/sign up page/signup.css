@@ -15,17 +15,12 @@
     position: relative;
     width: 50%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.54);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.534);
-    backdrop-filter: blur(5.5px);
-    -webkit-backdrop-filter: blur(5.5px);
-    border: 1px solid rgba(0, 0, 0, 0.04);
-    border-radius: 20px;
+    background: #222;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 40px;
+    justify-content: space-around;
     font-weight: 300;
     padding: 20px 0;
 }
@@ -76,7 +71,7 @@ form .user-detail {
     align-items: center;
     justify-content: center;
     gap: 20px;
-}
+}   
 
 .user-detail input {
     width: 100%;
@@ -113,14 +108,14 @@ form .user-detail {
 }
 
 .num-div span {
-    width: 10%;
-    height: 40px;
+    width: 50px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background: white;
     color: black;
-    border-radius: 5px;
+    border-radius: 3px;
 }
 
 .user-detail input:focus {
@@ -344,6 +339,7 @@ input[type="number"] {
     .signup-contain form {
         width: 100%;
         background: transparent;
+        padding: 50px 0;
     }
 
     form .user-name {
@@ -355,7 +351,7 @@ input[type="number"] {
     }
 
     form .user-detail {
-        width: 70%;
+        width: 80%;
     }
 
     .num-div span {
@@ -364,6 +360,14 @@ input[type="number"] {
 
     .num-div input {
         width: 75%;
+    }
+
+    .signup-form .submit {
+        width: 40%;
+    }
+
+    .signup-form .submit:hover {
+        transform: scale(1);
     }
 
     .signup-form .google {
@@ -439,7 +443,7 @@ input[type="number"] {
     }
 
     form .user-detail {
-        width: 50%;
+        width: 60%;
     }
 
     .num-div span {
@@ -448,6 +452,14 @@ input[type="number"] {
 
     .num-div input {
         width: 75%;
+    }
+
+    .signup-form .submit {
+        width: 30%;
+    }
+
+    .signup-form .submit:hover {
+        transform: scale(1);
     }
 
     .signup-form .google {
@@ -518,7 +530,7 @@ input[type="number"] {
     }
 
     form .user-detail {
-        width: 40%;
+        width: 50%;
     }
 
     .num-div span {
@@ -527,6 +539,14 @@ input[type="number"] {
 
     .num-div input {
         width: 75%;
+    }
+
+    .signup-form .submit {
+        width: 30%;
+    }
+
+    .signup-form .submit:hover {
+        transform: scale(1);
     }
 
     .signup-form .google {
@@ -580,7 +600,7 @@ input[type="number"] {
     }
 
     form .user-detail {
-        width: 30%;
+        width: 40%;
     }
 
     .num-div span {
@@ -599,4 +619,11 @@ input[type="number"] {
         width: 25%;
     }
 
+}
+
+
+@media (min-width: 1200px) and (max-width: 1300px) {
+    form .user-detail {
+        width: 70%;
+    }
 }

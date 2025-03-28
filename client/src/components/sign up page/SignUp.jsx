@@ -120,8 +120,6 @@ function SignUp() {
   const responseGoogle = (response) => {
     console.log(response);
   }
-
-  console.log(process.env.REACT_APP_API_URL);
   
 
   return (
