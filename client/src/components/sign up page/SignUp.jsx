@@ -121,6 +121,9 @@ function SignUp() {
     console.log(response);
   }
 
+  console.log(process.env.REACT_APP_API_URL);
+  
+
   return (
     <div className='signup-contain'>
       <form className='signup-form' onSubmit={handleSubmit(onSubmit, onError)}>
