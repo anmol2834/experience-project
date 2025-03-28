@@ -9,7 +9,27 @@ const Wishlist = () => {
   const navigate = useNavigate();
 
   if (wishlistLoading) {
-    return <div className="wishlist-loading">Loading...</div>;
+    return (
+      <div className="wishlist-loading">
+        <div className="wireframe-header">
+          <div className="wireframe-title"></div>
+          <div className="wireframe-count"></div>
+        </div>
+        <div className="wireframe-grid">
+          {[0, 1, 2].map((_, index) => (
+            <div key={index} className="wireframe-item">
+              <div className="wireframe-image"></div>
+              <div className="wireframe-details">
+                <div className="wireframe-name"></div>
+                <div className="wireframe-price"></div>
+                <div className="wireframe-specs"></div>
+                <div className="wireframe-button"></div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   }
 
   const handleViewDetails = (product) => {
