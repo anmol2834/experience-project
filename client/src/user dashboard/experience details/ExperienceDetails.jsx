@@ -141,7 +141,7 @@ function ExperienceDetails() {
     if (!productFromState && !product) {
       navigate('/catelog');
     }
-    window.scrollTo(0, 0); // Ensure page starts at the top
+    window.scrollTo(0, 0); 
   }, [productFromState, navigate]);
 
   useEffect(() => {
