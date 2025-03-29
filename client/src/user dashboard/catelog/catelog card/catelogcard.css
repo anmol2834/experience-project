@@ -63,43 +63,25 @@
     container-type: inline-size;
 }
 
-.heading h1 {
+.heading h2 {
     text-transform: capitalize;
     font-weight: 400;
     margin-bottom: 10px;
-    font-size: clamp(1.6rem, 4cqi, 2.5rem);
+    font-size: clamp(1.2rem, 4cqi, 2.5rem);
 }
 
-.place_title{
-    width: 100%;
-    height: auto;
+.place_title {
+    width: fit-content;
     display: flex;
     flex-direction: row;
-}
-
-.catelog-details .price {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.catelog-details .price section {
-    display: flex;
-    flex-direction: row;
+    align-items: center;
     gap: 10px;
+    border: 1px solid #d8d8d8;
+    padding: 5px;
+    border-radius: 5px;
 }
 
-.catelog-details .price section {
-    font-size: 1.2rem;
-    margin-top: 20px;
-}
-
-.price .mrp {
-    color: #888;
-    text-decoration: line-through;
-}
-
-.add-to-cart {
+.bottom-section {
     width: 100%;
     height: auto;
     display: flex;
@@ -107,10 +89,18 @@
     justify-content: space-between;
 }
 
-.add-to-cart button {
+.bottom-section section:nth-child(1) {
     width: 50%;
+}
+
+.bottom-section section:nth-child(2) {
+    width: 30%;
+}
+
+.bottom-section button {
+    width: 100%;
     height: 45px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: none;
     outline: none;
     color: white;
@@ -118,7 +108,7 @@
     cursor: pointer;
 }
 
-.add-to-cart button:hover {
+.bottom-section button:hover {
     background: #222222d1;
 }
 
@@ -135,6 +125,22 @@
 }
 
 .heart-contain svg {
+    fill: white;
+}
+
+.share-icon{
+    position: absolute;
+    top: 0px;
+    right: 40px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.share-icon svg {
     fill: white;
 }
 
@@ -181,6 +187,10 @@
         cursor: none;
     }
 
+    .share-icon{
+        cursor: none;
+    }
+
     .star-ratings span {
         font-size: 1.5rem;
     }
@@ -206,6 +216,10 @@
         cursor: none;
     }
 
+    .share-icon{
+        cursor: none;
+    }
+
     .catelog-details p {
         font-size: small;
     }
@@ -222,7 +236,7 @@
         font-size: 1.3rem;
     }
 
-    .add-to-cart button{
+    .add-to-cart button {
         cursor: none;
     }
 
@@ -239,7 +253,11 @@
         cursor: none;
     }
 
-    .add-to-cart button{
+    .share-icon{
+        cursor: none;
+    }
+
+    .add-to-cart button {
         cursor: none;
     }
 

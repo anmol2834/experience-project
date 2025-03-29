@@ -42,6 +42,7 @@ function Catelog() {
               state={value.state}
               city={value.city}
               title={value.title}
+              desc={value.description}
               price={value.price}
               img={value.img1}
               stock={value.stock}
