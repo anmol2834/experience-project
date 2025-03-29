@@ -138,6 +138,13 @@ function ExperienceDetails() {
   }, [productFromState, navigate]);
 
   useEffect(() => {
+    if (!productFromState && !product) {
+      navigate('/catelog');
+    }
+    window.scrollTo(0, 0); // Ensure page starts at the top
+  }, [productFromState, navigate]);
+
+  useEffect(() => {
     setLike(wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId)));
   }, [wishlistItems, productId]);
 
