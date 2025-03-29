@@ -152,7 +152,7 @@ function ExperienceDetails() {
     navigate(from, {
       state: { scrollToProductId: productId, fallbackScrollPosition: scrollPosition },
       replace: true,
-    });
+    })
   };
 
   if (!product) return null;
