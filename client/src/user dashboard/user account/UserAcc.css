@@ -1,8 +1,8 @@
 .user-acc-contain {
     width: 100vw;
     height: 100vh;
-    background: #222;
-    color: white;
+    background: linear-gradient(to right, var(--primary-color),  var(--shade-primary-color));
+    color: var(--main-element-color);
     padding: 20px;
     overflow-y: scroll;
     scrollbar-width: none;
@@ -14,7 +14,7 @@
 .account-menu {
     width: 30%;
     height: 100%;
-    background: #333;
+    background: var(--bg-color);
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     padding: 10px;
@@ -35,7 +35,7 @@
 .home-btn svg {
     width: 10%;
     height: 100%;
-    fill: white;
+    fill: var(--main-element-color);
     cursor: pointer;
     transition: 0.5s;
 }
@@ -53,7 +53,8 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    background: rgba(255, 40, 40, 0.864);
+    background: var(--accent-details);
+    color: white;
 }
 
 .profile section:nth-child(1) {
@@ -84,6 +85,7 @@
     border-radius: 5px;
     transition: 0.5s;
     cursor: pointer;
+    background: white;
 }
 
 .logout-btn:hover {
@@ -124,21 +126,25 @@
 }
 
 .profile-menu .profile-menu-btn {
-    background: white;
-    color: black;
+    background: var(--main-element-color);
+    color: var(--bg-color);
     border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
     cursor: pointer;
-    border: 2px solid #222;
+    border: 2px solid #333;
     transition: 0.5s;
+}
+
+.profile-menu .profile-menu-btn svg{
+    fill: var(--bg-color);
 }
 
 .profile-menu-btn:hover {
     transition: 0.5s;
-    background: #d8e9ff;
+    background: var(--light-color-text);
 }
 
 .address-section {
@@ -163,7 +169,7 @@
 }
 
 .address-section .add-address svg {
-    fill: white;
+    fill: var(--main-element-color);
     cursor: pointer;
     transition: 0.5s;
 }
@@ -208,27 +214,28 @@
     height: calc(100%/3);
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.233);
+    background: var(--primary-color);
     padding: 0 15px;
     border-radius: 3px;
-    border: 1px solid rgba(255, 255, 255, 0.421);
+    border: 1px solid var(--shade-primary-color);
     cursor: pointer;
     transition: 0.5s;
 }
 
 .activity section:hover {
     transition: 0.5s;
-    background: rgba(255, 255, 255, 0.359);
+    background: var(--shade-primary-color);
+    border: 1px solid var(--primary-color);
 }
 
 .account-render {
     width: 60%;
     height: 100%;
-    background: #333;
+    background: var(--bg-color);
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     padding: 20px;
-    color: #fff;
+    color: var(--main-element-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -242,7 +249,7 @@
 }
 
 .back-button svg {
-    fill: white;
+    fill: var(--main-element-color);
     transition: 0.5s;
 }
 

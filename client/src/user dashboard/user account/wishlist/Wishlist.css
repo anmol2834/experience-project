@@ -16,12 +16,12 @@
 .wishlist-header h2 {
   font-size: 1.8rem;
   text-transform: capitalize;
-  color: #00ff88;
+  color: var(--highlight-element);
 }
 
 .item-count {
   font-size: 0.9rem;
-  color: #c8c8c8;
+  color: var(--light-color-text);
 }
 
 .wishlist-grid {
@@ -32,7 +32,7 @@
 }
 
 .wishlist-item {
-  background: #444;
+  background: var(--bg-color);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -66,7 +66,7 @@
 }
 
 .wishlist-remove-btn:hover {
-  background: #ff4444;
+  background: var(--accent-details);
 }
 
 .item-details {
@@ -77,13 +77,13 @@
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
   text-transform: capitalize;
-  color: #fff;
+  color: var(--main-element-color);
 }
 
 .item-price {
   font-size: 1.3rem;
   font-weight: 600;
-  color: #00ff88;
+  color: var(--highlight-element);
   margin-bottom: 1rem;
 }
 
@@ -91,17 +91,17 @@
   display: flex;
   gap: 1rem;
   font-size: 0.9rem;
-  color: #c8c8c8;
+  color: var(--light-color-text);
   margin-bottom: 1.5rem;
 }
 
 .view-details-btn {
   width: 100%;
   padding: 0.8rem;
-  background: linear-gradient(45deg, #00ff88, #00cc6a);
+  background: linear-gradient(45deg, #00e278, #00b55d);
   border: none;
   border-radius: 8px;
-  color: #111;
+  color: white;
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -113,7 +113,7 @@
 
 .view-details-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 255, 136, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 255, 136, 0.2);  
 }
 
 .view-details-btn svg {
