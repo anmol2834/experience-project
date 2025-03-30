@@ -153,7 +153,7 @@
 
 .star-ratings span {
     font-size: 1.5rem;
-    color: var(--accent-details);
+    color: var(--highlight-element);
 }
 
 .star-ratings .star {
@@ -162,12 +162,12 @@
 }
 
 .star-ratings .filled {
-    color: var(--accent-details);
+    color: var(--highlight-element);
 }
 
 .star-ratings .half-filled {
-    color: var(--accent-details);
-    background: linear-gradient(to right, var(--accent-details) 50%, #d8d8d8 50%);
+    color: var(--highlight-element);
+    background: linear-gradient(to right, var(--highlight-element) 50%, #d8d8d8 50%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
