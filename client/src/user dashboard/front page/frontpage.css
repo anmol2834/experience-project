@@ -55,7 +55,7 @@
 }
 
 .dot.active {
-  background-color: white;
+  background-color: var(--accent-details);
 }
 
 .loading {
@@ -155,8 +155,8 @@ ul li:nth-child(7) {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  background: var(--color1);
-  color: var(--color2);
+  background: var(--bg-color);
+  color: var(--main-element-color);
   font-size: 1.1rem;
   text-transform: capitalize;
   bottom: 100px;
@@ -172,11 +172,6 @@ ul li:nth-child(7) {
 }
 
 .explore span {
-  z-index: 10;
-}
-
-.explore svg {
-  fill: var(--color2);
   z-index: 10;
 }
 
@@ -207,7 +202,6 @@ ul li:nth-child(7) {
   align-items: center;
   justify-content: space-between;
   padding: 0 30px;
-  color: white;
 }
 
 .header-btn {
@@ -259,6 +253,7 @@ ul li:nth-child(7) {
   justify-content: center;
   gap: 20px;
   padding: 20px;
+  color: var(--main-element-color);
 }
 
 .app-info-menu span{
@@ -270,7 +265,7 @@ ul li:nth-child(7) {
 .app-info-menu span:hover{
   transition: 0.5s;
   transform: scale(1.1);
-  color: #ff6f61;
+  color: var(--secondary-color);
 }
 
 .homepage {
@@ -282,6 +277,10 @@ ul li:nth-child(7) {
   cursor: pointer;
   z-index: 5;
   transition: 0.5s;
+}
+
+.user-icon svg{
+  fill: var(--main-element-color);
 }
 
 .user-icon:hover {
