@@ -120,13 +120,13 @@ function SignUp() {
   const responseGoogle = (response) => {
     console.log(response);
   }
-  
+
 
   return (
     <div className='signup-contain'>
       <form className='signup-form' onSubmit={handleSubmit(onSubmit, onError)}>
         <button type='button' className='back-btn' onClick={(e) => { e.preventDefault(); navigate('/home') }}>
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z" /></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M366.92-213.46 100-480.38l266.92-266.93 41.77 41.77-194.54 195.16h646.23v59.99H214.54l195.15 195.16-42.77 41.77Z" /></svg>
         </button>
         <h1>create an account</h1>
         <p>Already have an Account <span onClick={() => navigate('/signin')}>Sign In</span></p>

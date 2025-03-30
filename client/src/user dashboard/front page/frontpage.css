@@ -219,8 +219,8 @@ ul li:nth-child(7) {
   outline: none;
   border: none;
   border-radius: 10px;
-  background: var(--color1);
-  color: var(--color2);
+  background: var(--main-element-color);
+  color: var(--bg-color);
   font-size: 0.9rem;
   text-transform: capitalize;
   z-index: 2;

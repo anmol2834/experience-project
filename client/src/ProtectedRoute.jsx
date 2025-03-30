@@ -6,7 +6,17 @@ const ProtectedRoute = ({ children }) => {
   const { token, isLoading } = useAuth();
 
   if (isLoading) {
-    return <div>Loading...</div>; // Replace with a spinner if desired
+    return <div className="loading">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
   }
 
   if (!token) {

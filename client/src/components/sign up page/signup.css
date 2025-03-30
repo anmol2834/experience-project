@@ -1,21 +1,20 @@
 .signup-contain {
     width: 100%;
     height: 100vh;
-    background: var(--bg-color);
+    background: linear-gradient(to right, var(--primary-color),  var(--shade-primary-color));
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 30px;
     padding: 30px;
-    color: var(--color1);
-    font-family: var(--font);
+    color: var(--main-element-color);
 }
 
-.signup-contain form {
+.signup-contain form {  
     position: relative;
     width: 50%;
     height: 100%;
-    background: #222;
+    background: var(--bg-color);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -26,13 +25,13 @@
 }
 
 form p span {
-    color: var(--primary-color);
+    color: var(--secondary-color);
     cursor: pointer;
     font-size: 1.2rem;
 }
 
 form p span:hover {
-    color: var(--secondary-color);
+    color: var(--accent-details);
 }
 
 form h1 {
@@ -54,12 +53,12 @@ form .user-name {
     padding: 0 10px;
     border-radius: 5px;
     outline: none;
-    border: 2px solid var(--color1);
-    background: var(--color1);
+    border: 2px solid var(--shade-primary-color);
+    background: var(--primary-color);
 }
 
 .user-name input:focus {
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--main-element-color);
 }
 
 
@@ -79,7 +78,8 @@ form .user-detail {
     outline: none;
     border: none;
     border-radius: 5px;
-    border: 2px solid var(--color1);
+    border: 2px solid var(--shade-primary-color);
+    background: var(--primary-color);
     padding: 0 10px;
 }
 
@@ -93,7 +93,7 @@ form .user-detail {
 
 .pass svg {
     position: absolute;
-    fill: var(--color1);
+    fill: var(--main-element-color);
     right: -30px;
     cursor: pointer;
 }
@@ -113,13 +113,14 @@ form .user-detail {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: white;
+    background: var(--primary-color);
+    border: 2px solid var(--shade-primary-color);
     color: black;
     border-radius: 3px;
 }
 
 .user-detail input:focus {
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--main-element-color);
 }
 
 .num-div input {
@@ -168,7 +169,7 @@ form .line {
     width: 60%;
     height: 1px;
     border-radius: 10px;
-    background: white;
+    background: var(--light-color-text);
 }
 
 .signup-form .submit {
@@ -189,7 +190,6 @@ form .line {
     text-transform: capitalize;
     transition: 0.5s;
     background: var(--secondary-color);
-    font-family: var(--font);
     animation: animateSubmit 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
     transition: all 0.3s ease;
 }
@@ -308,12 +308,12 @@ input[type="number"] {
 
 .changeEmail {
     text-transform: capitalize;
-    color: rgb(0, 34, 255);
+    color: var(--secondary-color);
     cursor: pointer;
 }
 
 .changeEmail:hover {
-    color: red;
+    color: var(--accent-details);
 }
 
 .side-banner {
@@ -330,6 +330,7 @@ input[type="number"] {
 
     .signup-contain {
         padding: 0px;
+        background: var(--bg-color);
     }
 
     .side-banner {
@@ -427,6 +428,7 @@ input[type="number"] {
 
     .signup-contain {
         padding: 0px;
+        background: var(--bg-color);
     }
 
     .side-banner {
@@ -514,6 +516,7 @@ input[type="number"] {
 
     .signup-contain {
         padding: 0px;
+        background: var(--bg-color);
     }
 
     .side-banner {
