@@ -3,7 +3,7 @@
 .container {
   width: 100%;
   height: auto;
-  background: var(--bg-color);
+  background: linear-gradient(to right, var(--primary-color),  var(--shade-primary-color));
   font-family: "Nunito Sans", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
@@ -12,7 +12,7 @@
     "YTLC" 500;
 }
 
-input:-webkit-autofill {
+/* input:-webkit-autofill {
   background-color: transparent !important;
   box-shadow: 0 0 0px 1000px #151515 inset !important; 
   color: white !important;
@@ -24,4 +24,4 @@ input:-webkit-autofill::first-line {
 
 input:focus {
   outline: none !important;
-}
+} */

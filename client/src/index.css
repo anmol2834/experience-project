@@ -14,16 +14,16 @@
 }
 
 body{
-  background: #222;
+  background: #fff;
 }
 
 :root {
-  --font : "Lexend Deca", serif;
-  --bg-color: linear-gradient(to left, #222, #111);
-  --color1: white;
-  --color2: #000;
-  --primary-color: lime;
-  --secondary-color: yellow;
+  --bg-color: #fff;
+  --primary-color: rgb(217, 253, 250);
+  --shade-primary-color: rgb(217, 229, 253);
+  --secondary-color: rgb(26, 106, 255);
+  --main-element-color: #222;
+  --accent-details: #ff684e;
 }
 
 [data-theme="dark"] {
