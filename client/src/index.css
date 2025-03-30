@@ -23,7 +23,9 @@ body{
   --shade-primary-color: rgb(217, 229, 253);
   --secondary-color: rgb(26, 106, 255);
   --main-element-color: #222;
+  --light-color-text: #626262;
   --accent-details: #ff684e;
+  --highlight-element: rgb(0, 195, 0);
 }
 
 [data-theme="dark"] {
