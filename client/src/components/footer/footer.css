@@ -30,7 +30,7 @@
 .footer-section h2 {
     font-size: 1.5rem;
     margin-bottom: 15px;
-    color: var(--accent-details);
+    color: #ff6f61;
     position: relative;
 }
 
@@ -41,7 +41,7 @@
     bottom: -5px;
     width: 50px;
     height: 2px;
-    background: var(--accent-details);
+    background: #ff6f61;
 }
 
 .footer-section p {
@@ -76,7 +76,7 @@
 }
 
 .footer-section.links .footer-links a:hover {
-    color: var(--secondary-color);
+    color: #ff6f61;
 }
 
 .footer-section.newsletter form {
@@ -96,7 +96,7 @@
 
 .footer-section.newsletter button {
     padding: 10px 15px;
-    background: var(--accent-details);
+    background: #ff6f61;
     border: none;
     border-radius: 5px;
     color: white;
@@ -105,7 +105,7 @@
 }
 
 .footer-section.newsletter button:hover {
-    background: var(--secondary-color);
+    background: #e65a50;
 }
 
 .footer-section.social .social-icons {
@@ -120,7 +120,7 @@
 }
 
 .footer-section.social .social-icons a:hover {
-    color: var(--secondary-color);
+    color: #ff6f61;
     transform: translateY(-5px);
 }
 
