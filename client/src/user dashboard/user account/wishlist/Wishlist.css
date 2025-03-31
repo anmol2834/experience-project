@@ -140,7 +140,7 @@
 .wireframe-title {
   height: 30px;
   width: 150px;
-  background: #444;
+  background: var(--wireframe-color);
   border-radius: 4px;
   position: relative;
   overflow: hidden;
@@ -153,14 +153,14 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(to right, transparent, var(--wireframe-shade), transparent);
   animation: shimmer 1.5s infinite;
 }
 
 .wireframe-count {
   height: 20px;
   width: 100px;
-  background: #444;
+  background: var(--wireframe-color);
   border-radius: 4px;
   position: relative;
   overflow: hidden;
@@ -173,7 +173,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(to right, transparent, var(--wireframe-shade), transparent);
   animation: shimmer 1.5s infinite;
 }
 
@@ -185,7 +185,7 @@
 }
 
 .wireframe-item {
-  background: #444;
+  background: var(--bg-color);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -193,7 +193,7 @@
 
 .wireframe-image {
   height: 200px;
-  background: #555;
+  background: var(--wireframe-color);
   position: relative;
   overflow: hidden;
 }
@@ -205,7 +205,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(to right, transparent, var(--wireframe-shade), transparent);
   animation: shimmer 1.5s infinite;
 }
 
@@ -219,7 +219,7 @@
 .wireframe-name {
   height: 20px;
   width: 80%;
-  background: #555;
+  background: var(--wireframe-shade);
   border-radius: 4px;
   position: relative;
   overflow: hidden;
@@ -232,14 +232,14 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(to right, transparent, var(--wireframe-shade), transparent);
   animation: shimmer 1.5s infinite;
 }
 
 .wireframe-price {
   height: 25px;
   width: 50%;
-  background: #555;
+  background: var(--wireframe-shade);
   border-radius: 4px;
   position: relative;
   overflow: hidden;
@@ -252,14 +252,14 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(to right, transparent, var(--wireframe-shade), transparent);
   animation: shimmer 1.5s infinite;
 }
 
 .wireframe-specs {
   height: 15px;
   width: 70%;
-  background: #555;
+  background: var(--wireframe-shade);
   border-radius: 4px;
   position: relative;
   overflow: hidden;
@@ -272,14 +272,14 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(to right, transparent, var(--wireframe-shade), transparent);
   animation: shimmer 1.5s infinite;
 }
 
 .wireframe-button {
   height: 40px;
   width: 100%;
-  background: #555;
+  background: var(--wireframe-shade);
   border-radius: 8px;
   position: relative;
   overflow: hidden;
@@ -292,7 +292,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(to right, transparent, var(--wireframe-shade), transparent);
   animation: shimmer 1.5s infinite;
 }
 
