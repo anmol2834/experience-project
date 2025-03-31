@@ -1,5 +1,4 @@
-
-import { useContext, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { context_of_product } from '../../context/ProductContext';
 import { useAuth } from '../../context/AuthContext';
@@ -11,14 +10,13 @@ const AddToCart = () => {
   const { token } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem('adventureCart');
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+  const { cartItems, removeFromCart, updateCartQuantity, fetchCart } = useContext(context_of_product);
 
-  useState(() => {
-    localStorage.setItem('adventureCart', JSON.stringify(cartItems));
-  }, [cartItems]);
+  useEffect(() => {
+    if (token) {
+      fetchCart();
+    }
+  }, [token, fetchCart]);
 
   const handleBack = () => {
     if (location.state?.from) {
@@ -28,22 +26,18 @@ const AddToCart = () => {
     }
   };
 
-  const removeFromCart = (productId) => {
-    setCartItems((prevItems) => prevItems.filter(item => item._id !== productId));
+  const handleRemoveFromCart = (productId) => {
+    removeFromCart(productId);
   };
 
-  const updateQuantity = (productId, newQuantity) => {
+  const handleUpdateQuantity = (productId, newQuantity) => {
     if (newQuantity < 1) return;
-    
-    setCartItems((prevItems) =>
-      prevItems.map(item =>
-        item._id === productId ? { ...item, quantity: newQuantity } : item
-      )
-    );
+    updateCartQuantity(productId, newQuantity);
   };
 
   const totalPrice = cartItems.reduce(
-    (sum, item) => sum + (item.price * item.quantity), 0
+    (sum, item) => sum + (item.productId.price * item.quantity),
+    0
   );
 
   const handleBookNow = () => {
@@ -59,18 +53,17 @@ const AddToCart = () => {
     <div className="add-to-cart-container">
       <header className="cart-header">
         <button onClick={handleBack} className="back-button">
-          <FaArrowLeft /> Back
+          <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#e3e3e3"><path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" /></svg>
         </button>
-        <h1>Your Adventure Cart</h1>
+        <h1>Your Experience Cart</h1>
         <div className="cart-count">{cartItems.length} {cartItems.length === 1 ? 'item' : 'items'}</div>
       </header>
 
-      {/* Cart Items Section */}
       <main className="cart-main">
         {cartItems.length === 0 ? (
           <div className="empty-cart">
             <img src={emptyCart} alt="Empty cart" className="empty-cart-image" />
-            <h2>Your adventure cart is empty</h2>
+            <h2>Your "Experience Cart" is empty</h2>
             <p>Add some exciting experiences to get started!</p>
             <button onClick={() => navigate('/home')} className="explore-button">
               Explore Experiences
@@ -80,38 +73,38 @@ const AddToCart = () => {
           <div className="cart-items-container">
             <div className="cart-items-list">
               {cartItems.map((item) => (
-                <div key={item._id} className="cart-item">
-                  <div 
-                    className="item-image" 
-                    style={{ backgroundImage: `url(${item.image})` }}
-                    onClick={() => navigate(`/experience/${item._id}`)}
+                <div key={item.productId._id} className="cart-item">
+                  <div
+                    className="item-image"
+                    style={{ backgroundImage: `url(${item.productId.img1})` }}
+                    onClick={() => navigate(`/experience/${item.productId._id}`)}
                   ></div>
                   <div className="item-details">
-                    <h3 onClick={() => navigate(`/experience/${item._id}`)}>{item.title}</h3>
+                    <h3 onClick={() => navigate(`/experience/${item.productId._id}`)}>{item.productId.title}</h3>
                     <div className="location-rating">
-                      <span className="location">{item.location}</span>
+                      <span className="location">{item.productId.state}, {item.productId.city}</span>
                       <div className="rating">
                         <FaStar className="star" />
-                        <span>{item.rating || '4.5'}</span>
+                        <span>{item.productId.rating || '4.5'}</span>
                       </div>
                     </div>
                     <div className="quantity-control">
-                      <button 
-                        onClick={() => updateQuantity(item._id, item.quantity - 1)}
+                      <button
+                        onClick={() => handleUpdateQuantity(item.productId._id, item.quantity - 1)}
                         disabled={item.quantity <= 1}
                       >
                         <FaMinus />
                       </button>
                       <span>{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item._id, item.quantity + 1)}>
+                      <button onClick={() => handleUpdateQuantity(item.productId._id, item.quantity + 1)}>
                         <FaPlus />
                       </button>
                     </div>
                   </div>
                   <div className="item-price-actions">
-                    <span className="price">${(item.price * item.quantity).toFixed(2)}</span>
-                    <button 
-                      onClick={() => removeFromCart(item._id)}
+                    <span className="price">${(item.productId.price * item.quantity).toFixed(2)}</span>
+                    <button
+                      onClick={() => handleRemoveFromCart(item.productId._id)}
                       className="remove-button"
                     >
                       <FaTrash />
@@ -121,7 +114,6 @@ const AddToCart = () => {
               ))}
             </div>
 
-            {/* Order Summary */}
             <div className="order-summary">
               <h3>Order Summary</h3>
               <div className="summary-row">
@@ -141,7 +133,6 @@ const AddToCart = () => {
         )}
       </main>
 
-      {/* Fixed bottom bar with checkout */}
       {cartItems.length > 0 && (
         <div className="checkout-bar">
           <div className="total-price">

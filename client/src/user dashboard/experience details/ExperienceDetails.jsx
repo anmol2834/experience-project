@@ -11,7 +11,7 @@ function ExperienceDetails() {
   const navigate = useNavigate();
   const location = useLocation();
   const { token } = useAuth();
-  const { productInfo, wishlistItems, addToWishlist, removeFromWishlist } = useContext(context_of_product);
+  const { productInfo, wishlistItems, addToWishlist, removeFromWishlist, addToCart, cartItems } = useContext(context_of_product);
   const productFromState = location.state?.product;
   const from = location.state?.from || '/';
   const scrollPosition = location.state?.scrollPosition || 0;
@@ -45,7 +45,6 @@ function ExperienceDetails() {
 
   const showMoreThumb = images.length > 3;
 
-  // Sample reviews data (since actual data isn't provided)
   const sampleReviews = [
     {
       name: 'Towhidur Rahman',
@@ -141,7 +140,7 @@ function ExperienceDetails() {
     if (!productFromState && !product) {
       navigate('/catelog');
     }
-    window.scrollTo(0, 0); // Ensure page starts at the top
+    window.scrollTo(0, 0);
   }, [productFromState, navigate]);
 
   useEffect(() => {
@@ -155,6 +154,14 @@ function ExperienceDetails() {
     });
   };
 
+  const handleAddToCart = () => {
+    if (!token) {
+      navigate('/signin', { state: { from: location.pathname } });
+      return;
+    }
+    addToCart(product._id);
+  };
+
   if (!product) return null;
 
   return (
@@ -166,7 +173,7 @@ function ExperienceDetails() {
           </svg>
         </div>
 
-        <div className="cart-icon" data-content={0} onClick={() => navigate('/add_to_cart')}>
+        <div className="cart-icon" data-content={cartItems.length} onClick={() => navigate('/add_to_cart')}>
           <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
             <path d="M252.31-100Q222-100 201-121q-21-21-21-51.31v-455.38Q180-658 201-679q21-21 51.31-21H330v-10q0-62.15 43.92-106.08Q417.85-860 480-860t106.08 43.92Q630-772.15 630-710v10h77.69Q738-700 759-679q21 21 21 51.31v455.38Q780-142 759-121q-21 21-51.31 21H252.31Zm0-60h455.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46v-455.38q0-4.62-3.85-8.46-3.84-3.85-8.46-3.85H630v90q0 12.77-8.62 21.38Q612.77-520 600-520t-21.38-8.62Q570-537.23 570-550v-90H390v90q0 12.77-8.62 21.38Q372.77-520 360-520t-21.38-8.62Q330-537.23 330-550v-90h-77.69q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v455.38q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85ZM390-700h180v-10q0-37.61-26.19-63.81Q517.62-800 480-800q-37.62 0-63.81 26.19Q390-747.61 390-710v10ZM240-160v-480 480Z" />
           </svg>
@@ -239,11 +246,8 @@ function ExperienceDetails() {
             <div className="title-and-map">
               <h1 className="title">{product.title}</h1>
               <span className="locate-and-share-icon">
-
                 <FontAwesomeIcon className='shareAlt' icon={faShareAlt} />
-
                 <FontAwesomeIcon className='location-dot' icon={faLocationDot} />
-
               </span>
             </div>
             <div className="location">
@@ -272,7 +276,7 @@ function ExperienceDetails() {
 
           <div className="book-and-cart">
             <button className="book-now">Book Now</button>
-            <button className="addCart">
+            <button className="addCart" onClick={handleAddToCart}>
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
                 <path d="M252.31-100Q222-100 201-121q-21-21-21-51.31v-455.38Q180-658 201-679q21-21 51.31-21H330v-10q0-62.15 43.92-106.08Q417.85-860 480-860t106.08 43.92Q630-772.15 630-710v10h77.69Q738-700 759-679q21 21 21 51.31v455.38Q780-142 759-121q-21 21-51.31 21H252.31Zm0-60h455.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46v-455.38q0-4.62-3.85-8.46-3.84-3.85-8.46-3.85H630v90q0 12.77-8.62 21.38Q612.77-520 600-520t-21.38-8.62Q570-537.23 570-550v-90H390v90q0 12.77-8.62 21.38Q372.77-520 360-520t-21.38-8.62Q330-537.23 330-550v-90h-77.69q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v455.38q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85ZM390-700h180v-10q0-37.61-26.19-63.81Q517.62-800 480-800q-37.62 0-63.81 26.19Q390-747.61 390-710v10ZM240-160v-480 480Z" />
               </svg>

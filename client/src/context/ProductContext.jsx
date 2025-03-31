@@ -9,6 +9,7 @@ function ProductContext({ children }) {
   const [productInfo, setProductInfo] = useState([]);
   const [wishlistItems, setWishlistItems] = useState([]);
   const [userUpdated, setUserUpdated] = useState(0);
+  const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,8 +32,11 @@ function ProductContext({ children }) {
           });
           const wishlistData = await wishlistRes.json();
           setWishlistItems(wishlistData);
+
+          await fetchCart(); // Fetch cart items on token change
         } else {
           setWishlistItems([]);
+          setCartItems([]);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -42,6 +46,93 @@ function ProductContext({ children }) {
     };
     fetchData();
   }, [token]);
+
+  const fetchCart = async () => {
+    if (!token) return;
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/cart`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setCartItems(data.items || []);
+      } else {
+        console.error('Failed to fetch cart');
+      }
+    } catch (error) {
+      console.error('Error fetching cart:', error);
+    }
+  };
+
+  const addToCart = async (productId, quantity = 1) => {
+    if (!token) return;
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/cart/add`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId, quantity }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setCartItems(data.items);
+      } else {
+        console.error('Failed to add to cart');
+      }
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+    }
+  };
+
+  const removeFromCart = async (productId) => {
+    if (!token) return;
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/cart/remove`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setCartItems(data.items);
+      } else {
+        console.error('Failed to remove from cart');
+      }
+    } catch (error) {
+      console.error('Error removing from cart:', error);
+    }
+  };
+
+  const updateCartQuantity = async (productId, quantity) => {
+    if (!token) return;
+    try {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/cart/update`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ productId, quantity }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setCartItems(data.items);
+      } else {
+        console.error('Failed to update cart quantity');
+      }
+    } catch (error) {
+      console.error('Error updating cart quantity:', error);
+    }
+  };
 
   const addToWishlist = async (productId) => {
     if (!token) return;
@@ -96,7 +187,20 @@ function ProductContext({ children }) {
 
   return (
     <context_of_product.Provider
-      value={{ productInfo, productLoading, wishlistItems, addToWishlist, removeFromWishlist, userUpdated, incrementUserUpdated }}
+      value={{
+        productInfo,
+        productLoading,
+        wishlistItems,
+        addToWishlist,
+        removeFromWishlist,
+        userUpdated,
+        incrementUserUpdated,
+        cartItems,
+        addToCart,
+        removeFromCart,
+        updateCartQuantity,
+        fetchCart,
+      }}
     >
       {children}
     </context_of_product.Provider>
