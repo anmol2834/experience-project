@@ -5,7 +5,7 @@ import { useAuth } from '../../../context/AuthContext';
 import { context_of_product } from '../../../context/ProductContext';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot, faShare, faShareAlt, faShareNodes } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faShare, faShareAlt, faShareNodes, faStar } from '@fortawesome/free-solid-svg-icons';
 
 function Catelogcard({ title, desc, state, city, price, img, ratings, productId, isLiked }) {
   const { token } = useAuth();
@@ -13,6 +13,8 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
   const [like, setLike] = useState(isLiked);
   const [wishlistLoading, setWishlistLoading] = useState(false);
   const navigate = useNavigate();
+
+  let newDesc = desc.length > 80 ? desc.slice(0, 80) + '...' : desc;
 
   useEffect(() => {
     setLike(isLiked);
@@ -79,9 +81,7 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
 
   return (
     <div className="catelog-card" data-product-id={productId}>
-      <div className="catelog-img" style={{ backgroundImage: `url(${img || ''})` }}></div>
-      <div className="catelog-details">
-
+      <div className="catelog-img" style={{ backgroundImage: `url(${img || ''})` }}>
         <div className="heart-contain" onClick={handleLike}>
           {wishlistLoading ? (
             <div className="spinner"></div>
@@ -95,22 +95,30 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
             </svg>
           )}
         </div>
+      </div>
+      <div className="catelog-details">
 
         <div className="heading">
-          <h2>{title}</h2>
+          <div>
+            <h2>{title}</h2>
+            <div className="star-ratings">
+              <span>{rating}</span>
+              <FontAwesomeIcon icon={faStar} className="star-icon" />
+            </div>
+          </div>
           <div className='place_title'>
             <FontAwesomeIcon icon={faLocationDot} className="location-icon" />
             <p>{state},{city}</p>
           </div>
         </div>
 
+        <div className="description">
+          <p>{newDesc}</p>
+        </div>
+
         <div className="bottom-section">
           <section>
             <p className="selling-price">${price}/Person</p>
-            <div className="star-ratings">
-              <span>{rating}</span>
-              <div>{handleStars(rating)}</div>
-            </div>
           </section>
 
           <section>

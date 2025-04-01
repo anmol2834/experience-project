@@ -54,17 +54,25 @@
 
 .heading {
     width: 100%;
-    height: 30px;
+    height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     container-type: inline-size;
+}
+
+.heading div:nth-child(1){
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .heading h2 {
     text-transform: capitalize;
     font-weight: 400;
-    margin-bottom: 10px;
     font-size: clamp(1.2rem, 4cqi, 2.5rem);
 }
 
@@ -74,9 +82,8 @@
     flex-direction: row;
     align-items: center;
     gap: 10px;
-    border: 1px solid #d8d8d8;
-    padding: 5px;
-    border-radius: 5px;
+    font-size: 0.8rem;
+    color: var(--light-color-text);
 }
 
 .bottom-section {
@@ -123,10 +130,10 @@
 }
 
 .heart-contain svg {
-    fill: var(--accent-details);
+    fill: white;
 }
 
-.share-icon{
+.share-icon {
     position: absolute;
     top: 0px;
     right: 60px;
@@ -143,34 +150,26 @@
 }
 
 .star-ratings {
-    width: 100%;
-    height: auto;
-    bottom: 5px;
     display: flex;
+    flex-direction: row;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    gap: 5px;
+    color: var(--highlight-element);
 }
 
 .star-ratings span {
-    font-size: 1.5rem;
-    color: var(--highlight-element);
+    font-size: 1rem;
+    margin-top: 2px;
 }
 
-.star-ratings .star {
-    font-size: 1.5rem;
-    color: #d8d8d8;
-}
-
-.star-ratings .filled {
-    color: var(--highlight-element);
-}
-
-.star-ratings .half-filled {
-    color: var(--highlight-element);
-    background: linear-gradient(to right, var(--highlight-element) 50%, #d8d8d8 50%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.description {
+    max-height: '100px';
+    overflow: 'hidden';
+    text-overflow: ellipsis;
+    font-size: 1rem;
+    color: var(--light-color-text);
+    font-weight: 400;
 }
 
 
@@ -185,20 +184,27 @@
         cursor: none;
     }
 
-    .share-icon{
+    .share-icon {
         cursor: none;
     }
 
-    .star-ratings span {
-        font-size: 1.5rem;
+    .star-ratings {
+        font-size: 0.8rem;
+        top: 0px;
+        right: 0px;
     }
 
-    .star-ratings .star {
-        font-size: 1.2rem;
+    .bottom-section section:nth-child(2) {
+        width: 25%;
     }
 
-    .catelog-details .left {
-        font-size: small;
+    .bottom-section button {
+        height: 30px;
+        font-size: 0.6rem;
+    }
+
+    .description {
+        font-size: 0.8rem;
     }
 
 }
@@ -214,28 +220,31 @@
         cursor: none;
     }
 
-    .share-icon{
+    .share-icon {
         cursor: none;
     }
 
-    .catelog-details p {
-        font-size: small;
-    }
-
     .star-ratings {
-        gap: 10px;
-    }
-
-    .star-ratings span {
-        font-size: 1.5rem;
-    }
-
-    .star-ratings .star {
-        font-size: 1.3rem;
+        font-size: 0.8rem;
+        top: 0px;
+        right: 0px;
     }
 
     .add-to-cart button {
         cursor: none;
+    }
+
+    .bottom-section section:nth-child(2) {
+        width: 25%;
+    }
+
+    .bottom-section button {
+        height: 30px;
+        font-size: 0.6rem;
+    }
+
+    .description {
+        font-size: 0.8rem;
     }
 
 }
@@ -251,12 +260,25 @@
         cursor: none;
     }
 
-    .share-icon{
+    .share-icon {
         cursor: none;
     }
 
     .add-to-cart button {
         cursor: none;
+    }
+
+    .bottom-section section:nth-child(2) {
+        width: 25%;
+    }
+
+    .bottom-section button {
+        height: 30px;
+        font-size: 0.6rem;
+    }
+
+    .description {
+        font-size: 0.8rem;
     }
 
 }
@@ -266,6 +288,19 @@
 
     .catelog-card {
         height: 450px;
+    }
+
+    .bottom-section section:nth-child(2) {
+        width: 30%;
+    }
+
+    .bottom-section button {
+        height: 30px;
+        font-size: 0.6rem;
+    }
+
+    .description {
+        font-size: 0.8rem;
     }
 
 }
