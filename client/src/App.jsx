@@ -17,6 +17,7 @@ import ProductSlideshow from './user dashboard/experience details/product slides
 import BookingsPage from './user dashboard/user account/bookings page/BookingsPage';
 import Rewards from './user dashboard/user account/rewards page/Rewards';
 import AddToCart from './user dashboard/add to cart page/AddToCart';
+import BookPage from './user dashboard/book page/BookPage';
 
 function App() {
 
@@ -59,6 +60,7 @@ function App() {
                 <Route path='rewards' element={<Rewards/>} />
               </Route>
               <Route path='/add_to_cart' element={ <ProtectedRoute><AddToCart/></ProtectedRoute> } />
+              <Route path='/book_page' element={ <ProtectedRoute><BookPage/></ProtectedRoute> } />
               <Route path='/product-slideshow' element={<ProductSlideshow />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />

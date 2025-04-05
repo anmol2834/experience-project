@@ -31,7 +31,10 @@ function ProfileEdit() {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      if (!token) return;
+      if (!token) {
+        toast.error('No token found, please sign in again');
+        return;
+      }
 
       try {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
@@ -54,9 +57,13 @@ function ProfileEdit() {
           };
           setUserData(fetchedData);
           setOriginalData(fetchedData); // Store original data for comparison
+        } else {
+          const errorData = await response.json();
+          toast.error(errorData.message || 'Failed to fetch user data');
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
+        toast.error('An error occurred while fetching user data');
       } finally {
         setLoading(false);
       }
@@ -143,7 +150,8 @@ function ProfileEdit() {
         setOldPassword('');
         setNewPassword('');
       } else {
-        toast.error('Old password is incorrect');
+        const errorData = await response.json();
+        toast.error(errorData.message || 'Old password is incorrect');
       }
     } catch (error) {
       console.error('Error changing password:', error);
@@ -155,7 +163,10 @@ function ProfileEdit() {
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/send-otp`, {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` }
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
       });
       if (response.ok) {
         setOtpSent(true);
@@ -185,7 +196,8 @@ function ProfileEdit() {
         setNewPassContain(true);
         toast.success('OTP verified successfully');
       } else {
-        toast.error('Invalid OTP');
+        const data = await response.json();
+        toast.error(data.message || 'Invalid OTP');
       }
     } catch (error) {
       console.error('Error verifying OTP:', error);
@@ -198,7 +210,10 @@ function ProfileEdit() {
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/resend-otp`, {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` }
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
       });
       if (response.ok) {
         toast.success('OTP resent successfully');
@@ -232,7 +247,8 @@ function ProfileEdit() {
         setOtp('');
         setNewPassword('');
       } else {
-        toast.error('Failed to update password');
+        const data = await response.json();
+        toast.error(data.message || 'Failed to update password');
       }
     } catch (error) {
       console.error('Error changing password with OTP:', error);
