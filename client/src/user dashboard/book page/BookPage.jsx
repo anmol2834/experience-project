@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -13,12 +13,16 @@ import './BookPage.css';
 const BookPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const experience = location.state?.experience || {
-    id: 1,
-    title: "Premium Skydiving Experience",
-    price: 299,
-    image: "https://www.pigeonforgetncabins.com/wp-content/uploads/2022/03/skydiving-in-the-great-smoky-mountains-pigeon-forge.jpg"
-  };
+  const product = location.state?.product;
+
+  // Redirect if no product is passed in state
+  useEffect(() => {
+    if (!product) {
+      navigate('/home');
+    }
+  }, [product, navigate]);
+
+  if (!product) return null;
 
   // State for booking form
   const [participants, setParticipants] = useState(1);
@@ -92,24 +96,47 @@ const BookPage = () => {
   };
 
   const calculateTotal = () => {
-    const subtotal = experience.price * participants;
+    const subtotal = product.price * participants;
     const discountAmount = subtotal * discount / 100;
     const gst = (subtotal - discountAmount) * 0.18;
     return (subtotal - discountAmount + gst).toFixed(2);
   };
 
-  const handleCheckout = () => {
-    navigate('/confirmation', {
-      state: {
-        bookingDetails: {
-          experience,
-          date: selectedDate,
-          participants,
-          total: calculateTotal(),
-          discount
-        }
+  const handleCheckout = async () => {
+    const bookingDetails = {
+      productId: product._id,
+      title: product.title,
+      state: product.state,
+      city: product.city,
+      companyName: product.company_Name,
+      providerName: product.provider_Name,
+      selectedDate,
+      participants,
+      totalPrice: calculateTotal(),
+      gst: ((product.price * participants - (product.price * participants * discount / 100)) * 0.18).toFixed(2),
+      discount,
+      coupon,
+      timestamp: new Date(),
+    };
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/checkout`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Assuming token is stored in localStorage
+        },
+        body: JSON.stringify(bookingDetails),
+      });
+
+      if (response.ok) {
+        navigate('/confirmation', { state: { bookingDetails } });
+      } else {
+        console.error('Failed to save booking details');
       }
-    });
+    } catch (error) {
+      console.error('Error during checkout:', error);
+    }
   };
 
   const days = generateCalendarDays(currentMonth);
@@ -130,14 +157,14 @@ const BookPage = () => {
         <div className="experience-gallery">
           <div
             className="main-image"
-            style={{ backgroundImage: `url(${experience.image})` }}
+            style={{ backgroundImage: `url(${product.img1})` }} // Use product's first image
           />
         </div>
 
         {/* Experience Details */}
         <div className="experience-details">
-          <h2>{experience.title}</h2>
-          <div className="price">${experience.price} <span>per person</span></div>
+          <h2>{product.title}</h2>
+          <div className="price">${product.price} <span>per person</span></div>
         </div>
 
         {/* Booking Form */}
@@ -168,11 +195,11 @@ const BookPage = () => {
               <FontAwesomeIcon icon={faCalendarAlt} /> Select Date
             </label>
             <div className="calendar-header">
-              <button onClick={() => handleMonthChange(-1)}>&lt;</button>
+              <button onClick={() => handleMonthChange(-1)}>{'<'}</button>
               <h4>
                 {currentMonth.toLocaleString('default', { month: 'long' })} {currentMonth.getFullYear()}
               </h4>
-              <button onClick={() => handleMonthChange(1)}>&gt;</button>
+              <button onClick={() => handleMonthChange(1)}>{'>'}</button>
             </div>
             <div className="calendar-grid">
               {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
@@ -225,17 +252,17 @@ const BookPage = () => {
           <div className="price-summary">
             <div className="price-line">
               <span>Subtotal ({participants} {participants > 1 ? 'people' : 'person'})</span>
-              <span>${(experience.price * participants).toFixed(2)}</span>
+              <span>${(product.price * participants).toFixed(2)}</span>
             </div>
             {discount > 0 && (
               <div className="price-line discount">
                 <span>Discount ({discount}%)</span>
-                <span>-${(experience.price * participants * discount / 100).toFixed(2)}</span>
+                <span>-${(product.price * participants * discount / 100).toFixed(2)}</span>
               </div>
             )}
             <div className="price-line">
               <span>GST (18%)</span>
-              <span>${((experience.price * participants - (experience.price * participants * discount / 100)) * 0.18).toFixed(2)}</span>
+              <span>${((product.price * participants - (product.price * participants * discount / 100)) * 0.18).toFixed(2)}</span>
             </div>
             <div className="price-line total">
               <span>Total Amount</span>
