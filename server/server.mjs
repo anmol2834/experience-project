@@ -6,6 +6,7 @@ import User from './models/users.js';
 import Wishlist from './models/wishlist.js';
 import Product from './models/products.js';
 import Cart from './models/cart.js';
+import Checkout from './models/checkout.js';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { generateToken, verifyToken } from './middlewares/middleware.js';
@@ -598,6 +599,48 @@ app.post('/cart/update', verifyToken, async (req, res) => {
     await cart.save();
     const populatedCart = await Cart.findById(cart._id).populate('items.productId');
     res.status(200).json(populatedCart);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+// Checkout route (requires token)
+app.post('/checkout', verifyToken, async (req, res) => {
+  const {
+    productId,
+    title,
+    state,
+    city,
+    companyName,
+    providerName,
+    selectedDate,
+    participants,
+    totalPrice,
+    gst,
+    discount,
+    coupon,
+  } = req.body;
+
+  try {
+    const checkout = new Checkout({
+      userId: req.user.id,
+      productId,
+      title,
+      state,
+      city,
+      companyName,
+      providerName,
+      selectedDate,
+      participants,
+      totalPrice,
+      gst,
+      discount,
+      coupon,
+    });
+    await checkout.save();
+    res.status(201).json({ message: 'Booking successful' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
