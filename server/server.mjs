@@ -89,6 +89,7 @@ app.post('/register', async (req, res) => {
   }
 });
 
+// Login route
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -203,7 +204,7 @@ app.get('/validate-token', verifyToken, async (req, res) => {
   }
 });
 
-// Get user details
+// Get user details (requires token)
 app.get('/user', verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('firstname lastname email phone dob gender');
@@ -217,7 +218,7 @@ app.get('/user', verifyToken, async (req, res) => {
   }
 });
 
-// Update user profile
+// Update user profile (requires token)
 app.put('/user', verifyToken, async (req, res) => {
   try {
     const { firstname, lastname, email, phone, dob, gender } = req.body;
@@ -252,7 +253,7 @@ app.put('/user', verifyToken, async (req, res) => {
   }
 });
 
-// Change password using old password
+// Change password using old password (requires token)
 app.post('/change-password-old', verifyToken, async (req, res) => {
   const { oldPassword, newPassword } = req.body;
   try {
@@ -271,7 +272,7 @@ app.post('/change-password-old', verifyToken, async (req, res) => {
   }
 });
 
-// Send OTP for password change
+// Send OTP for password change (requires token)
 app.post('/send-otp', verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
@@ -309,7 +310,7 @@ app.post('/send-otp', verifyToken, async (req, res) => {
   }
 });
 
-// Resend OTP
+// Resend OTP (requires token)
 app.post('/resend-otp', verifyToken, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
@@ -351,7 +352,7 @@ app.post('/resend-otp', verifyToken, async (req, res) => {
   }
 });
 
-// Verify OTP
+// Verify OTP (requires token)
 app.post('/verify-otp', verifyToken, async (req, res) => {
   const { otp } = req.body;
   try {
@@ -369,7 +370,7 @@ app.post('/verify-otp', verifyToken, async (req, res) => {
   }
 });
 
-// Change password using OTP
+// Change password using OTP (requires token)
 app.post('/change-password-otp', verifyToken, async (req, res) => {
   const { newPassword } = req.body;
   try {
@@ -380,6 +381,81 @@ app.post('/change-password-otp', verifyToken, async (req, res) => {
     user.otp = undefined;
     user.otpExpiration = undefined;
     user.lastOtpSent = undefined;
+    await user.save();
+    res.status(200).json({ message: 'Password updated successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Check email existence (no token required)
+app.post('/check-email', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User email does not exist' });
+    }
+    res.status(200).json({ message: 'Email exists' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Send OTP for password reset (no token required)
+app.post('/send-reset-otp', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const otp = generateOTP();
+    const expiration = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
+
+    user.otp = otp;
+    user.otpExpiration = expiration;
+    await user.save();
+
+    const mailOptions = {
+      from: 'anmolsinha4321@gmail.com',
+      to: user.email,
+      subject: 'Password Reset OTP',
+      text: `Your OTP for password reset is: ${otp}`,
+    };
+
+    transporter.sendMail(mailOptions, (error) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).send('Error sending OTP');
+      }
+      res.status(200).json({ message: 'OTP sent successfully' });
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Reset password with OTP (no token required)
+app.post('/reset-password', async (req, res) => {
+  const { email, otp, newPassword } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    if (!isValidOTP(user, otp)) {
+      return res.status(400).json({ message: 'Invalid or expired OTP' });
+    }
+
+    user.password = newPassword; // Pre-save hook will hash it
+    user.otp = undefined;
+    user.otpExpiration = undefined;
     await user.save();
     res.status(200).json({ message: 'Password updated successfully' });
   } catch (err) {
@@ -399,6 +475,7 @@ app.get('/products', async (req, res) => {
   }
 });
 
+// Wishlist routes (require token)
 app.post('/wishlist/add', verifyToken, async (req, res) => {
   const { productId } = req.body;
   try {
@@ -446,8 +523,7 @@ app.get('/wishlist', verifyToken, async (req, res) => {
   }
 });
 
-
-// Cart Routes
+// Cart routes (require token)
 app.get('/cart', verifyToken, async (req, res) => {
   try {
     const userId = req.user.id;

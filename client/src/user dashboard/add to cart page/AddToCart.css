@@ -461,7 +461,7 @@
       "price-actions";
   }
   
-  .item-image {
+  .cart-item .item-image {
     grid-area: image;
     width: var(--image-width);
     height: var(--image-height);
