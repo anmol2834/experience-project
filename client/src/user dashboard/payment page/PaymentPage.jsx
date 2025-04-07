@@ -17,25 +17,30 @@ import {
     faUser,
     faCalendar,
     faTicket,
+    faUniversity,
+    faCheckCircle,
 } from '@fortawesome/free-solid-svg-icons';
-import { faPaypal, faCcVisa, faCcMastercard } from '@fortawesome/free-brands-svg-icons';
+import { faCcVisa, faCcMastercard } from '@fortawesome/free-brands-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './PaymentPage.css';
-import { useAuth } from '../../context/AuthContext'; // Updated to use AuthContext
+import { useAuth } from '../../context/AuthContext';
+import sbi from './sbi.png';
+import hdfc from './hdfc.png';
+import icici from './icici.png';
+import axis from './axis.png';
 
 const PaymentMethods = {
     CARD: 'card',
-    PAYPAL: 'paypal',
+    NETBANKING: 'netbanking',
     UPI: 'upi',
 };
 
 const PaymentPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { token, logout } = useAuth(); // Use useAuth to get token and logout
+    const { token, logout } = useAuth();
 
-    // Fetch user details from API
     const [userDetails, setUserDetails] = useState({
         firstname: '',
         lastname: '',
@@ -46,12 +51,12 @@ const PaymentPage = () => {
         state: '',
         zip: '',
     });
+
     useEffect(() => {
         const fetchUserDetails = async () => {
             if (!token) {
                 console.warn('No token available, redirecting to signin');
                 toast.error('Please log in to view your details');
-                // Redirect to signin page after a short delay to show the toast
                 setTimeout(() => navigate('/signin'), 3000);
                 return;
             }
@@ -66,8 +71,7 @@ const PaymentPage = () => {
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    console.log('Fetched user data:', data); // Debug log to verify data
-                    // Safely set user details, handling potential missing fields
+                    console.log('Fetched user data:', data);
                     setUserDetails({
                         firstname: data.firstname || '',
                         lastname: data.lastname || '',
@@ -83,7 +87,7 @@ const PaymentPage = () => {
                     toast.error(`Failed to fetch user details: ${response.status} ${response.statusText}`);
                     if (response.status === 401) {
                         toast.error('Unauthorized: Please log in again');
-                        logout(); // Invalidate token and redirect via AuthContext
+                        logout();
                     }
                 }
             } catch (error) {
@@ -94,7 +98,6 @@ const PaymentPage = () => {
         fetchUserDetails();
     }, [token, navigate, logout]);
 
-    // State initialization
     const [currentStep, setCurrentStep] = useState('details');
     const [paymentMethod, setPaymentMethod] = useState(PaymentMethods.CARD);
     const [cardDetails, setCardDetails] = useState({
@@ -111,8 +114,40 @@ const PaymentPage = () => {
         isEditing: false,
         detailsConfirmed: false,
     });
+    const [selectedBank, setSelectedBank] = useState(null);
 
-    // Update editableUserDetails when userDetails changes
+    const popularBanks = [
+        { name: 'State Bank of India (SBI)', logo: sbi },
+        { name: 'HDFC Bank', logo: hdfc },
+        { name: 'ICICI Bank', logo: icici },
+        { name: 'Axis Bank', logo: axis },
+    ];
+
+    const otherBanks = [
+        'Allahabad Bank',
+        'Andhra Bank',
+        'Bank of Baroda',
+        'Bank of India',
+        'Bank of Maharashtra',
+        'Canara Bank',
+        'Central Bank of India',
+        'Corporation Bank',
+        'Dena Bank',
+        'IDBI Bank',
+        'Indian Bank',
+        'Indian Overseas Bank',
+        'Oriental Bank of Commerce',
+        'Punjab & Sind Bank',
+        'Punjab National Bank',
+        'Syndicate Bank',
+        'UCO Bank',
+        'Union Bank of India',
+        'United Bank of India',
+        'Vijaya Bank',
+        'Yes Bank',
+        'Kotak Mahindra Bank',
+    ];
+
     useEffect(() => {
         setEditableUserDetails((prev) => ({
             ...prev,
@@ -122,14 +157,12 @@ const PaymentPage = () => {
         }));
     }, [userDetails]);
 
-    // Calculate totals (using data from BookPage if passed)
     const product = location.state?.product || { price: 99, title: 'Adventure Experience', description: 'Outdoor activity package' };
     const participants = location.state?.participants || 2;
     const selectedDate = location.state?.selectedDate || new Date();
     const calculateSubtotal = () => (product.price || 0) * (participants || 1);
-    const calculateTotal = () => calculateSubtotal(); // Add taxes/fees here if needed
+    const calculateTotal = () => calculateSubtotal();
 
-    // Event handlers
     const handlePaymentMethodSelect = (method) => setPaymentMethod(method);
 
     const handleCardInputChange = (e) => {
@@ -188,7 +221,7 @@ const PaymentPage = () => {
             });
             if (response.ok) {
                 const updatedUser = await response.json();
-                console.log('Updated user data:', updatedUser); // Debug log to verify update
+                console.log('Updated user data:', updatedUser);
                 setUserDetails({
                     ...userDetails,
                     firstname: updatedUser.firstname || '',
@@ -205,7 +238,7 @@ const PaymentPage = () => {
                 toast.error(`Failed to update user details: ${response.status} ${response.statusText}`);
                 if (response.status === 401) {
                     toast.error('Unauthorized: Please log in again');
-                    logout(); // Invalidate token and redirect via AuthContext
+                    logout();
                 }
             }
         } catch (error) {
@@ -303,7 +336,7 @@ const PaymentPage = () => {
                                     <div className={`progress-step-number ${currentStep === 'confirmation' ? '' : 'inactive'}`}>
                                         3
                                     </div>
-                                    <span className="progress-step-text">Confirmation</span>
+                                    <span className="progress-step-text">Confirm</span>
                                 </div>
                             </div>
                         </div>
@@ -364,7 +397,7 @@ const PaymentPage = () => {
                                         <div className="details-grid">
                                             <div className="form-group">
                                                 <label className="form-label" htmlFor="email">
-                                                    Email 
+                                                    Email
                                                 </label>
                                                 <div className="bg-gray-50">
                                                     {editableUserDetails.email}
@@ -373,7 +406,7 @@ const PaymentPage = () => {
 
                                             <div className="form-group">
                                                 <label className="form-label" htmlFor="phone">
-                                                    Phone 
+                                                    Phone
                                                 </label>
                                                 <div className="bg-gray-50">
                                                     {editableUserDetails.phone}
@@ -488,11 +521,11 @@ const PaymentPage = () => {
                                                 <span className="font-medium">Credit/Debit Card</span>
                                             </div>
                                             <div
-                                                className={`payment-method-card ${paymentMethod === 'paypal' ? 'selected' : ''}`}
-                                                onClick={() => handlePaymentMethodSelect('paypal')}
+                                                className={`payment-method-card ${paymentMethod === 'netbanking' ? 'selected' : ''}`}
+                                                onClick={() => handlePaymentMethodSelect('netbanking')}
                                             >
-                                                <FontAwesomeIcon icon={faPaypal} className="text-2xl text-blue-600 mb-2" />
-                                                <span className="font-medium">PayPal</span>
+                                                <FontAwesomeIcon icon={faUniversity} className="text-2xl text-green-600 mb-2" />
+                                                <span className="font-medium">NetBanking</span>
                                             </div>
                                             <div
                                                 className={`payment-method-card ${paymentMethod === 'upi' ? 'selected' : ''}`}
@@ -631,20 +664,67 @@ const PaymentPage = () => {
                                             </motion.div>
                                         )}
 
-                                        {paymentMethod === 'paypal' && (
+                                        {paymentMethod === 'netbanking' && (
                                             <motion.div
-                                                key="paypal-form"
+                                                key="netbanking-form"
                                                 initial={{ opacity: 0, y: 20 }}
                                                 animate={{ opacity: 1, y: 0 }}
                                                 exit={{ opacity: 0, y: -20 }}
-                                                className="payment-form"
+                                                className="payment-form netbanking-section"
                                             >
-                                                <h2 className="form-heading">PayPal</h2>
-                                                <p className="text-gray-600 mb-6">Pay with your PayPal account.</p>
+                                                <h2 className="form-heading">NetBanking</h2>
+                                                <p className="text-gray-600 mb-4">Choose your bank for a secure payment experience.</p>
+
+                                                <div className="mb-6 popular-banks-container">
+                                                    <h3 className="text-sm font-medium text-gray-700 mb-3">Popular Banks</h3>
+                                                    <div className="grid grid-cols-2 gap-4">
+                                                        {popularBanks.map((bank) => (
+                                                            <div
+                                                                key={bank.name}
+                                                                className={`bank-card ${selectedBank === bank.name ? 'selected' : ''}`}
+                                                                onClick={() => setSelectedBank(bank.name)}
+                                                            >
+                                                                <img
+                                                                    src={`${bank.logo}`}
+                                                                    alt={`${bank.name} Logo`}
+                                                                    className="bank-logo"
+                                                                />
+
+                                                                <span>{bank.name}</span>
+                                                                {selectedBank === bank.name && (
+                                                                    <FontAwesomeIcon icon={faCheckCircle} className="selected-icon" />
+                                                                )}
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+
+                                                <div className="mb-6 other-banks-container">
+                                                    <label className="form-label" htmlFor="otherBanks">
+                                                        Other Banks
+                                                    </label>
+                                                    <div className="custom-select-wrapper">
+                                                        <select
+                                                            id="otherBanks"
+                                                            className="form-input custom-select"
+                                                            value={selectedBank || ''}
+                                                            onChange={(e) => setSelectedBank(e.target.value)}
+                                                        >
+                                                            <option value="">Select a bank</option>
+                                                            {otherBanks.map((bank) => (
+                                                                <option key={bank} value={bank}>
+                                                                    {bank}
+                                                                </option>
+                                                            ))}
+                                                        </select>
+                                                        <span className="select-arrow">▼</span>
+                                                    </div>
+                                                </div>
+
                                                 <button
-                                                    className="submit-button"
+                                                    className="submit-button netbanking-pay-button"
                                                     onClick={handlePayment}
-                                                    disabled={isProcessing}
+                                                    disabled={!selectedBank || isProcessing}
                                                 >
                                                     {isProcessing ? (
                                                         <>
@@ -652,10 +732,7 @@ const PaymentPage = () => {
                                                             Processing...
                                                         </>
                                                     ) : (
-                                                        <>
-                                                            <FontAwesomeIcon icon={faPaypal} style={{ marginRight: '0.5rem' }} />
-                                                            Pay with PayPal
-                                                        </>
+                                                        `Proceed to Pay $${calculateTotal().toFixed(2)}`
                                                     )}
                                                 </button>
                                             </motion.div>
@@ -730,13 +807,14 @@ const PaymentPage = () => {
                                                 <div className="logo-placeholder"></div>
                                                 <h2>Wandercall</h2>
                                             </div>
-                                            <div className="ticket-ribbon">E-Ticket</div>
                                         </div>
 
                                         <div className="ticket-body">
                                             <div className="hologram-sticker"></div>
                                             <div className="ticket-qr">
-                                                <span className="qr-code"></span>
+                                                <span className="qr-code">
+
+                                                </span>
                                                 <div className="scan-text">Scan for verification</div>
                                             </div>
 
@@ -781,11 +859,11 @@ const PaymentPage = () => {
                                                 <span>{Math.random().toString(36).substr(2, 6).toUpperCase()}</span>
                                             </div>
                                             <div className="terms-text">
-                                                Valid photo ID required • No refunds after event start • Subject to terms at adventurex.com
+                                                Valid photo ID required • No refunds after 48 hours • Subject to terms at wandercall.com
                                             </div>
                                         </div>
 
-                                        <div className="ticket-watermark">ADVENTUREX</div>
+                                        <div className="ticket-watermark">WANDERCALL</div>
                                     </div>
 
                                     <div className="info-box">
@@ -869,7 +947,7 @@ const PaymentPage = () => {
 
                         <div className="cancellation-policy">
                             <h3 className="cancellation-title">Cancellation Policy</h3>
-                            <p className="cancellation-text">Free cancellation up to 24 hours before.</p>
+                            <p className="cancellation-text">Free cancellation up to 48 hours before.</p>
                         </div>
 
                         <div className="secure-payment-notice">
@@ -883,7 +961,7 @@ const PaymentPage = () => {
             {/* Footer */}
             <footer className="footer">
                 <div className="footer-text">
-                    <p>© 2023 Adventure Experiences. All rights reserved.</p>
+                    <p>© 2025 Wandercall Experiences. All rights reserved.</p>
                 </div>
             </footer>
 
