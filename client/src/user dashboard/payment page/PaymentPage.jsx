@@ -51,6 +51,7 @@ const PaymentPage = () => {
         state: '',
         zip: '',
     });
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchUserDetails = async () => {
@@ -58,6 +59,7 @@ const PaymentPage = () => {
                 console.warn('No token available, redirecting to signin');
                 toast.error('Please log in to view your details');
                 setTimeout(() => navigate('/signin'), 3000);
+                setIsLoading(false); // Reset loading if no token
                 return;
             }
 
@@ -93,6 +95,8 @@ const PaymentPage = () => {
             } catch (error) {
                 console.error('Error fetching user details:', error.message);
                 toast.error('Error fetching user details. Check console for details.');
+            } finally {
+                setIsLoading(false); // Reset loading after fetch completes
             }
         };
         fetchUserDetails();
@@ -278,6 +282,23 @@ const PaymentPage = () => {
 
     const handleDownloadTicket = () => toast.success('Ticket downloaded.');
     const handleViewBookingDetails = () => navigate('/bookings');
+
+    // Show loading indicator until user details are fetched
+    if (isLoading) {
+        return (
+            <div className="loading">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        );
+    }
 
     return (
         <motion.div

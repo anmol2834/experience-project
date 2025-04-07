@@ -6,7 +6,8 @@ import {
   faUsers,
   faChevronLeft,
   faTag,
-  faCheckCircle
+  faCheckCircle,
+  faSpinner // Added for loading spinner
 } from '@fortawesome/free-solid-svg-icons';
 import './BookPage.css';
 
@@ -31,6 +32,7 @@ const BookPage = () => {
   const [coupon, setCoupon] = useState('');
   const [discount, setDiscount] = useState(0);
   const [couponMessage, setCouponMessage] = useState('');
+  const [isCheckingOut, setIsCheckingOut] = useState(false); // Added loading state
 
   // Mock availability data
   const availability = {
@@ -103,6 +105,7 @@ const BookPage = () => {
   };
 
   const handleCheckout = async () => {
+    setIsCheckingOut(true); // Show loading immediately
     const bookingDetails = {
       productId: product._id,
       title: product.title,
@@ -140,9 +143,11 @@ const BookPage = () => {
         });
       } else {
         console.error('Failed to save booking details');
+        setIsCheckingOut(false); // Reset loading on error
       }
     } catch (error) {
       console.error('Error during checkout:', error);
+      setIsCheckingOut(false); // Reset loading on error
     }
   };
 
@@ -279,10 +284,15 @@ const BookPage = () => {
 
           <button
             className="checkout-button"
-            disabled={!selectedDate}
+            disabled={!selectedDate || isCheckingOut} // Disable during loading
             onClick={handleCheckout}
           >
-            <FontAwesomeIcon icon={faCheckCircle} /> Proceed to Checkout
+            {isCheckingOut ? (
+              <FontAwesomeIcon icon={faSpinner} spin style={{ marginRight: '0.5rem' }} />
+            ) : (
+              <FontAwesomeIcon icon={faCheckCircle} style={{ marginRight: '0.5rem' }} />
+            )}
+            {isCheckingOut ? 'Processing...' : 'Proceed to Checkout'}
           </button>
         </div>
       </div>
