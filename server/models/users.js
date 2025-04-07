@@ -13,7 +13,11 @@ const userSchema = new mongoose.Schema({
   gender: { type: String },
   otp: { type: String },
   otpExpiration: { type: Date },
-  lastOtpSent: { type: Date }
+  lastOtpSent: { type: Date },
+  street: { type: String }, 
+  city: { type: String },   
+  state: { type: String }, 
+  zip: { type: String },   
 });
 
 userSchema.pre('save', async function (next) {

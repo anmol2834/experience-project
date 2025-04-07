@@ -208,7 +208,7 @@ app.get('/validate-token', verifyToken, async (req, res) => {
 // Get user details (requires token)
 app.get('/user', verifyToken, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('firstname lastname email phone dob gender');
+    const user = await User.findById(req.user.id).select('firstname lastname email phone dob gender street city state zip');
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -222,7 +222,7 @@ app.get('/user', verifyToken, async (req, res) => {
 // Update user profile (requires token)
 app.put('/user', verifyToken, async (req, res) => {
   try {
-    const { firstname, lastname, email, phone, dob, gender } = req.body;
+    const { firstname, lastname, email, phone, dob, gender, street, city, state, zip } = req.body;
 
     // Check if email is provided and already exists for another user
     if (email) {
@@ -241,7 +241,7 @@ app.put('/user', verifyToken, async (req, res) => {
     }
 
     // Prepare update data with provided fields
-    const updateData = { firstname, lastname, email, phone, dob, gender };
+    const updateData = { firstname, lastname, email, phone, dob, gender, street, city, state, zip };
 
     const user = await User.findByIdAndUpdate(req.user.id, updateData, { new: true });
     if (!user) {
