@@ -22,7 +22,7 @@ body {
 }
 
 /* Header Styles */
-header {
+.payment-header {
   width: 100%;
   height: 10%;
   background-color: white;
@@ -34,7 +34,7 @@ header {
   justify-content: center;
 }
 
-header div {
+.payment-header div {
   width: 100%;
   height: 100%;
   display: flex;
@@ -42,12 +42,12 @@ header div {
   justify-content: space-around;
 }
 
-header h1 {
+.payment-header h1 {
   font-size: 1.25rem;
   font-weight: 600;
 }
 
-header .back-button {
+.payment-header .back-button {
   display: flex;
   align-items: center;
   color: #1A202C;
@@ -58,7 +58,7 @@ header .back-button {
   z-index: 1;
 }
 
-header .back-button:hover {
+.payment-header .back-button:hover {
   color: #3182CE;
 }
 
