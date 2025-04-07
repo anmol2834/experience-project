@@ -124,13 +124,20 @@ const BookPage = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`, // Assuming token is stored in localStorage
+          'Authorization': `Bearer ${localStorage.getItem('token')}`, 
         },
         body: JSON.stringify(bookingDetails),
       });
 
       if (response.ok) {
-        navigate('/confirmation', { state: { bookingDetails } });
+        navigate('/payment', { 
+          state: { 
+            product: product,  
+            bookingDetails: bookingDetails,
+            participants: participants,
+            selectedDate: selectedDate
+          } 
+        });
       } else {
         console.error('Failed to save booking details');
       }
