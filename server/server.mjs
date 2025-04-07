@@ -656,5 +656,5 @@ app.get('*', (_, res) => {
 
 // Start the server
 app.listen(process.env.PORT || 5000, '0.0.0.0', () => {
-  console.log('Server is running on localhost:5000');
+  console.log('Server is running');
 });
