@@ -254,7 +254,7 @@ const PaymentPage = () => {
             exit={{ opacity: 0 }}
         >
             {/* Header */}
-            <header>
+            <header className='payment-header'>
                 <div>
                     <button className="back-button" onClick={handleBack}>
                         <FontAwesomeIcon icon={faArrowLeft} />
@@ -364,7 +364,7 @@ const PaymentPage = () => {
                                         <div className="details-grid">
                                             <div className="form-group">
                                                 <label className="form-label" htmlFor="email">
-                                                    Email (can't be changed)
+                                                    Email 
                                                 </label>
                                                 <div className="bg-gray-50">
                                                     {editableUserDetails.email}
@@ -373,7 +373,7 @@ const PaymentPage = () => {
 
                                             <div className="form-group">
                                                 <label className="form-label" htmlFor="phone">
-                                                    Phone (can't be changed)
+                                                    Phone 
                                                 </label>
                                                 <div className="bg-gray-50">
                                                     {editableUserDetails.phone}
