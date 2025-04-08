@@ -941,46 +941,6 @@ input[type="checkbox"] {
     flex-direction: row;
   }
 
-  .payment-header .back-button{
-    cursor: none;
-  }
-
-  .input-icon-left{
-    cursor: none;
-  }
-
-  button.text-primary{
-    cursor: none;
-  }
-
-  .payment-method-card {
-    cursor: none;
-  }
-
-  .upi-button {
-    cursor: none;
-  }
-
-  .ticket-watermark {
-    cursor: none;
-  }
-
-  .action-button {
-    cursor: none;
-  }
-
-  .bank-card {
-    cursor: none;
-  }
-
-  .custom-select {
-    cursor: none;
-  }
-
-  .select-arrow {
-    cursor: none;
-  }
-
 }
 
 .action-button {

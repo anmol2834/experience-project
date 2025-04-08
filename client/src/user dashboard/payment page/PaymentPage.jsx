@@ -41,6 +41,30 @@ const PaymentPage = () => {
     const location = useLocation();
     const { token, logout } = useAuth();
 
+    // Data retrieval from BookPage.jsx
+    const product = location.state?.product || { title: 'Adventure Experience', img1: 'https://images.unsplash.com/photo-1540397106260-e24a507a08ea', price: 99 };
+    const bookingDetails = location.state?.bookingDetails || {};
+    const participants = bookingDetails.participants || 2;
+    const selectedDate = bookingDetails.selectedDate || new Date();
+
+    // Calculations
+    const calculateSubtotal = () => (product.price || 0) * (participants || 1);
+    const calculateGST = () => parseFloat(bookingDetails.gst || 0);
+    const calculateTotal = () => parseFloat(bookingDetails.totalPrice || calculateSubtotal() + calculateGST());
+
+    // Route protection
+    useEffect(() => {
+        if (!location.state?.bookingDetails) {
+            toast.error('Invalid access. Please book through the proper channel.');
+            navigate('/home');
+        }
+    }, [location.state, navigate]);
+
+    // Page scroll fix
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const [userDetails, setUserDetails] = useState({
         firstname: '',
         lastname: '',
@@ -73,7 +97,6 @@ const PaymentPage = () => {
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    console.log('Fetched user data:', data);
                     setUserDetails({
                         firstname: data.firstname || '',
                         lastname: data.lastname || '',
@@ -160,12 +183,6 @@ const PaymentPage = () => {
             detailsConfirmed: false,
         }));
     }, [userDetails]);
-
-    const product = location.state?.product || { price: 99, title: 'Adventure Experience', description: 'Outdoor activity package' };
-    const participants = location.state?.participants || 2;
-    const selectedDate = location.state?.selectedDate || new Date();
-    const calculateSubtotal = () => (product.price || 0) * (participants || 1);
-    const calculateTotal = () => calculateSubtotal();
 
     const handlePaymentMethodSelect = (method) => setPaymentMethod(method);
 
@@ -925,29 +942,12 @@ const PaymentPage = () => {
                         <h2 className="summary-heading">Order Summary</h2>
                         <div className="product-info">
                             <div className="product-image">
-                                <img
-                                    src="https://images.unsplash.com/photo-1540397106260-e24a507a08ea"
-                                    alt={product.title}
-                                />
+                                <img src={product.img1} alt={product.title} />
                             </div>
                             <div className="product-details">
                                 <h3>{product.title}</h3>
-                                <p>{product.description}</p>
-                            </div>
-                        </div>
-
-                        <div className="booking-details">
-                            <div className="detail-row">
-                                <span className="detail-label">Date:</span>
-                                <span className="detail-value">{selectedDate.toLocaleDateString()}</span>
-                            </div>
-                            <div className="detail-row">
-                                <span className="detail-label">Time:</span>
-                                <span className="detail-value">10:00 AM</span>
-                            </div>
-                            <div className="detail-row">
-                                <span className="detail-label">Participants:</span>
-                                <span className="detail-value">{participants}</span>
+                                <p>Number of Participants: {participants}</p>
+                                <p>Booking Date: {selectedDate.toLocaleDateString()}</p>
                             </div>
                         </div>
 
@@ -957,11 +957,11 @@ const PaymentPage = () => {
                                 <span>${calculateSubtotal().toFixed(2)}</span>
                             </div>
                             <div className="price-row">
-                                <span className="detail-label">Taxes:</span>
-                                <span>$0.00</span>
+                                <span className="detail-label">GST (18%):</span>
+                                <span>${calculateGST().toFixed(2)}</span>
                             </div>
                             <div className="price-total">
-                                <span>Total:</span>
+                                <span>Total Amount:</span>
                                 <span className="price-total-value">${calculateTotal().toFixed(2)}</span>
                             </div>
                         </div>

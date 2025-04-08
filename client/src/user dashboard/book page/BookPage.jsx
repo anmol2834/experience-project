@@ -120,6 +120,7 @@ const BookPage = () => {
       discount,
       coupon,
       timestamp: new Date(),
+      img1: product.img1, // Include the first image
     };
 
     try {
@@ -133,13 +134,20 @@ const BookPage = () => {
       });
 
       if (response.ok) {
-        navigate('/payment', { 
-          state: { 
-            product: product,  
-            bookingDetails: bookingDetails,
-            participants: participants,
-            selectedDate: selectedDate
-          } 
+        navigate('/payment', {
+          state: {
+            product: {
+              title: product.title,
+              img1: product.img1,
+              price: product.price,
+            },
+            bookingDetails: {
+              totalPrice: bookingDetails.totalPrice,
+              gst: bookingDetails.gst,
+              participants,
+              selectedDate,
+            },
+          },
         });
       } else {
         console.error('Failed to save booking details');
