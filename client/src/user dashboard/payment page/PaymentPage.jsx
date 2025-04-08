@@ -29,6 +29,7 @@ import sbi from './sbi.png';
 import hdfc from './hdfc.png';
 import icici from './icici.png';
 import axis from './axis.png';
+import QRCode from 'qrcode'; // Import qrcode library
 
 const PaymentMethods = {
     CARD: 'card',
@@ -83,7 +84,7 @@ const PaymentPage = () => {
                 console.warn('No token available, redirecting to signin');
                 toast.error('Please log in to view your details');
                 setTimeout(() => navigate('/signin'), 3000);
-                setIsLoading(false); // Reset loading if no token
+                setIsLoading(false);
                 return;
             }
 
@@ -119,7 +120,7 @@ const PaymentPage = () => {
                 console.error('Error fetching user details:', error.message);
                 toast.error('Error fetching user details. Check console for details.');
             } finally {
-                setIsLoading(false); // Reset loading after fetch completes
+                setIsLoading(false);
             }
         };
         fetchUserDetails();
@@ -142,6 +143,7 @@ const PaymentPage = () => {
         detailsConfirmed: false,
     });
     const [selectedBank, setSelectedBank] = useState(null);
+    const [qrCodeUrl, setQrCodeUrl] = useState(''); // State for QR code data URL
 
     const popularBanks = [
         { name: 'State Bank of India (SBI)', logo: sbi },
@@ -300,7 +302,25 @@ const PaymentPage = () => {
     const handleDownloadTicket = () => toast.success('Ticket downloaded.');
     const handleViewBookingDetails = () => navigate('/bookings');
 
-    // Show loading indicator until user details are fetched
+    // UPI QR Code Configuration
+    const upiId = 'anmolsinha4321@okaxis'; // Your actual UPI ID
+    const upiUrl = `upi://pay?pa=${upiId}&am=${calculateTotal().toFixed(2)}&cu=INR`; // Set to INR
+
+    // Generate QR code when UPI is selected
+    useEffect(() => {
+        if (paymentMethod === 'upi') {
+            QRCode.toDataURL(upiUrl, { width: 200, margin: 2 }, (err, url) => {
+                if (err) {
+                    console.error('Error generating QR code:', err);
+                    return;
+                }
+                setQrCodeUrl(url);
+            });
+        } else {
+            setQrCodeUrl(''); // Clear QR code when not on UPI
+        }
+    }, [paymentMethod, upiUrl]);
+
     if (isLoading) {
         return (
             <div className="loading">
@@ -357,8 +377,7 @@ const PaymentPage = () => {
                                 </div>
                                 <div className="progress-step">
                                     <div
-                                        className={`progress-step-number ${currentStep === 'payment' ? '' : currentStep === 'confirmation' ? 'completed' : 'inactive'
-                                            }`}
+                                        className={`progress-step-number ${currentStep === 'payment' ? '' : currentStep === 'confirmation' ? 'completed' : 'inactive'}`}
                                     >
                                         {currentStep === 'confirmation' ? <FontAwesomeIcon icon={faCheck} /> : 2}
                                     </div>
@@ -690,7 +709,7 @@ const PaymentPage = () => {
                                                                 Processing...
                                                             </>
                                                         ) : (
-                                                            `Pay $${calculateTotal().toFixed(2)}`
+                                                            `Pay ₹${calculateTotal().toFixed(2)}` // Updated to INR
                                                         )}
                                                     </button>
 
@@ -727,7 +746,6 @@ const PaymentPage = () => {
                                                                     alt={`${bank.name} Logo`}
                                                                     className="bank-logo"
                                                                 />
-
                                                                 <span>{bank.name}</span>
                                                                 {selectedBank === bank.name && (
                                                                     <FontAwesomeIcon icon={faCheckCircle} className="selected-icon" />
@@ -770,7 +788,7 @@ const PaymentPage = () => {
                                                             Processing...
                                                         </>
                                                     ) : (
-                                                        `Proceed to Pay $${calculateTotal().toFixed(2)}`
+                                                        `Proceed to Pay ₹${calculateTotal().toFixed(2)}` // Updated to INR
                                                     )}
                                                 </button>
                                             </motion.div>
@@ -787,7 +805,11 @@ const PaymentPage = () => {
                                                 <h2 className="form-heading">UPI</h2>
                                                 <div className="upi-container">
                                                     <div className="qr-code">
-                                                        <span className="text-gray-500">UPI QR Code</span>
+                                                        {qrCodeUrl ? (
+                                                            <img src={qrCodeUrl} alt="UPI QR Code" style={{ width: '200px', height: '200px' }} />
+                                                        ) : (
+                                                            <p>Loading QR Code...</p>
+                                                        )}
                                                     </div>
                                                     <p className="text-gray-600 mb-2">Scan with any UPI app</p>
                                                     <p className="font-medium">Or</p>
@@ -801,6 +823,8 @@ const PaymentPage = () => {
                                                                 type="text"
                                                                 className="form-input input-focus upi-input"
                                                                 placeholder="yourname@upi"
+                                                                value={upiId}
+                                                                readOnly
                                                             />
                                                             <button
                                                                 onClick={handlePayment}
@@ -851,7 +875,7 @@ const PaymentPage = () => {
                                             <div className="hologram-sticker"></div>
                                             <div className="ticket-qr">
                                                 <span className="qr-code">
-
+                                                    {/* Optional: Add a QR code here if needed */}
                                                 </span>
                                                 <div className="scan-text">Scan for verification</div>
                                             </div>
@@ -954,15 +978,15 @@ const PaymentPage = () => {
                         <div className="price-breakdown">
                             <div className="price-row">
                                 <span className="detail-label">Subtotal:</span>
-                                <span>${calculateSubtotal().toFixed(2)}</span>
+                                <span>₹{calculateSubtotal().toFixed(2)}</span> {/* Updated to INR */}
                             </div>
                             <div className="price-row">
                                 <span className="detail-label">GST (18%):</span>
-                                <span>${calculateGST().toFixed(2)}</span>
+                                <span>₹{calculateGST().toFixed(2)}</span> {/* Updated to INR */}
                             </div>
                             <div className="price-total">
                                 <span>Total Amount:</span>
-                                <span className="price-total-value">${calculateTotal().toFixed(2)}</span>
+                                <span className="price-total-value">₹{calculateTotal().toFixed(2)}</span> {/* Updated to INR */}
                             </div>
                         </div>
 
