@@ -605,7 +605,6 @@ app.post('/cart/update', verifyToken, async (req, res) => {
   }
 });
 
-
 // Checkout route (requires token)
 app.post('/checkout', verifyToken, async (req, res) => {
   const {
