@@ -118,7 +118,7 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
 
         <div className="bottom-section">
           <section>
-            <p className="selling-price">${price}/Person</p>
+            <p className="selling-price">₹{price}/Person</p>
           </section>
 
           <section>

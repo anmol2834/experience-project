@@ -272,7 +272,7 @@ function ExperienceDetails() {
               <span className="reviews">(0 reviews)</span>
             </div>
             <div className="price">
-              <span className="amount">${product.price}</span>
+              <span className="amount">₹{product.price}</span>
               <span className="per-person">/person</span>
             </div>
           </div>

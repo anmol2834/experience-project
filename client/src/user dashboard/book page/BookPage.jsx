@@ -7,7 +7,7 @@ import {
   faChevronLeft,
   faTag,
   faCheckCircle,
-  faSpinner // Added for loading spinner
+  faSpinner
 } from '@fortawesome/free-solid-svg-icons';
 import './BookPage.css';
 
@@ -16,7 +16,6 @@ const BookPage = () => {
   const navigate = useNavigate();
   const product = location.state?.product;
 
-  // Redirect if no product is passed in state
   useEffect(() => {
     if (!product) {
       navigate('/home');
@@ -25,16 +24,14 @@ const BookPage = () => {
 
   if (!product) return null;
 
-  // State for booking form
   const [participants, setParticipants] = useState(1);
   const [selectedDate, setSelectedDate] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [coupon, setCoupon] = useState('');
   const [discount, setDiscount] = useState(0);
   const [couponMessage, setCouponMessage] = useState('');
-  const [isCheckingOut, setIsCheckingOut] = useState(false); // Added loading state
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
-  // Mock availability data
   const availability = {
     '2024-03-15': { status: 'available' },
     '2024-03-16': { status: 'available' },
@@ -43,7 +40,6 @@ const BookPage = () => {
     '2024-03-19': { status: 'limited' },
   };
 
-  // Generate calendar days (only current month's dates)
   const generateCalendarDays = (date) => {
     const days = [];
     const today = new Date();
@@ -52,13 +48,11 @@ const BookPage = () => {
     const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
     const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     
-    // Add empty days for start of week
     const startDay = monthStart.getDay();
     for(let i = 0; i < startDay; i++) {
       days.push(null);
     }
 
-    // Add actual days of the month
     for(let d = 1; d <= monthEnd.getDate(); d++) {
       const day = new Date(date.getFullYear(), date.getMonth(), d);
       days.push(day);
@@ -101,11 +95,11 @@ const BookPage = () => {
     const subtotal = product.price * participants;
     const discountAmount = subtotal * discount / 100;
     const gst = (subtotal - discountAmount) * 0.18;
-    return (subtotal - discountAmount + gst).toFixed(2);
+    return Math.round(subtotal - discountAmount + gst); // Changed to use Math.round()
   };
 
   const handleCheckout = async () => {
-    setIsCheckingOut(true); // Show loading immediately
+    setIsCheckingOut(true);
     const bookingDetails = {
       productId: product._id,
       title: product.title,
@@ -120,7 +114,7 @@ const BookPage = () => {
       discount,
       coupon,
       timestamp: new Date(),
-      img1: product.img1, // Include the first image
+      img1: product.img1,
     };
 
     try {
@@ -151,11 +145,11 @@ const BookPage = () => {
         });
       } else {
         console.error('Failed to save booking details');
-        setIsCheckingOut(false); // Reset loading on error
+        setIsCheckingOut(false);
       }
     } catch (error) {
       console.error('Error during checkout:', error);
-      setIsCheckingOut(false); // Reset loading on error
+      setIsCheckingOut(false);
     }
   };
 
@@ -173,21 +167,18 @@ const BookPage = () => {
       </div>
 
       <div className="book-page-content">
-        {/* Experience Gallery */}
         <div className="experience-gallery">
           <div
             className="main-image"
-            style={{ backgroundImage: `url(${product.img1})` }} // Use product's first image
+            style={{ backgroundImage: `url(${product.img1})` }}
           />
         </div>
 
-        {/* Experience Details */}
         <div className="experience-details">
           <h2>{product.title}</h2>
-          <div className="price">${product.price} <span>per person</span></div>
+          <div className="price">₹{product.price} <span>per person</span></div>
         </div>
 
-        {/* Booking Form */}
         <div className="booking-form">
           <div className="form-group">
             <label>
@@ -272,27 +263,27 @@ const BookPage = () => {
           <div className="price-summary">
             <div className="price-line">
               <span>Subtotal ({participants} {participants > 1 ? 'people' : 'person'})</span>
-              <span>${(product.price * participants).toFixed(2)}</span>
+              <span>₹{(product.price * participants).toFixed(2)}</span>
             </div>
             {discount > 0 && (
               <div className="price-line discount">
                 <span>Discount ({discount}%)</span>
-                <span>-${(product.price * participants * discount / 100).toFixed(2)}</span>
+                <span>-₹{(product.price * participants * discount / 100).toFixed(2)}</span>
               </div>
             )}
             <div className="price-line">
               <span>GST (18%)</span>
-              <span>${((product.price * participants - (product.price * participants * discount / 100)) * 0.18).toFixed(2)}</span>
+              <span>₹{((product.price * participants - (product.price * participants * discount / 100)) * 0.18).toFixed(2)}</span>
             </div>
             <div className="price-line total">
               <span>Total Amount</span>
-              <span>${calculateTotal()}</span>
+              <span>₹{calculateTotal()}</span>
             </div>
           </div>
 
           <button
             className="checkout-button"
-            disabled={!selectedDate || isCheckingOut} // Disable during loading
+            disabled={!selectedDate || isCheckingOut}
             onClick={handleCheckout}
           >
             {isCheckingOut ? (

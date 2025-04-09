@@ -94,7 +94,7 @@ const Wishlist = () => {
             </div>
             <div className="item-details">
               <h3 className="item-name">{item.productId.title}</h3>
-              <p className="item-price">${item.productId.price.toFixed(2)}</p>
+              <p className="item-price">₹{item.productId.price.toFixed(2)}</p>
               <div className="item-specs">
                 <span>State: {item.productId.state}</span>
                 <span>City: {item.productId.city}</span>

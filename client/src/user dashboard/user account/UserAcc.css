@@ -1,7 +1,7 @@
 .user-acc-contain {
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(to right, var(--primary-color),  var(--shade-primary-color));
+    background: linear-gradient(to right, var(--primary-color), var(--shade-primary-color));
     color: var(--main-element-color);
     padding: 20px;
     overflow-y: scroll;
@@ -138,7 +138,7 @@
     transition: 0.5s;
 }
 
-.profile-menu .profile-menu-btn svg{
+.profile-menu .profile-menu-btn svg {
     fill: var(--bg-color);
 }
 
@@ -215,6 +215,7 @@
     display: flex;
     align-items: center;
     background: var(--primary-color);
+    color: black;
     padding: 0 15px;
     border-radius: 3px;
     border: 1px solid var(--shade-primary-color);
@@ -224,8 +225,7 @@
 
 .activity section:hover {
     transition: 0.5s;
-    background: var(--shade-primary-color);
-    border: 1px solid var(--primary-color);
+    opacity: 0.8;
 }
 
 .account-render {
@@ -271,6 +271,7 @@
     .account-menu {
         width: 100%;
         border-radius: 0;
+        background: linear-gradient(to right, var(--primary-color), var(--shade-primary-color));
     }
 
     .home-btn svg {
@@ -295,6 +296,8 @@
 
     .activity section {
         cursor: none;
+        background: white;
+        color: black;
     }
 
 }
