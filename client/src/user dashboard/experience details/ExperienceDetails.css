@@ -25,11 +25,17 @@
 .back-btn {
   cursor: pointer;
   margin-top: 1rem;
+  font-size: 1.5rem;
+}
+
+.back-btn .back-ico {
+  color: var(--main-element-color);
   transition: 0.5s;
 }
 
-.back-btn svg {
-  fill: var(--main-element-color);
+.back-btn .back-ico:hover {
+  transition: 0.5s;
+  transform: scale(1.1);
 }
 
 .cart-icon {
@@ -62,11 +68,6 @@
   justify-content: center;
   color: white;
   font-size: 0.7rem;
-}
-
-.back-btn:hover {
-  transition: 0.5s;
-  transform: scale(1.1);
 }
 
 .experience-card {

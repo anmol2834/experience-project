@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { context_of_product } from '../../context/ProductContext';
 import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot, faShare, faShareAlt, faShareAltSquare, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeftLong, faLocationDot, faShare, faShareAlt, faShareAltSquare, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 function ExperienceDetails() {
   // Step 1: Call all hooks unconditionally at the top
@@ -186,9 +186,7 @@ function ExperienceDetails() {
     <div className="experience-details-container">
       <div className="headers">
         <div className="back-btn" onClick={handleBack}>
-          <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
-            <path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" />
-          </svg>
+          <FontAwesomeIcon className='back-ico' icon={faArrowLeftLong}/>
         </div>
 
         <div className="cart-icon" data-content={cartItems.length} onClick={() => navigate('/add_to_cart')}>

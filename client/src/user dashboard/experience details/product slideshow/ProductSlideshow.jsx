@@ -3,6 +3,8 @@ import './ProductSlideshow.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useContext } from 'react';
 import { context_of_product } from '../../../context/ProductContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 
 function ProductSlideshow() {
   const navigate = useNavigate();
@@ -92,9 +94,7 @@ function ProductSlideshow() {
   return (
     <div className="product-slideshow-container" onClick={handleContainerBack}>
       <div className="back-to-experience-details" onClick={() => navigate(-1, { state: location.state })}>
-        <svg xmlns="http://www.w3.org/2000/svg" height="35px" viewBox="0 -960 960 960" width="35px" fill="#000000">
-          <path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" />
-        </svg>
+        <FontAwesomeIcon className='back-ico2' icon={faArrowLeftLong}/>
       </div>
 
       <div

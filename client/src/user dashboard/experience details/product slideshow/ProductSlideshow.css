@@ -17,14 +17,20 @@
 
 .back-to-experience-details {
     position: absolute;
-    top: 15px;
-    left: 15px;
+    top: 20px;
+    left: 20px;
     cursor: pointer;
-    transition: 0.5s;
+    font-size: 1.5rem;
 }
 
-.back-to-experience-details svg{
-    fill: white;
+.back-to-experience-details .back-ico2 {
+  color: var(--bg-color);
+  transition: 0.5s;
+}
+
+.back-to-experience-details .back-ico2:hover {
+  transition: 0.5s;
+  transform: scale(1.1);
 }
 
 .product-slideshow-box {
