@@ -19,6 +19,7 @@ import {
     faTicket,
     faUniversity,
     faCheckCircle,
+    faArrowLeftLong,
 } from '@fortawesome/free-solid-svg-icons';
 import { faCcVisa, faCcMastercard } from '@fortawesome/free-brands-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
@@ -244,7 +245,6 @@ const PaymentPage = () => {
             });
             if (response.ok) {
                 const updatedUser = await response.json();
-                console.log('Updated user data:', updatedUser);
                 setUserDetails({
                     ...userDetails,
                     firstname: updatedUser.firstname || '',
@@ -286,11 +286,90 @@ const PaymentPage = () => {
             toast.error('Please fix card details.');
             return;
         }
+        if (paymentMethod === PaymentMethods.NETBANKING && !selectedBank) {
+            toast.error('Please select a bank.');
+            return;
+        }
         setIsProcessing(true);
         setTimeout(() => {
             setIsProcessing(false);
             setCurrentStep('confirmation');
         }, 1500);
+    };
+
+    // Load Razorpay SDK
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+        script.async = true;
+        document.body.appendChild(script);
+    }, []);
+
+    const handleUpiPayment = async () => {
+        try {
+            setIsProcessing(true);
+            // Step 1: Create payment order
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/create-payment`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ amount: calculateTotal() }), // Amount in rupees
+            });
+
+            if (!response.ok) throw new Error('Failed to create payment order');
+
+            const orderData = await response.json();
+
+            // Step 2: Open Razorpay payment modal
+            const options = {
+                key: process.env.RAZORPAY_KEY_SECRET,
+                amount: orderData.amount,
+                currency: orderData.currency,
+                name: 'Wandercall',
+                description: 'Adventure Experience Booking',
+                order_id: orderData.orderId,
+                handler: async (response) => {
+                    // Step 3: Verify payment on server
+                    const verifyResponse = await fetch(`${process.env.REACT_APP_API_URL}/verify-payment`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature,
+                        }),
+                    });
+
+                    const verifyData = await verifyResponse.json();
+                    if (verifyResponse.ok && verifyData.status === 'success') {
+                        setCurrentStep('confirmation'); // Redirect only on success
+                    } else {
+                        toast.error('Payment verification failed');
+                    }
+                    setIsProcessing(false);
+                },
+                prefill: {
+                    name: `${userDetails.firstname} ${userDetails.lastname}`,
+                    email: userDetails.email,
+                    contact: userDetails.phone,
+                },
+                theme: {
+                    color: '#F37254',
+                },
+            };
+
+            const rzp = new window.Razorpay(options);
+            rzp.open();
+        } catch (error) {
+            console.error('Error initiating UPI payment:', error);
+            toast.error('Error initiating payment');
+            setIsProcessing(false);
+        }
     };
 
     const handleBack = () => {
@@ -345,10 +424,10 @@ const PaymentPage = () => {
             exit={{ opacity: 0 }}
         >
             {/* Header */}
-            <header className='payment-header'>
+            <header className="payment-header">
                 <div>
                     <button className="back-button" onClick={handleBack}>
-                        <FontAwesomeIcon icon={faArrowLeft} />
+                        <FontAwesomeIcon icon={faArrowLeftLong} />
                         <span>Back</span>
                     </button>
                     <h1>Payment</h1>
@@ -709,7 +788,7 @@ const PaymentPage = () => {
                                                                 Processing...
                                                             </>
                                                         ) : (
-                                                            `Pay ₹${calculateTotal().toFixed(2)}` // Updated to INR
+                                                            `Pay ₹${calculateTotal().toFixed(2)}`
                                                         )}
                                                     </button>
 
@@ -788,7 +867,7 @@ const PaymentPage = () => {
                                                             Processing...
                                                         </>
                                                     ) : (
-                                                        `Proceed to Pay ₹${calculateTotal().toFixed(2)}` // Updated to INR
+                                                        `Proceed to Pay ₹${calculateTotal().toFixed(2)}`
                                                     )}
                                                 </button>
                                             </motion.div>
@@ -802,7 +881,7 @@ const PaymentPage = () => {
                                                 exit={{ opacity: 0, y: -20 }}
                                                 className="payment-form"
                                             >
-                                                <h2 className="form-heading">UPI</h2>
+                                                <h2 className="form-heading">UPI Payment</h2>
                                                 <div className="upi-container">
                                                     <div className="qr-code">
                                                         {qrCodeUrl ? (
@@ -815,29 +894,22 @@ const PaymentPage = () => {
                                                     <p className="font-medium">Or</p>
                                                     <div className="upi-input-container">
                                                         <label className="form-label" htmlFor="upiId">
-                                                            Enter UPI ID
+                                                            Pay via Razorpay UPI
                                                         </label>
-                                                        <div className="upi-input-wrapper">
-                                                            <input
-                                                                id="upiId"
-                                                                type="text"
-                                                                className="form-input input-focus upi-input"
-                                                                placeholder="yourname@upi"
-                                                                value={upiId}
-                                                                readOnly
-                                                            />
-                                                            <button
-                                                                onClick={handlePayment}
-                                                                disabled={isProcessing}
-                                                                className="upi-button"
-                                                            >
-                                                                {isProcessing ? (
-                                                                    <FontAwesomeIcon icon={faSpinner} spin />
-                                                                ) : (
-                                                                    'Pay Now'
-                                                                )}
-                                                            </button>
-                                                        </div>
+                                                        <button
+                                                            onClick={handleUpiPayment}
+                                                            disabled={isProcessing}
+                                                            className="submit-button"
+                                                        >
+                                                            {isProcessing ? (
+                                                                <>
+                                                                    <FontAwesomeIcon icon={faSpinner} spin style={{ marginRight: '0.5rem' }} />
+                                                                    Processing...
+                                                                </>
+                                                            ) : (
+                                                                `Pay ₹${calculateTotal().toFixed(2)}`
+                                                            )}
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </motion.div>
@@ -874,9 +946,7 @@ const PaymentPage = () => {
                                         <div className="ticket-body">
                                             <div className="hologram-sticker"></div>
                                             <div className="ticket-qr">
-                                                <span className="qr-code">
-                                                    {/* Optional: Add a QR code here if needed */}
-                                                </span>
+                                                <span className="qr-code"></span>
                                                 <div className="scan-text">Scan for verification</div>
                                             </div>
 
@@ -978,15 +1048,15 @@ const PaymentPage = () => {
                         <div className="price-breakdown">
                             <div className="price-row">
                                 <span className="detail-label">Subtotal:</span>
-                                <span>₹{calculateSubtotal().toFixed(2)}</span> {/* Updated to INR */}
+                                <span>₹{calculateSubtotal().toFixed(2)}</span>
                             </div>
                             <div className="price-row">
                                 <span className="detail-label">GST (18%):</span>
-                                <span>₹{calculateGST().toFixed(2)}</span> {/* Updated to INR */}
+                                <span>₹{calculateGST().toFixed(2)}</span>
                             </div>
                             <div className="price-total">
                                 <span>Total Amount:</span>
-                                <span className="price-total-value">₹{calculateTotal().toFixed(2)}</span> {/* Updated to INR */}
+                                <span className="price-total-value">₹{calculateTotal().toFixed(2)}</span>
                             </div>
                         </div>
 
