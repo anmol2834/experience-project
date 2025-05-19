@@ -4,6 +4,8 @@ import { useAuth } from '../../context/AuthContext';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { context_of_product } from '../../context/ProductContext';
 import { motion } from 'framer-motion'; // Import framer-motion for animations
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 
 function UserAcc() {
   const { logout, token } = useAuth();
@@ -121,11 +123,10 @@ function UserAcc() {
         style={{ display: isMobile && !showMenu ? 'none' : 'flex' }}
       >
         <div className="home-btn">
-          <svg onClick={() => navigate('/home')} xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000">
-            <path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" />
-          </svg>
+          <FontAwesomeIcon onClick={() => navigate(-1)} className='back-ico3' icon={faArrowLeftLong}/>
           <span>Profile</span>
         </div>
+
         <div className="profile">
           <section>
             <h2>{userData.firstname} {userData.lastname}</h2>
@@ -207,10 +208,8 @@ function UserAcc() {
         style={{ display: isMobile && showMenu ? 'none' : 'flex', padding: isMobile ? '50px 10px' : '10px 20px' }}
       >
         {isMobile && !showMenu && (
-          <div className="back-button" onClick={handleBack}>
-            <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000">
-              <path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" />
-            </svg>
+          <div className="back-button2" onClick={handleBack}>
+            <FontAwesomeIcon onClick={() => navigate(-1)} className='back-ico3' icon={faArrowLeftLong}/>
           </div>
         )}
         <Outlet />
