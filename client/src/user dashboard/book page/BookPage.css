@@ -26,10 +26,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-.book-page-header h2{
-  transform: translateX(50px);
+  justify-content: flex-start;
+  gap: 20px;
 }
 
 .book-page-header .back-button {
@@ -37,6 +35,7 @@
   border: none;
   width: 40px;
   height: 40px;
+  font-size: 1.1rem;
   border-radius: 50%;
   display: flex;
   align-items: center;

@@ -7,7 +7,8 @@ import {
   faChevronLeft,
   faTag,
   faCheckCircle,
-  faSpinner
+  faSpinner,
+  faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
 import './BookPage.css';
 
@@ -160,10 +161,10 @@ const BookPage = () => {
   return (
     <div className="book-page">
       <div className="book-page-header">
-        <h2>Book Now</h2>
         <button className="back-button" onClick={() => navigate(-1)}>
-          <FontAwesomeIcon icon={faChevronLeft} />
+          <FontAwesomeIcon icon={faArrowLeft} />
         </button>
+        <h2>Book Now</h2>
       </div>
 
       <div className="book-page-content">
