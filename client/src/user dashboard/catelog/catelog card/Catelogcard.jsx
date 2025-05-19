@@ -44,21 +44,11 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
 
   const handleViewDetails = () => {
     const scrollPosition = window.scrollY;
-
-    navigate('/experience-details', {
+    // Navigate to dynamic route with productId
+    navigate(`/experience-details/${productId}`, {
       state: {
-        product: {
-          title,
-          state,
-          city,
-          price,
-          rating: ratings,
-          productId,
-          img1: img,
-        },
         from: '/',
         scrollPosition,
-        productId,
       },
     });
   };
@@ -97,7 +87,6 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
         </div>
       </div>
       <div className="catelog-details">
-
         <div className="heading">
           <div>
             <h2>{title}</h2>
@@ -106,31 +95,27 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
               <FontAwesomeIcon icon={faStar} className="star-icon" />
             </div>
           </div>
-          <div className='place_title'>
+          <div className="place_title">
             <FontAwesomeIcon icon={faLocationDot} className="location-icon" />
             <p>{state},{city}</p>
           </div>
         </div>
-
         <div className="description">
           <p>{newDesc}</p>
         </div>
-
         <div className="bottom-section">
           <section>
             <p className="selling-price">₹{price}/Person</p>
           </section>
-
           <section>
             <button onClick={handleViewDetails}>View Details</button>
           </section>
-
         </div>
-
       </div>
     </div>
   );
 }
+
 Catelogcard.propTypes = {
   title: PropTypes.string.isRequired,
   state: PropTypes.string.isRequired,

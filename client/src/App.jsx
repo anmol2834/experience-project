@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import SignIn from './components/sign in page/SignIn';
@@ -20,17 +19,13 @@ import AddToCart from './user dashboard/add to cart page/AddToCart';
 import BookPage from './user dashboard/book page/BookPage';
 import PaymentPage from './user dashboard/payment page/PaymentPage';
 
-
 function App() {
-
-  //! Preventing Zoom on Ctrl + or Ctrl -
   document.addEventListener('keydown', function (event) {
     if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '-' || event.key === '0')) {
       event.preventDefault();
     }
   });
 
-  //! Preventing Zoom on Pinch Gestures
   document.addEventListener('wheel', function (event) {
     if (event.ctrlKey) {
       event.preventDefault();
@@ -41,7 +36,6 @@ function App() {
     event.preventDefault();
   });
 
-
   return (
     <Router>
       <AuthProvider>
@@ -51,20 +45,21 @@ function App() {
               <Route path="/" element={<DashboardLayout />}>
                 <Route index element={<UserDashboard />} />
                 <Route path="/home" element={<UserDashboard />} />
-                <Route path='/experience-details' element={<ExperienceDetails />} />
+                {/* Updated route with dynamic productId parameter */}
+                <Route path="/experience-details/:productId" element={<ExperienceDetails />} />
               </Route>
               <Route path="/account" element={<ProtectedRoute><UserAcc /></ProtectedRoute>}>
                 <Route index element={<Rewards />} />
-                <Route path='edit_profile' element={<ProfileEdit />} />
-                <Route path='help_center' element={<HelpCenter />} />
-                <Route path='wishlist' element={<Wishlist />} />
-                <Route path='bookings' element={<BookingsPage />} />
-                <Route path='rewards' element={<Rewards />} />
+                <Route path="edit_profile" element={<ProfileEdit />} />
+                <Route path="help_center" element={<HelpCenter />} />
+                <Route path="wishlist" element={<Wishlist />} />
+                <Route path="bookings" element={<BookingsPage />} />
+                <Route path="rewards" element={<Rewards />} />
               </Route>
-              <Route path='/add_to_cart' element={<ProtectedRoute><AddToCart /></ProtectedRoute>} />
-              <Route path='/book_page' element={<ProtectedRoute><BookPage /></ProtectedRoute>} />
-              <Route path='/payment' element={<ProtectedRoute><PaymentPage/></ProtectedRoute>} />
-              <Route path='/product-slideshow' element={<ProductSlideshow />} />
+              <Route path="/add_to_cart" element={<ProtectedRoute><AddToCart /></ProtectedRoute>} />
+              <Route path="/book_page" element={<ProtectedRoute><BookPage /></ProtectedRoute>} />
+              <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
+              <Route path="/product-slideshow" element={<ProductSlideshow />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
             </Routes>
@@ -72,7 +67,7 @@ function App() {
         </ProductContext>
       </AuthProvider>
     </Router>
-  )
+  );
 }
 
 export default App;

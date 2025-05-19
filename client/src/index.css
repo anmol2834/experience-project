@@ -19,8 +19,8 @@ body{
 
 :root {
   --bg-color: #fff;
-  --primary-color: rgb(226, 249, 247);
-  --shade-primary-color: rgb(227, 226, 255);
+  --primary-color: rgb(240, 253, 252);
+  --shade-primary-color: rgb(238, 238, 255);
   --secondary-color: rgb(26, 106, 255);
   --main-element-color: #222;
   --light-color-text: #626262;

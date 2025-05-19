@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './ExperienceDetails.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { context_of_product } from '../../context/ProductContext';
 import { useContext } from 'react';
@@ -10,38 +10,44 @@ import { faLocationDot, faShare, faShareAlt, faShareAltSquare, faStar, faUserCir
 function ExperienceDetails() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { productId } = useParams(); // Get productId from URL
   const { token } = useAuth();
-  const { productInfo, wishlistItems, addToWishlist, removeFromWishlist, addToCart, cartItems } = useContext(context_of_product);
-  const productFromState = location.state?.product;
+  const { productInfo, productLoading, wishlistItems, addToWishlist, removeFromWishlist, addToCart, cartItems } = useContext(context_of_product);
+
   const from = location.state?.from || '/';
   const scrollPosition = location.state?.scrollPosition || 0;
-  const productId = location.state?.productId;
 
-  const product = productFromState
-    ? { ...productFromState, ...productInfo.find((p) => p._id === productFromState.productId) }
-    : null;
-
-  const [like, setLike] = useState(
-    wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId))
-  );
+  const [like, setLike] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [imageLoading, setImageLoading] = useState(true);
   const [wishlistLoading, setWishlistLoading] = useState(false);
 
-  const images = product
-    ? [
-      product.img1,
-      product.img2,
-      product.img3,
-      product.img4,
-      product.img5,
-      product.img6,
-      product.img7,
-      product.img8,
-    ].filter(Boolean)
-    : [];
+  // Handle loading state
+  if (productLoading) {
+    return <div className="loading">Loading...</div>;
+  }
+
+  // Find product in productInfo using productId from URL
+  const product = productInfo.find((p) => p._id === productId);
+
+  // If product not found, redirect to home
+  if (!product) {
+    navigate('/home');
+    return null;
+  }
+
+  const images = [
+    product.img1,
+    product.img2,
+    product.img3,
+    product.img4,
+    product.img5,
+    product.img6,
+    product.img7,
+    product.img8,
+  ].filter(Boolean);
 
   const showMoreThumb = images.length > 3;
 
@@ -74,6 +80,16 @@ function ExperienceDetails() {
       totalReviews: 20,
     },
   ];
+
+  // Update like state based on wishlistItems
+  useEffect(() => {
+    setLike(wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId)));
+  }, [wishlistItems, productId]);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSlideChange = (index) => {
     if (index < 0) index = images.length - 1;
@@ -112,10 +128,10 @@ function ExperienceDetails() {
     setWishlistLoading(true);
     try {
       if (like) {
-        await removeFromWishlist(product.productId);
+        await removeFromWishlist(productId); // Use productId from params
         setLike(false);
       } else {
-        await addToWishlist(product.productId);
+        await addToWishlist(productId); // Use productId from params
         setLike(true);
       }
     } catch (error) {
@@ -129,23 +145,6 @@ function ExperienceDetails() {
   const handleImageLoad = () => {
     setImageLoading(false);
   };
-
-  useEffect(() => {
-    if (!productFromState && !product) {
-      navigate('/home');
-    }
-  }, [productFromState, navigate]);
-
-  useEffect(() => {
-    if (!productFromState && !product) {
-      navigate('/home');
-    }
-    window.scrollTo(0, 0);
-  }, [productFromState, navigate]);
-
-  useEffect(() => {
-    setLike(wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId)));
-  }, [wishlistItems, productId]);
 
   const handleBack = () => {
     navigate(from, {
@@ -162,12 +161,9 @@ function ExperienceDetails() {
     addToCart(product._id);
   };
 
-  // Handle "Book Now" button click
   const handleBookNow = () => {
     navigate('/book_page', { state: { product } });
   };
-
-  if (!product) return null;
 
   return (
     <div className="experience-details-container">
@@ -251,8 +247,8 @@ function ExperienceDetails() {
             <div className="title-and-map">
               <h1 className="title">{product.title}</h1>
               <span className="locate-and-share-icon">
-                <FontAwesomeIcon className='shareAlt' icon={faShareAlt} />
-                <FontAwesomeIcon className='location-dot' icon={faLocationDot} />
+                <FontAwesomeIcon className="shareAlt" icon={faShareAlt} />
+                <FontAwesomeIcon className="location-dot" icon={faLocationDot} />
               </span>
             </div>
             <div className="location">
@@ -266,7 +262,7 @@ function ExperienceDetails() {
           <div className="price-rating">
             <div className="rating">
               <span>
-              <FontAwesomeIcon icon={faStar}/>
+                <FontAwesomeIcon icon={faStar} />
               </span>
               <span>{product.rating || 'N/A'}</span>
               <span className="reviews">(0 reviews)</span>
@@ -302,7 +298,7 @@ function ExperienceDetails() {
             </p>
           </div>
           <div className="average-rating">
-            <h3>4.0 <span className="stars"><FontAwesomeIcon icon={faStar}/></span></h3>
+            <h3>4.0 <span className="stars"><FontAwesomeIcon icon={faStar} /></span></h3>
             <p>Average rating on this year</p>
           </div>
           <div className="rating-distribution">
