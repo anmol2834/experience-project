@@ -8,9 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faShare, faShareAlt, faShareAltSquare, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 function ExperienceDetails() {
+  // Step 1: Call all hooks unconditionally at the top
   const navigate = useNavigate();
   const location = useLocation();
-  const { productId } = useParams(); // Get productId from URL
+  const { productId } = useParams();
   const { token } = useAuth();
   const { productInfo, productLoading, wishlistItems, addToWishlist, removeFromWishlist, addToCart, cartItems } = useContext(context_of_product);
 
@@ -24,20 +25,46 @@ function ExperienceDetails() {
   const [imageLoading, setImageLoading] = useState(true);
   const [wishlistLoading, setWishlistLoading] = useState(false);
 
-  // Handle loading state
-  if (productLoading) {
-    return <div className="loading">Loading...</div>;
-  }
+  // useEffect to set the 'like' state based on wishlistItems
+  useEffect(() => {
+    setLike(wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId)));
+  }, [wishlistItems, productId]);
 
-  // Find product in productInfo using productId from URL
+  // useEffect to scroll to the top on mount
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // Step 2: Compute product after all hooks
   const product = productInfo.find((p) => p._id === productId);
 
-  // If product not found, redirect to home
-  if (!product) {
-    navigate('/home');
-    return null;
+  // Step 3: Handle navigation with useEffect
+  useEffect(() => {
+    if (!productLoading && !product) {
+      navigate('/home');
+    }
+  }, [productLoading, product, navigate]);
+
+  // Step 4: Conditional rendering
+  if (productLoading) {
+    return <div className="loading">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
   }
 
+  if (!product) {
+    return null; // Navigation will occur via useEffect; return null to avoid rendering
+  }
+
+  // Step 5: Product exists, proceed with rendering
   const images = [
     product.img1,
     product.img2,
@@ -81,16 +108,6 @@ function ExperienceDetails() {
     },
   ];
 
-  // Update like state based on wishlistItems
-  useEffect(() => {
-    setLike(wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId)));
-  }, [wishlistItems, productId]);
-
-  // Scroll to top when component mounts
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const handleSlideChange = (index) => {
     if (index < 0) index = images.length - 1;
     if (index >= images.length) index = 0;
@@ -128,10 +145,10 @@ function ExperienceDetails() {
     setWishlistLoading(true);
     try {
       if (like) {
-        await removeFromWishlist(productId); // Use productId from params
+        await removeFromWishlist(productId);
         setLike(false);
       } else {
-        await addToWishlist(productId); // Use productId from params
+        await addToWishlist(productId);
         setLike(true);
       }
     } catch (error) {
