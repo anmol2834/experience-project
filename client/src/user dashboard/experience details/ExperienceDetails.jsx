@@ -210,7 +210,13 @@ function ExperienceDetails() {
               if (e.target.closest('.wishlist-icon')) {
                 return;
               }
-              navigate('/product-slideshow', { state: { ...location.state, initialSlide: currentSlide } });
+              navigate('/product-slideshow', {
+                state: {
+                  product: product, // Pass the full product object
+                  initialSlide: currentSlide,
+                  from: location.pathname, // Track where we came from
+                },
+              });
             }}
           >
             {imageLoading && (
@@ -251,7 +257,13 @@ function ExperienceDetails() {
             {showMoreThumb && (
               <div
                 className="thumb more-images"
-                onClick={() => navigate('/product-slideshow', { state: { ...location.state, initialSlide: currentSlide } })}
+                onClick={() => navigate('/product-slideshow', {
+                  state: {
+                    product: product, // Pass the full product object
+                    initialSlide: currentSlide,
+                    from: location.pathname, // Track where we came from
+                  },
+                })}
               >
                 +{images.length - 3}
               </div>
