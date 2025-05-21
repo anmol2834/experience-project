@@ -18,6 +18,7 @@ import Rewards from './user dashboard/user account/rewards page/Rewards';
 import AddToCart from './user dashboard/add to cart page/AddToCart';
 import BookPage from './user dashboard/book page/BookPage';
 import PaymentPage from './user dashboard/payment page/PaymentPage';
+import Address from './user dashboard/user account/address/Address';
 
 function App() {
   document.addEventListener('keydown', function (event) {
@@ -55,6 +56,7 @@ function App() {
                 <Route path="wishlist" element={<Wishlist />} />
                 <Route path="bookings" element={<BookingsPage />} />
                 <Route path="rewards" element={<Rewards />} />
+                <Route path='address' element={<Address />} />
               </Route>
               <Route path="/add_to_cart" element={<ProtectedRoute><AddToCart /></ProtectedRoute>} />
               <Route path="/book_page" element={<ProtectedRoute><BookPage /></ProtectedRoute>} />
