@@ -2,7 +2,7 @@
 
 .container {
   width: 100%;
-  height: auto;
+  height: 100vh;
   background: linear-gradient(to right, var(--primary-color),  var(--shade-primary-color));
   font-family: "Nunito Sans", sans-serif;
   font-optical-sizing: auto;

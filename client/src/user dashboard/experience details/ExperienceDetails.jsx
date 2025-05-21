@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { context_of_product } from '../../context/ProductContext';
 import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeftLong, faLocationDot, faShare, faShareAlt, faShareAltSquare, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeftLong, faLocationDot, faShare, faShareAlt, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 function ExperienceDetails() {
   // Step 1: Call all hooks unconditionally at the top

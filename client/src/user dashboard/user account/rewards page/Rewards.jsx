@@ -23,7 +23,7 @@ const Rewards = ({ isMobile, handleBack }) => {
                         <div className="xp-details">
                             <span className="label">Total XP</span>
                             <h2>1,731</h2>
-                            <div className="progress-container">
+                            <div className="progress-contain">
                                 <div className="progress-bar" style={{ width: '65%' }} />
                             </div>
                             <span className="progress-text">65% to next level</span>

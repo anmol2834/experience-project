@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { 
-  faCommentAlt, 
-  faGift, 
-  faHeart, 
-  faList, 
-  faTicket, 
+import {
+  faCommentAlt,
+  faGift,
+  faHeart,
+  faList,
+  faTicket,
   faUser,
   faCrown,
   faStore
