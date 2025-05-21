@@ -1,8 +1,239 @@
-
 .address-container {
     width: 100%;
     height: 100%;
     overflow-y: scroll;
-    background: red;
 }
 
+.address-container .address-header {
+    padding: 20px 0;
+}
+
+.address-container .new-address-container {
+    width: 100%;
+    height: auto;
+    padding: 20px 20px;
+    background: var(--shade-primary-color);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+}
+
+
+.new-address-container .new-address-header {
+    font-weight: 600;
+    color: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.new-address-container .new-address-header .back-space {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.new-address-container .new-address-header .back-space:hover {
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.1);
+}
+
+.new-address-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 25px;
+}
+
+.new-address-form .state-selector {
+    width: 30%;
+    font-size: 1rem;
+    outline: none;
+    padding: 10px;
+    border: 1px solid rgb(215, 215, 255);
+    border-radius: 10px;
+}
+
+.new-address-form .state-selector:focus {
+    border: 1px solid var(--secondary-color);
+}
+
+.new-address-form .address-partition-div {
+    width: 60%;
+    height: auto;
+    display: flex;
+    gap: 20px;
+}
+
+.new-address-form .address-partition-div input {
+    width: 50%;
+    font-size: 1rem;
+    outline: none;
+    padding: 10px;
+    border: 1px solid rgb(215, 215, 255);
+    border-radius: 10px;
+}
+
+.new-address-form .address-field {
+    width: 60%;
+    height: 100px;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-size: 1rem;
+    outline: none;
+    padding: 10px;
+    border: 1px solid rgb(215, 215, 255);
+    border-radius: 10px;
+    resize: none;
+}
+
+.new-address-form .save-address-btn {
+    width: 30%;
+    font-size: 1rem;
+    outline: none;
+    padding: 10px;
+    border: 1px solid rgb(215, 215, 255);
+    border-radius: 10px;
+    background: var(--secondary-color);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.new-address-form .save-address-btn:hover {
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.1);
+}
+
+.address-container .address-list {
+    width: 100%;
+    height: auto;
+    padding: 25px;
+    background: var(--shade-primary-color);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    box-sizing: border-box;
+}
+
+.address-list .address-list-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.address-list-container .address-list-item {
+    background: white;
+    border: 1px solid rgb(215, 215, 255);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.address-container .address-list .address-list-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.address-list-item .address-list-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.address-list-item .address-list-btns button {
+    background: var(--secondary-color);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.address-list .address-list-header input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+}
+
+.address-list .address-list-header input[type="checkbox"]:hover {
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.address-list .address-list-header input[type="checkbox"]:checked {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.address-list .address-list-header input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 6px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+
+@media (max-width: 1075px) {
+    .new-address-form .state-selector {
+        width: 50%;
+    }
+
+    .new-address-form .address-partition-div {
+        width: 100%;
+    }
+
+    .new-address-form .address-field {
+        width: 100%;
+    }
+
+    .new-address-form .save-address-btn {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .address-list .address-list-container {
+        grid-template-columns: 1fr;
+    }
+
+    .new-address-container .new-address-header .back-space {
+        cursor: none;
+    }
+
+    .new-address-form .save-address-btn {
+        cursor: none;
+    }
+
+    .address-list-item .address-list-btns button {
+        cursor: none;
+    }
+
+    .address-list .address-list-header input[type="checkbox"] {
+        cursor: none;
+    }
+
+    .new-address-form .save-address-btn:hover {
+        transform: scale(1);
+    }
+
+}
