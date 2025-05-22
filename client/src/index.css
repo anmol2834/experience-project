@@ -36,8 +36,8 @@ body {
   --light-color-text: #626262;
   --accent-details: #ff684e;
   --highlight-element: rgb(0, 195, 0);
-  --wireframe-color: #e0e0e0;
-  --wireframe-shade: #f0f0f0;
+  --wireframe-color: #444;
+  --wireframe-shade: #bababa;
 }
 
 [data-theme="dark"] {

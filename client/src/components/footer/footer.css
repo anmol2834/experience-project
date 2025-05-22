@@ -2,8 +2,8 @@
 .footer-contain {
     width: 100%;
     min-height: 50vh;
-    background: linear-gradient(135deg, #1a1a1a, #000000);
-    color: white;
+    background: linear-gradient(135deg, #1a1a1a, var(--bg-primary));
+    color: var(--primary-font-color);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -30,7 +30,7 @@
 .footer-section h2 {
     font-size: 1.5rem;
     margin-bottom: 15px;
-    color: var(--accent-details);
+    color: var(--glow-secondary);
     position: relative;
 }
 
@@ -41,7 +41,7 @@
     bottom: -5px;
     width: 50px;
     height: 2px;
-    background: var(--accent-details);
+    background: var(--glow-secondary);
 }
 
 .footer-section p {
@@ -69,14 +69,14 @@
 }
 
 .footer-section.links .footer-links a {
-    color: white;
+    color: var(--primary-font-color);
     text-decoration: none;
     font-size: 0.9rem;
     transition: color 0.3s ease;
 }
 
 .footer-section.links .footer-links a:hover {
-    color: var(--secondary-color);
+    color: var(--glow-accent-warm);
 }
 
 .footer-section.newsletter form {
@@ -96,16 +96,12 @@
 
 .footer-section.newsletter button {
     padding: 10px 15px;
-    background: var(--accent-details);
+    background: var(--glow-accent-warm);
     border: none;
     border-radius: 5px;
-    color: white;
+    color: var(--primary-font-color);
     cursor: pointer;
     transition: background 0.3s ease;
-}
-
-.footer-section.newsletter button:hover {
-    background: var(--secondary-color);
 }
 
 .footer-section.social .social-icons {
@@ -114,13 +110,13 @@
 }
 
 .footer-section.social .social-icons a {
-    color: white;
+    color: var(--primary-font-color);
     font-size: 1.5rem;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .footer-section.social .social-icons a:hover {
-    color: var(--secondary-color);
+    color: var(--glow-accent-warm);
     transform: translateY(-5px);
 }
 
