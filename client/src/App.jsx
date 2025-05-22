@@ -43,11 +43,11 @@ function App() {
         <ProductContext>
           <div className="container">
 
-            <div class="glow-shape blob1"></div>
-            <div class="glow-shape blob2"></div>
-            <div class="glow-shape blob3"></div>
-            <div class="glow-shape blob4"></div>
-
+            <div className="glow-shape blob1"></div>
+            <div className="glow-shape blob2"></div>
+            <div className="glow-shape blob3"></div>
+            <div className="glow-shape blob4"></div>
+            
             <Routes>
               <Route path="/" element={<DashboardLayout />}>
                 <Route index element={<UserDashboard />} />

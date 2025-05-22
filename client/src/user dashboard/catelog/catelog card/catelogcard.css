@@ -147,12 +147,12 @@
     margin-top: 2px;
 }
 
-.description {
+.catelog-details .description {
     max-height: '100px';
     overflow: 'hidden';
     text-overflow: ellipsis;
     font-size: 1rem;
-    color: var(--light-color-text);
+    color: var(--seconday-font-color);
     font-weight: 400;
 }
 
