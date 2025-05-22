@@ -203,7 +203,7 @@ function UserAcc() {
         initial={{ x: '0%' }}
         animate={{ x: showMenu ? '0%' : 0 }}
         transition={{ type: 'tween', duration: 0.3 }}
-        style={{ display: isMobile && showMenu ? 'none' : 'flex', padding: isMobile ? '50px 10px' : '10px 20px' }}
+        style={{ display: isMobile && showMenu ? 'none' : 'flex', padding: isMobile ? '50px 10px 10px 10px' : '10px 20px' }}
       >
         {isMobile && !showMenu && (
           <div className="back-button2" onClick={handleBack}>
