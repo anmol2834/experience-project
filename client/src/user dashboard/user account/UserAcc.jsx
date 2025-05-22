@@ -123,7 +123,7 @@ function UserAcc() {
         style={{ display: isMobile && !showMenu ? 'none' : 'flex' }}
       >
         <div className="home-btn">
-          <FontAwesomeIcon onClick={() => navigate(-1)} className='back-ico3' icon={faArrowLeftLong}/>
+          <FontAwesomeIcon onClick={() => navigate('/home')} className='back-ico3' icon={faArrowLeftLong}/>
           <span>Profile</span>
         </div>
 

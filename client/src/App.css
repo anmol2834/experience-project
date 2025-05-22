@@ -56,3 +56,28 @@
   background: radial-gradient(circle at center, var(--glow-accent-cool), transparent 70%);
   border-radius: 50%;
 }
+
+
+@media only screen and (max-width: 575px) {
+
+  .blob1 {
+    width: 300px;
+    height: 200px;
+  }
+
+  .blob2 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .blob3 {
+    width: 150px;
+    height: 250px;
+  }
+
+  .blob4 {
+    width: 200px;
+    height: 200px;
+  }
+
+}
