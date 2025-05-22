@@ -19,7 +19,7 @@
 .menu-bar-contain {
   width: 100%;
   height: 100%;
-  color: white;
+  color: var(--primary-font-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -75,7 +75,7 @@
 
 .menu-type1 .menu-icon:hover {
   transform: scale(1.2);
-  color: var(--accent-details);
+  color: var(--glow-secondary);
 }
 
 .menu-type2 {
@@ -262,7 +262,7 @@
   left: 0px;
   width: 3px;
   height: 50%;
-  background: var(--accent-details);
+  background: var(--glow-secondary);
   border-radius: 20px;
 }
 
@@ -330,7 +330,7 @@
 
   .menu-type1 .mobile-menu-item {
     padding: 15px;
-    background: #444;
+    background: var(--bg-secondary);
     border-radius: 20px;
   }
 
@@ -388,7 +388,8 @@
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    background: var(--accent-details);
+    background: var(--glow-secondary);
+    color: black;
   }
 
   .user-icon-container {
