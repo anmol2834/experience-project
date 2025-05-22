@@ -1,243 +1,254 @@
-
 .rewards-container {
-    width: 100%;
-    height: 100%;
-    padding: 30px 25px;
-    overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  padding: 30px 25px;
+  overflow-y: auto;
+}
+
+.mobile-back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.rewards-header h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: black;
+}
+
+.xp-card {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-accent-dark) 100%);
+  border-radius: 20px;
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  position: relative;
+  overflow: hidden;
+  color: white;
+}
+
+.xp-details {
+  z-index: 2;
+}
+
+.xp-details h2 {
+  font-size: 2.5rem;
+  margin: 10px 0;
+}
+
+.progress-contain {
+  background: rgba(255, 255, 255, 0.2);
+  height: 6px;
+  border-radius: 3px;
+  margin: 15px 0;
+}
+
+.progress-bar {
+  background: var(--glow-accent-warm);
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.xp-badge {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.3;
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin: 25px 0;
+}
+
+.action-card {
+  padding: 20px;
+  border-radius: 15px;
+  border: none;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 120px;
+}
+
+.redeem-card {
+  background: linear-gradient(45deg, #e74c3c, var(--glow-accent-warm));
+}
+
+.earn-card {
+  background: linear-gradient(45deg, #27ae60, var(--highlight-element));
+}
+
+.adventure-feed {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.adventure-feed h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 30px 0 20px;
+  color: black;
+}
+
+.feed-list {
+  width: 100%;
+  height: auto;
+}
+
+.feed-item {
+  width: 100%;
+  background: var(--main-element-color);
+  color: var(--bg-color);
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  gap: 15px;
+  transition: transform 0.3s ease;
+}
+
+.adventure-feed .view-more {
+  width: 150px;
+  height: 40px;
+  border: none;
+  outline: none;
+  text-transform: capitalize;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin-top: 10px;
+  background: var(--glow-accent-cool);
+  color: white;
+  cursor: pointer;
+}
+
+.feed-item:hover {
+  transform: translateX(10px);
+}
+
+.activity-icon {
+  font-size: 1.8rem;
+}
+
+.activity-info {
+  flex-grow: 1;
+}
+
+.xp-gain {
+  color: var(--highlight-element);
+  font-weight: bold;
+}
+
+.experience-gallery h3 {
+  margin: 40px 0 20px;
+  color: black;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.gallery-grid .experience-card {
+  height: 180px;
+  border-radius: 15px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.experience-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+  color: white;
+}
+
+.xp-requirement {
+  color: var(--glow-accent-warm);
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+  .rewards-container {
+    padding: 15px;
   }
-  
-  .mobile-back-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    cursor: pointer;
-    z-index: 10;
-  }
-  
+
   .rewards-header h1 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: var(--main-element-color);
+    color: var(--primary-font-color);
   }
-  
+
   .xp-card {
-    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-    border-radius: 20px;
-    padding: 25px;
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-    position: relative;
-    overflow: hidden;
-    color: white;
-  }
-  
-  .xp-details {
-    z-index: 2;
-  }
-  
-  .xp-details h2 {
-    font-size: 2.5rem;
-    margin: 10px 0;
-  }
-  
-  .progress-contain {
-    background: rgba(255,255,255,0.2);
-    height: 6px;
-    border-radius: 3px;
-    margin: 15px 0;
-  }
-  
-  .progress-bar {
-    background: #fff;
-    height: 100%;
-    border-radius: 3px;
-    transition: width 0.5s ease;
-  }
-  
-  .xp-badge {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    opacity: 0.3;
-  }
-  
-  .action-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    margin: 25px 0;
-  }
-  
-  .action-card {
     padding: 20px;
-    border-radius: 15px;
-    border: none;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-height: 120px;
-  }
-  
-  .redeem-card { 
-    background: linear-gradient(45deg, #e74c3c, #e67e22); 
-  }
-  
-  .earn-card { 
-    background: linear-gradient(45deg, #27ae60, #2ecc71); 
   }
 
-  .adventure-feed{
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  .adventure-feed h3 {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 30px 0 20px;
-    color: var(--main-element-color);
+  .xp-details h2 {
+    font-size: 2rem;
   }
 
-  .feed-list{
-    width: 100%;
-    height: auto;
-  }
-  
-  .feed-item {
-    width: 100%;
-    background: var(--main-element-color);
-    color: var(--bg-color);
-    padding: 15px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-    gap: 15px;
-    transition: transform 0.3s ease;
-  }
-
-  .adventure-feed .view-more{
-    width: 150px;
-    height: 40px;
-    border: none;
-    outline: none;
-    text-transform: capitalize;
-    font-size: 1rem;
-    border-radius: 5px;
-    margin-top: 10px;
-    background: var(--accent-details);
-    color: white;
-    cursor: pointer;
-  }
-  
-  .feed-item:hover {
-    transform: translateX(10px);
-  }
-  
-  .activity-icon {
-    font-size: 1.8rem;
-  }
-  
-  .activity-info {
-    flex-grow: 1;
-  }
-  
-  .xp-gain {
-    color: #2ecc71;
-    font-weight: bold;
-  }
-  
-  .experience-gallery h3 {
-    margin: 40px 0 20px;
-    color: var(--main-element-color);
-  }
-  
   .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: 1fr;
   }
-  
-  .gallery-grid .experience-card {
-    height: 180px;
-    border-radius: 15px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .experience-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+
+  .action-card {
+    min-height: 100px;
     padding: 15px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.9));
-    color: white;
   }
-  
-  .xp-requirement {
-    color: #3498db;
-    font-weight: bold;
-    margin-top: 5px;
+
+  .adventure-feed .view-more {
+    cursor: none;
   }
-  
-  @media (max-width: 768px) {
-    .rewards-container {
-      padding: 15px;
-    }
-    
-    .xp-card {
-      padding: 20px;
-    }
-    
-    .xp-details h2 {
-      font-size: 2rem;
-    }
-    
-    .gallery-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .action-card {
-      min-height: 100px;
-      padding: 15px;
-    }
 
-    .adventure-feed .view-more{
-      cursor: none;
-    }
-
+  .adventure-feed h3 {
+    color: var(--primary-font-color);
   }
-  
-  @media (hover: none) {
-    .feed-item:hover {
-      transform: none;
-    }
 
-    .mobile-back-button{
-      cursor: none;
-    }
-
-    .action-card{
-      cursor: none;
-    }
-
-    .adventure-feed .view-more{
-      cursor: none;
-    }
-
+  .experience-gallery h3 {
+    color: var(--primary-font-color);
   }
+
+}
+
+@media (hover: none) {
+  .feed-item:hover {
+    transform: none;
+  }
+
+  .mobile-back-button {
+    cursor: none;
+  }
+
+  .action-card {
+    cursor: none;
+  }
+
+  .adventure-feed .view-more {
+    cursor: none;
+  }
+
+}
