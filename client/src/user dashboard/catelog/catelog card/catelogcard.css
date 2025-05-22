@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    background: var(--bg-color);
+    background: var(--primary-font-color);
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     overflow: hidden;
 }
@@ -14,7 +14,7 @@
 .spinner {
     width: 20px;
     height: 20px;
-    border: 3px solid var(--primary-color);
+    border: 3px solid var(--primary-font-color);
     border-top: 3px solid var(--seconday-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
@@ -108,13 +108,13 @@
     border-radius: 5px;
     border: none;
     outline: none;
-    color: var(--bg-color);
-    background: var(--main-element-color);
+    color: var(--primary-font-color);
+    background: var(--bg-primary);
     cursor: pointer;
 }
 
 .bottom-section button:hover {
-    background: #222222d1;
+    background: var(--bg-darkest);
 }
 
 .heart-contain {
@@ -131,22 +131,6 @@
 
 .heart-contain svg {
     fill: white;
-}
-
-.share-icon {
-    position: absolute;
-    top: 0px;
-    right: 60px;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.share-icon svg {
-    fill: var(--accent-details);
 }
 
 .star-ratings {

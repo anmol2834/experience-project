@@ -27,17 +27,17 @@ body {
   --glow-accent-cool: #8a2be2;
   --primary-font-color: #fff;
   --secondary-font-color: #000;
+  --light-color-text: #626262;
+  --highlight-element: rgb(0, 219, 0);
+  --wireframe-color: #444;
+  --wireframe-shade: #bababa;
 
   --bg-color: #fff;
   --primary-color: rgb(240, 253, 252);
   --shade-primary-color: rgb(238, 238, 255);
   --secondary-color: rgb(26, 106, 255);
   --main-element-color: #222;
-  --light-color-text: #626262;
   --accent-details: #ff684e;
-  --highlight-element: rgb(0, 195, 0);
-  --wireframe-color: #444;
-  --wireframe-shade: #bababa;
 }
 
 [data-theme="dark"] {
