@@ -2,7 +2,7 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background: #222;
+    background: var(--bg-primary);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,7 +12,7 @@
 }
 
 .product-slideshow-container .back-btn svg{
-    fill: white;
+    fill: var(--primary-font-color);
 }
 
 .back-to-experience-details {
@@ -24,7 +24,7 @@
 }
 
 .back-to-experience-details .back-ico2 {
-  color: var(--bg-color);
+  color: var(--primary-font-color);
   transition: 0.5s;
 }
 
@@ -36,7 +36,7 @@
 .product-slideshow-box {
     width: 60%;
     height: 60%;
-    background: white;
+    background: var(--primary-font-color);
     border-radius: 10px;
     background-position: center;
     background-repeat: no-repeat;
@@ -60,7 +60,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: white;
+    background: var(--primary-font-color);
     cursor: pointer;
     opacity: 0.5;
     transition: 0.3s ease-out;
