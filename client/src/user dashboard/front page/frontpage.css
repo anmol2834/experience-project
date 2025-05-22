@@ -48,14 +48,14 @@
 .dot {
   width: 12px;
   height: 12px;
-  background-color: black;
+  background-color: var(--primary-font-color);
   border: none;
   border-radius: 50%;
   cursor: pointer;
 }
 
 .dot.active {
-  background-color: var(--accent-details);
+  background-color: var(--glow-accent-warm);
 }
 
 .loading {
@@ -155,8 +155,8 @@ ul li:nth-child(7) {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  background: var(--bg-color);
-  color: var(--main-element-color);
+  background: var(--primary-font-color);
+  color: var(--secondary-font-color);
   font-size: 1.1rem;
   text-transform: capitalize;
   bottom: 100px;
@@ -202,6 +202,7 @@ ul li:nth-child(7) {
   align-items: center;
   justify-content: space-between;
   padding: 0 30px;
+  color: var(--primary-font-color);
 }
 
 .header-btn {
@@ -220,8 +221,8 @@ ul li:nth-child(7) {
   outline: none;
   border: none;
   border-radius: 10px;
-  background: var(--main-element-color);
-  color: var(--bg-color);
+  background: var(--primary-font-color);
+  color: var(--secondary-font-color);
   font-size: 0.9rem;
   text-transform: capitalize;
   z-index: 2;
@@ -245,6 +246,7 @@ ul li:nth-child(7) {
 .logo img {
   width: 200px;
   height: 200px;
+  filter: invert(100%);
 }
 
 .app-info-menu {
@@ -255,7 +257,7 @@ ul li:nth-child(7) {
   justify-content: center;
   gap: 20px;
   padding: 20px;
-  color: var(--main-element-color);
+  color: var(--primary-font-color);
 }
 
 .app-info-menu span {
@@ -267,7 +269,7 @@ ul li:nth-child(7) {
 .app-info-menu span:hover {
   transition: 0.5s;
   transform: scale(1.1);
-  color: var(--secondary-color);
+  color: var(--glow-secondary);
 }
 
 .homepage {
