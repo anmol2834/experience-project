@@ -3,7 +3,7 @@ import { useAuth } from './AuthContext';
 
 export const context_of_product = createContext();
 
-function ProductContext({ children }) {
+function ProductProvider({ children }) {
   const { token } = useAuth();
   const [productLoading, setProductLoading] = useState(true);
   const [productInfo, setProductInfo] = useState([]);
@@ -207,4 +207,4 @@ function ProductContext({ children }) {
   );
 }
 
-export default ProductContext;
+export default ProductProvider;

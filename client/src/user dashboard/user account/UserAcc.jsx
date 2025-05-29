@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import './UserAcc.css';
 import { useAuth } from '../../context/AuthContext';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { context_of_product } from '../../context/ProductContext';
+import { context_of_product } from '../../context/ProductProvider';
 import { motion } from 'framer-motion'; // Import framer-motion for animations
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd, faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';

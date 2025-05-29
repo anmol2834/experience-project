@@ -7,6 +7,7 @@ import Wishlist from './models/wishlist.js';
 import Product from './models/products.js';
 import Cart from './models/cart.js';
 import Checkout from './models/checkout.js';
+import Address from './models/address.js';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { generateToken, verifyToken } from './middlewares/middleware.js';
@@ -642,6 +643,92 @@ app.post('/checkout', verifyToken, async (req, res) => {
     res.status(201).json({ message: 'Booking successful' });
   } catch (err) {
     console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+// GET all addresses for the user
+app.get('/addresses', verifyToken, async (req, res) => {
+  try {
+    const addresses = await Address.find({ userId: req.user.id });
+    const user = await User.findById(req.user.id).select('activeAddressId');
+    res.json({ addresses, activeAddressId: user.activeAddressId });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// POST a new address
+app.post('/addresses', verifyToken, async (req, res) => {
+  const { address, locality, city, state, zip, phone, landmark, alternatePhone } = req.body;
+  try {
+    const newAddress = new Address({
+      userId: req.user.id,
+      address,
+      locality,
+      city,
+      state,
+      zip,
+      phone,
+      landmark,
+      alternatePhone,
+    });
+    await newAddress.save();
+    const user = await User.findById(req.user.id);
+    if (!user.activeAddressId) {
+      user.activeAddressId = newAddress._id;
+      await user.save();
+    }
+    res.status(201).json(newAddress);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// PUT to update an address
+app.put('/addresses/:id', verifyToken, async (req, res) => {
+  const { address, locality, city, state, zip, phone, landmark, alternatePhone } = req.body;
+  try {
+    const updatedAddress = await Address.findOneAndUpdate(
+      { _id: req.params.id, userId: req.user.id },
+      { address, locality, city, state, zip, phone, landmark, alternatePhone },
+      { new: true }
+    );
+    if (!updatedAddress) return res.status(404).json({ message: 'Address not found' });
+    res.json(updatedAddress);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// DELETE an address
+app.delete('/addresses/:id', verifyToken, async (req, res) => {
+  try {
+    const address = await Address.findOneAndDelete({ _id: req.params.id, userId: req.user.id });
+    if (!address) return res.status(404).json({ message: 'Address not found' });
+    const user = await User.findById(req.user.id);
+    if (user.activeAddressId && user.activeAddressId.toString() === req.params.id) {
+      user.activeAddressId = null;
+      await user.save();
+    }
+    res.json({ message: 'Address deleted' });
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// PUT to set active address
+app.put('/user/active-address', verifyToken, async (req, res) => {
+  const { addressId } = req.body;
+  try {
+    const address = await Address.findOne({ _id: addressId, userId: req.user.id });
+    if (!address) return res.status(404).json({ message: 'Address not found' });
+    const user = await User.findById(req.user.id);
+    user.activeAddressId = addressId;
+    await user.save();
+    res.json({ message: 'Active address updated' });
+  } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }
 });

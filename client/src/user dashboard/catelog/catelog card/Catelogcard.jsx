@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import './catelogcard.css';
 import { useAuth } from '../../../context/AuthContext';
-import { context_of_product } from '../../../context/ProductContext';
+import { context_of_product } from '../../../context/ProductProvider';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faShare, faShareAlt, faShareNodes, faStar } from '@fortawesome/free-solid-svg-icons';

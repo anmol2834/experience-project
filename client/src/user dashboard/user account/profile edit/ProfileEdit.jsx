@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useAuth } from '../../../context/AuthContext';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { context_of_product } from '../../../context/ProductContext';
+import { context_of_product } from '../../../context/ProductProvider';
 
 function ProfileEdit() {
   const { token } = useAuth();

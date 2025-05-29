@@ -14,10 +14,11 @@ const userSchema = new mongoose.Schema({
   otp: { type: String },
   otpExpiration: { type: Date },
   lastOtpSent: { type: Date },
-  street: { type: String }, 
-  city: { type: String },   
-  state: { type: String }, 
-  zip: { type: String },   
+  street: { type: String },
+  city: { type: String },
+  state: { type: String },
+  zip: { type: String },
+  activeAddressId: { type: mongoose.Schema.Types.ObjectId, ref: 'Address', default: null },
 });
 
 userSchema.pre('save', async function (next) {
@@ -27,6 +28,4 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-const User = mongoose.model('User', userSchema);
-
-export default User;
+export default mongoose.model('User', userSchema);

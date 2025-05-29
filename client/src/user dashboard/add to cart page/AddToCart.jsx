@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { context_of_product } from '../../context/ProductContext';
+import { context_of_product } from '../../context/ProductProvider';
 import { useAuth } from '../../context/AuthContext';
 import { FaArrowLeft, FaStar, FaPlus, FaMinus, FaTrash } from 'react-icons/fa';
 import './AddToCart.css';

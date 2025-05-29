@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import './catelog.css';
 import Catelogcard from './catelog card/Catelogcard';
-import { context_of_product } from '../../context/ProductContext';
+import { context_of_product } from '../../context/ProductProvider';
 
 function Catelog() {
   const { productInfo, productLoading, wishlistItems } = useContext(context_of_product);

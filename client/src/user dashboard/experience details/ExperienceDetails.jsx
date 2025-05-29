@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './ExperienceDetails.css';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { context_of_product } from '../../context/ProductContext';
+import { context_of_product } from '../../context/ProductProvider';
 import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong, faLocationDot, faShareAlt, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';

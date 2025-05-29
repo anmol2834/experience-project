@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './ProductSlideshow.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from 'react';
-import { context_of_product } from '../../../context/ProductContext';
+import { context_of_product } from '../../../context/ProductProvider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 
