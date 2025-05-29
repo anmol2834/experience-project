@@ -42,7 +42,6 @@ function App() {
       <AuthProvider>
         <ProductContext>
           <div className="container">
-
             <div className="glow-shape blob1"></div>
             <div className="glow-shape blob2"></div>
             <div className="glow-shape blob3"></div>
@@ -52,8 +51,9 @@ function App() {
               <Route path="/" element={<DashboardLayout />}>
                 <Route index element={<UserDashboard />} />
                 <Route path="/home" element={<UserDashboard />} />
-                {/* Updated route with dynamic productId parameter */}
                 <Route path="/experience-details/:productId" element={<ExperienceDetails />} />
+                {/* Updated route with dynamic productId parameter */}
+                <Route path="/product-slideshow/:productId" element={<ProductSlideshow />} />
               </Route>
               <Route path="/account" element={<ProtectedRoute><UserAcc /></ProtectedRoute>}>
                 <Route index element={<Rewards />} />
@@ -62,12 +62,11 @@ function App() {
                 <Route path="wishlist" element={<Wishlist />} />
                 <Route path="bookings" element={<BookingsPage />} />
                 <Route path="rewards" element={<Rewards />} />
-                <Route path='address' element={<Address />} />
+                <Route path="address" element={<Address />} />
               </Route>
               <Route path="/add_to_cart" element={<ProtectedRoute><AddToCart /></ProtectedRoute>} />
               <Route path="/book_page" element={<ProtectedRoute><BookPage /></ProtectedRoute>} />
               <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
-              <Route path="/product-slideshow" element={<ProductSlideshow />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
             </Routes>

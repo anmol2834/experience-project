@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './ProductSlideshow.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from 'react';
 import { context_of_product } from '../../../context/ProductContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,17 +8,32 @@ import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 
 function ProductSlideshow() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { productInfo } = useContext(context_of_product);
-  const [currentSlide, setCurrentSlide] = useState(location.state?.initialSlide || 0);
+  const { productId } = useParams(); // Get productId from URL
+  const { productInfo, productLoading } = useContext(context_of_product);
+  const [currentSlide, setCurrentSlide] = useState(0); // Default to 0 for dynamic fetch
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [animate, setAnimate] = useState(false);
 
-  const productFromState = location.state?.product;
-  const product = productFromState
-    ? { ...productFromState, ...productInfo.find((p) => p._id === productFromState.productId) }
-    : null;
+  // Handle loading state
+  if (productLoading) {
+    return (
+      <div className="loading">
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    );
+  }
+
+  // Find product using productId
+  const product = productInfo.find((p) => p._id === productId);
 
   const images = product
     ? [
@@ -80,7 +95,7 @@ function ProductSlideshow() {
     if (e.target.closest('.product-slideshow-box') || e.target.closest('.thumbnail-slides')) {
       return;
     }
-    navigate('/experience-details', { state: location.state });
+    navigate(`/experience-details/${productId}`);
   };
 
   useEffect(() => {
@@ -93,7 +108,7 @@ function ProductSlideshow() {
 
   return (
     <div className="product-slideshow-container" onClick={handleContainerBack}>
-      <div className="back-to-experience-details" onClick={() => navigate(-1, { state: location.state })}>
+      <div className="back-to-experience-details" onClick={() => navigate(`/experience-details/${productId}`)}>
         <FontAwesomeIcon className='back-ico2' icon={faArrowLeftLong}/>
       </div>
 

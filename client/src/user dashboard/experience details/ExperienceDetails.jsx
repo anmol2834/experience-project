@@ -5,10 +5,9 @@ import { useAuth } from '../../context/AuthContext';
 import { context_of_product } from '../../context/ProductContext';
 import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeftLong, faLocationDot, faShare, faShareAlt, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeftLong, faLocationDot, faShareAlt, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 function ExperienceDetails() {
-  // Step 1: Call all hooks unconditionally at the top
   const navigate = useNavigate();
   const location = useLocation();
   const { productId } = useParams();
@@ -25,46 +24,42 @@ function ExperienceDetails() {
   const [imageLoading, setImageLoading] = useState(true);
   const [wishlistLoading, setWishlistLoading] = useState(false);
 
-  // useEffect to set the 'like' state based on wishlistItems
   useEffect(() => {
     setLike(wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId)));
   }, [wishlistItems, productId]);
 
-  // useEffect to scroll to the top on mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Step 2: Compute product after all hooks
   const product = productInfo.find((p) => p._id === productId);
 
-  // Step 3: Handle navigation with useEffect
   useEffect(() => {
     if (!productLoading && !product) {
       navigate('/home');
     }
   }, [productLoading, product, navigate]);
 
-  // Step 4: Conditional rendering
   if (productLoading) {
-    return <div className="loading">
-      <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-    </div>
+    return (
+      <div className="loading">
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
+    );
   }
 
   if (!product) {
-    return null; // Navigation will occur via useEffect; return null to avoid rendering
+    return null;
   }
 
-  // Step 5: Product exists, proceed with rendering
   const images = [
     product.img1,
     product.img2,
@@ -186,7 +181,7 @@ function ExperienceDetails() {
     <div className="experience-details-container">
       <div className="headers">
         <div className="back-btn" onClick={handleBack}>
-          <FontAwesomeIcon className='back-ico' icon={faArrowLeftLong}/>
+          <FontAwesomeIcon className="back-ico" icon={faArrowLeftLong} />
         </div>
 
         <div className="cart-icon" data-content={cartItems.length} onClick={() => navigate('/add_to_cart')}>
@@ -208,11 +203,10 @@ function ExperienceDetails() {
               if (e.target.closest('.wishlist-icon')) {
                 return;
               }
-              navigate('/product-slideshow', {
+              navigate(`/product-slideshow/${productId}`, {
                 state: {
-                  product: product, // Pass the full product object
                   initialSlide: currentSlide,
-                  from: location.pathname, // Track where we came from
+                  from: location.pathname,
                 },
               });
             }}
@@ -255,11 +249,10 @@ function ExperienceDetails() {
             {showMoreThumb && (
               <div
                 className="thumb more-images"
-                onClick={() => navigate('/product-slideshow', {
+                onClick={() => navigate(`/product-slideshow/${productId}`, {
                   state: {
-                    product: product, // Pass the full product object
                     initialSlide: currentSlide,
-                    from: location.pathname, // Track where we came from
+                    from: location.pathname,
                   },
                 })}
               >
