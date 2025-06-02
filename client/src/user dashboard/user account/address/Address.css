@@ -21,7 +21,6 @@
     margin-bottom: 30px;
 }
 
-
 .new-address-container .new-address-header {
     font-weight: 600;
     color: var(--glow-accent-cool);
@@ -102,11 +101,19 @@
     color: white;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.new-address-form .save-address-btn:hover {
+.new-address-form .save-address-btn:hover:not(:disabled) {
     transition: all 0.3s ease-in-out;
     transform: scale(1.1);
+}
+
+.new-address-form .save-address-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 .address-container .address-list {
@@ -143,6 +150,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
 .address-list-item .address-list-btns {
@@ -158,6 +166,18 @@
     border: none;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.address-list-item .address-list-btns button:hover:not(:disabled) {
+    transform: scale(1.05);
+}
+
+.address-list-item .address-list-btns button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 .address-list .address-list-header input[type="checkbox"] {
@@ -173,7 +193,7 @@
     transition: all 0.2s ease-in-out;
 }
 
-.address-list .address-list-header input[type="checkbox"]:hover {
+.address-list .address-list-header input[type="checkbox"]:hover:not(:disabled) {
     box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
 }
 
@@ -194,9 +214,62 @@
     transform: rotate(45deg);
 }
 
+.address-list .address-list-header input[type="checkbox"]:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Futuristic Spinner for Buttons */
+.futuristic-spinner {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0 60deg, var(--glow-accent-cool) 60deg 120deg, transparent 120deg 360deg);
+    animation: futuristic-spin 1s linear infinite;
+    position: relative;
+}
+
+.futuristic-spinner::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes futuristic-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Spinner for Checkbox */
+.checkbox-spinner {
+    width: 16px;
+    height: 16px;
+    border: 3px solid transparent;
+    border-top: 3px solid var(--glow-accent-cool);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
 
 @media (max-width: 1075px) {
-
     .address-container .address-header {
         color: var(--primary-font-color);
     }
@@ -238,8 +311,11 @@
         cursor: none;
     }
 
-    .new-address-form .save-address-btn:hover {
+    .new-address-form .save-address-btn:hover:not(:disabled) {
         transform: scale(1);
     }
 
+    .address-list-item .address-list-btns button:hover:not(:disabled) {
+        transform: scale(1);
+    }
 }

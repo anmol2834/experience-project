@@ -9,6 +9,9 @@ function Address() {
   const { addresses, activeAddressId, addAddress, updateAddress, deleteAddress, setActiveAddress, loading } = useContext(AddressContext);
   const [newAddress, setNewAddress] = useState(addresses.length === 0);
   const [editingAddress, setEditingAddress] = useState(null);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isSettingActive, setIsSettingActive] = useState(false);
   const formRef = useRef(null);
 
   const handleNewAddressBack = () => {
@@ -24,7 +27,7 @@ function Address() {
     setNewAddress(true);
   };
 
-  const handleEdit = (address) => {
+  const handleEdit = async (address) => {
     setEditingAddress(address);
     setNewAddress(true);
     if (formRef.current) {
@@ -32,16 +35,21 @@ function Address() {
     }
   };
 
-  const handleDelete = (id) => {
-    deleteAddress(id);
+  const handleDelete = async (id) => {
+    setIsDeleting(true);
+    await deleteAddress(id);
+    setIsDeleting(false);
   };
 
-  const handleSetActive = (id) => {
-    setActiveAddress(id);
+  const handleSetActive = async (id) => {
+    setIsSettingActive(true);
+    await setActiveAddress(id);
+    setIsSettingActive(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSaving(true);
     const formData = new FormData(e.target);
     const addressData = {
       state: formData.get('states'),
@@ -59,6 +67,7 @@ function Address() {
     } else {
       await addAddress(addressData);
     }
+    setIsSaving(false);
     setNewAddress(false);
     setEditingAddress(null);
     e.target.reset();
@@ -101,7 +110,7 @@ function Address() {
             <option value="bihar">Bihar</option>
             <option value="westbengal">West Bengal</option>
             <option value="odisha">Odisha</option>
-            <option value="andhrapradesh}">Andhra Pradesh</option>
+            <option value="andhrapradesh">Andhra Pradesh</option>
             <option value="telangana">Telangana</option>
             <option value="jharkhand">Jharkhand</option>
             <option value="chhattisgarh">Chhattisgarh</option>
@@ -143,7 +152,9 @@ function Address() {
             <input type="text" name="alternatePhone" placeholder='Alternate Phone (Optional)' defaultValue={editingAddress?.alternatePhone || ''} />
           </div>
 
-          <button type="submit" className='save-address-btn'>Save</button>
+          <button type="submit" className='save-address-btn' disabled={isSaving}>
+            {isSaving ? <span className="futuristic-spinner"></span> : 'Save'}
+          </button>
         </form>
       </div>
 
@@ -160,16 +171,34 @@ function Address() {
               <div className="address-list-item" key={address._id}>
                 <div className="address-list-header">
                   <h4>Address {address._id}</h4>
-                  <input
-                    type="checkbox"
-                    checked={activeAddressId && activeAddressId.toString() === address._id.toString()}
-                    onChange={() => handleSetActive(address._id)}
-                  />
+                  <div style={{ position: 'relative' }}>
+                    <input
+                      type="checkbox"
+                      checked={activeAddressId && activeAddressId.toString() === address._id.toString()}
+                      onChange={() => handleSetActive(address._id)}
+                      disabled={isSettingActive}
+                      style={{ visibility: isSettingActive ? 'hidden' : 'visible' }}
+                    />
+                    <span
+                      className="checkbox-spinner"
+                      style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        visibility: isSettingActive ? 'visible' : 'hidden',
+                      }}
+                    ></span>
+                  </div>
                 </div>
                 <p>{address.address}, {address.locality}, {address.city}, {address.state} - <b>{address.zip}</b></p>
                 <div className="address-list-btns">
-                  <button className='address-list-btn' onClick={() => handleEdit(address)}>Edit</button>
-                  <button className='address-list-btn' onClick={() => handleDelete(address._id)}>Delete</button>
+                  <button className='address-list-btn' onClick={() => handleEdit(address)} disabled={isSaving || isDeleting || isSettingActive}>
+                    {isSaving ? <span className="futuristic-spinner"></span> : 'Edit'}
+                  </button>
+                  <button className='address-list-btn' onClick={() => handleDelete(address._id)} disabled={isDeleting || isSettingActive}>
+                    {isDeleting ? <span className="futuristic-spinner"></span> : 'Delete'}
+                  </button>
                 </div>
               </div>
             ))
