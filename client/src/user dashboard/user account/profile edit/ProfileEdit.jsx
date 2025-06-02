@@ -20,6 +20,9 @@ function ProfileEdit() {
   const [originalData, setOriginalData] = useState({}); // Store original fetched data
   const [changedFields, setChangedFields] = useState({}); // Track changed fields
   const [loading, setLoading] = useState(true);
+  const [isUpdatingProfile, setIsUpdatingProfile] = useState(false); // Loading state for profile update
+  const [isChangingPasswordOld, setIsChangingPasswordOld] = useState(false); // Loading state for old password method
+  const [isChangingPasswordOtp, setIsChangingPasswordOtp] = useState(false); // Loading state for OTP method
 
   const [nextMethod, setNextMethod] = useState(false);
   const [passwordBox, setPasswordBox] = useState(false);
@@ -106,6 +109,7 @@ function ProfileEdit() {
       return;
     }
 
+    setIsUpdatingProfile(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
         method: 'PUT',
@@ -130,11 +134,14 @@ function ProfileEdit() {
     } catch (error) {
       console.error('Error updating profile:', error);
       toast.error('An error occurred while updating profile');
+    } finally {
+      setIsUpdatingProfile(false);
     }
   };
 
   const handleChangePasswordWithOld = async (e) => {
     e.preventDefault();
+    setIsChangingPasswordOld(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/change-password-old`, {
         method: 'POST',
@@ -156,6 +163,8 @@ function ProfileEdit() {
     } catch (error) {
       console.error('Error changing password:', error);
       toast.error('An error occurred while changing password');
+    } finally {
+      setIsChangingPasswordOld(false);
     }
   };
 
@@ -229,6 +238,7 @@ function ProfileEdit() {
 
   const handleChangePasswordWithOtp = async (e) => {
     e.preventDefault();
+    setIsChangingPasswordOtp(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/change-password-otp`, {
         method: 'POST',
@@ -253,6 +263,8 @@ function ProfileEdit() {
     } catch (error) {
       console.error('Error changing password with OTP:', error);
       toast.error('An error occurred while changing password');
+    } finally {
+      setIsChangingPasswordOtp(false);
     }
   };
 
@@ -371,8 +383,12 @@ function ProfileEdit() {
           </select>
         </div>
 
-        <button className="edit-profile-btn" onClick={handleProfileUpdate}>
-          <span className="btn-text">Update Profile</span>
+        <button className="edit-profile-btn" onClick={handleProfileUpdate} disabled={isUpdatingProfile}>
+          {isUpdatingProfile ? <span className="futuristic-spinner"></span> : (
+            <>
+              <span className="btn-text">Update Profile</span>
+            </>
+          )}
         </button>
         <button className='change-password' onClick={openPasswordBox}>Change Password</button>
 
@@ -410,7 +426,9 @@ function ProfileEdit() {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
-                <button type='submit'>Submit</button>
+                <button type='submit' disabled={isChangingPasswordOld}>
+                  {isChangingPasswordOld ? <span className="futuristic-spinner"></span> : 'Submit'}
+                </button>
               </form>
             </div>
 
@@ -445,7 +463,9 @@ function ProfileEdit() {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
-                <button type='submit'>Submit</button>
+                <button type='submit' disabled={isChangingPasswordOtp}>
+                  {isChangingPasswordOtp ? <span className="futuristic-spinner"></span> : 'Submit'}
+                </button>
               </form>
             </div>
 

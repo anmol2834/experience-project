@@ -85,9 +85,14 @@
     transition: all 0.3s ease;
 }
 
-.edit-profile-btn:hover {
+.edit-profile-btn:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+.edit-profile-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 .btn-icon {
@@ -254,12 +259,20 @@
     transition: 0.5s;
 }
 
-.first-method form button:hover,
-.second-method form button:hover,
-.new-password-contain form button:hover,
-.email-verificaton-container form button:hover {
+.first-method form button:hover:not(:disabled),
+.second-method form button:hover:not(:disabled),
+.new-password-contain form button:hover:not(:disabled),
+.email-verificaton-container form button:hover:not(:disabled) {
     transition: 0.5s;
     background: #0066cc;
+}
+
+.first-method form button:disabled,
+.second-method form button:disabled,
+.new-password-contain form button:disabled,
+.email-verificaton-container form button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 .resend-otp {
@@ -281,9 +294,38 @@
     background: #0066cc;
 }
 
+/* Futuristic Spinner for Buttons */
+.futuristic-spinner {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 0 60deg, #007bff 60deg 120deg, transparent 120deg 360deg);
+    animation: futuristic-spin 1s linear infinite;
+    position: relative;
+}
+
+.futuristic-spinner::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes futuristic-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 @media (max-width: 480px) {
-
     .input-group label {
         color: #cdcdcd;
     }
@@ -327,5 +369,4 @@
     .back-btn-section svg {
         cursor: none;
     }
-
 }
