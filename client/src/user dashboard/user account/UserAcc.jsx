@@ -6,10 +6,12 @@ import { context_of_product } from '../../context/ProductProvider';
 import { motion } from 'framer-motion'; // Import framer-motion for animations
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAdd, faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
+import { AddressContext } from '../../context/AddressContext'; // Import AddressContext
 
 function UserAcc() {
   const { logout, token } = useAuth();
   const { userUpdated } = useContext(context_of_product);
+  const { addresses, activeAddressId } = useContext(AddressContext); // Access address context
   const navigate = useNavigate();
   const location = useLocation();
   const [userData, setUserData] = useState({
@@ -96,6 +98,13 @@ function UserAcc() {
   const handleLogout = () => {
     logout();
   };
+
+  // Determine the active address and format it
+  const activeAddress = addresses.find(addr => addr._id === activeAddressId);
+  const fullAddress = activeAddress
+    ? `${activeAddress.address}, ${activeAddress.locality}, ${activeAddress.city}, ${activeAddress.state} - ${activeAddress.zip}`
+    : 'Add Your Local Address';
+  const displayAddress = fullAddress.length > 160 ? fullAddress.slice(0, 160) + '...' : fullAddress;
 
   if (loading) {
     return (
@@ -184,7 +193,7 @@ function UserAcc() {
             </span>
           </section>
           <section>
-            Add Your Local Address
+            {displayAddress}
           </section>
         </div>
 

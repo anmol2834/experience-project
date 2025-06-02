@@ -2,7 +2,7 @@ import './Address.css';
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBackspace, faPlus, faSave } from '@fortawesome/free-solid-svg-icons';
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext, useEffect } from 'react';
 import { AddressContext } from '../../../context/AddressContext';
 
 function Address() {
@@ -13,6 +13,15 @@ function Address() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isSettingActive, setIsSettingActive] = useState(false);
   const formRef = useRef(null);
+
+  // Automatically set a new active address if the current active one is deleted
+  useEffect(() => {
+    if (activeAddressId && !addresses.find(addr => addr._id === activeAddressId)) {
+      if (addresses.length > 0) {
+        setActiveAddress(addresses[0]._id);
+      }
+    }
+  }, [addresses, activeAddressId, setActiveAddress]);
 
   const handleNewAddressBack = () => {
     if (newAddress) {
