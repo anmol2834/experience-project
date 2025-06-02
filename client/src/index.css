@@ -31,12 +31,13 @@ body {
   --secondary-font-color: #000;
   --light-color-text: #626262;
   --highlight-element: rgb(0, 219, 0);
+  --shade-primary-color: rgb(242, 232, 255);
   --wireframe-color: #444;
   --wireframe-shade: #bababa;
 
+
   --bg-color: #fff;
   --primary-color: rgb(240, 253, 252);
-  --shade-primary-color: rgb(238, 238, 255);
   --secondary-color: rgb(26, 106, 255);
   --main-element-color: #222;
   --accent-details: #ff684e;
