@@ -310,6 +310,11 @@
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+
+  .wishlist-container {
+    padding-bottom: 4rem;
+  }
+
   .wishlist-grid {
     grid-template-columns: 1fr;
     padding: 0px;
