@@ -197,6 +197,7 @@
 @media (max-width: 768px) {
   .rewards-container {
     padding: 15px;
+    padding-bottom: 4rem;
   }
 
   .rewards-header h1 {
