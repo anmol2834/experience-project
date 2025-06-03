@@ -14,7 +14,7 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
   const [wishlistLoading, setWishlistLoading] = useState(false);
   const navigate = useNavigate();
 
-  let newDesc = desc.length > 80 ? desc.slice(0, 80) + '...' : desc;
+  let newDesc = desc.length > 60 ? desc.slice(0, 70) + '...' : desc;
 
   useEffect(() => {
     setLike(isLiked);
