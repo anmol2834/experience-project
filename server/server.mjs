@@ -477,6 +477,23 @@ app.get('/products', async (req, res) => {
   }
 });
 
+// search endpoint 
+app.get('/products/search', async (req, res) => {
+  const { query } = req.query;
+  try {
+    if (!query) {
+      const products = await Product.find();
+      return res.json(products);
+    }
+    const regex = new RegExp(`^${query}`, 'i'); // Match titles starting with query, case-insensitive
+    const products = await Product.find({ title: regex });
+    res.json(products);
+  } catch (error) {
+    console.error('Error searching products:', error);
+    res.status(500).json({ message: 'Error searching products' });
+  }
+});
+
 // Wishlist routes (require token)
 app.post('/wishlist/add', verifyToken, async (req, res) => {
   const { productId } = req.body;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   faCommentAlt,
   faGift,
@@ -12,11 +12,13 @@ import {
 import "./menubar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
+import { context_of_product } from '../../context/ProductProvider';
 
 const Menubar = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.matchMedia("(max-width: 992px)").matches);
+  const { setSearchQuery } = useContext(context_of_product); // Access setSearchQuery from context
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,6 +37,10 @@ const Menubar = () => {
     document.body.style.overflow = (menuOpen && isMobile) ? "hidden" : "auto";
     return () => document.body.style.overflow = "auto";
   }, [menuOpen, isMobile]);
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value); // Update searchQuery in context on input change
+  };
 
   return (
     <div className="menu-bar-contain">
@@ -90,6 +96,7 @@ const Menubar = () => {
           type="search"
           placeholder="Search Your Experience"
           className="search-bar"
+          onChange={handleSearch} // Call handleSearch on input change
         />
       </div>
       <div className="user-icon-container" onClick={() => navigate("/account")}>

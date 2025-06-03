@@ -10,12 +10,16 @@ function ProductProvider({ children }) {
   const [wishlistItems, setWishlistItems] = useState([]);
   const [userUpdated, setUserUpdated] = useState(0);
   const [cartItems, setCartItems] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(''); // New state for search query
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setProductLoading(true);
-        const productRes = await fetch(`${process.env.REACT_APP_API_URL}/products`, {
+        const url = searchQuery
+          ? `${process.env.REACT_APP_API_URL}/products/search?query=${encodeURIComponent(searchQuery)}`
+          : `${process.env.REACT_APP_API_URL}/products`;
+        const productRes = await fetch(url, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
         });
@@ -33,7 +37,7 @@ function ProductProvider({ children }) {
           const wishlistData = await wishlistRes.json();
           setWishlistItems(wishlistData);
 
-          await fetchCart(); // Fetch cart items on token change
+          await fetchCart();
         } else {
           setWishlistItems([]);
           setCartItems([]);
@@ -45,7 +49,7 @@ function ProductProvider({ children }) {
       }
     };
     fetchData();
-  }, [token]);
+  }, [token, searchQuery]); // Add searchQuery as a dependency
 
   const fetchCart = async () => {
     if (!token) return;
@@ -155,9 +159,9 @@ function ProductProvider({ children }) {
     } catch (error) {
       console.error('Error adding to wishlist:', error);
     }
-  };
+    };
 
-  const removeFromWishlist = async (productId) => {
+    const removeFromWishlist = async (productId) => {
     if (!token) return;
     try {
       const res = await fetch(`${process.env.REACT_APP_API_URL}/wishlist/remove`, {
@@ -200,6 +204,8 @@ function ProductProvider({ children }) {
         removeFromCart,
         updateCartQuantity,
         fetchCart,
+        searchQuery,
+        setSearchQuery,
       }}
     >
       {children}

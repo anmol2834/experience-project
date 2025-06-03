@@ -34,25 +34,29 @@ function Catelog() {
     <div className="catelogs">
       <h1>Explore Experiences :</h1>
       <div className="catelog-aligner">
-        {productInfo.map((value) => {
-          const isLiked = wishlistItems.some((item) => item.productId && item.productId._id === value._id);
-          return (
-            <Catelogcard
-              key={value._id}
-              state={value.state}
-              city={value.city}
-              title={value.title}
-              desc={value.description}
-              price={value.price}
-              img={value.img1}
-              stock={value.stock}
-              mrp={value.mrp}
-              ratings={value.rating}
-              productId={value._id}
-              isLiked={isLiked}
-            />
-          );
-        })}
+        {productInfo.length > 0 ? (
+          productInfo.map((value) => {
+            const isLiked = wishlistItems.some((item) => item.productId && item.productId._id === value._id);
+            return (
+              <Catelogcard
+                key={value._id}
+                state={value.state}
+                city={value.city}
+                title={value.title}
+                desc={value.description}
+                price={value.price}
+                img={value.img1}
+                stock={value.stock}
+                mrp={value.mrp}
+                ratings={value.rating}
+                productId={value._id}
+                isLiked={isLiked}
+              />
+            );
+          })
+        ) : (
+          <p>No matching experiences found.</p>
+        )}
       </div>
     </div>
   );
