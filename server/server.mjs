@@ -12,6 +12,7 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { generateToken, verifyToken } from './middlewares/middleware.js';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 const app = express();
 
@@ -24,7 +25,18 @@ app.use(cors({
 app.use(express.json());
 dotenv.config();
 
-const __dirname = path.resolve();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+// Serve static files from React
+app.use(express.static(path.join(__dirname, '../client/dist'), {
+  setHeaders: (res, path) => {
+    if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
+    }
+  }
+}));
 
 
 mongoose.connect(process.env.MONGO_CONNECTION_STRING)
@@ -733,11 +745,11 @@ app.put('/user/active-address', verifyToken, async (req, res) => {
   }
 });
 
+// console.log('Static files path:', path.join(__dirname, '../client/dist'));
 
-app.use(express.static(path.join(__dirname, '/client/dist')));
-
-app.get('*', (_, res) => {
-  res.sendFile(path.join(__dirname, '/client/dist/index.html'));
+// Catch-all route for SPA
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 // Start the server

@@ -6,7 +6,8 @@ dotenv.config({ path: '../.env' });
 
 
 export default defineConfig({
-  base: './',
+  base: '/',
+  envDir: '../',
   plugins: [react()],
   define: {
     'process.env': process.env, 
@@ -14,5 +15,6 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 1000,
     minify: false,
+    outDir: 'dist',
   },
 });

@@ -39,7 +39,7 @@ function App() {
   });
 
   return (
-    <Router>
+    <Router basename="/">
       <AuthProvider>
         <ProductProvider>
           <AddressProvider> {/* Corrected from AddressContext */}
