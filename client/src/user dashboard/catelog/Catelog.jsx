@@ -55,7 +55,7 @@ function Catelog() {
             );
           })
         ) : (
-          <p>No matching experiences found.</p>
+          <div className='no-search-result-container'>No matching experiences found!</div>
         )}
       </div>
     </div>

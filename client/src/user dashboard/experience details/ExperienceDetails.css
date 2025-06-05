@@ -235,7 +235,6 @@
 .total-reviews p,
 .average-rating p {
   font-size: 0.9rem;
-  color: var(--glow-accent-warm);
 }
 
 .growth {
@@ -279,7 +278,7 @@
 
 .rating-bar .fill {
   height: 100%;
-  background: var(--glow-accent-warm);
+  background: var(--highlight-element);
   transition: width 0.3s ease;
 }
 
@@ -319,7 +318,7 @@
 
 .reviewer-details p {
   font-size: 0.8rem;
-  color: var(--glow-accent-warm);
+  color: var(--highlight-element);
 }
 
 .review-meta {
@@ -335,7 +334,7 @@
 }
 
 .review-rating .star.filled {
-  color: var(--glow-accent-warm);
+  color: var(--highlight-element);
 }
 
 .review-date {
@@ -375,11 +374,11 @@
 }
 
 .see-more-reviews {
-  background: var(--glow-accent-warm);
+  background: var(--glow-accent-cool);
   border: none;
   padding: 0.8rem 1.5rem;
   border-radius: 0.5rem;
-  color: var(--secondary-font-color);
+  color: white;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -419,7 +418,7 @@
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--primary-font-color);
 }
 
@@ -466,6 +465,10 @@
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
+}
+
+.price-rating .rating{
+  color: white;
 }
 
 .price .amount {
