@@ -80,8 +80,6 @@ function ExperienceDetails() {
       rating: 5,
       text: 'My first and only mala ordered on Etsy, and I’M beyond delighted! I requested a custom mala based on two stones I was called to invite together in this kind of creation. The fun and genuine joy I invite together in this kind of creation.',
       date: '24-10-2022',
-      totalSpend: '$200',
-      totalReviews: 14,
     },
     {
       name: 'Jane Smith',
@@ -89,8 +87,6 @@ function ExperienceDetails() {
       rating: 4,
       text: 'Great experience overall. The service was excellent, though it felt a bit pricey for what was offered.',
       date: '15-01-2023',
-      totalSpend: '$150',
-      totalReviews: 8,
     },
     {
       name: 'Alex Johnson',
@@ -98,8 +94,6 @@ function ExperienceDetails() {
       rating: 5,
       text: 'Absolutely fantastic! Exceeded all my expectations, and I’ll definitely be coming back.',
       date: '10-02-2023',
-      totalSpend: '$300',
-      totalReviews: 20,
     },
   ];
 
@@ -282,7 +276,7 @@ function ExperienceDetails() {
           <div className="price-rating">
             <div className="rating">
               <span>
-                <FontAwesomeIcon icon={faStar} />
+                <FontAwesomeIcon icon={faStar} color='var(--highlight-element)'/>
               </span>
               <span>{product.rating || 'N/A'}</span>
               <span className="reviews">(0 reviews)</span>
@@ -356,7 +350,6 @@ function ExperienceDetails() {
                 <FontAwesomeIcon icon={faUserCircle} style={{ fontSize: '50px', width: '50px', height: '50px' }} />
                 <div className="reviewer-details">
                   <h4>{review.name}</h4>
-                  <p>Total Spend: {review.totalSpend} • Total Reviews: {review.totalReviews}</p>
                 </div>
                 <div className="review-meta">
                   <span className="review-rating">
@@ -369,8 +362,7 @@ function ExperienceDetails() {
               </div>
               <p className="review-text">{review.text}</p>
               <div className="review-actions">
-                <button className="action-btn">Public Comment</button>
-                <button className="action-btn">Direct Message</button>
+                <button className="action-btn">Comment</button>
               </div>
             </div>
           ))}
