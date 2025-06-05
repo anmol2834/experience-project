@@ -70,7 +70,7 @@
     justify-content: space-between;
 }
 
-.heading h2 {
+.heading h3 {
     text-transform: capitalize;
     font-weight: 400;
     font-size: clamp(1.2rem, 4cqi, 2.5rem);
