@@ -97,7 +97,7 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
           </div>
           <div className="place_title">
             <FontAwesomeIcon icon={faLocationDot} className="location-icon" />
-            <p>{state},{city}</p>
+            <p>{city}, {state}</p>
           </div>
         </div>
         <div className="description">

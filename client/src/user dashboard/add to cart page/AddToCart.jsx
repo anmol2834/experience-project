@@ -2,7 +2,8 @@ import { useContext, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { context_of_product } from '../../context/ProductProvider';
 import { useAuth } from '../../context/AuthContext';
-import { FaArrowLeft, FaStar, FaPlus, FaMinus, FaTrash } from 'react-icons/fa';
+import { FaArrowLeft, FaStar, FaPlus, FaMinus, FaTrash, FaMapMarked, FaLocationArrow } from 'react-icons/fa';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import './AddToCart.css';
 import emptyCart from './empty-cart.svg';
 
@@ -82,9 +83,12 @@ const AddToCart = () => {
                   <div className="item-details">
                     <h3 onClick={() => navigate(`/experience/${item.productId._id}`)}>{item.productId.title}</h3>
                     <div className="location-rating">
-                      <span className="location">{item.productId.state}, {item.productId.city}</span>
+                      <span className="location">
+                        <FaLocationArrow className="location-icon" />
+                        {item.productId.city}, {item.productId.state}
+                        </span>
                       <div className="rating">
-                        <FaStar className="star" />
+                        <FaStar className="rating-icon"/>
                         <span>{item.productId.rating || '4.5'}</span>
                       </div>
                     </div>

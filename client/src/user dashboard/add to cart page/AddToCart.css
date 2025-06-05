@@ -17,12 +17,12 @@
 
 .add-to-cart-container {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  color: var(--text);
+  color: var(--primary-font-color);
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--background);
+  background: transparent;
   position: relative;
   overflow: hidden;
 }
@@ -41,7 +41,7 @@
 .cart-header h1 {
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--text);
+  color: var(--primary-font-color);
   margin: 0 auto;
 }
 
@@ -49,7 +49,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--primary);
+  color: var(--primary-font-color);
   font-weight: 500;
   border-radius: 0.375rem;
   transition: all 0.2s ease;
@@ -59,16 +59,17 @@
 }
 
 .back-button:hover {
-  background: #EFF6FF;
+  background: black;
 }
 
 .cart-count {
-  background: var(--primary);
+  background: var(--glow-accent-cool);
   color: white;
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
   font-size: 0.875rem;
   font-weight: 500;
+  z-index: 5;
 }
 
 /* Empty State */
@@ -93,19 +94,19 @@
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--text);
+  color: var(--primary-font-color);
 }
 
 .empty-cart p {
-  color: var(--text-light);
+  color: var(--light-color-text);
   margin-bottom: 2rem;
   max-width: 400px;
   line-height: 1.5;
 }
 
 .explore-button {
-  background: var(--primary);
-  color: white;
+  background: var(--glow-accent-cool);
+  color: var(--primary-font-color);
   padding: 0.75rem 2rem;
   border-radius: 0.5rem;
   font-weight: 500;
@@ -116,7 +117,7 @@
 }
 
 .explore-button:hover {
-  background: var(--primary-hover);
+  background: var(--glow-accent-cool);
 }
 
 /* Main Content */
@@ -124,6 +125,7 @@
   flex: 1;
   padding: 5.5rem 2rem 7rem;
   overflow-y: auto;
+  z-index: 1;
 }
 
 .cart-items-container {
@@ -145,7 +147,7 @@
   grid-template-columns: var(--image-width) 1fr auto;
   gap: 1.5rem;
   padding: 1.5rem;
-  background: var(--card-bg);
+  background: var(--bg-primary);
   border-radius: 0.75rem;
   box-shadow: var(--shadow);
   margin-bottom: 1rem;
@@ -184,7 +186,7 @@
   font-size: 1.125rem;
   font-weight: 600;
   margin: 0;
-  color: var(--text);
+  color: var(--primary-font-color);
   transition: color 0.2s ease;
   white-space: nowrap;
   overflow: hidden;
@@ -202,24 +204,19 @@
 }
 
 .location {
-  font-size: 0.875rem;
-  color: var(--text-light);
+  font-size: 0.875rem;  
+  color: #dedede;
   display: flex;
   align-items: center;
   gap: 0.25rem;
   white-space: nowrap;
 }
 
-.location::before {
-  content: '\1F4CD'; 
-  font-size: 0.9em;
-}
-
 .rating {
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  color: #F59E0B;
+  color: var(--glow-accent-warm);
   font-weight: 500;
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
@@ -230,7 +227,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--background);
+  background: var(--bg-secondary);
   padding: 0.25rem;
   border-radius: 0.5rem;
   width: fit-content;
@@ -241,7 +238,8 @@
   width: 2rem;
   height: 2rem;
   border-radius: 0.375rem;
-  background: var(--card-bg);
+  background: var(--bg-accent-dark);
+  color: var(--primary-font-color);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   border: none;
   cursor: pointer;
@@ -252,7 +250,7 @@
 }
 
 .quantity-control button:hover {
-  background: var(--border);
+  background: var(--secondary-font-color);
 }
 
 .quantity-control button:disabled {
@@ -276,7 +274,7 @@
 .price {
   font-size: 1.125rem;
   font-weight: 600;
-  color: var(--text);
+  color: var(--primary-font-color);
 }
 
 .remove-button {
@@ -294,15 +292,15 @@
 }
 
 .remove-button:hover {
-  background: #FEE2E2;
+  background: var(--secondary-font-color);
 }
 
 /* Order Summary */
-.order-summary {
+.cart-items-container .order-summary {
   flex: 0 0 320px;
   height: fit-content;
   padding: 1.5rem;
-  background: var(--card-bg);
+  background: var(--bg-primary);
   border-radius: 0.75rem;
   box-shadow: var(--shadow);
   position: sticky;
@@ -337,7 +335,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: var(--card-bg);
+  background: var(--bg-darkest);
   padding: 1rem 2rem;
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
   display: flex;
