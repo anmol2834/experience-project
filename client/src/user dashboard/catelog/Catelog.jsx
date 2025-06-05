@@ -12,7 +12,7 @@ function Catelog() {
         <div className="wireframe-container">
           <div className="wireframe-header"></div>
           <div className="wireframe-grid">
-            {[...Array(6)].map((_, index) => (
+            {[...Array(8)].map((_, index) => (
               <div key={index} className="wireframe-card">
                 <div className="wireframe-image"></div>
                 <div className="wireframe-details">
