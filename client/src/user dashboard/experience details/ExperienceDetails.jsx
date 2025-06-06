@@ -266,8 +266,8 @@ function ExperienceDetails() {
               </span>
             </div>
             <div className="location">
-              <p className="state">{product.city} ,</p>
-              <p className="city">{product.state}</p>
+              <p className="state">{product.location.city} ,</p>
+              <p className="city">{product.location.state}</p>
             </div>
           </div>
 

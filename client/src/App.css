@@ -17,8 +17,8 @@
 .glow-shape {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.7;
+  filter: blur(70px);
+  opacity: 1;
   z-index: 1;
 }
 
@@ -44,15 +44,14 @@
   bottom: 0;
   right: 0;
   background: radial-gradient(circle at center, var(--glow-accent-warm), transparent 70%);
-  
   border-radius: 50% 50% 40% 60% / 60% 40% 50% 50%;
 }
 
 .blob4 {
   width: 250px;
   height: 250px;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
   background: radial-gradient(circle at center, var(--glow-accent-cool), transparent 70%);
   border-radius: 50%;
 }

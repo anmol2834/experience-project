@@ -40,8 +40,8 @@ function Catelog() {
             return (
               <Catelogcard
                 key={value._id}
-                state={value.state}
-                city={value.city}
+                state={value.location.state}
+                city={value.location.city}
                 title={value.title}
                 desc={value.description}
                 price={value.price}

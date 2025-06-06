@@ -257,10 +257,10 @@
     border: 3px solid transparent;
     border-top: 3px solid var(--glow-accent-cool);
     border-radius: 50%;
-    animation: spin 0.8s linear infinite;
+    animation: checkbox-spin 0.8s linear infinite;
 }
 
-@keyframes spin {
+@keyframes checkbox-spin {
     0% {
         transform: translate(-50%, -50%) rotate(0deg);
     }

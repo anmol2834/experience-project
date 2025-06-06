@@ -35,12 +35,12 @@ const Wishlist = () => {
   const handleViewDetails = (product) => {
     const scrollPosition = window.scrollY;
 
-    navigate('/experience-details', {
+    navigate(`/experience-details/${product._id}`, { // Include productId in the URL
       state: {
         product: {
           title: product.title,
-          state: product.state,
-          city: product.city,
+          state: product.location.state,
+          city: product.location.city,
           price: product.price,
           rating: product.rating || product.ratings,
           productId: product._id,
@@ -96,8 +96,8 @@ const Wishlist = () => {
               <h3 className="item-name">{item.productId.title}</h3>
               <p className="item-price">₹{item.productId.price.toFixed(2)}</p>
               <div className="item-specs">
-                <span>State: {item.productId.state}</span>
-                <span>City: {item.productId.city}</span>
+                <span>State: {item.productId.location.state}</span>
+                <span>City: {item.productId.location.city}</span>
               </div>
               <button
                 onClick={() => handleViewDetails(item.productId)}
