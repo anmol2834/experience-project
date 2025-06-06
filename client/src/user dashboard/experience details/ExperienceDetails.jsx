@@ -5,7 +5,18 @@ import { useAuth } from '../../context/AuthContext';
 import { context_of_product } from '../../context/ProductProvider';
 import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeftLong, faLocationDot, faShareAlt, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeftLong, faCross, faCut, faLocationDot, faMultiply, faShareAlt, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+
+// Fix for Leaflet marker icons
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+});
 
 function ExperienceDetails() {
   const navigate = useNavigate();
@@ -23,6 +34,8 @@ function ExperienceDetails() {
   const [touchEnd, setTouchEnd] = useState(0);
   const [imageLoading, setImageLoading] = useState(true);
   const [wishlistLoading, setWishlistLoading] = useState(false);
+  const [showMap, setShowMap] = useState(false);
+  const [mapView, setMapView] = useState('standard');
 
   useEffect(() => {
     setLike(wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId)));
@@ -171,6 +184,37 @@ function ExperienceDetails() {
     navigate('/book_page', { state: { product } });
   };
 
+  const handleLocationClick = () => {
+    setShowMap(true);
+  };
+
+  const handleCloseMap = () => {
+    setShowMap(false);
+  };
+
+  const MapViewToggle = () => {
+    const map = useMap();
+    useEffect(() => {
+      const standardLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      });
+
+      const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: '© <a href="https://www.esri.com/">Esri</a>',
+      });
+
+      if (mapView === 'standard') {
+        standardLayer.addTo(map);
+        satelliteLayer.remove();
+      } else {
+        satelliteLayer.addTo(map);
+        standardLayer.remove();
+      }
+    }, [mapView]);
+
+    return null;
+  };
+
   return (
     <div className="experience-details-container">
       <div className="headers">
@@ -262,7 +306,7 @@ function ExperienceDetails() {
               <h1 className="title">{product.title}</h1>
               <span className="locate-and-share-icon">
                 <FontAwesomeIcon className="shareAlt" icon={faShareAlt} />
-                <FontAwesomeIcon className="location-dot" icon={faLocationDot} />
+                <FontAwesomeIcon className="location-dot" icon={faLocationDot} onClick={handleLocationClick} />
               </span>
             </div>
             <div className="location">
@@ -276,7 +320,7 @@ function ExperienceDetails() {
           <div className="price-rating">
             <div className="rating">
               <span>
-                <FontAwesomeIcon icon={faStar} color='var(--highlight-element)'/>
+                <FontAwesomeIcon icon={faStar} color='var(--highlight-element)' />
               </span>
               <span>{product.rating || 'N/A'}</span>
               <span className="reviews">(0 reviews)</span>
@@ -298,6 +342,33 @@ function ExperienceDetails() {
           </div>
         </div>
       </div>
+
+      {showMap && (
+        <div className="map-overlay">
+          <MapContainer
+            center={[product.location.latitude || 21.176901, product.location.longitude || 72.661396]}
+            zoom={13}
+            className="map-container"
+          >
+            <MapViewToggle />
+            <Marker position={[product.location.latitude || 21.176901, product.location.longitude || 72.661396]}>
+              <Popup>{product.title}</Popup>
+            </Marker>
+          </MapContainer>
+          <button
+            onClick={handleCloseMap}
+            className="map-close-btn"
+          >
+            <FontAwesomeIcon icon={faMultiply}/>
+          </button>
+          <button
+            onClick={() => setMapView(mapView === 'standard' ? 'satellite' : 'standard')}
+            className="map-toggle-btn"
+          >
+            {mapView === 'standard' ? 'Satellite View' : 'Standard View'}
+          </button>
+        </div>
+      )}
 
       <div className="reviews-container">
         <div className="reviews-header">
