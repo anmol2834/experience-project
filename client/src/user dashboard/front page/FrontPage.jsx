@@ -107,21 +107,21 @@ const FrontPage = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className="loading">
-        <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className="loading">
+  //       <ul>
+  //         <li></li>
+  //         <li></li>
+  //         <li></li>
+  //         <li></li>
+  //         <li></li>
+  //         <li></li>
+  //         <li></li>
+  //       </ul>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="front-contain">
