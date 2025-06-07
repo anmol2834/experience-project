@@ -85,7 +85,7 @@ const AddToCart = () => {
                     <div className="location-rating">
                       <span className="location">
                         <FaLocationArrow className="location-icon" />
-                        {item.productId.city}, {item.productId.state}
+                        {item.productId.location.city}, {item.productId.location.state}
                         </span>
                       <div className="rating">
                         <FaStar className="rating-icon"/>

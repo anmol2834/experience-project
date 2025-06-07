@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { context_of_product } from '../../context/ProductProvider';
 import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeftLong, faCross, faCut, faLocationDot, faMultiply, faShareAlt, faStar, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeftLong, faCross, faCut, faLocationDot, faMultiply, faShareAlt, faStar, faUserCircle, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -28,6 +28,46 @@ function ExperienceDetails() {
   const from = location.state?.from || '/';
   const scrollPosition = location.state?.scrollPosition || 0;
 
+  // Define sampleReviews before using it in state
+  const sampleReviews = [
+    {
+      name: 'Towhidur Rahman',
+      avatar: 'https://via.placeholder.com/50',
+      rating: 5,
+      text: 'My first and only mala ordered on Etsy, and I’M beyond delighted! I requested a custom mala based on two stones I was called to invite together in this kind of creation. The fun and genuine joy I invite together in this kind of creation.',
+      date: '24-10-2022',
+      likes: 10,
+      dislikes: 2,
+    },
+    {
+      name: 'Jane Smith',
+      avatar: 'https://via.placeholder.com/50',
+      rating: 4,
+      text: 'Great experience overall. The service was excellent, though it felt a bit pricey for what was offered.',
+      date: '15-01-2023',
+      likes: 8,
+      dislikes: 3,
+    },
+    {
+      name: 'Alex Johnson',
+      avatar: 'https://via.placeholder.com/50',
+      rating: 5,
+      text: 'Absolutely fantastic! Exceeded all my expectations, and I’ll definitely be coming back.',
+      date: '10-02-2023',
+      likes: 15,
+      dislikes: 1,
+    },
+    {
+      name: 'Emily Davis',
+      avatar: 'https://via.placeholder.com/50',
+      rating: 3,
+      text: 'It was okay, but I expected more for the price.',
+      date: '05-03-2023',
+      likes: 5,
+      dislikes: 4,
+    },
+  ];
+
   const [like, setLike] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
@@ -36,6 +76,18 @@ function ExperienceDetails() {
   const [wishlistLoading, setWishlistLoading] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [mapView, setMapView] = useState('standard');
+  const [reviewPage, setReviewPage] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionDirection, setTransitionDirection] = useState(null);
+
+  const [reviewInteractions, setReviewInteractions] = useState(
+    sampleReviews.map((review) => ({
+      likes: review.likes,
+      dislikes: review.dislikes,
+      userLiked: false,
+      userDisliked: false,
+    }))
+  );
 
   useEffect(() => {
     setLike(wishlistItems.some((item) => item.productId === productId || (item.productId && item.productId._id === productId)));
@@ -52,6 +104,21 @@ function ExperienceDetails() {
       navigate('/home');
     }
   }, [productLoading, product, navigate]);
+
+  useEffect(() => {
+    if (isTransitioning) {
+      const timer = setTimeout(() => {
+        if (transitionDirection === 'next') {
+          setReviewPage((prev) => prev + 1);
+        } else if (transitionDirection === 'prev') {
+          setReviewPage((prev) => prev - 1);
+        }
+        setIsTransitioning(false);
+        setTransitionDirection(null);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [isTransitioning, transitionDirection]);
 
   if (productLoading) {
     return (
@@ -85,30 +152,6 @@ function ExperienceDetails() {
   ].filter(Boolean);
 
   const showMoreThumb = images.length > 3;
-
-  const sampleReviews = [
-    {
-      name: 'Towhidur Rahman',
-      avatar: 'https://via.placeholder.com/50',
-      rating: 5,
-      text: 'My first and only mala ordered on Etsy, and I’M beyond delighted! I requested a custom mala based on two stones I was called to invite together in this kind of creation. The fun and genuine joy I invite together in this kind of creation.',
-      date: '24-10-2022',
-    },
-    {
-      name: 'Jane Smith',
-      avatar: 'https://via.placeholder.com/50',
-      rating: 4,
-      text: 'Great experience overall. The service was excellent, though it felt a bit pricey for what was offered.',
-      date: '15-01-2023',
-    },
-    {
-      name: 'Alex Johnson',
-      avatar: 'https://via.placeholder.com/50',
-      rating: 5,
-      text: 'Absolutely fantastic! Exceeded all my expectations, and I’ll definitely be coming back.',
-      date: '10-02-2023',
-    },
-  ];
 
   const handleSlideChange = (index) => {
     if (index < 0) index = images.length - 1;
@@ -192,6 +235,62 @@ function ExperienceDetails() {
     setShowMap(false);
   };
 
+  const handleLikeReview = (globalIndex) => {
+    setReviewInteractions((prev) =>
+      prev.map((interaction, i) => {
+        if (i !== globalIndex) return interaction;
+        if (interaction.userLiked) {
+          return { ...interaction, likes: interaction.likes - 1, userLiked: false };
+        }
+        if (interaction.userDisliked) {
+          return {
+            ...interaction,
+            likes: interaction.likes + 1,
+            dislikes: interaction.dislikes - 1,
+            userLiked: true,
+            userDisliked: false,
+          };
+        }
+        return { ...interaction, likes: interaction.likes + 1, userLiked: true };
+      })
+    );
+  };
+
+  const handleDislikeReview = (globalIndex) => {
+    setReviewInteractions((prev) =>
+      prev.map((interaction, i) => {
+        if (i !== globalIndex) return interaction;
+        if (interaction.userDisliked) {
+          return { ...interaction, dislikes: interaction.dislikes - 1, userDisliked: false };
+        }
+        if (interaction.userLiked) {
+          return {
+            ...interaction,
+            likes: interaction.likes - 1,
+            dislikes: interaction.dislikes + 1,
+            userLiked: false,
+            userDisliked: true,
+          };
+        }
+        return { ...interaction, dislikes: interaction.dislikes + 1, userDisliked: true };
+      })
+    );
+  };
+
+  const handleNextPage = () => {
+    if ((reviewPage + 1) * 3 < sampleReviews.length) {
+      setTransitionDirection('next');
+      setIsTransitioning(true);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (reviewPage > 0) {
+      setTransitionDirection('prev');
+      setIsTransitioning(true);
+    }
+  };
+
   const MapViewToggle = () => {
     const map = useMap();
     useEffect(() => {
@@ -214,6 +313,8 @@ function ExperienceDetails() {
 
     return null;
   };
+
+  const currentReviews = sampleReviews.slice(reviewPage * 3, (reviewPage * 3) + 3);
 
   return (
     <div className="experience-details-container">
@@ -414,31 +515,48 @@ function ExperienceDetails() {
             </div>
           </div>
         </div>
-        <div className="reviews-list">
-          {sampleReviews.map((review, index) => (
-            <div key={index} className="review-item">
-              <div className="reviewer-info">
-                <FontAwesomeIcon icon={faUserCircle} style={{ fontSize: '50px', width: '50px', height: '50px' }} />
-                <div className="reviewer-details">
-                  <h4>{review.name}</h4>
+        <div className={`reviews-list ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
+          {currentReviews.map((review, localIndex) => {
+            const globalIndex = reviewPage * 3 + localIndex;
+            return (
+              <div key={globalIndex} className="review-item">
+                <div className="reviewer-info">
+                  <FontAwesomeIcon icon={faUserCircle} style={{ fontSize: '50px', width: '50px', height: '50px' }} />
+                  <div className="reviewer-details">
+                    <h4>{review.name}</h4>
+                  </div>
+                  <div className="review-meta">
+                    <span className="review-rating">
+                      {Array.from({ length: 5 }, (_, i) => (
+                        <span key={i} className={i < review.rating ? 'star filled' : 'star'}>★</span>
+                      ))}
+                    </span>
+                    <span className="review-date">{review.date}</span>
+                  </div>
                 </div>
-                <div className="review-meta">
-                  <span className="review-rating">
-                    {Array.from({ length: 5 }, (_, i) => (
-                      <span key={i} className={i < review.rating ? 'star filled' : 'star'}>★</span>
-                    ))}
-                  </span>
-                  <span className="review-date">{review.date}</span>
+                <p className="review-text">{review.text}</p>
+                <div className="review-actions">
+                  <button className="action-btn like-btn" onClick={() => handleLikeReview(globalIndex)}>
+                    <FontAwesomeIcon icon={faThumbsUp} className={`like-icon ${reviewInteractions[globalIndex].userLiked ? 'active' : ''}`} />
+                    <span className="like-count">{reviewInteractions[globalIndex].likes}</span>
+                  </button>
+                  <button className="action-btn dislike-btn" onClick={() => handleDislikeReview(globalIndex)}>
+                    <FontAwesomeIcon icon={faThumbsDown} className={`dislike-icon ${reviewInteractions[globalIndex].userDisliked ? 'active' : ''}`} />
+                    <span className="dislike-count">{reviewInteractions[globalIndex].dislikes}</span>
+                  </button>
                 </div>
               </div>
-              <p className="review-text">{review.text}</p>
-              <div className="review-actions">
-                <button className="action-btn">Comment</button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
-        <button className="see-more-reviews">See More Reviews</button>
+        <div className="reviews-navigation">
+          {reviewPage > 0 && (
+            <button className="see-more-reviews" onClick={handlePrevPage}>Previous Reviews</button>
+          )}
+          {sampleReviews.length > 3 && (reviewPage + 1) * 3 < sampleReviews.length && (
+            <button className="see-more-reviews" onClick={handleNextPage}>See More Reviews</button>
+          )}
+        </div>
       </div>
     </div>
   );
