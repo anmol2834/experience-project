@@ -111,7 +111,11 @@
 
 .feed-list {
   width: 100%;
-  height: auto;
+  height: 216px; /* Fixed height: 3 items * (56px height + 15px padding + 5px margin) */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .feed-item {
@@ -122,9 +126,18 @@
   border-radius: 12px;
   display: flex;
   align-items: center;
-  margin: 10px 0;
   gap: 15px;
   transition: transform 0.3s ease;
+  height: 56px; /* Fixed height for each item */
+}
+
+.activity-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+  position: relative;
+  z-index: 2; /* Ensure buttons are above feed-items */
 }
 
 .adventure-feed .view-more {
@@ -135,7 +148,6 @@
   text-transform: capitalize;
   font-size: 1rem;
   border-radius: 5px;
-  margin-top: 10px;
   background: var(--glow-accent-cool);
   color: white;
   cursor: pointer;
@@ -233,6 +245,13 @@
     color: var(--primary-font-color);
   }
 
+  .feed-list {
+    height: 216px; /* Maintain fixed height on smaller screens */
+  }
+
+  .feed-item {
+    height: 56px; /* Maintain fixed height on smaller screens */
+  }
 }
 
 @media (hover: none) {
@@ -251,5 +270,4 @@
   .adventure-feed .view-more {
     cursor: none;
   }
-
 }
