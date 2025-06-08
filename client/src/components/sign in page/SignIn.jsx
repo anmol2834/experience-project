@@ -6,6 +6,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './signin.css';
 import signinBanner from './signin-banner.jpg';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faLongArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function SignIn() {
   const navigate = useNavigate();
@@ -156,9 +158,7 @@ function SignIn() {
     <div className='signin-contain'>
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <button type='button' className='back-btn' onClick={(e) => { e.preventDefault(); navigate('/home') }}>
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
-            <path d="M366.92-213.46 100-480.38l266.92-266.93 41.77 41.77-194.54 195.16h646.23v59.99H214.54l195.15 195.16-42.77 41.77Z" />
-          </svg>
+          <FontAwesomeIcon icon={faLongArrowLeft} />
         </button>
         <h1>sign in</h1>
         <p>Don't have an Account? <span onClick={() => navigate('/signup')}>sign up</span></p>

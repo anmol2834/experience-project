@@ -17,8 +17,8 @@
 .glow-shape {
   position: absolute;
   border-radius: 50%;
-  filter: blur(70px);
-  opacity: 1;
+  filter: blur(80px);
+  opacity: 0.6;
   z-index: 1;
 }
 

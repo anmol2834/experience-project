@@ -5,15 +5,15 @@
   grid-template-columns: 1fr 1fr;
   column-gap: 20px;
   padding: 30px;
-  background: linear-gradient(to right, var(--primary-color),  var(--shade-primary-color));
-  color: var(--color1);
+  background: transparent;
+  color: var(--primary-font-color);
   font-weight: 300;
 }
 
 .signin-contain form {
   position: relative;
   height: 100%;
-  background: var(--bg-color);
+  background: transparent;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5.5px);
   -webkit-backdrop-filter: blur(5.5px);
@@ -23,23 +23,24 @@
   align-items: center;
   justify-content: space-around;
   overflow: hidden;
+  z-index: 10;
 }
 
 .signin-contain form h1 {
   font-weight: 100;
   text-transform: uppercase;
-  color: var(--main-element-color);
+  color: var(--primary-font-color);
 }
 
 .signin-contain p span {
-  color: var(--secondary-color);
+  color: var(--glow-accent-warm);
   font-size: 1.2rem;
   text-transform: capitalize;
   cursor: pointer;
 }
 
 .signin-contain p span:hover {
-  color: var(--accent-details);
+  color: var(--glow-accent-cool);
 }
 
 .signin-contain .signin-banner {
@@ -51,6 +52,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  z-index: 10;
 }
 
 form .back-btn {
@@ -68,10 +70,7 @@ form .back-btn {
   background: transparent;
   cursor: pointer;
   transition: 0.2s;
-}
-
-form .back-btn svg {
-  fill: var(--main-element-color);
+  color: white;
 }
 
 /*! input area  */
@@ -99,7 +98,7 @@ form .back-btn svg {
   top: 20px;
   left: 5px;
   font-size: 16px;
-  color: var(--main-element-color);
+  color: var(--primary-font-color);
   transition: all 0.3s ease;
 }
 
@@ -110,7 +109,7 @@ form .back-btn svg {
   border: none;
   font-size: 16px;
   padding: 5px;
-  color: var(--main-element-color);
+  color: var(--primary-font-color);
   padding-right: 30px;
 }
 
@@ -121,7 +120,7 @@ form .back-btn svg {
 }
 
 .eye-container svg {
-  fill: var(--main-element-color);
+  fill: var(--primary-font-color);
   cursor: pointer;
 }
 
@@ -130,7 +129,7 @@ form .back-btn svg {
   bottom: 0;
   width: 100%;
   height: 2px;
-  background-color: var(--main-element-color);
+  background-color: var(--primary-font-color);
   transition: background-color 0.3s ease, transform 0.3s ease;
   transform-origin: left;
   transition: 1s;
@@ -145,13 +144,13 @@ form .back-btn svg {
 
 .input:hover .bottom-border {
   transition: 1s;
-  box-shadow: inset 400px 0px 0 0 var(--highlight-element);
+  box-shadow: inset 400px 0px 0 0 var(--glow-accent-warm);
 }
 
 /* Focus effect to keep the label at the top */
 .input input:focus+.bottom-border {
   transition: 1s;
-  box-shadow: inset 400px 0px 0 0 var(--highlight-element);
+  box-shadow: inset 400px 0px 0 0 var(--glow-accent-warm);
 }
 
 .input input:focus~.label {
@@ -176,19 +175,19 @@ input[type="password"]::-webkit-password-suggestion-button {
 
 .input.focused .bottom-border,
 .input.focused:hover .bottom-border {
-  background-color: var(--highlight-element);
+  background-color: var(--glow-accent-warm);
   transform: scaleX(1);
 }
 
 .forgot {
-  color: var(--secondary-color);
+  color: var(--glow-accent-warm);
   cursor: pointer;
   align-self: flex-start;
   margin-left: 25%;
 }
 
 .forgot:hover {
-  color: var(--accent-details);
+  color: var(--glow-accent-cool);
 }
 
 .submit-container {
@@ -211,8 +210,8 @@ input[type="password"]::-webkit-password-suggestion-button {
   overflow: hidden;
   text-transform: capitalize;
   transition: 0.5s;
-  background: var(--main-element-color);
-  color: var(--bg-color);
+  background: var(--primary-font-color);
+  color: black;
 }
 
 .submit:hover {
@@ -264,11 +263,10 @@ input[type="password"]::-webkit-password-suggestion-button {
   width: 50%;
   height: 40px;
   border-radius: 10px;
-  border: 2px solid var(--main-element-color);
+  border: 2px solid var(--primary-font-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color2);
   gap: 10px;
   text-transform: capitalize;
   transition: 0.5s;
@@ -286,8 +284,7 @@ input[type="password"]::-webkit-password-suggestion-button {
 
   .signin-contain {
     grid-template-columns: 1fr;
-    padding: 0px;
-    background: var(--bg-color);
+    padding: 0px; 
   }
 
   .signin-banner {
@@ -340,7 +337,6 @@ input[type="password"]::-webkit-password-suggestion-button {
   .signin-contain {
     grid-template-columns: 1fr;
     padding: 10px;
-    background: var(--bg-color);
   }
 
   .signin-banner {
@@ -391,7 +387,6 @@ input[type="password"]::-webkit-password-suggestion-button {
   .signin-contain {
     grid-template-columns: 1fr;
     padding: 10px;
-    background: var(--bg-color);
   }
 
   .signin-banner {
