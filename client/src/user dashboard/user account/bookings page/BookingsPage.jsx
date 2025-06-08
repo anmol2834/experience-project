@@ -1,4 +1,3 @@
-// BookingsPage.jsx
 import './BookingsPage.css'
 import { motion } from "framer-motion"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,7 +23,7 @@ const BookingsPage = () => {
       image: "https://images.livemint.com/img/2022/05/20/original/Big_Story_Himalayan_Treks_Nepal_1653055597386.jpg"
     },
     {
-      id: 2,
+      id: 3, // Changed from 2 to 3 to ensure unique key
       name: "Himalayan Trekking",
       date: "2024-04-02",
       status: "Pending",
@@ -76,10 +75,16 @@ const BookingsPage = () => {
                     <FontAwesomeIcon icon={faDownload} />
                     Ticket
                   </button>
-                  <button className="action-btn cancel-btn">
-                    <FontAwesomeIcon icon={faXmark} />
-                    Cancel
-                  </button>
+                  {booking.status === "Confirmed" ? (
+                    <button className="action-btn review-btn">
+                      Review
+                    </button>
+                  ) : (
+                    <button className="action-btn cancel-btn">
+                      <FontAwesomeIcon icon={faXmark} />
+                      Cancel
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

@@ -172,6 +172,11 @@
   color: #fff;
 }
 
+.review-btn {
+  background: #2196F3; /* A distinct blue color for the Review button */
+  color: #fff;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .account-render {
