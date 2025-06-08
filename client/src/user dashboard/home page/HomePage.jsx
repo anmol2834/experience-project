@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
-import './homepage.css'; // Verify this file exists in the same directory as HomePage.jsx
-// import Category from '../categories/Category';
-import Catelog from '../catelog/Catelog'; // Verify this path is correct (e.g., ../catelog/Catelog.jsx)
+import './homepage.css';
+import Catelog from '../catelog/Catelog';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -37,7 +36,6 @@ function HomePage() {
 
   return (
     <div className="home-contain">
-      {/* <Category /> */}
       <div className="catelog-contain" ref={catelogRef}>
         <Catelog />
 

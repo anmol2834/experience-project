@@ -27,21 +27,22 @@ const FrontPage = () => {
     const scrollToProductId = location.state?.scrollToProductId;
     const fallbackScrollPosition = location.state?.fallbackScrollPosition || 0;
 
-    if (scrollToProductId) {
-      const targetCard = document.querySelector(`[data-product-id="${scrollToProductId}"]`);
-      if (targetCard) {
-        targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } else {
-        setTimeout(() => {
+    const scrollToTarget = () => {
+      if (scrollToProductId) {
+        const targetCard = document.querySelector(`[data-product-id="${scrollToProductId}"]`);
+        if (targetCard) {
+          targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
           window.scrollTo({ top: fallbackScrollPosition, behavior: 'smooth' });
-        }, 500);
+        }
+      } else {
+        window.scrollTo({ top: fallbackScrollPosition, behavior: 'smooth' });
       }
-    } else {
-      window.scrollTo({ top: fallbackScrollPosition, behavior: 'smooth' });
-    }
+    };
 
-    if (location.state?.scrollToProductId || location.state?.fallbackScrollPosition) {
-      navigate('/', { replace: true, state: {} });
+    if (scrollToProductId || fallbackScrollPosition) {
+      setTimeout(scrollToTarget, 500); // Delay to ensure DOM is fully rendered
+      navigate('/', { replace: true, state: {} }); // Clear state after scrolling
     }
   }, [location, navigate]);
 
@@ -106,22 +107,6 @@ const FrontPage = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // if (isLoading) {
-  //   return (
-  //     <div className="loading">
-  //       <ul>
-  //         <li></li>
-  //         <li></li>
-  //         <li></li>
-  //         <li></li>
-  //         <li></li>
-  //         <li></li>
-  //         <li></li>
-  //       </ul>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="front-contain">

@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import './ExperienceDetails.css';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { context_of_product } from '../../context/ProductProvider';
-import { useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong, faCross, faCut, faLocationDot, faMultiply, faShareAlt, faStar, faUserCircle, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
@@ -28,7 +27,6 @@ function ExperienceDetails() {
   const from = location.state?.from || '/';
   const scrollPosition = location.state?.scrollPosition || 0;
 
-  // Define sampleReviews before using it in state
   const sampleReviews = [
     {
       name: 'Towhidur Rahman',

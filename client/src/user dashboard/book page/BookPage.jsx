@@ -10,6 +10,8 @@ import {
   faSpinner,
   faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './BookPage.css';
 
 const BookPage = () => {
@@ -96,7 +98,7 @@ const BookPage = () => {
     const subtotal = product.price * participants;
     const discountAmount = subtotal * discount / 100;
     const gst = (subtotal - discountAmount) * 0.18;
-    return Math.round(subtotal - discountAmount + gst); // Changed to use Math.round()
+    return Math.round(subtotal - discountAmount + gst);
   };
 
   const handleCheckout = async () => {
@@ -104,8 +106,8 @@ const BookPage = () => {
     const bookingDetails = {
       productId: product._id,
       title: product.title,
-      state: product.state,
-      city: product.city,
+      state: product.location.state,
+      city: product.location.city,
       companyName: product.company_Name,
       providerName: product.provider_Name,
       selectedDate,
@@ -123,7 +125,7 @@ const BookPage = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('token')}`, 
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },
         body: JSON.stringify(bookingDetails),
       });
@@ -145,11 +147,14 @@ const BookPage = () => {
           },
         });
       } else {
-        console.error('Failed to save booking details');
-        setIsCheckingOut(false);
+        const errorData = await response.json();
+        console.error('Failed to save booking details:', errorData);
+        toast.error(`Failed to save booking: ${errorData.message || 'Unknown server error'}`);
       }
     } catch (error) {
       console.error('Error during checkout:', error);
+      toast.error('Checkout failed. Please try again later.');
+    } finally {
       setIsCheckingOut(false);
     }
   };
@@ -296,6 +301,7 @@ const BookPage = () => {
           </button>
         </div>
       </div>
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };

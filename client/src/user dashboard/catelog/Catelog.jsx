@@ -44,7 +44,7 @@ function Catelog() {
                 city={value.location.city}
                 title={value.title}
                 desc={value.description}
-                price={value.price}
+                price={value.price !== undefined ? value.price : 0} // Fallback to 0 if price is undefined
                 img={value.img1}
                 stock={value.stock}
                 mrp={value.mrp}

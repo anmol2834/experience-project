@@ -44,7 +44,6 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
 
   const handleViewDetails = () => {
     const scrollPosition = window.scrollY;
-    // Navigate to dynamic route with productId
     navigate(`/experience-details/${productId}`, {
       state: {
         from: '/',
@@ -105,7 +104,7 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
         </div>
         <div className="bottom-section">
           <section>
-            <p className="selling-price">₹{price}/Person</p>
+            <p className="selling-price">₹{price !== undefined ? price : 'N/A'}/Person</p>
           </section>
           <section>
             <button onClick={handleViewDetails}>View Details</button>
