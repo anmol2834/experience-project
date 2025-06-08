@@ -3,7 +3,7 @@
 
 .payment-container {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(to right, var(--primary-color),  var(--shade-primary-color));
+  background: transparent;
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -16,8 +16,9 @@
 .payment-header {
   width: 100%;
   height: 50px;
-  background-color: white;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background-color: var(--bg-primary);
+  color: var(--primary-font-color);
+  box-shadow: 0 1px 2px rgba(132, 132, 132, 0.05);
   padding: 0.75rem 1rem;
   z-index: 10;
   display: flex;
@@ -43,7 +44,7 @@
 .payment-header .back-button {
   display: flex;
   align-items: center;
-  color: #1A202C;
+  color: var(--primary-font-color);
   transition: color 0.3s ease;
   background: none;
   border: none;
@@ -53,7 +54,7 @@
 }
 
 .payment-header .back-button:hover {
-  color: #3182CE;
+  color: var(--glow-accent-cool);
 }
 
 /* Main Content Layout */
@@ -63,6 +64,7 @@ main {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  z-index: 10;
 }
 
 main>div {
@@ -112,7 +114,7 @@ main>div {
 .progress-step-number {
   width: 2rem;
   height: 2rem;
-  background-color: #3182CE;
+  background-color: var(--glow-accent-cool);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -152,14 +154,14 @@ main>div {
   left: 0;
   top: 0;
   height: 100%;
-  background-color: #3182CE;
+  background-color: var(--glow-accent-cool);
   transition: width 0.3s ease;
 }
 
 .payment-form {
   background-color: white;
   border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(132, 132, 132, 0.05);
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   width: 100%;
@@ -213,8 +215,8 @@ main>div {
 }
 
 .input-focus:focus {
-  border-color: #3182CE;
-  box-shadow: 0 0 0 1px #3182CE;
+  border-color: var(--glow-accent-cool);
+  box-shadow: 0 0 0 1px var(--glow-accent-cool);
   outline: none;
 }
 
@@ -283,7 +285,7 @@ main>div {
 
 /* Buttons */
 button.text-primary {
-  color: #3182CE;
+  color: var(--glow-accent-cool);
   background: none;
   border: none;
   font-size: 0.875rem;
@@ -302,7 +304,7 @@ button.text-primary:hover {
 
 .submit-button {
   width: 100%;
-  background-color: #3182CE;
+  background-color: var(--glow-accent-cool);
   color: white;
   font-weight: 600;
   padding: 0.75rem 1rem;
@@ -315,7 +317,7 @@ button.text-primary:hover {
 }
 
 .submit-button:hover {
-  background-color: #2C5282;
+  background-color: var(--glow-secondary);
 }
 
 .submit-button:disabled {
@@ -357,12 +359,12 @@ button.text-primary:hover {
 
 .payment-method-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px rgba(132, 132, 132, 0.05);
 }
 
 .payment-method-card.selected {
-  border-color: #3182CE;
-  box-shadow: 0 0 0 1px #3182CE;
+  border-color: var(--glow-accent-cool);
+  box-shadow: 0 0 0 1px var(--glow-accent-cool);
 }
 
 .text-2xl {
@@ -370,7 +372,7 @@ button.text-primary:hover {
 }
 
 .text-primary {
-  color: #3182CE;
+  color: var(--glow-accent-cool);
 }
 
 .text-blue-600 {
@@ -430,7 +432,7 @@ button.text-primary:hover {
 input[type="checkbox"] {
   height: 1rem;
   width: 1rem;
-  color: #3182CE;
+  color: var(--glow-accent-cool);
   border-radius: 0.25rem;
   margin-right: 0.5rem;
 }
@@ -953,11 +955,11 @@ input[type="checkbox"] {
 }
 
 .action-button.primary {
-  background-color: #3182CE;
+  background-color: var(--glow-accent-cool);
 }
 
 .action-button.primary:hover {
-  background-color: #2C5282;
+  background-color: var(--glow-secondary);
 }
 
 .action-button.secondary {
@@ -976,7 +978,7 @@ input[type="checkbox"] {
 .order-summary {
   background-color: white;
   border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(132, 132, 132, 0.05);
   padding: 1.5rem;
   height: fit-content;
   width: 100%;
@@ -1080,7 +1082,7 @@ input[type="checkbox"] {
 }
 
 .price-total-value {
-  color: #3182CE;
+  color: var(--glow-accent-cool);
 }
 
 .cancellation-policy {
@@ -1093,7 +1095,7 @@ input[type="checkbox"] {
 .cancellation-title {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #2C5282;
+  color: var(--glow-secondary);
   margin-bottom: 0.25rem;
 }
 
@@ -1151,7 +1153,7 @@ input[type="checkbox"] {
 .netbanking-section {
   background: linear-gradient(135deg, #ffffff, #f8fafc);
   border: 1px solid #e5e7eb;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(132, 132, 132, 0.05);
   transition: box-shadow 0.3s ease;
 }
 
@@ -1190,9 +1192,9 @@ input[type="checkbox"] {
 }
 
 .bank-card.selected {
-  border-color: #3182ce;
+  border-color: var(--glow-accent-cool);
   background: linear-gradient(135deg, #eff6ff, #dbeafe);
-  box-shadow: 0 0 0 2px #3182ce, 0 4px 12px rgba(49, 130, 206, 0.2);
+  box-shadow: 0 0 0 2px var(--glow-accent-cool), 0 4px 12px rgba(49, 130, 206, 0.2);
 }
 
 .bank-logo {
@@ -1216,14 +1218,14 @@ input[type="checkbox"] {
 }
 
 .bank-card.selected span {
-  color: #3182ce;
+  color: var(--glow-accent-cool);
 }
 
 .selected-icon {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  color: #3182ce;
+  color: var(--glow-accent-cool);
   font-size: 1.25rem;
   transition: opacity 0.3s ease;
 }
@@ -1247,7 +1249,7 @@ input[type="checkbox"] {
   font-weight: 500;
   color: #1a202c;
   background: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(132, 132, 132, 0.05);
   transition: all 0.3s ease;
   cursor: pointer;
 }
@@ -1258,7 +1260,7 @@ input[type="checkbox"] {
 }
 
 .custom-select:focus {
-  border-color: #3182ce;
+  border-color: var(--glow-accent-cool);
   box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.3);
   outline: none;
 }
@@ -1275,17 +1277,17 @@ input[type="checkbox"] {
 }
 
 .custom-select:hover+.select-arrow {
-  color: #3182ce;
+  color: var(--glow-accent-cool);
 }
 
 .netbanking-pay-button {
-  background: linear-gradient(90deg, #3182ce, #2563eb);
+  background: linear-gradient(90deg, var(--glow-accent-cool), #2563eb);
   box-shadow: 0 4px 12px rgba(49, 130, 206, 0.3);
   transition: all 0.3s ease;
 }
 
 .netbanking-pay-button:hover:not(:disabled) {
-  background: linear-gradient(90deg, #2c5282, #1e40af);
+  background: linear-gradient(90deg, var(--glow-secondary), #1e40af);
   box-shadow: 0 6px 18px rgba(49, 130, 206, 0.4);
   transform: translateY(-2px);
 }
