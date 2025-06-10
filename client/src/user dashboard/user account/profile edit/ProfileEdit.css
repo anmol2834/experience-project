@@ -1,372 +1,388 @@
 .profile-edit-container {
-    width: 100%;
-    height: 100%;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .form-section {
-    width: 100%;
+  width: 100%;
 }
 
 .form-section h1 {
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    text-align: center;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
 .input-group {
-    position: relative;
-    margin-bottom: 1.5rem;
+  position: relative;
+  margin-bottom: 1.5rem;
 }
 
 .input-group label {
-    display: block;
-    margin-bottom: 0.8rem;
-    font-size: 0.9rem;
-    color: var(--light-color-text);
-    font-weight: 500;
+  display: block;
+  margin-bottom: 0.8rem;
+  font-size: 0.9rem;
+  color: var(--light-color-text);
+  font-weight: 500;
 }
 
 .inline-input-group {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .inline-input-group .input-group {
-    width: 100%;
+  width: 100%;
 }
 
 .modern-input {
-    width: 100%;
-    padding: 1rem 1.5rem;
-    border: 2px solid var(--shade-primary-color);
-    border-radius: 12px;
-    background: var(--shade-primary-color);
-    color: black;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--shade-primary-color);
+  border-radius: 12px;
+  background: var(--shade-primary-color);
+  color: black;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
 }
 
 .modern-input:focus {
-    border-color: var(--glow-accent-cool);
-    background: white;
+  border-color: var(--glow-accent-cool);
+  background: white;
 }
 
 .modern-select {
-    width: 100%;
-    padding: 1rem 1.5rem;
-    border: 2px solid var(--shade-primary-color);
-    border-radius: 12px;
-    background: var(--shade-primary-color) url("data:image/svg+xml,%3Csvg...") no-repeat right 1rem center/12px;
-    color: black;
-    appearance: none;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--shade-primary-color);
+  border-radius: 12px;
+  background: var(--shade-primary-color) url("data:image/svg+xml,%3Csvg...") no-repeat right 1rem center/12px;
+  color: black;
+  appearance: none;
 }
 
 .edit-profile-btn {
-    width: 100%;
-    padding: 1rem;
-    background: var(--glow-accent-cool);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
+  width: 100%;
+  padding: 1rem;
+  background: var(--glow-accent-cool);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
 }
 
 .edit-profile-btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
 }
 
 .edit-profile-btn:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .btn-icon {
-    font-size: 1.2rem;
-    transform: translateX(-5px);
-    opacity: 0;
-    transition: all 0.3s ease;
+  font-size: 1.2rem;
+  transform: translateX(-5px);
+  opacity: 0;
+  transition: all 0.3s ease;
 }
 
 .edit-profile-btn:hover .btn-icon {
-    transform: translateX(0);
-    opacity: 1;
+  transform: translateX(0);
+  opacity: 1;
 }
 
 .change-password {
-    width: 30%;
-    height: 40px;
-    margin-top: 15px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-    background: var(--glow-accent-warm);
-    color: white;
-    cursor: pointer;
-    transition: 0.5s;
+  width: 30%;
+  height: 40px;
+  margin-top: 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: var(--glow-accent-warm);
+  color: white;
+  cursor: pointer;
+  transition: 0.5s;
 }
 
 .change-password:hover {
-    transition: 0.5s;
-    opacity: 0.8;
+  transition: 0.5s;
+  opacity: 0.8;
 }
 
 .change-password-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.47);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.47);
+  z-index: 1000;
 }
 
 .change-password-box {
-    width: 30%;
-    height: 60%;
-    background: white;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 30%;
+  height: 60%;
+  background: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .change-password-box .back-btn-section {
-    width: 100%;
-    height: auto;
-    padding: 10px 20px;
+  width: 100%;
+  height: auto;
+  padding: 10px 20px;
 }
 
 .back-btn-section svg {
-    transition: 0.5s;
-    cursor: pointer;
+  transition: 0.5s;
+  cursor: pointer;
 }
 
 .back-btn-section svg:hover {
-    transition: 0.5s;
-    transform: translateX(-5px);
+  transition: 0.5s;
+  transform: translateX(-5px);
 }
 
 .first-method,
 .second-method,
 .new-password-contain,
 .email-verificaton-container {
-    width: 100%;
-    height: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .next-method-btn {
-    width: 100%;
-    height: 15%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0 30px;
+  width: 100%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 30px;
 }
 
 .next-method-btn span {
-    color: blue;
-    cursor: pointer;
+  color: blue;
+  cursor: pointer;
 }
 
 .next-method-btn span:hover {
-    color: red;
+  color: red;
 }
 
 .next-method-btn svg {
-    fill: blue;
+  fill: blue;
 }
 
 .next-method-btn span:hover~svg,
 .next-method-btn:hover+svg,
 .next-method-btn:has(span:hover) svg {
-    fill: red;
+  fill: red;
 }
 
 .first-method form,
 .second-method form,
 .new-password-contain form,
 .email-verificaton-container form {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    background: white;
-    box-shadow: none;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: white;
+  box-shadow: none;
 }
 
 .first-method h2,
 .second-method h2,
 .new-password-contain h2,
 .email-verificaton-container h2 {
-    color: black;
-    font-weight: 400;
-    margin-bottom: 10px;
+  color: black;
+  font-weight: 400;
+  margin-bottom: 10px;
 }
 
 .first-method form input,
 .second-method form input,
 .new-password-contain form input,
 .email-verificaton-container form input {
-    width: 60%;
-    height: 40px;
-    padding: 0 10px;
-    font-size: 1rem;
-    border: 2px solid #222;
-    border-radius: 5px;
-    outline: none;
+  width: 60%;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 1rem;
+  border: 2px solid #222;
+  border-radius: 5px;
+  outline: none;
 }
 
 .first-method form button,
 .second-method form button,
 .new-password-contain form button,
 .email-verificaton-container form button {
-    width: 60%;
-    height: 40px;
-    padding: 0 10px;
-    font-size: 1rem;
-    border: none;
-    background: #007bff;
-    color: white;
-    border-radius: 5px;
-    outline: none;
-    cursor: pointer;
-    transition: 0.5s;
+  width: 60%;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 1rem;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.5s;
 }
 
 .first-method form button:hover:not(:disabled),
 .second-method form button:hover:not(:disabled),
 .new-password-contain form button:hover:not(:disabled),
 .email-verificaton-container form button:hover:not(:disabled) {
-    transition: 0.5s;
-    background: #0066cc;
+  transition: 0.5s;
+  background: #0066cc;
 }
 
 .first-method form button:disabled,
 .second-method form button:disabled,
 .new-password-contain form button:disabled,
 .email-verificaton-container form button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .resend-otp {
-    width: 60%;
-    height: 40px;
-    padding: 0 10px;
-    font-size: 1rem;
-    border: none;
-    background: #007bff;
-    color: white;
-    border-radius: 5px;
-    outline: none;
-    cursor: pointer;
-    transition: 0.5s;
+  width: 60%;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 1rem;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.5s;
 }
 
-.resend-otp:hover {
-    transition: 0.5s;
-    background: #0066cc;
+.resend-otp:hover:not(:disabled) {
+  transition: 0.5s;
+  background: #0066cc;
 }
 
-/* Futuristic Spinner for Buttons */
+.resend-otp:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Spinner for buttons */
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0 60deg, #007bff 60deg 120deg, transparent 120deg 360deg);
+  animation: spin 1s linear infinite;
+  position: relative;
+}
+
+.spinner::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Remove Futuristic Spinner since we're using a consistent spinner */
 .futuristic-spinner {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: conic-gradient(from 0deg, transparent 0 60deg, #007bff 60deg 120deg, transparent 120deg 360deg);
-    animation: futuristic-spin 1s linear infinite;
-    position: relative;
-}
-
-.futuristic-spinner::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 16px;
-    height: 16px;
-    background: white;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
+  display: none;
 }
 
 @keyframes futuristic-spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  /* Removed since we're using a simpler spinner */
 }
 
 @media (max-width: 480px) {
-    .input-group label {
-        color: #cdcdcd;
-    }
+  .input-group label {
+    color: #cdcdcd;
+  }
 
-    .form-section h1 {
-        color: var(--primary-font-color);
-    }
+  .form-section h1 {
+    color: var(--primary-font-color);
+  }
 
-    .change-password {
-        width: 100%;
-        height: 50px;
-        cursor: none;
-    }
+  .change-password {
+    width: 100%;
+    height: 50px;
+    cursor: none;
+  }
 
-    .edit-profile-btn {
-        cursor: none;
-    }
+  .edit-profile-btn {
+    cursor: none;
+  }
 
-    .change-password-box {
-        width: 90%;
-    }
+  .change-password-box {
+    width: 90%;
+  }
 
-    .next-method-btn span {
-        cursor: none;
-    }
+  .next-method-btn span {
+    cursor: none;
+  }
 
-    .first-method form button,
-    .second-method form button,
-    .new-password-contain form button {
-        cursor: none;
-    }
+  .first-method form button,
+  .second-method form button,
+  .new-password-contain form button {
+    cursor: none;
+  }
 
-    .edit-profile-btn {
-        cursor: none;
-    }
+  .edit-profile-btn {
+    cursor: none;
+  }
 
-    .resend-otp {
-        cursor: none;
-    }
+  .resend-otp {
+    cursor: none;
+  }
 
-    .back-btn-section svg {
-        cursor: none;
-    }
+  .back-btn-section svg {
+    cursor: none;
+  }
 }

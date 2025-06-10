@@ -1,635 +1,692 @@
 .signup-contain {
-    width: 100%;
-    height: 100vh;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    padding: 30px;
-    color: var(--primary-font-color);
+  width: 100%;
+  height: 100vh;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 30px;
+  color: var(--primary-font-color);
 }
 
 .signup-contain form {  
-    position: relative;
-    width: 50%;
-    height: 100%;
-    background: var(--bg-primary);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    font-weight: 300;
-    padding: 20px 0;
-    z-index: 10;
+  position: relative;
+  width: 50%;
+  height: 100%;
+  background: var(--bg-primary);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  font-weight: 300;
+  padding: 20px 0;
+  z-index: 10;
 }
 
 form p span {
-    color: var(--glow-accent-warm);
-    cursor: pointer;
-    font-size: 1.2rem;
+  color: var(--glow-accent-warm);
+  cursor: pointer;
+  font-size: 1.2rem;
 }
 
 form p span:hover {
-    color: var(--glow-accent-cool);
+  color: var(--glow-accent-cool);
 }
 
 form h1 {
-    text-transform: uppercase;
-    font-weight: 100;
+  text-transform: uppercase;
+  font-weight: 100;
+}
+
+form .back-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  border: none;
+  outline: none;
+  border-radius: 0 0 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  cursor: pointer;
+  transition: 0.2s;
+  color: white;
 }
 
 form .user-name {
-    width: 100%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 25px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
 }
 
 .user-name input {
-    height: 40px;
-    padding: 0 10px;
-    border-radius: 5px;
-    outline: none;
-    border: 2px solid var(--shade-primary-color);
-    background: var(--primary-font-color);
+  height: 40px;
+  padding: 0 10px;
+  border-radius: 5px;
+  outline: none;
+  border: 2px solid var(--shade-primary-color);
+  background: var(--primary-font-color);
 }
 
 .user-name input:focus {
-    border: 2px solid var(--primary-font-color);
+  border: 2px solid var(--primary-font-color);
 }
 
-
 form .user-detail {
-    width: 55%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+  width: 55%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }   
 
 .user-detail input {
-    width: 100%;
-    height: 40px;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    border: 2px solid var(--shade-primary-color);
-    background: var(--primary-font-color);
-    padding: 0 10px;
+  width: 100%;
+  height: 40px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background: var(--primary-font-color);
+  padding: 0 10px;
 }
 
 .user-detail .pass {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.pass svg {
-    position: absolute;
-    fill: var(--primary-font-color);
-    right: -30px;
-    cursor: pointer;
+.user-detail .pass input {
+  border-radius: 5px 0 0 5px;
+}
+
+.user-detail .pass span{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    background: white;
+    border-radius: 0 5px 5px 0;
+}
+
+.pass span svg {
+  fill: black;
+  cursor: pointer;
 }
 
 .user-detail .num-div {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .num-div span {
-    width: 50px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--primary-font-color);
-    border: 2px solid var(--shade-primary-color);
-    color: black;
-    border-radius: 3px;
+  width: 50px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-font-color);
+  border: 2px solid var(--shade-primary-color);
+  color: black;
+  border-radius: 3px;
 }
 
 .user-detail input:focus {
-    border: 2px solid var(--primary-font-color);
+  border: 2px solid var(--primary-font-color);
 }
 
 .num-div input {
-    width: 85%;
-    height: 40px;
-    padding: 0 10px;
-    outline: none;
-    border-radius: 5px;
+  width: 85%;
+  height: 40px;
+  padding: 0 10px;
+  outline: none;
+  border-radius: 5px;
 }
 
 .checkbox {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
 }
 
 .checkbox p {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 .checkbox p span {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
 .checkbox input {
-    width: 20px;
-    height: 20px;
-    border: none;
-    outline: none;
-    cursor: pointer;
+  width: 20px;
+  height: 20px;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
-
 .or {
-    width: 80%;
-    height: auto;
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  width: 80%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 form .line {
-    width: 60%;
-    height: 1px;
-    border-radius: 10px;
-    background: var(--light-color-text);
+  width: 60%;
+  height: 1px;
+  border-radius: 10px;
+  background: var(--light-color-text);
 }
 
 .signup-form .submit {
-    width: 30%;
-    background: var(--glow-accent-warm);
-    border-radius: 5px;
-    color: white;
+  width: 30%;
+  height: 40px;
+  background: var(--glow-accent-warm);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: white;
+  text-transform: capitalize;
+  transition: 0.5s;
 }
 
-.signup-form .submitAnimation {
-    position: relative;
-    width: 30%;
-    height: 40px;
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    cursor: pointer;
-    overflow: hidden;
-    text-transform: capitalize;
-    transition: 0.5s;
-    background: var(--glow-accent-warm);
-    animation: animateSubmit 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
-    transition: all 0.3s ease;
+.signup-form .submit:hover:not(:disabled) {
+  transform: scale(110%);
 }
 
-@keyframes animateSubmit {
-    0% {
-        transform: scale(1);
-        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-    }
-    20% {
-        transform: scale(1.15);
-        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
-    }
-    40% {
-        transform: scale(0.95);
-        filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
-    }
-    60% {
-        transform: scale(1.05);
-    }
-    80% {
-        transform: scale(0.98);
-    }
-    100% {
-        transform: scale(1);
-        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-    }
+.signup-form .submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .signup-form .google {
-    width: 30%;
-    height: 45px;
-    background: transparent;
-    color: var(--color1);
-    border: 2px solid var(--color1);
-    border-radius: 5px;
-    font-weight: 200;
+  width: 30%;
+  height: 45px;
+  background: transparent;
+  color: var(--color1);
+  border: 2px solid var(--color1);
+  border-radius: 5px;
+  font-weight: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-transform: capitalize;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.signup-form .google:hover {
+  transform: scale(110%);
+}
+
+/* Spinner for buttons */
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0 60deg, var(--glow-accent-cool) 60deg 120deg, transparent 120deg 360deg);
+  animation: spin 1s linear infinite;
+  position: relative;
+}
+
+.spinner::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: var(--primary-font-color);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Remove submitAnimation since we're using spinner */
+.signup-form .submitAnimation {
+  display: none;
+}
+
+@keyframes animateSubmit {
+  /* Removed since we're using spinner */
 }
 
 .verification-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.438);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.438);
+  z-index: 100;
 }
 
 .verify-contain {
-    width: 30%;
-    height: 400px;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    color: black;
+  width: 30%;
+  height: 400px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  color: black;
 }
 
 .verify-contain h2 {
-    font-weight: 400;
-    text-align: center;
-    text-transform: capitalize;
+  font-weight: 400;
+  text-align: center;
+  text-transform: capitalize;
 }
 
 .verify {
-    position: relative;
-    width: 100%;
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+  position: relative;
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
 
 /* For Chrome, Safari, Edge, and Opera */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* For Firefox */
 input[type="number"] {
-    appearance: textfield;
-    -moz-appearance: textfield;
+  appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 .enterCode {
-    width: 50%;
-    height: 40px;
-    outline: none;
-    border: 2px solid #555;
-    border-radius: 5px;
-    font-size: 1rem;
-    padding: 0 10px;
+  width: 50%;
+  height: 40px;
+  outline: none;
+  border: 2px solid #555;
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 0 10px;
 }
 
 .submitCode,
 .sendAgain {
-    width: 50%;
-    height: 40px;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background: #222;
-    color: white;
-    text-transform: capitalize;
+  width: 50%;
+  height: 40px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #222;
+  color: white;
+  text-transform: capitalize;
+  transition: 0.3s;
 }
 
-.submitCode:hover,
-.sendAgain:hover {
-    background: #222222d3;
+.submitCode:hover:not(:disabled),
+.sendAgain:hover:not(:disabled) {
+  background: #222222d3;
+}
+
+.submitCode:disabled,
+.sendAgain:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .changeEmail {
-    text-transform: capitalize;
-    color: var(--glow-accent-warm);
-    cursor: pointer;
+  text-transform: capitalize;
+  color: var(--glow-accent-warm);
+  cursor: pointer;
 }
 
 .changeEmail:hover {
-    color: var(--glow-accent-cool);
+  color: var(--glow-accent-cool);
 }
 
 .side-banner {
-    height: 100%;
-    width: 50%;
-    border-radius: 20px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: 10;
+  height: 100%;
+  width: 50%;
+  border-radius: 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 10;
 }
 
 /*! Extra Small Devices (Portrait Phones) */
 @media only screen and (max-width: 575px) {
+  .signup-contain {
+    padding: 0px;
+    background: transparent;
+  }
 
-    .signup-contain {
-        padding: 0px;
-        background: transparent;
-    }
+  .side-banner {
+    display: none;
+  }
 
-    .side-banner {
-        display: none;
-    }
+  .signup-contain form {
+    width: 100%;
+    background: transparent;
+    padding: 50px 0;
+  }
 
-    .signup-contain form {
-        width: 100%;
-        background: transparent;
-        padding: 50px 0;
-    }
+  form .user-name {
+    gap: 15px;
+  }
 
-    form .user-name {
-        gap: 15px;
-    }
+  form .user-name input {
+    width: 40%;
+  }
 
-    form .user-name input {
-        width: 40%;
-    }
+  form .user-detail {
+    width: 80%;
+  }
 
-    form .user-detail {
-        width: 80%;
-    }
+  .num-div span {
+    width: 20%;
+  }
 
-    .num-div span {
-        width: 20%;
-    }
+  .num-div input {
+    width: 75%;
+  }
 
-    .num-div input {
-        width: 75%;
-    }
+  .signup-form .submit {
+    width: 40%;
+  }
 
-    .signup-form .submit {
-        width: 40%;
-    }
+  .signup-form .submit:hover {
+    transform: scale(1);
+  }
 
-    .signup-form .submit:hover {
-        transform: scale(1);
-    }
+  .signup-form .google {
+    width: 60%;
+    cursor: none;
+  }
 
-    .signup-form .google {
-        width: 60%;
-        cursor: none;
-    }
+  .checkbox {
+    gap: 5px;
+    cursor: none;
+  }
 
-    .checkbox {
-        gap: 5px;
-        cursor: none;
-    }
+  .verify-contain {
+    width: 90%;
+    height: 400px;
+  }
 
-    .verify-contain {
-        width: 90%;
-        height: 400px;
-    }
+  .enterCode {
+    width: 80%;
+    cursor: none;
+  }
 
-    .enterCode {
-        width: 80%;
-        cursor: none;
-    }
+  .submitCode,
+  .sendAgain {
+    width: 80%;
+    cursor: none;
+  }
 
-    .submitCode,
-    .sendAgain {
-        width: 80%;
-        cursor: none;
-    }
+  .changeEmail {
+    cursor: none;
+  }
 
-    .changeEmail {
-        cursor: none;
-    }
+  form p span {
+    cursor: none;
+  }
 
-    form p span{
-        cursor: none;
-    }
+  .pass svg {
+    cursor: none;
+  }
 
-    .pass svg{
-        cursor: none;
-    }
+  .checkbox input {
+    cursor: none;
+  }
 
-    .checkbox input{
-        cursor: none;
-    }
-
-    .signup-form .submitAnimation{
-        cursor: none;
-    }
-
-    .sendAgain{
-        cursor: none;
-    }
-
+  form .back-btn {
+    cursor: none;
+  }
 }
 
 /*! Small devices (phones, 576px and up) */
 @media (min-width: 575px) and (max-width: 768px) {
+  .signup-contain {
+    padding: 0px;
+    background: transparent;
+  }
 
-    .signup-contain {
-        padding: 0px;
-        background: transparent;
-    }
+  .side-banner {
+    display: none;
+  }
 
-    .side-banner {
-        display: none;
-    }
+  .signup-contain form {
+    width: 100%;
+    background: transparent;
+  }
 
-    .signup-contain form {
-        width: 100%;
-        background: transparent;
-    }
+  form .user-name {
+    gap: 15px;
+  }
 
-    form .user-name {
-        gap: 15px;
-    }
+  form .user-detail {
+    width: 60%;
+  }
 
-    form .user-detail {
-        width: 60%;
-    }
+  .num-div span {
+    width: 20%;
+  }
 
-    .num-div span {
-        width: 20%;
-    }
+  .num-div input {
+    width: 75%;
+  }
 
-    .num-div input {
-        width: 75%;
-    }
+  .signup-form .submit {
+    width: 30%;
+  }
 
-    .signup-form .submit {
-        width: 30%;
-    }
+  .signup-form .submit:hover {
+    transform: scale(1);
+  }
 
-    .signup-form .submit:hover {
-        transform: scale(1);
-    }
+  .signup-form .google {
+    width: 40%;
+    cursor: none;
+  }
 
-    .signup-form .google {
-        width: 40%;
-        cursor: none;
-    }
+  .verify-contain {
+    width: 80%;
+    height: 400px;
+  }
 
-    .verify-contain {
-        width: 80%;
-        height: 400px;
-    }
+  .enterCode {
+    width: 80%;
+    cursor: none;
+  }
 
-    .enterCode {
-        width: 80%;
-        cursor: none;
-    }
+  .submitCode,
+  .sendAgain {
+    width: 80%;
+    cursor: none;
+  }
 
-    .submitCode,
-    .sendAgain {
-        width: 80%;
-        cursor: none;
-    }
+  .changeEmail {
+    cursor: none;
+  }
 
-    .changeEmail {
-        cursor: none;
-    }
+  form p span {
+    cursor: none;
+  }
 
-    form p span{
-        cursor: none;
-    }
+  .pass svg {
+    cursor: none;
+  }
 
-    .pass svg{
-        cursor: none;
-    }
+  .checkbox input {
+    cursor: none;
+  }
 
-    .checkbox input{
-        cursor: none;
-    }
-
-    .signup-form .submitAnimation{
-        cursor: none;
-    }
-
-    .sendAgain{
-        cursor: none;
-    }
-
+  form .back-btn {
+    cursor: none;
+  }
 }
 
 /*! Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 992px) {
+  .signup-contain {
+    padding: 0px;
+    background: transparent;
+  }
 
-    .signup-contain {
-        padding: 0px;
-        background: transparent;
-    }
+  .side-banner {
+    display: none;
+  }
 
-    .side-banner {
-        display: none;
-    }
+  .signup-contain form {
+    width: 100%;
+    background: transparent;
+  }
 
-    .signup-contain form {
-        width: 100%;
-        background: transparent;
-    }
+  form .user-name {
+    gap: 15px;
+  }
 
-    form .user-name {
-        gap: 15px;
-    }
+  form .user-detail {
+    width: 50%;
+  }
 
-    form .user-detail {
-        width: 50%;
-    }
+  .num-div span {
+    width: 20%;
+  }
 
-    .num-div span {
-        width: 20%;
-    }
+  .num-div input {
+    width: 75%;
+  }
 
-    .num-div input {
-        width: 75%;
-    }
+  .signup-form .submit {
+    width: 30%;
+  }
 
-    .signup-form .submit {
-        width: 30%;
-    }
+  .signup-form .submit:hover {
+    transform: scale(1);
+  }
 
-    .signup-form .submit:hover {
-        transform: scale(1);
-    }
+  .signup-form .google {
+    width: 30%;
+  }
 
-    .signup-form .google {
-        width: 30%;
-    }
+  .verify-contain {
+    width: 70%;
+  }
 
-    .changeEmail {
-        cursor: none;
-    }
+  .changeEmail {
+    cursor: none;
+  }
 
-    form p span{
-        cursor: none;
-    }
+  form p span {
+    cursor: none;
+  }
 
-    .pass svg{
-        cursor: none;
-    }
+  .pass svg {
+    cursor: none;
+  }
 
-    .checkbox input{
-        cursor: none;
-    }
+  .checkbox input {
+    cursor: none;
+  }
 
-    .signup-form .submitAnimation{
-        cursor: none;
-    }
+  form .back-btn {
+    cursor: none;
+  }
 
-    .sendAgain{
-        cursor: none;
-    }
-
+  .submitCode,
+  .sendAgain {
+    cursor: none;
+  }
 }
 
 /*! Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1200px) {
+  .signup-contain {
+    padding: 0px;
+  }
 
-    .signup-contain {
-        padding: 0px;
-    }
+  .side-banner {
+    display: none;
+  }
 
-    .side-banner {
-        display: none;
-    }
+  .signup-contain form {
+    width: 100%;
+    background: transparent;
+  }
 
-    .signup-contain form {
-        width: 100%;
-        background: transparent;
-    }
+  form .user-name {
+    gap: 15px;
+  }
 
-    form .user-name {
-        gap: 15px;
-    }
+  form .user-detail {
+    width: 40%;
+  }
 
-    form .user-detail {
-        width: 40%;
-    }
+  .num-div span {
+    width: 15%;
+  }
 
-    .num-div span {
-        width: 15%;
-    }
+  .num-div input {
+    width: 80%;
+  }
 
-    .num-div input {
-        width: 80%;
-    }
+  .signup-form .submit {
+    width: 20%;
+  }
 
-    .signup-form .submit {
-        width: 20%;
-    }
+  .signup-form .google {
+    width: 25%;
+  }
 
-    .signup-form .google {
-        width: 25%;
-    }
-
+  .verify-contain {
+    width: 50%;
+  }
 }
 
-
 @media (min-width: 1200px) and (max-width: 1300px) {
-    form .user-detail {
-        width: 70%;
-    }
+  form .user-detail {
+    width: 70%;
+  }
+
+  .verify-contain {
+    width: 40%;
+  }
 }

@@ -6,7 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './signin.css';
 import signinBanner from './signin-banner.jpg';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faLongArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 function SignIn() {
@@ -36,8 +36,16 @@ function SignIn() {
   const [lastOtpSentTime, setLastOtpSentTime] = useState(null);
   const COOLDOWN_PERIOD = 5 * 60 * 1000; // 5 minutes in milliseconds
 
+  // Loading states for server actions
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [isVerifyingEmail, setIsVerifyingEmail] = useState(false);
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
+  const [isResettingPassword, setIsResettingPassword] = useState(false);
+
   const onSubmit = async (data) => {
+    setIsLoggingIn(true);
     const result = await login(data.email, data.password);
+    setIsLoggingIn(false);
     if (!result.success) {
       toast.dismiss('login-error');
       toast.error(result.message, { toastId: 'login-error' });
@@ -56,6 +64,7 @@ function SignIn() {
 
   const handleVerifyEmail = async (e) => {
     e.preventDefault();
+    setIsVerifyingEmail(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/check-email`, {
         method: 'POST',
@@ -72,6 +81,8 @@ function SignIn() {
     } catch (error) {
       console.error('Error verifying email:', error);
       toast.error('An error occurred while verifying email');
+    } finally {
+      setIsVerifyingEmail(false);
     }
   };
 
@@ -80,6 +91,7 @@ function SignIn() {
       toast.error('Please wait before requesting a new OTP');
       return;
     }
+    setIsSendingOtp(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/send-reset-otp`, {
         method: 'POST',
@@ -97,11 +109,14 @@ function SignIn() {
     } catch (error) {
       console.error('Error sending OTP:', error);
       toast.error('An error occurred while sending OTP');
+    } finally {
+      setIsSendingOtp(false);
     }
   };
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
+    setIsResettingPassword(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/reset-password`, {
         method: 'POST',
@@ -123,6 +138,8 @@ function SignIn() {
     } catch (error) {
       console.error('Error resetting password:', error);
       toast.error('An error occurred while resetting password');
+    } finally {
+      setIsResettingPassword(false);
     }
   };
 
@@ -208,7 +225,9 @@ function SignIn() {
           <span className='forgot' onClick={openPasswordBox}>Forgot Password ?</span>
         </div>
         <div className="submit-container">
-          <button type='submit' className='submit'>Login</button>
+          <button type='submit' className='submit' disabled={isLoggingIn}>
+            {isLoggingIn ? <span className="spinner"></span> : 'Login'}
+          </button>
           <p>or</p>
           <div className="google">
             <svg width="35px" height="35px" viewBox="0 0 32 32" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg">
@@ -248,7 +267,9 @@ function SignIn() {
                 onChange={handleInputEmail}
                 placeholder='Enter Your Valid Email'
               />
-              <button className='next-method' type="submit">Next</button>
+              <button className='next-method' type="submit" disabled={isVerifyingEmail}>
+                {isVerifyingEmail ? <span className="spinner"></span> : 'Next'}
+              </button>
             </form>
           </div>
           <div
@@ -269,14 +290,16 @@ function SignIn() {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
               />
-              <button type='submit'>Submit</button>
+              <button type='submit' disabled={isResettingPassword}>
+                {isResettingPassword ? <span className="spinner"></span> : 'Submit'}
+              </button>
               {otpSent && (
                 <button
                   className="resend-otp"
                   onClick={handleSendResetOtp}
-                  disabled={lastOtpSentTime && Date.now() - lastOtpSentTime < COOLDOWN_PERIOD}
+                  disabled={isSendingOtp || (lastOtpSentTime && Date.now() - lastOtpSentTime < COOLDOWN_PERIOD)}
                 >
-                  Resend OTP
+                  {isSendingOtp ? <span className="spinner"></span> : 'Resend OTP'}
                 </button>
               )}
             </form>

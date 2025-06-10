@@ -23,6 +23,8 @@ function ProfileEdit() {
   const [isUpdatingProfile, setIsUpdatingProfile] = useState(false); // Loading state for profile update
   const [isChangingPasswordOld, setIsChangingPasswordOld] = useState(false); // Loading state for old password method
   const [isChangingPasswordOtp, setIsChangingPasswordOtp] = useState(false); // Loading state for OTP method
+  const [isSendingOtp, setIsSendingOtp] = useState(false); // Loading state for sending OTP
+  const [isVerifyingOtp, setIsVerifyingOtp] = useState(false); // Loading state for verifying OTP
 
   const [nextMethod, setNextMethod] = useState(false);
   const [passwordBox, setPasswordBox] = useState(false);
@@ -169,6 +171,7 @@ function ProfileEdit() {
   };
 
   const handleSendOtp = async () => {
+    setIsSendingOtp(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/send-otp`, {
         method: 'POST',
@@ -187,11 +190,14 @@ function ProfileEdit() {
     } catch (error) {
       console.error('Error sending OTP:', error);
       toast.error('An error occurred while sending OTP');
+    } finally {
+      setIsSendingOtp(false);
     }
   };
 
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
+    setIsVerifyingOtp(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/verify-otp`, {
         method: 'POST',
@@ -211,11 +217,14 @@ function ProfileEdit() {
     } catch (error) {
       console.error('Error verifying OTP:', error);
       toast.error('An error occurred while verifying OTP');
+    } finally {
+      setIsVerifyingOtp(false);
     }
   };
 
   const handleResendOtp = async (e) => {
     e.preventDefault();
+    setIsSendingOtp(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/resend-otp`, {
         method: 'POST',
@@ -233,6 +242,8 @@ function ProfileEdit() {
     } catch (error) {
       console.error('Error resending OTP:', error);
       toast.error('An error occurred while resending OTP');
+    } finally {
+      setIsSendingOtp(false);
     }
   };
 
@@ -384,11 +395,7 @@ function ProfileEdit() {
         </div>
 
         <button className="edit-profile-btn" onClick={handleProfileUpdate} disabled={isUpdatingProfile}>
-          {isUpdatingProfile ? <span className="futuristic-spinner"></span> : (
-            <>
-              <span className="btn-text">Update Profile</span>
-            </>
-          )}
+          {isUpdatingProfile ? <span className="spinner"></span> : 'Update Profile'}
         </button>
         <button className='change-password' onClick={openPasswordBox}>Change Password</button>
 
@@ -427,9 +434,9 @@ function ProfileEdit() {
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
                 <button type='submit' disabled={isChangingPasswordOld}>
-                  {isChangingPasswordOld ? <span className="futuristic-spinner"></span> : 'Submit'}
+                  {isChangingPasswordOld ? <span className="spinner"></span> : 'Submit'}
                 </button>
-              </form>
+            </form>
             </div>
 
             <div
@@ -444,9 +451,13 @@ function ProfileEdit() {
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                 />
-                <button type='submit'>Verify OTP</button>
+                <button type='submit' disabled={isVerifyingOtp}>
+                  {isVerifyingOtp ? <span className="spinner"></span> : 'Verify OTP'}
+                </button>
                 {otpSent && (
-                  <button className="resend-otp" onClick={handleResendOtp}>Resend OTP</button>
+                  <button className="resend-otp" onClick={handleResendOtp} disabled={isSendingOtp}>
+                    {isSendingOtp ? <span className="spinner"></span> : 'Resend OTP'}
+                  </button>
                 )}
               </form>
             </div>
@@ -464,7 +475,7 @@ function ProfileEdit() {
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
                 <button type='submit' disabled={isChangingPasswordOtp}>
-                  {isChangingPasswordOtp ? <span className="futuristic-spinner"></span> : 'Submit'}
+                  {isChangingPasswordOtp ? <span className="spinner"></span> : 'Submit'}
                 </button>
               </form>
             </div>

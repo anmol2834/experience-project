@@ -214,9 +214,14 @@ input[type="password"]::-webkit-password-suggestion-button {
   color: black;
 }
 
-.submit:hover {
+.submit:hover:not(:disabled) {
   transition: 0.5s;
   transform: scale(110%);
+}
+
+.submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .submit:after {
@@ -278,13 +283,177 @@ input[type="password"]::-webkit-password-suggestion-button {
   transform: scale(110%);
 }
 
+/* Spinner for buttons */
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0 60deg, var(--glow-accent-cool) 60deg 120deg, transparent 120deg 360deg);
+  animation: spin 1s linear infinite;
+  position: relative;
+}
+
+.spinner::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: var(--primary-font-color);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Change Password Container */
+.change-password-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.47);
+  z-index: 1000;
+}
+
+.change-password-box {
+  width: 30%;
+  height: 60%;
+  background: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.change-password-box .back-btn-section {
+  width: 100%;
+  height: auto;
+  padding: 10px 20px;
+}
+
+.back-btn-section svg {
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.back-btn-section svg:hover {
+  transition: 0.5s;
+  transform: translateX(-5px);
+}
+
+.email-verificaton-container,
+.second-method {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-verificaton-container form,
+.second-method form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: white;
+  box-shadow: none;
+}
+
+.email-verificaton-container h2,
+.second-method h2 {
+  color: black;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.email-verificaton-container form input,
+.second-method form input {
+  width: 60%;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 1rem;
+  border: 2px solid #222;
+  border-radius: 5px;
+  outline: none;
+}
+
+.email-verificaton-container form button,
+.second-method form button {
+  width: 60%;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 1rem;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.email-verificaton-container form button:hover:not(:disabled),
+.second-method form button:hover:not(:disabled) {
+  transition: 0.5s;
+  background: #0066cc;
+}
+
+.email-verificaton-container form button:disabled,
+.second-method form button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.resend-otp {
+  width: 60%;
+  height: 40px;
+  padding: 0 10px;
+  font-size: 1rem;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.resend-otp:hover:not(:disabled) {
+  transition: 0.5s;
+  background: #0066cc;
+}
+
+.resend-otp:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
 
 /*! Extra Small Devices (Portrait Phones) */
 @media only screen and (max-width: 575px) {
-
   .signin-contain {
     grid-template-columns: 1fr;
-    padding: 0px; 
+    padding: 0px;
   }
 
   .signin-banner {
@@ -329,11 +498,23 @@ input[type="password"]::-webkit-password-suggestion-button {
     cursor: none;
   }
 
+  .change-password-box {
+    width: 90%;
+  }
+
+  .email-verificaton-container form button,
+  .second-method form button,
+  .resend-otp {
+    cursor: none;
+  }
+
+  .back-btn-section svg {
+    cursor: none;
+  }
 }
 
 /*! Small devices (phones, 576px and up) */
 @media (min-width: 575px) and (max-width: 768px) {
-
   .signin-contain {
     grid-template-columns: 1fr;
     padding: 10px;
@@ -379,11 +560,23 @@ input[type="password"]::-webkit-password-suggestion-button {
     cursor: none;
   }
 
+  .change-password-box {
+    width: 90%;
+  }
+
+  .email-verificaton-container form button,
+  .second-method form button,
+  .resend-otp {
+    cursor: none;
+  }
+
+  .back-btn-section svg {
+    cursor: none;
+  }
 }
 
 /*! Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 992px) {
-
   .signin-contain {
     grid-template-columns: 1fr;
     padding: 10px;
@@ -428,11 +621,23 @@ input[type="password"]::-webkit-password-suggestion-button {
     cursor: none;
   }
 
+  .change-password-box {
+    width: 70%;
+  }
+
+  .email-verificaton-container form button,
+  .second-method form button,
+  .resend-otp {
+    cursor: none;
+  }
+
+  .back-btn-section svg {
+    cursor: none;
+  }
 }
 
 /*! Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1200px) {
-
   .signin-contain form {
     justify-content: center;
     gap: 50px;
@@ -450,4 +655,7 @@ input[type="password"]::-webkit-password-suggestion-button {
     width: 60%;
   }
 
+  .change-password-box {
+    width: 50%;
+  }
 }
