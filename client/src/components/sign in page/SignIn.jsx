@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './signin.css';
 import signinBanner from './signin-banner.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faLongArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faLongArrowLeft, faMultiply } from '@fortawesome/free-solid-svg-icons';
 
 function SignIn() {
   const navigate = useNavigate();
@@ -36,19 +36,33 @@ function SignIn() {
   const [lastOtpSentTime, setLastOtpSentTime] = useState(null);
   const COOLDOWN_PERIOD = 5 * 60 * 1000; // 5 minutes in milliseconds
 
+  // Verification box states
+  const [showVerificationBox, setShowVerificationBox] = useState(false);
+  const [verificationEmail, setVerificationEmail] = useState('');
+  const [verificationOtp, setVerificationOtp] = useState('');
+  const [otpTimer, setOtpTimer] = useState(0);
+  const [canResendOtp, setCanResendOtp] = useState(true);
+
   // Loading states for server actions
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [isVerifyingEmail, setIsVerifyingEmail] = useState(false);
   const [isSendingOtp, setIsSendingOtp] = useState(false);
   const [isResettingPassword, setIsResettingPassword] = useState(false);
+  const [isSendingVerificationOtp, setIsSendingVerificationOtp] = useState(false);
+  const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
 
   const onSubmit = async (data) => {
     setIsLoggingIn(true);
     const result = await login(data.email, data.password);
     setIsLoggingIn(false);
     if (!result.success) {
-      toast.dismiss('login-error');
-      toast.error(result.message, { toastId: 'login-error' });
+      if (result.message === 'Email not verified') {
+        setVerificationEmail(data.email);
+        setShowVerificationBox(true);
+      } else {
+        toast.dismiss('login-error');
+        toast.error(result.message, { toastId: 'login-error' });
+      }
     }
   };
 
@@ -143,6 +157,67 @@ function SignIn() {
     }
   };
 
+  const handleSendVerificationOtp = async () => {
+    if (otpTimer > 0) {
+      toast.error('Please wait before requesting a new OTP');
+      return;
+    }
+    setIsSendingVerificationOtp(true);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/send-verification-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: verificationEmail })
+      });
+      if (response.ok) {
+        setOtpTimer(60);
+        setCanResendOtp(false);
+        toast.success('OTP sent to your email');
+      } else {
+        const data = await response.json();
+        toast.error(data.message || 'Failed to send OTP');
+      }
+    } catch (error) {
+      console.error('Error sending OTP:', error);
+      toast.error('An error occurred while sending OTP');
+    } finally {
+      setIsSendingVerificationOtp(false);
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    setIsVerifyingOtp(true);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/verify-otp-no-token`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: verificationEmail, otp: verificationOtp })
+      });
+      if (response.ok) {
+        toast.success('Email verified successfully');
+        setShowVerificationBox(false);
+        // Optionally, retry login here if needed
+      } else {
+        const data = await response.json();
+        toast.error(data.message || 'Invalid OTP');
+      }
+    } catch (error) {
+      console.error('Error verifying OTP:', error);
+      toast.error('An error occurred while verifying OTP');
+    } finally {
+      setIsVerifyingOtp(false);
+    }
+  };
+
+  useEffect(() => {
+    if (otpTimer > 0) {
+      const timer = setTimeout(() => setOtpTimer(otpTimer - 1), 1000);
+      return () => clearTimeout(timer);
+    } else {
+      setCanResendOtp(true);
+    }
+  }, [otpTimer]);
+
   const handleBackBtn = () => {
     setPasswordBox(false);
     setOtpSent(false);
@@ -169,6 +244,13 @@ function SignIn() {
     setNewPassword('');
     setVerifiedEmail(false);
     setResetEmail('');
+  };
+
+  const closeVerificationBox = () => {
+    setShowVerificationBox(false);
+    setVerificationOtp('');
+    setOtpTimer(0);
+    setCanResendOtp(true);
   };
 
   return (
@@ -217,7 +299,7 @@ function SignIn() {
                 <path d="m644-428-58-58q9-47-27-88t-93-32l-58-58q17-8  34.5-12t37.5-4q75 0 127.5 52.5T660-500q0 20-4 37.5T644-428Zm128 126-58-56q38-29 67.5-63.5T832-500q-50-101-143.5-160.5T480-720q-29 0-57 4t-55 12l-62-62q41-17 84-25.5t90-8.5q151 0 269 83.5T920-500q-23 59-60.5 109.5T772-302Zm20 246L624-222q-35 11-70.5 16.5T480-200q-151 0-269-83.5T40-500q21-53 53-98.5t73-81.5L56-792l56-56 736 736-56 56ZM222-624q-29 26-53 57t-41 67q50 101 143.5 160.5T480-280q20 0 39-2.5t39-5.5l-36-38q-11 3-21 4.5t-21 1.5q-75 0-127.5-52.5T300-500q0-11 1.5-21t4.5-21l-84-82Zm319 93Zm-151 75Z" />
               </svg>
               <svg style={{ display: eye ? 'block' : 'none' }} xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
-                <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
+                <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200時には0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
               </svg>
             </div>
             <span className='bottom-border'></span>
@@ -254,13 +336,14 @@ function SignIn() {
             <svg onClick={handleBackBtn} xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#000000">
               <path d="M366.15-253.85 140-480l226.15-226.15L408.31-664l-154 154H820v60H254.31l154 154-42.16 42.15Z" />
             </svg>
+            <h2>Forgot Password</h2>  
           </div>
           <div
             className="email-verificaton-container"
             style={{ display: !verifiedEmail ? "block" : "none" }}
           >
             <form onSubmit={handleVerifyEmail}>
-              <h2>Change To Your New Password</h2>
+              <h3>enter your valid email address</h3>
               <input
                 type="email"
                 value={resetEmail}
@@ -273,11 +356,11 @@ function SignIn() {
             </form>
           </div>
           <div
-            className="second-method"
+            className="second-process-container"
             style={{ display: verifiedEmail ? "block" : "none" }}
           >
             <form onSubmit={handleResetPassword}>
-              <h2>OTP Sent To Your Email</h2>
+              <h3>OTP Sent To Your Email</h3>
               <input
                 type="password"
                 placeholder='Enter OTP'
@@ -304,6 +387,46 @@ function SignIn() {
               )}
             </form>
           </div>
+        </div>
+      </div>
+      <div
+        className="verification-container"
+        style={{ display: showVerificationBox ? "flex" : "none" }}
+      >
+        <div className="verification-box">
+          <h2>Verify Your Email</h2>
+          <p>Enter the OTP sent to {verificationEmail}</p>
+          <input
+            type="text"
+            placeholder="Enter OTP"
+            value={verificationOtp}
+            onChange={(e) => setVerificationOtp(e.target.value)}
+          />
+          <div className="verification-buttons">
+            <button
+              className="send-otp"
+              onClick={handleSendVerificationOtp}
+              disabled={isSendingVerificationOtp || !canResendOtp}
+            >
+              {isSendingVerificationOtp ? (
+                <span className="spinner"></span>
+              ) : otpTimer > 0 ? (
+                `Resend in ${otpTimer}s`
+              ) : (
+                'Send OTP'
+              )}
+            </button>
+            <button
+              className="submit-otp"
+              onClick={handleVerifyOtp}
+              disabled={isVerifyingOtp}
+            >
+              {isVerifyingOtp ? <span className="spinner"></span> : 'Submit'}
+            </button>
+          </div>
+          <button className="close-verification" onClick={closeVerificationBox}>
+            <FontAwesomeIcon icon={faMultiply} />
+          </button>
         </div>
       </div>
       <div style={{ position: "absolute" }}>

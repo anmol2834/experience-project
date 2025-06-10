@@ -129,58 +129,6 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Verify route
-app.post('/verify', async (req, res) => {
-  const { email, code } = req.body;
-  try {
-    const user = await User.findOne({ email, verificationCode: code });
-    if (!user) {
-      return res.status(400).send('Invalid verification code');
-    }
-    user.verified = true;
-    user.verificationCode = undefined;
-    await user.save();
-    const token = generateToken(user);
-    res.status(200).json({ token });
-  } catch (err) {
-    res.status(500).send('Server error');
-  }
-});
-
-// Resend verification code
-app.post('/resend', async (req, res) => {
-  const { email } = req.body;
-  try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(400).send('User not found');
-    }
-    if (user.verified) {
-      return res.status(400).send('User already verified');
-    }
-    const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-    user.verificationCode = verificationCode;
-    await user.save();
-
-    const mailOptions = {
-      from: 'anmolsinha4321@gmail.com',
-      to: email,
-      subject: 'Email Verification',
-      text: `Your new verification code is: ${verificationCode}`,
-    };
-
-    transporter.sendMail(mailOptions, (error) => {
-      if (error) {
-        console.log(error);
-        return res.status(500).send('Error sending email');
-      }
-      res.status(200).send('Verification code resent');
-    });
-  } catch (err) {
-    res.status(500).send('Server error');
-  }
-});
-
 // Google sign-in route
 app.post('/google-signin', async (req, res) => {
   const { email, name } = req.body;
@@ -267,6 +215,58 @@ app.put('/user', verifyToken, async (req, res) => {
   }
 });
 
+// Verify route
+app.post('/verify', async (req, res) => {
+  const { email, code } = req.body;
+  try {
+    const user = await User.findOne({ email, verificationCode: code });
+    if (!user) {
+      return res.status(400).send('Invalid verification code');
+    }
+    user.verified = true;
+    user.verificationCode = undefined;
+    await user.save();
+    const token = generateToken(user);
+    res.status(200).json({ token });
+  } catch (err) {
+    res.status(500).send('Server error');
+  }
+});
+
+// Resend verification code
+app.post('/resend', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).send('User not found');
+    }
+    if (user.verified) {
+      return res.status(400).send('User already verified');
+    }
+    const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+    user.verificationCode = verificationCode;
+    await user.save();
+
+    const mailOptions = {
+      from: 'anmolsinha4321@gmail.com',
+      to: email,
+      subject: 'Email Verification',
+      text: `Your new verification code is: ${verificationCode}`,
+    };
+
+    transporter.sendMail(mailOptions, (error) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).send('Error sending email');
+      }
+      res.status(200).send('Verification code resent');
+    });
+  } catch (err) {
+    res.status(500).send('Server error');
+  }
+});
+
 // Change password using old password (requires token)
 app.post('/change-password-old', verifyToken, async (req, res) => {
   const { oldPassword, newPassword } = req.body;
@@ -292,12 +292,12 @@ app.post('/send-otp', verifyToken, async (req, res) => {
     const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ message: 'User not found' });
 
-    if (user.lastOtpSent && (new Date() - user.lastOtpSent) < 5 * 60 * 1000) {
-      return res.status(400).json({ message: 'Please wait 5 minutes before requesting a new OTP' });
+    if (user.lastOtpSent && (new Date() - user.lastOtpSent) < 1 * 60 * 1000) {
+      return res.status(400).json({ message: 'Please wait 1 minutes before requesting a new OTP' });
     }
 
     const otp = generateOTP();
-    const expiration = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
+    const expiration = new Date(Date.now() + 1 * 60 * 1000); // 1 minutes
 
     user.otp = otp;
     user.otpExpiration = expiration;
@@ -334,12 +334,12 @@ app.post('/resend-otp', verifyToken, async (req, res) => {
       return res.status(400).json({ message: 'No OTP has been sent yet' });
     }
 
-    if ((new Date() - user.lastOtpSent) < 5 * 60 * 1000) {
-      return res.status(400).json({ message: 'You can only resend OTP after 5 minutes' });
+    if ((new Date() - user.lastOtpSent) < 1 * 60 * 1000) {
+      return res.status(400).json({ message: 'You can only resend OTP after 1 minutes' });
     }
 
     const otp = generateOTP();
-    const expiration = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
+    const expiration = new Date(Date.now() + 1 * 60 * 1000); // 1 minutes
 
     user.otp = otp;
     user.otpExpiration = expiration;
@@ -378,6 +378,34 @@ app.post('/verify-otp', verifyToken, async (req, res) => {
     } else {
       res.status(400).json({ message: 'Invalid or expired OTP' });
     }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// New endpoint: Verify OTP for email verification (no token required)
+app.post('/verify-otp-no-token', async (req, res) => {
+  const { email, otp } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    if (user.verified) {
+      return res.status(400).json({ message: 'Email already verified' });
+    }
+
+    if (!isValidOTP(user, otp)) {
+      return res.status(400).json({ message: 'Invalid or expired OTP' });
+    }
+
+    user.verified = true;
+    user.otp = undefined;
+    user.otpExpiration = undefined;
+    await user.save();
+    const token = generateToken(user);
+    res.status(200).json({ message: 'Email verified successfully', token });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
@@ -428,7 +456,7 @@ app.post('/send-reset-otp', async (req, res) => {
     }
 
     const otp = generateOTP();
-    const expiration = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
+    const expiration = new Date(Date.now() + 1 * 60 * 1000); // 1 minutes
 
     user.otp = otp;
     user.otpExpiration = expiration;
@@ -472,6 +500,73 @@ app.post('/reset-password', async (req, res) => {
     user.otpExpiration = undefined;
     await user.save();
     res.status(200).json({ message: 'Password updated successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Send OTP for email verification (no token required)
+app.post('/send-verification-otp', async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    if (user.verified) {
+      return res.status(400).json({ message: 'Email already verified' });
+    }
+
+    const otp = generateOTP();
+    const expiration = new Date(Date.now() + 1 * 60 * 1000); // 1 minutes
+
+    user.otp = otp;
+    user.otpExpiration = expiration;
+    await user.save();
+
+    const mailOptions = {
+      from: 'anmolsinha4321@gmail.com',
+      to: user.email,
+      subject: 'Email Verification OTP',
+      text: `Your OTP for email verification is: ${otp}`,
+    };
+
+    transporter.sendMail(mailOptions, (error) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).send('Error sending OTP');
+      }
+      res.status(200).json({ message: 'OTP sent successfully' });
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Verify OTP for email verification (no token required)
+app.post('/verify-otp', async (req, res) => {
+  const { email, otp } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    if (user.verified) {
+      return res.status(400).json({ message: 'Email already verified' });
+    }
+
+    if (!isValidOTP(user, otp)) {
+      return res.status(400).json({ message: 'Invalid or expired OTP' });
+    }
+
+    user.verified = true;
+    user.otp = undefined;
+    user.otpExpiration = undefined;
+    await user.save();
+    const token = generateToken(user);
+    res.status(200).json({ message: 'Email verified successfully', token });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
@@ -676,7 +771,6 @@ app.post('/checkout', verifyToken, async (req, res) => {
   }
 });
 
-
 // GET all addresses for the user
 app.get('/addresses', verifyToken, async (req, res) => {
   try {
@@ -761,6 +855,7 @@ app.put('/user/active-address', verifyToken, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+
 
 // console.log('Static files path:', path.join(__dirname, '../client/dist'));
 
