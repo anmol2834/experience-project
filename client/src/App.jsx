@@ -20,6 +20,7 @@ import BookPage from './user dashboard/book page/BookPage';
 import PaymentPage from './user dashboard/payment page/PaymentPage';
 import Address from './user dashboard/user account/address/Address';
 import { AddressProvider } from './context/AddressContext'; // Use AddressProvider
+import Reviews from './user dashboard/user account/reviews/Reviews';
 
 function App() {
   document.addEventListener('keydown', function (event) {
@@ -39,7 +40,7 @@ function App() {
   });
 
   return (
-    <Router basename="/">
+    <Router>
       <AuthProvider>
         <ProductProvider>
           <AddressProvider> {/* Corrected from AddressContext */}
@@ -48,7 +49,7 @@ function App() {
               <div className="glow-shape blob2"></div>
               <div className="glow-shape blob3"></div>
               <div className="glow-shape blob4"></div>
-              
+
               <Routes>
                 <Route path="/" element={<DashboardLayout />}>
                   <Route index element={<UserDashboard />} />
@@ -64,6 +65,7 @@ function App() {
                   <Route path="bookings" element={<BookingsPage />} />
                   <Route path="rewards" element={<Rewards />} />
                   <Route path="address" element={<Address />} />
+                  <Route path="reviews" element={<Reviews />} />
                 </Route>
                 <Route path="/add_to_cart" element={<ProtectedRoute><AddToCart /></ProtectedRoute>} />
                 <Route path="/book_page" element={<ProtectedRoute><BookPage /></ProtectedRoute>} />

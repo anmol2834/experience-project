@@ -42,16 +42,3 @@ body {
   --main-element-color: #222;
   --accent-details: #ff684e;
 }
-
-[data-theme="dark"] {
-  --bg-color: #222;
-  --primary-color: #2b2b2b;
-  --shade-primary-color: #3c3c3c;
-  --secondary-color: rgb(60, 128, 255);
-  --main-element-color: #fff;
-  --light-color-text: #b3b3b3;
-  --accent-details: #ff684e;
-  --highlight-element: rgb(0, 255, 0);
-  --wireframe-color: #444;
-  --wireframe-shade: #bababa;
-}
