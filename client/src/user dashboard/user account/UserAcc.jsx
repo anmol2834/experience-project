@@ -200,7 +200,7 @@ function UserAcc() {
         <div className="my-activity-section">
           <h2>My Activity :</h2>
           <div className="activity">
-            <section>Reviews</section>
+            <section onClick={() => navigate('reviews')}>Reviews</section>
             <section>Questions & Answers</section>
             <section>Transaction History</section>
           </div>
