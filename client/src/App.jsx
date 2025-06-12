@@ -10,7 +10,7 @@ import ProtectedRoute from './ProtectedRoute';
 import ProfileEdit from './user dashboard/user account/profile edit/ProfileEdit';
 import HelpCenter from './user dashboard/user account/help center/HelpCenter';
 import Wishlist from './user dashboard/user account/wishlist/Wishlist';
-import ProductProvider from './context/ProductProvider'; // Default import
+import ProductProvider from './context/ProductProvider';
 import ExperienceDetails from './user dashboard/experience details/ExperienceDetails';
 import ProductSlideshow from './user dashboard/experience details/product slideshow/ProductSlideshow';
 import BookingsPage from './user dashboard/user account/bookings page/BookingsPage';
@@ -19,37 +19,76 @@ import AddToCart from './user dashboard/add to cart page/AddToCart';
 import BookPage from './user dashboard/book page/BookPage';
 import PaymentPage from './user dashboard/payment page/PaymentPage';
 import Address from './user dashboard/user account/address/Address';
-import { AddressProvider } from './context/AddressContext'; // Use AddressProvider
+import { AddressProvider } from './context/AddressContext';
 import Reviews from './user dashboard/user account/reviews/Reviews';
+import AboutUs from './user dashboard/about us/AboutUs';
+import { useEffect } from 'react';
 
 function App() {
-  document.addEventListener('keydown', function (event) {
-    if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '-' || event.key === '0')) {
-      event.preventDefault();
-    }
-  });
+  // Prevent zooming
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if ((event.ctrlKey || event.metaKey) && (event.key === '+' || event.key === '-' || event.key === '0')) {
+        event.preventDefault();
+      }
+    };
 
-  document.addEventListener('wheel', function (event) {
-    if (event.ctrlKey) {
-      event.preventDefault();
-    }
-  }, { passive: false });
+    const handleWheel = (event) => {
+      if (event.ctrlKey) {
+        event.preventDefault();
+      }
+    };
 
-  document.addEventListener('gesturestart', function (event) {
-    event.preventDefault();
-  });
+    const handleGestureStart = (event) => {
+      event.preventDefault();
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('wheel', handleWheel, { passive: false });
+    document.addEventListener('gesturestart', handleGestureStart);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('wheel', handleWheel);
+      document.removeEventListener('gesturestart', handleGestureStart);
+    };
+  }, []);
 
   return (
     <Router>
       <AuthProvider>
         <ProductProvider>
-          <AddressProvider> {/* Corrected from AddressContext */}
+          <AddressProvider>
             <div className="container">
+              {/* Background Elements (unchanged) */}
               <div className="glow-shape blob1"></div>
               <div className="glow-shape blob2"></div>
               <div className="glow-shape blob3"></div>
               <div className="glow-shape blob4"></div>
-
+              
+              {/* NEW: Floating Particles */}
+              <div className="app-particles">
+                {[...Array(30)].map((_, i) => (
+                  <div 
+                    key={i} 
+                    className="app-particle" 
+                    style={{
+                      top: `${Math.random() * 100}%`,
+                      left: `${Math.random() * 100}%`,
+                      animationDelay: `${Math.random() * 5}s`,
+                      transform: `scale(${0.5 + Math.random()})`
+                    }}
+                  ></div>
+                ))}
+              </div>
+              
+              {/* NEW: Decorative Ornaments */}
+              <div className="app-ornament app-ornament-top-left">✧</div>
+              <div className="app-ornament app-ornament-top-right">✦</div>
+              <div className="app-ornament app-ornament-bottom-left">✦</div>
+              <div className="app-ornament app-ornament-bottom-right">✧</div>
+              
+              {/* Main Content (unchanged) */}
               <Routes>
                 <Route path="/" element={<DashboardLayout />}>
                   <Route index element={<UserDashboard />} />
@@ -72,6 +111,7 @@ function App() {
                 <Route path="/payment" element={<ProtectedRoute><PaymentPage /></ProtectedRoute>} />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
+                <Route path='/aboutus' element={<AboutUs />} />
               </Routes>
             </div>
           </AddressProvider>

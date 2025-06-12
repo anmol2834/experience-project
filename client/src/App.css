@@ -1,3 +1,4 @@
+/* EXISTING STYLES - UNCHANGED */
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
 .container {
@@ -56,9 +57,7 @@
   border-radius: 50%;
 }
 
-
 @media only screen and (max-width: 575px) {
-
   .blob1 {
     width: 300px;
     height: 200px;
@@ -78,5 +77,90 @@
     width: 200px;
     height: 200px;
   }
+}
 
+/* NEW STYLES - ABSOLUTELY POSITIONED */
+.app-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--glow-primary);
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: app-particle-float 12s infinite linear;
+}
+
+.app-ornament {
+  position: fixed;
+  font-size: 2.5rem;
+  color: var(--glow-accent-warm); /* Using requested color */
+  opacity: 0.3;
+  z-index: 1;
+  animation: app-ornament-pulse 8s infinite alternate;
+}
+
+.app-ornament-top-left {
+  top: 30px;
+  left: 30px;
+  animation-delay: 0s;
+}
+
+.app-ornament-top-right {
+  top: 30px;
+  right: 30px;
+  animation-delay: 2s;
+}
+
+.app-ornament-bottom-left {
+  bottom: 30px;
+  left: 30px;
+  animation-delay: 4s;
+}
+
+.app-ornament-bottom-right {
+  bottom: 30px;
+  right: 30px;
+  animation-delay: 6s;
+}
+
+/* Keyframe Animations */
+@keyframes app-particle-float {
+  0% { transform: translate(0, 0); opacity: 0; }
+  25% { opacity: 0.8; }
+  50% { transform: translate(50px, -100px); opacity: 0.5; }
+  75% { opacity: 0.8; }
+  100% { transform: translate(100px, 0); opacity: 0; }
+}
+
+@keyframes app-ornament-pulse {
+  0% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.2); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 0.3; }
+}
+
+/* Responsive for new elements */
+@media only screen and (max-width: 575px) {
+  .app-ornament {
+    font-size: 1.8rem;
+  }
+  
+  .app-ornament-top-left,
+  .app-ornament-top-right,
+  .app-ornament-bottom-left,
+  .app-ornament-bottom-right {
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+  }
 }

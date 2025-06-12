@@ -3,6 +3,7 @@ import './homepage.css';
 import Catelog from '../catelog/Catelog';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import Category from '../categories/Category';
 
 function HomePage() {
   const catelogRef = useRef(null);
@@ -37,6 +38,7 @@ function HomePage() {
   return (
     <div className="home-contain">
       <div className="catelog-contain" ref={catelogRef}>
+        {/* <Category/> */}
         <Catelog />
 
         <section className="how-it-works">
