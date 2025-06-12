@@ -7,10 +7,14 @@
     justify-content: center;
     gap: 30px;
     padding: 30px 50px;
+    background: transparent;
 }
 
 .catelogs h1 {
     font-weight: 400;
+    color: var(--glow-primary);
+    text-shadow: 0 0 10px var(--glow-primary);
+    font-family: 'Alatsi', sans-serif;
 }
 
 .catelogs .catelog-aligner {
@@ -29,6 +33,7 @@
     align-items: flex-start;
     justify-content: center;
     padding: 30px 50px;
+    background: transparent;
 }
 
 .no-search-result-container {
@@ -36,21 +41,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--primary-font-color);
+    font-size: 1.2rem;
 }
 
 .wireframe-container {
     width: 100%;
+    background: transparent;
 }
 
 .wireframe-header {
     height: 40px;
     width: 200px;
-    background: var(--wireframe-color);
+    background: rgba(26, 26, 46, 0.5);
     margin-bottom: 30px;
     border-radius: 8px;
     position: relative;
     overflow: hidden;
+    border: 1px solid var(--glow-secondary);
 }
 
 .wireframe-header::before {
@@ -60,7 +68,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, transparent, var(--wireframe-shade), transparent);
+    background: linear-gradient(to right, transparent, rgba(106, 90, 205, 0.3), transparent);
     animation: shimmer 1.5s infinite;
 }
 
@@ -81,20 +89,22 @@
     align-items: center;
     justify-content: space-between;
     border-radius: 10px;
-    background: var(--wireframe-shade);
-    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    background: rgba(26, 26, 46, 0.5);
+    box-shadow: 0 0 20px rgba(106, 90, 205, 0.2);
     backdrop-filter: blur(3.5px);
     -webkit-backdrop-filter: blur(3.5px);
     overflow: hidden;
+    border: 1px solid var(--glow-secondary);
 }
 
 .wireframe-image {
     width: 100%;
     height: 60%;
-    background: var(--wireframe-color);
+    background: rgba(15, 52, 96, 0.3);
     padding: 15px;
     position: relative;
     overflow: hidden;
+    border-bottom: 1px solid var(--glow-secondary);
 }
 
 .wireframe-image::before {
@@ -104,7 +114,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, transparent, var(--wireframe-shade), transparent);
+    background: linear-gradient(to right, transparent, rgba(106, 90, 205, 0.3), transparent);
     animation: shimmer 1.5s infinite;
 }
 
@@ -121,7 +131,7 @@
 .wireframe-title {
     height: 30px;
     width: 80%;
-    background: var(--wireframe-color);
+    background: rgba(15, 52, 96, 0.3);
     border-radius: 4px;
     position: relative;
     overflow: hidden;
@@ -134,14 +144,14 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, transparent, var(--wireframe-shade), transparent);
+    background: linear-gradient(to right, transparent, rgba(106, 90, 205, 0.3), transparent);
     animation: shimmer 1.5s infinite;
 }
 
 .wireframe-location {
     height: 15px;
     width: 60%;
-    background: var(--wireframe-color);
+    background: rgba(15, 52, 96, 0.3);
     border-radius: 4px;
     position: relative;
     overflow: hidden;
@@ -154,14 +164,14 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, transparent, var(--wireframe-shade), transparent);
+    background: linear-gradient(to right, transparent, rgba(106, 90, 205, 0.3), transparent);
     animation: shimmer 1.5s infinite;
 }
 
 .wireframe-price {
     height: 20px;
     width: 40%;
-    background: var(--wireframe-color);
+    background: rgba(15, 52, 96, 0.3);
     border-radius: 4px;
     position: relative;
     overflow: hidden;
@@ -174,14 +184,14 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, transparent, var(--wireframe-shade), transparent);
+    background: linear-gradient(to right, transparent, rgba(106, 90, 205, 0.3), transparent);
     animation: shimmer 1.5s infinite;
 }
 
 .wireframe-ratings {
     height: 20px;
     width: 50%;
-    background: var(--wireframe-color);
+    background: rgba(15, 52, 96, 0.3);
     border-radius: 4px;
     position: relative;
     overflow: hidden;
@@ -194,18 +204,19 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, transparent, var(--wireframe-shade), transparent);
+    background: linear-gradient(to right, transparent, rgba(106, 90, 205, 0.3), transparent);
     animation: shimmer 1.5s infinite;
 }
 
 .wireframe-button {
     width: 50%;
     height: 45px;
-    background: var(--wireframe-color);
+    background: rgba(106, 90, 205, 0.5);
     border-radius: 10px;
     align-self: flex-end;
     position: relative;
     overflow: hidden;
+    border: 1px solid var(--glow-primary);
 }
 
 .wireframe-button::before {
@@ -215,11 +226,10 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to right, transparent, var(--wireframe-shade), transparent);
+    background: linear-gradient(to right, transparent, rgba(255, 0, 255, 0.3), transparent);
     animation: shimmer 1.5s infinite;
 }
 
-/* Shimmer Animation Definition */
 @keyframes shimmer {
     0% {
         left: -100%;
@@ -229,7 +239,7 @@
     }
 }
 
-/*! Extra Small Devices (Portrait Phones) */
+/* Responsive Styles */
 @media only screen and (max-width: 575px) {
     .catelogs {
         padding: 60px 10px 60px 10px;
@@ -256,7 +266,6 @@
     }
 }
 
-/*! Small devices (phones, 576px and up) */
 @media (min-width: 575px) and (max-width: 768px) {
     .catelogs {
         padding: 20px;
@@ -282,7 +291,6 @@
     }
 }
 
-/*! Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 992px) {
     .catelogs {
         padding: 60px 30px 60px 30px;
@@ -308,7 +316,6 @@
     }
 }
 
-/*! Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
     .catelogs {
         padding: 30px 10px;

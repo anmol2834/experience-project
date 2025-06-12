@@ -6,16 +6,25 @@
     align-items: center;
     justify-content: center;
     border-radius: 20px;
-    background: var(--primary-font-color);
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background: rgba(26, 26, 46, 0.7);
+    box-shadow: 0 0 20px rgba(106, 90, 205, 0.2);
+    backdrop-filter: blur(5px);
     overflow: hidden;
+    border: 1px solid var(--glow-secondary);
+    transition: all 0.3s ease;
+}
+
+.catelog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(106, 90, 205, 0.4);
+    border: 1px solid var(--glow-primary);
 }
 
 .spinner {
     width: 20px;
     height: 20px;
-    border: 3px solid var(--primary-font-color);
-    border-top: 3px solid var(--seconday-color);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid var(--glow-primary);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -24,7 +33,6 @@
     0% {
         transform: rotate(0deg);
     }
-
     100% {
         transform: rotate(360deg);
     }
@@ -74,6 +82,8 @@
     text-transform: capitalize;
     font-weight: 400;
     font-size: clamp(1.2rem, 4cqi, 2.5rem);
+    color: var(--primary-font-color);
+    font-family: 'Alatsi', sans-serif;
 }
 
 .place_title {
@@ -83,7 +93,7 @@
     align-items: center;
     gap: 10px;
     font-size: 0.8rem;
-    color: var(--light-color-text);
+    color: var(--shade-primary-color);
     margin-bottom: 10px;
 }
 
@@ -94,6 +104,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 0;
+    color: white;
 }
 
 .bottom-section section:nth-child(1) {
@@ -111,12 +122,14 @@
     border: none;
     outline: none;
     color: var(--primary-font-color);
-    background: var(--bg-primary);
+    background: var(--glow-primary);
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .bottom-section button:hover {
-    background: var(--bg-darkest);
+    background: var(--glow-secondary);
+    box-shadow: 0 0 15px var(--glow-primary);
 }
 
 .heart-contain {
@@ -129,10 +142,12 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom-left-radius: 20px;
 }
 
 .heart-contain svg {
-    fill: white;
+    fill: var(--primary-font-color);
 }
 
 .star-ratings {
@@ -141,12 +156,13 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
-    color: var(--highlight-element);
+    color: var(--glow-accent-warm);
 }
 
 .star-ratings span {
     font-size: 1rem;
     margin-top: 2px;
+    color: var(--primary-font-color);
 }
 
 .catelog-details .description {
@@ -154,32 +170,16 @@
     overflow: 'hidden';
     text-overflow: ellipsis;
     font-size: 0.9rem;
-    color: var(--seconday-font-color);
+    color: var(--shade-primary-color);
     font-weight: 400;
 }
 
-
-/*! Extra Small Devices (Portrait Phones) */
+/* Responsive Styles */
 @media only screen and (max-width: 575px) {
-
     .catelog-card {
         height: 410px;
     }
 
-    .heart-contain {
-        cursor: none;
-    }
-
-    .share-icon {
-        cursor: none;
-    }
-
-    .star-ratings {
-        font-size: 0.8rem;
-        top: 0px;
-        right: 0px;
-    }
-
     .bottom-section section:nth-child(2) {
         width: 30%;
     }
@@ -192,34 +192,13 @@
     .description {
         font-size: 0.8rem;
     }
-
 }
 
-/*! Small devices (phones, 576px and up) */
 @media (min-width: 575px) and (max-width: 768px) {
-
     .catelog-card {
         height: 450px;
     }
 
-    .heart-contain {
-        cursor: none;
-    }
-
-    .share-icon {
-        cursor: none;
-    }
-
-    .star-ratings {
-        font-size: 0.8rem;
-        top: 0px;
-        right: 0px;
-    }
-
-    .add-to-cart button {
-        cursor: none;
-    }
-
     .bottom-section section:nth-child(2) {
         width: 30%;
     }
@@ -232,28 +211,13 @@
     .description {
         font-size: 0.8rem;
     }
-
 }
 
-/*! Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width: 992px) {
-
     .catelog-card {
         height: 400px;
     }
 
-    .heart-contain {
-        cursor: none;
-    }
-
-    .share-icon {
-        cursor: none;
-    }
-
-    .add-to-cart button {
-        cursor: none;
-    }
-
     .bottom-section section:nth-child(2) {
         width: 30%;
     }
@@ -266,12 +230,9 @@
     .description {
         font-size: 0.8rem;
     }
-
 }
 
-/*! Large devices (desktops, 992px and up) */
 @media (min-width: 992px) and (max-width: 1199.98px) {
-
     .catelog-card {
         height: 450px;
     }
@@ -288,5 +249,4 @@
     .description {
         font-size: 0.8rem;
     }
-
 }

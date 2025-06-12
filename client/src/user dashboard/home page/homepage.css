@@ -8,7 +8,7 @@
     background: transparent;
 }
 
-.home-contain h1{
+.home-contain h1 {
     color: var(--primary-font-color);
 }
 
@@ -31,9 +31,10 @@
 .section-title {
     text-align: center;
     font-size: 2.5rem;
-    color: var(--glow-accent-cool);
+    color: var(--glow-primary);
     margin-bottom: 4rem;
     font-weight: 700;
+    text-shadow: 0 0 10px var(--glow-primary);
 }
 
 .steps-grid {
@@ -44,56 +45,62 @@
 }
 
 .step-card {
-    background: var(--primary-font-color);
+    background: rgba(26, 26, 46, 0.7);
     padding: 2.5rem 2rem;
     border-radius: 1rem;
     text-align: center;
     transition: 0.5s;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
     z-index: 10;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(106, 90, 205, 0.3);
 }
 
 .step-card:hover {
     transition: 0.5s;
     transform: translateY(-5px);
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 25px -5px rgba(106, 90, 205, 0.4);
+    border: 1px solid var(--glow-secondary);
 }
 
 .step-icon {
     width: 80px;
     height: 80px;
-    background: var(--glow-accent-cool);
+    background: var(--glow-primary);
     border-radius: 50%;
     margin: 0 auto 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 0 15px var(--glow-primary);
 }
 
 .step-title {
-    color: var(--secondary-font-color);
+    color: var(--primary-font-color);
     margin-bottom: 1rem;
     font-size: 1.5rem;
+    font-family: 'Alatsi', sans-serif;
 }
 
 .step-description {
-    color: #444;
+    color: var(--shade-primary-color);
     line-height: 1.6;
     font-size: 1rem;
 }
 
 .highlighted {
-    background: var(--glow-accent-cool);
-    color: var(--secondary-font-color);
+    background: rgba(106, 90, 205, 0.7);
+    border: 1px solid var(--glow-primary);
 }
 
 .highlighted .step-title,
 .highlighted .step-description {
-    color: white;
+    color: var(--primary-font-color);
 }
 
 .highlighted .step-icon {
-    background: white;
+    background: var(--glow-accent-warm);
+    box-shadow: 0 0 15px var(--glow-accent-warm);
 }
 
 @media (max-width: 768px) {
@@ -109,4 +116,4 @@
     .step-card {
         padding: 2rem 1.5rem;
     }
-}       
+}

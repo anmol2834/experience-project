@@ -419,7 +419,7 @@ function ExperienceDetails() {
           <div className="price-rating">
             <div className="rating">
               <span>
-                <FontAwesomeIcon icon={faStar} color='var(--highlight-element)' />
+                <FontAwesomeIcon icon={faStar} color='var(--glow-accent-warm)' />
               </span>
               <span>{product.rating || 'N/A'}</span>
               <span className="reviews">(0 reviews)</span>
