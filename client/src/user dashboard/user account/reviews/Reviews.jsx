@@ -157,14 +157,44 @@ function Reviews() {
 
   if (loading) {
     return (
-      <div className="reviews-loading">
-        <div className="spinner">
-          {[...Array(8)].map((_, i) => <div key={i}></div>)}
+      <div className="reviews-contain">
+        <div className="reviews-header">
+          <div className="skeleton-heading"></div>
+          <div className="skeleton-subheading"></div>
         </div>
-        <p>Loading your adventure memories...</p>
+        
+        <div className="skeleton-tabs">
+          <div className="skeleton-tab"></div>
+          <div className="skeleton-tab"></div>
+          <div className="skeleton-tab"></div>
+        </div>
+        
+        <div className="reviews-grid">
+          {[...Array(4)].map((_, index) => (
+            <div className="skeleton-card" key={index}>
+              <div className="skeleton-image"></div>
+              <div className="skeleton-content">
+                <div className="skeleton-title"></div>
+                <div className="skeleton-text"></div>
+                <div className="skeleton-rating">
+                  {[...Array(5)].map((_, i) => (
+                    <div className="skeleton-star" key={i}></div>
+                  ))}
+                </div>
+                <div className="skeleton-excerpt">
+                  <div className="skeleton-line"></div>
+                  <div className="skeleton-line"></div>
+                  <div className="skeleton-line"></div>
+                </div>
+                <div className="skeleton-button"></div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
+
 
   return (
     <div className="reviews-contain">
