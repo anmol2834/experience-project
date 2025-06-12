@@ -167,4 +167,8 @@
     .help-title {
         font-size: 2rem;
     }
+
+    .faq-section h2 {
+        color: white;
+    }
 }

@@ -19,11 +19,13 @@
 .how-it-works {
     padding: 5rem 1rem;
     background: transparent;
+    z-index: 10;
 }
 
 .work-container {
     max-width: 1200px;
     margin: 0 auto;
+    z-index: 10;
 }
 
 .section-title {
@@ -48,6 +50,7 @@
     text-align: center;
     transition: 0.5s;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    z-index: 10;
 }
 
 .step-card:hover {

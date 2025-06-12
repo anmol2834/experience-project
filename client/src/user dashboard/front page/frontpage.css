@@ -3,6 +3,7 @@
   height: 100%;
   scrollbar-width: none;
   overflow-x: hidden;
+  z-index: 2;
 }
 
 .slideshow-container {
