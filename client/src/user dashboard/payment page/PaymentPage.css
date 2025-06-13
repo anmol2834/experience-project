@@ -38,7 +38,7 @@
 .payment-header h1 {
   font-size: 1.25rem;
   font-weight: 600;
-  text-shadow: 0 0 10px var(--glow-primary);
+  text-shadow: 0 0 10px var( --secondary-color);
 }
 
 .payment-header .back-button {
@@ -182,7 +182,7 @@ main > div {
   font-weight: 600;
   margin-bottom: 1.25rem;
   color: var(--primary-font-color);
-  text-shadow: 0 0 10px var(--glow-primary);
+  text-shadow: 0 0 10px var( --secondary-color);
 }
 
 .space-y-4 > * {
@@ -225,8 +225,8 @@ main > div {
 }
 
 .input-focus:focus {
-  border-color: var(--glow-primary);
-  box-shadow: 0 0 10px var(--glow-primary);
+  border-color: var( --secondary-color);
+  box-shadow: 0 0 10px var( --secondary-color);
   outline: none;
 }
 
@@ -305,7 +305,7 @@ button.text-primary {
 }
 
 button.text-primary:hover {
-  color: var(--glow-primary);
+  color: var( --secondary-color);
   text-decoration: underline;
 }
 
@@ -331,7 +331,7 @@ button.text-primary:hover {
 
 .submit-button:hover {
   background: var(--glow-secondary);
-  box-shadow: 0 0 10px var(--glow-primary);
+  box-shadow: 0 0 10px var( --secondary-color);
 }
 
 .submit-button:disabled {
@@ -375,8 +375,8 @@ button.text-primary:hover {
 
 .payment-method-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 10px var(--glow-primary);
-  border-color: var(--glow-primary);
+  box-shadow: 0 0 10px var( --secondary-color);
+  border-color: var( --secondary-color);
 }
 
 .payment-method-card.selected {
@@ -539,7 +539,7 @@ input[type="checkbox"] {
 
 .upi-button:hover {
   background: var(--glow-secondary);
-  box-shadow: 0 0 10px var(--glow-primary);
+  box-shadow: 0 0 10px var( --secondary-color);
 }
 
 /* Confirmation Page */
@@ -551,13 +551,13 @@ input[type="checkbox"] {
 .success-icon {
   width: 4rem;
   height: 4rem;
-  background: rgba(106, 90, 205, 0.7);
+  background: var(--highlight-element);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 1rem auto;
-  box-shadow: 0 0 10px var(--glow-accent-cool);
+  box-shadow: 0 0 10px var(--highlight-element);
 }
 
 .text-white {
@@ -570,7 +570,7 @@ input[type="checkbox"] {
   color: var(--primary-font-color);
   margin-top: 1rem;
   margin-bottom: 0.5rem;
-  text-shadow: 0 0 10px var(--glow-primary);
+  text-shadow: 0 0 10px var( --secondary-color);
 }
 
 .confirmation-subtitle {
@@ -620,6 +620,15 @@ input[type="checkbox"] {
   place-items: center;
   color: var(--primary-font-color);
   font-size: 1.5rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.logo-placeholder img{
+  width: 100%;
+  height: 100%;
+  filter: invert(1);
 }
 
 .ticket-ribbon {
@@ -651,7 +660,7 @@ input[type="checkbox"] {
   width: 15%;
   max-width: 60px;
   aspect-ratio: 1;
-  background: linear-gradient(45deg, var(--glow-primary), var(--glow-secondary));
+  background: linear-gradient(45deg, var( --secondary-color), var(--glow-secondary));
   border-radius: 50%;
   opacity: 0.1;
   transform: translate(30%, -30%);
@@ -984,7 +993,7 @@ input[type="checkbox"] {
 
 .action-button.primary:hover {
   background: var(--glow-secondary);
-  box-shadow: 0 0 10px var(--glow-primary);
+  box-shadow: 0 0 10px var( --secondary-color);
 }
 
 .action-button.secondary {
@@ -992,7 +1001,7 @@ input[type="checkbox"] {
 }
 
 .action-button.secondary:hover {
-  background: var(--glow-primary);
+  background: var( --secondary-color);
   box-shadow: 0 0 10px var(--glow-accent-cool);
 }
 
@@ -1025,7 +1034,7 @@ input[type="checkbox"] {
   font-weight: 600;
   margin-bottom: 1.25rem;
   color: var(--primary-font-color);
-  text-shadow: 0 0 10px var(--glow-primary);
+  text-shadow: 0 0 10px var( --secondary-color);
 }
 
 .product-info {
@@ -1221,8 +1230,8 @@ input[type="checkbox"] {
 
 .bank-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 0 10px var(--glow-primary);
-  border-color: var(--glow-primary);
+  box-shadow: 0 0 10px var( --secondary-color);
+  border-color: var( --secondary-color);
 }
 
 .bank-card.selected {
@@ -1289,8 +1298,8 @@ input[type="checkbox"] {
 }
 
 .custom-select:hover {
-  border-color: var(--glow-primary);
-  box-shadow: 0 0 10px var(--glow-primary);
+  border-color: var( --secondary-color);
+  box-shadow: 0 0 10px var( --secondary-color);
 }
 
 .custom-select:focus {
@@ -1322,7 +1331,7 @@ input[type="checkbox"] {
 
 .netbanking-pay-button:hover:not(:disabled) {
   background: var(--glow-secondary);
-  box-shadow: 0 0 10px var(--glow-primary);
+  box-shadow: 0 0 10px var( --secondary-color);
   transform: translateY(-2px);
 }
 

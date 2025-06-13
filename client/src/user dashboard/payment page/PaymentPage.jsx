@@ -30,7 +30,8 @@ import sbi from './sbi.png';
 import hdfc from './hdfc.png';
 import icici from './icici.png';
 import axis from './axis.png';
-import QRCode from 'qrcode'; // Import qrcode library
+import wanderCallLogo from './wandercall-logo2.svg'
+import QRCode from 'qrcode'; 
 
 const PaymentMethods = {
     CARD: 'card',
@@ -938,7 +939,9 @@ const PaymentPage = () => {
                                     <div className="ticket-container">
                                         <div className="ticket-header">
                                             <div className="company-branding">
-                                                <div className="logo-placeholder"></div>
+                                                <div className="logo-placeholder">
+                                                    <img src={wanderCallLogo} alt="Wandercall Logo" className="logo-image" />
+                                                </div>
                                                 <h2>Wandercall</h2>
                                             </div>
                                         </div>

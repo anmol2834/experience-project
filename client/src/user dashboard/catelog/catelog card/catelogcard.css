@@ -17,14 +17,14 @@
 .catelog-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(106, 90, 205, 0.4);
-    border: 1px solid var(--glow-primary);
+    border: 1px solid var(--secondary-color);
 }
 
 .spinner {
     width: 20px;
     height: 20px;
     border: 3px solid rgba(255, 255, 255, 0.3);
-    border-top: 3px solid var(--glow-primary);
+    border-top: 3px solid var(--secondary-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -122,14 +122,14 @@
     border: none;
     outline: none;
     color: var(--primary-font-color);
-    background: var(--glow-primary);
+    background: var(--secondary-color);
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .bottom-section button:hover {
-    background: var(--glow-secondary);
-    box-shadow: 0 0 15px var(--glow-primary);
+    background: var(--glow-accent-cool);
+    box-shadow: 0 0 15px var(--secondary-color);
 }
 
 .heart-contain {
