@@ -82,7 +82,7 @@ const Menubar = () => {
           </div>
 
           <div className="menu-type3">
-            <span>About Us</span>
+            <span onClick={() => navigate('/aboutus')}>About Us</span>
             <span>Contact</span>
             <span>FAQ</span>
             <span>Privacy Policy</span>
