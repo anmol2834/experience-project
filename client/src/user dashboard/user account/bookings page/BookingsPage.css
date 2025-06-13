@@ -3,15 +3,18 @@
   height: 100%;
   padding: 2rem;
   overflow-y: scroll;
+  background: transparent;
+  color: var(--primary-font-color);
 }
 
 .bookings-title {
   text-align: center;
   margin-bottom: 2rem;
   font-size: 2rem;
-  color: black;
+  color: var(--primary-font-color);
   text-transform: uppercase;
   letter-spacing: 2px;
+  text-shadow: 0 0 10px var(--glow-primary);
 }
 
 .bookings-grid {
@@ -22,18 +25,21 @@
 }
 
 .booking-card {
-  background: var(--bg-color);
+  background: rgba(26, 26, 46, 0.7);
   border-radius: 12px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+  box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
   transition: transform 0.2s ease;
   display: grid;
   grid-template-columns: 200px 1fr;
   min-height: 200px;
   overflow: hidden;
+  border: 1px solid var(--glow-secondary);
+  backdrop-filter: blur(10px);
 }
 
 .booking-card:hover {
   transform: translateY(-3px);
+  box-shadow: 0 0 10px var(--glow-primary);
 }
 
 .card-image {
@@ -63,7 +69,7 @@
 
 .experience-name {
   font-size: 1.3rem;
-  color: black;
+  color: var(--primary-font-color);
   margin: 0;
   line-height: 1.3;
 }
@@ -82,7 +88,7 @@
 }
 
 .booking-date {
-  color: var(--light-color-text);
+  color: var(--shade-primary-color);
   margin: 0 0 1rem 0;
   font-size: 0.9rem;
 }
@@ -91,13 +97,13 @@
   display: block;
   font-weight: 600;
   margin-bottom: 0.3rem;
-  color: var(--light-color-text);
+  color: var(--shade-primary-color);
 }
 
 .location-btn {
-  background: none;
-  border: 1px solid #666;
-  color: var(--light-color-text);
+  background: transparent;
+  border: 1px solid var(--glow-secondary);
+  color: var(--shade-primary-color);
   padding: 0.5rem 1rem;
   border-radius: 8px;
   cursor: pointer;
@@ -106,11 +112,13 @@
   align-items: center;
   gap: 0.5rem;
   width: fit-content;
+  box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
 }
 
 .location-btn:hover {
-  border-color: black;
-  background: var(--shade-primary-color);
+  border-color: var(--glow-accent-cool);
+  background: rgba(15, 52, 96, 0.3);
+  box-shadow: 0 0 10px var(--glow-primary);
 }
 
 .card-footer {
@@ -139,42 +147,44 @@
   gap: 0.5rem;
   transition: opacity 0.2s ease;
   font-weight: 600;
+  box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
 }
 
 .action-btn:hover {
   opacity: 0.9;
+  box-shadow: 0 0 10px var(--glow-primary);
 }
 
 /* Status Colors */
 .status-badge.confirmed {
-  background: #4CAF50;
-  color: #fff;
+  background: var(--glow-accent-cool);
+  color: var(--primary-font-color);
 }
 
 .status-badge.pending {
-  background: #FFC107;
-  color: #333;
+  background: var(--glow-accent-warm);
+  color: var(--primary-font-color);
 }
 
 .status-badge.cancelled {
-  background: #F44336;
-  color: #fff;
+  background: rgba(255, 0, 102, 0.3);
+  color: var(--primary-font-color);
 }
 
 /* Button Colors */
 .download-btn {
   background: var(--glow-accent-cool);
-  color: #fff;
+  color: var(--primary-font-color);
 }
 
 .cancel-btn {
   background: var(--glow-accent-warm);
-  color: #fff;
+  color: var(--primary-font-color);
 }
 
 .review-btn {
-  background: #2196F3; /* A distinct blue color for the Review button */
-  color: #fff;
+  background: var(--glow-secondary);
+  color: var(--primary-font-color);
 }
 
 /* Responsive Design */

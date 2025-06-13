@@ -3,16 +3,16 @@
     height: 100%;
     padding: 2rem;
     overflow-y: auto;
+    background: transparent;
+    color: var(--primary-font-color);
 }
 
 .help-title {
     font-size: 2.5rem;
     margin-bottom: 2rem;
     text-align: center;
-    background: var(--glow-accent-cool);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--primary-font-color);
+    text-shadow: 0 0 10px var(--glow-primary);
 }
 
 .contact-grid {
@@ -23,29 +23,35 @@
 }
 
 .contact-card {
-    background: var(--shade-primary-color);
+    background: rgba(26, 26, 46, 0.7);
     padding: 2rem;
     border-radius: 15px;
     transition: transform 0.3s ease;
     cursor: pointer;
+    box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
+    border: 1px solid var(--glow-secondary);
+    backdrop-filter: blur(10px);
 }
 
 .contact-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 0 10px var(--glow-primary);
 }
 
 .contact-icon {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    color: var(--glow-accent-warm);
 }
 
 .contact-card h3 {
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
+    color: var(--primary-font-color);
 }
 
 .contact-card p {
-    color: var(--light-color-text);
+    color: var(--shade-primary-color);
     margin-bottom: 1.5rem;
 }
 
@@ -56,17 +62,20 @@
     padding: 0.5rem 1.5rem;
     border-radius: 25px;
     transition: all 0.3s ease;
+    box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
 }
 
 .contact-action:hover {
-    background: var(--glow-accent-cool);
-    color: white;
+    background: var(--glow-secondary);
+    color: var(--primary-font-color);
+    box-shadow: 0 0 10px var(--glow-primary);
 }
 
 .faq-section h2 {
     font-size: 1.75rem;
     margin-bottom: 2rem;
-    color: black;
+    color: var(--primary-font-color);
+    text-shadow: 0 0 10px var(--glow-primary);
 }
 
 .faq-grid {
@@ -76,16 +85,19 @@
 }
 
 .faq-item {
-    background: white;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    background: rgba(26, 26, 46, 0.7);
+    box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
     border-radius: 10px;
     padding: 1.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    border: 1px solid var(--glow-secondary);
+    backdrop-filter: blur(10px);
 }
 
 .faq-item.active {
-    background: var(--shade-primary-color);
+    background: rgba(15, 52, 96, 0.3);
+    box-shadow: 0 0 10px var(--glow-primary);
 }
 
 .faq-question {
@@ -93,66 +105,75 @@
     justify-content: space-between;
     align-items: center;
     font-weight: 500;
+    color: var(--primary-font-color);
 }
 
 .toggle-icon {
     font-size: 1.5rem;
     font-weight: 300;
+    color: var(--glow-accent-cool);
 }
 
 .faq-answer {
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--light-color-text);
-    color: var(--light-color-text);
+    border-top: 1px solid var(--glow-secondary);
+    color: var(--shade-primary-color);
 }
 
 .support-form {
-    background: var(--shade-primary-color);
+    background: rgba(26, 26, 46, 0.7);
     padding: 2rem;
     border-radius: 15px;
+    box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
+    border: 1px solid var(--glow-secondary);
+    backdrop-filter: blur(10px);
 }
 
 .support-form h2 {
     margin-bottom: 1.5rem;
-    color: black;
+    color: var(--primary-font-color);
+    text-shadow: 0 0 10px var(--glow-primary);
 }
 
 .form-group {
     margin-bottom: 1.5rem;
 }
 
-.form-group input,
+.support-form .form-group input,
 .form-group textarea {
     width: 100%;
     padding: 1rem;
-    background: white;
-    border: 2px solid var(--shade-primary-color);
+    background: rgba(15, 52, 96, 0.3);
+    border: 2px solid var(--glow-secondary);
     resize: none;
     border-radius: 8px;
-    color: black;
+    color: var(--primary-font-color);
     transition: border-color 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     border-color: var(--glow-accent-cool);
+    box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
     outline: none;
 }
 
 .support-form button {
     background: var(--glow-accent-cool);
-    color: white;
+    color: var(--primary-font-color);
     padding: 1rem 2.5rem;
     border: none;
     border-radius: 25px;
     cursor: pointer;
     font-weight: 500;
     transition: background 0.3s ease;
+    box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
 }
 
 .support-form button:hover {
-    background: var(--bg-secondary);
+    background: var(--glow-secondary);
+    box-shadow: 0 0 10px var(--glow-primary);
 }
 
 @media (max-width: 768px) {
@@ -169,6 +190,6 @@
     }
 
     .faq-section h2 {
-        color: white;
+        color: var(--primary-font-color);
     }
 }
