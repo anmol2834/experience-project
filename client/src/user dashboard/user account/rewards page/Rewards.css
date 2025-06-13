@@ -3,6 +3,8 @@
   height: 100%;
   padding: 30px 25px;
   overflow-y: auto;
+  background: transparent;
+  color: var(--primary-font-color);
 }
 
 .mobile-back-button {
@@ -11,16 +13,22 @@
   left: 20px;
   cursor: pointer;
   z-index: 10;
+  color: var(--primary-font-color);
+}
+
+.mobile-back-button:hover {
+  color: var(--glow-accent-cool);
 }
 
 .rewards-header h1 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  color: black;
+  color: var(--primary-font-color);
+  text-shadow: 0 0 10px var(--glow-primary);
 }
 
 .xp-card {
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-accent-dark) 100%);
+  background: rgba(26, 26, 46, 0.7);
   border-radius: 20px;
   padding: 25px;
   display: flex;
@@ -28,7 +36,10 @@
   margin: 20px 0;
   position: relative;
   overflow: hidden;
-  color: white;
+  color: var(--primary-font-color);
+  box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
+  border: 1px solid var(--glow-secondary);
+  backdrop-filter: blur(10px);
 }
 
 .xp-details {
@@ -38,17 +49,18 @@
 .xp-details h2 {
   font-size: 2.5rem;
   margin: 10px 0;
+  text-shadow: 0 0 10px var(--glow-primary);
 }
 
 .progress-contain {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(15, 52, 96, 0.3);
   height: 6px;
   border-radius: 3px;
   margin: 15px 0;
 }
 
 .progress-bar {
-  background: var(--glow-accent-warm);
+  background: var(--glow-accent-cool);
   height: 100%;
   border-radius: 3px;
   transition: width 0.5s ease;
@@ -60,6 +72,7 @@
   top: 50%;
   transform: translateY(-50%);
   opacity: 0.3;
+  color: var(--glow-accent-cool);
 }
 
 .action-grid {
@@ -73,7 +86,7 @@
   padding: 20px;
   border-radius: 15px;
   border: none;
-  color: white;
+  color: var(--primary-font-color);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,14 +94,27 @@
   cursor: pointer;
   transition: all 0.3s ease;
   min-height: 120px;
+  box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
 }
 
 .redeem-card {
-  background: linear-gradient(45deg, #e74c3c, var(--glow-accent-warm));
+  background: rgba(106, 90, 205, 0.7);
+  border: 1px solid var(--glow-secondary);
+}
+
+.redeem-card:hover {
+  background: var(--glow-secondary);
+  box-shadow: 0 0 10px var(--glow-primary);
 }
 
 .earn-card {
-  background: linear-gradient(45deg, #27ae60, var(--highlight-element));
+  background: rgba(106, 90, 205, 0.7);
+  border: 1px solid var(--glow-secondary);
+}
+
+.earn-card:hover {
+  background: var(--glow-secondary);
+  box-shadow: 0 0 10px var(--glow-primary);
 }
 
 .adventure-feed {
@@ -106,12 +132,13 @@
   align-items: center;
   gap: 10px;
   margin: 30px 0 20px;
-  color: black;
+  color: var(--primary-font-color);
+  text-shadow: 0 0 10px var(--glow-primary);
 }
 
 .feed-list {
   width: 100%;
-  height: 216px; /* Fixed height: 3 items * (56px height + 15px padding + 5px margin) */
+  height: 216px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -120,15 +147,18 @@
 
 .feed-item {
   width: 100%;
-  background: var(--main-element-color);
-  color: var(--bg-color);
+  background: rgba(26, 26, 46, 0.7);
+  color: var(--primary-font-color);
   padding: 15px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   gap: 15px;
   transition: transform 0.3s ease;
-  height: 56px; /* Fixed height for each item */
+  height: 56px;
+  border: 1px solid var(--glow-secondary);
+  box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
+  backdrop-filter: blur(5px);
 }
 
 .activity-navigation {
@@ -137,7 +167,7 @@
   gap: 10px;
   margin-top: 10px;
   position: relative;
-  z-index: 2; /* Ensure buttons are above feed-items */
+  z-index: 2;
 }
 
 .adventure-feed .view-more {
@@ -149,8 +179,14 @@
   font-size: 1rem;
   border-radius: 5px;
   background: var(--glow-accent-cool);
-  color: white;
+  color: var(--primary-font-color);
   cursor: pointer;
+  box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
+}
+
+.adventure-feed .view-more:hover {
+  background: var(--glow-secondary);
+  box-shadow: 0 0 10px var(--glow-primary);
 }
 
 .feed-item:hover {
@@ -159,6 +195,7 @@
 
 .activity-icon {
   font-size: 1.8rem;
+  color: var(--glow-accent-cool);
 }
 
 .activity-info {
@@ -166,13 +203,14 @@
 }
 
 .xp-gain {
-  color: var(--highlight-element);
+  color: var(--glow-accent-warm);
   font-weight: bold;
 }
 
 .experience-gallery h3 {
   margin: 40px 0 20px;
-  color: black;
+  color: var(--primary-font-color);
+  text-shadow: 0 0 10px var(--glow-primary);
 }
 
 .gallery-grid {
@@ -188,6 +226,8 @@
   background-position: center;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
+  border: 1px solid var(--glow-secondary);
 }
 
 .experience-overlay {
@@ -196,8 +236,8 @@
   left: 0;
   right: 0;
   padding: 15px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-  color: white;
+  background: linear-gradient(transparent, rgba(26, 26, 46, 0.9));
+  color: var(--primary-font-color);
 }
 
 .xp-requirement {
@@ -246,11 +286,11 @@
   }
 
   .feed-list {
-    height: 216px; /* Maintain fixed height on smaller screens */
+    height: 216px;
   }
 
   .feed-item {
-    height: 56px; /* Maintain fixed height on smaller screens */
+    height: 56px;
   }
 }
 

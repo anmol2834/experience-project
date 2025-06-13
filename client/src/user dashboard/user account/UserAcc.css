@@ -14,15 +14,16 @@
 .account-menu {
     width: 30%;
     height: 100%;
-    background: var(--bg-primary);
+    background: rgba(26, 26, 46, 0.7);
     border-radius: 10px;
     color: var(--primary-font-color);
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 15px;
     z-index: 2;
+    backdrop-filter: blur(10px);
 }
 
 .home-btn {
@@ -32,7 +33,7 @@
     justify-content: space-between;
 }
 
-.home-btn .back-ico3{
+.home-btn .back-ico3 {
     color: var(--primary-font-color);
     font-size: 1.5rem;
     transition: 0.5s;
@@ -40,11 +41,12 @@
 }
 
 .home-btn .back-ico3:hover {
+    color: var(--glow-accent-cool);
     transition: 0.5s;
     transform: scale(1.1);
 }
 
-.userAcc-back-button{
+.userAcc-back-button {
     position: absolute;
     top: 0;
 }
@@ -57,8 +59,11 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    background: var(--glow-accent-cool);
-    color: white;
+    background: rgba(106, 90, 205, 0.7);
+    color: var(--primary-font-color);
+    border: 1px solid var(--glow-secondary);
+    box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
+    backdrop-filter: blur(5px);
 }
 
 .profile section:nth-child(1) {
@@ -89,10 +94,14 @@
     border-radius: 5px;
     transition: 0.5s;
     cursor: pointer;
-    background: white;
+    background: var(--glow-accent-cool);
+    color: var(--primary-font-color);
+    box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
 }
 
 .logout-btn:hover {
+    background: var(--glow-secondary);
+    box-shadow: 0 0 10px var(--glow-primary);
     transition: 0.5s;
     transform: scale(1.1);
 }
@@ -100,6 +109,7 @@
 .profile h2 {
     text-transform: capitalize;
     font-weight: 400;
+    text-shadow: 0 0 10px var(--glow-primary);
 }
 
 .edit-profile-icon {
@@ -109,12 +119,15 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: white;
+    background: rgba(26, 26, 46, 0.7);
     cursor: pointer;
     transition: 0.5s;
+    box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
 }
 
 .edit-profile-icon:hover {
+    background: var(--glow-secondary);
+    box-shadow: 0 0 10px var(--glow-primary);
     transition: 0.5s;
     transform: scale(1.2);
 }
@@ -130,7 +143,7 @@
 }
 
 .profile-menu .profile-menu-btn {
-    background: var(--bg-secondary);
+    background: rgba(15, 52, 96, 0.3);
     color: var(--primary-font-color);
     border-radius: 5px;
     display: flex;
@@ -138,8 +151,9 @@
     justify-content: center;
     gap: 5px;
     cursor: pointer;
-    border: 2px solid var(--glow-accent-cool);
+    border: 2px solid var(--glow-secondary);
     transition: 0.5s;
+    box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
 }
 
 .profile-menu .profile-menu-btn svg {
@@ -147,6 +161,8 @@
 }
 
 .profile-menu-btn:hover {
+    border-color: var(--glow-primary);
+    box-shadow: 0 0 10px var(--glow-primary);
     transition: 0.5s;
     transform: scale(1.1);
 }
@@ -170,17 +186,28 @@
 
 .address-section section:nth-child(1) h2 {
     font-weight: 400;
+    text-shadow: 0 0 10px var(--glow-primary);
 }
 
 .address-section section:nth-child(2) {
     width: 100%;
     height: 60%;
     padding: 10px;
-    border: 1px solid #999;
+    border: 1px solid var(--glow-secondary);
     border-radius: 10px;
+    background: rgba(26, 26, 46, 0.7);
+    color: var(--primary-font-color);
+    box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.add-address svg {
+    color: var(--primary-font-color);
+    transition: 0.5s;
 }
 
 .add-address svg:hover {
+    color: var(--glow-accent-cool);
     transition: 0.5s;
     transform: scale(1.1);
 }
@@ -196,6 +223,7 @@
 
 .my-activity-section h2 {
     font-weight: 400;
+    text-shadow: 0 0 10px var(--glow-primary);
 }
 
 .activity {
@@ -212,27 +240,35 @@
     height: calc(100%/3);
     display: flex;
     align-items: center;
-    background: var(--primary-font-color);
-    color: black;
+    background: rgba(26, 26, 46, 0.7);
+    color: var(--primary-font-color);
     padding: 0 15px;
     border-radius: 3px;
-    border: 1px solid var(--glow-accent-cool);
+    border: 1px solid var(--glow-secondary);
     cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
+}
+
+.activity section:hover {
+    border-color: var(--glow-primary);
+    box-shadow: 0 0 10px var(--glow-primary);
     transition: 0.5s;
 }
 
 .account-render {
     width: 60%;
     height: 100%;
-    background: var(--bg-color);
+    background: rgba(26, 26, 46, 0.7);
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
     padding: 20px;
-    color: var(--secondary-font-color);
+    color: var(--primary-font-color);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 2;
+    backdrop-filter: blur(10px);
 }
 
 .back-button2 {
@@ -244,9 +280,12 @@
     color: var(--primary-font-color);
 }
 
-/*! Extra Small Devices (Portrait Phones) */
-@media only screen and (max-width: 575px) {
+.back-button2:hover {
+    color: var(--glow-accent-cool);
+}
 
+/* Extra Small Devices (Portrait Phones) */
+@media only screen and (max-width: 575px) {
     .account-render {
         display: none;
         background: transparent;
@@ -284,27 +323,25 @@
 
     .activity section {
         cursor: none;
-        background: white;
-        color: black;
+        background: rgba(26, 26, 46, 0.7);
+        color: var(--primary-font-color);
     }
-
 }
 
 @media (min-width: 575px) and (max-width: 768px) {
-
     .account-menu {
         width: 70%;
         border-radius: 0;
+        background: rgba(26, 26, 46, 0.7);
+        backdrop-filter: blur(10px);
     }
-
 }
 
-
 @media (min-width: 768px) and (max-width: 1070px) {
-
     .account-menu {
         width: 50%;
         border-radius: 0;
+        background: rgba(26, 26, 46, 0.7);
+        backdrop-filter: blur(10px);
     }
-
 }
