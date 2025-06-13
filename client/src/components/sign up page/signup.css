@@ -14,7 +14,7 @@
   position: relative;
   width: 50%;
   height: 100%;
-  background: var(--bg-primary);
+  background: transparent;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -23,6 +23,8 @@
   font-weight: 300;
   padding: 20px 0;
   z-index: 10;
+  box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
+  backdrop-filter: blur(5px);
 }
 
 form p span {
@@ -38,6 +40,8 @@ form p span:hover {
 form h1 {
   text-transform: uppercase;
   font-weight: 100;
+  color: var(--primary-font-color);
+  text-shadow: 0 0 10px var(--glow-primary);
 }
 
 form .back-btn {
@@ -55,7 +59,7 @@ form .back-btn {
   background: transparent;
   cursor: pointer;
   transition: 0.2s;
-  color: white;
+  color: var(--glow-accent-cool);
 }
 
 form .user-name {
@@ -112,18 +116,18 @@ form .user-detail {
   border-radius: 5px 0 0 5px;
 }
 
-.user-detail .pass span{
+.user-detail .pass span {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 10px;
-    background: white;
+    background: var(--primary-font-color);
     border-radius: 0 5px 5px 0;
 }
 
 .pass span svg {
-  fill: black;
+  fill: var(--glow-accent-cool);
   cursor: pointer;
 }
 
@@ -171,6 +175,7 @@ form .user-detail {
 
 .checkbox p {
   font-size: 0.8rem;
+  color: var(--shade-primary-color);
 }
 
 .checkbox p span {
@@ -197,24 +202,27 @@ form .line {
   width: 60%;
   height: 1px;
   border-radius: 10px;
-  background: var(--light-color-text);
+  background: var(--shade-primary-color);
 }
 
 .signup-form .submit {
   width: 30%;
   height: 40px;
-  background: var(--glow-accent-warm);
+  background: var(--glow-accent-cool);
   border-radius: 5px;
   border: none;
   outline: none;
   cursor: pointer;
-  color: white;
+  color: var(--primary-font-color);
   text-transform: capitalize;
   transition: 0.5s;
+  box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
 }
 
 .signup-form .submit:hover:not(:disabled) {
   transform: scale(110%);
+  background: var(--glow-secondary);
+  box-shadow: 0 0 10px var(--glow-primary);
 }
 
 .signup-form .submit:disabled {
@@ -226,8 +234,8 @@ form .line {
   width: 30%;
   height: 45px;
   background: transparent;
-  color: var(--color1);
-  border: 2px solid var(--color1);
+  color: var(--primary-font-color);
+  border: 2px solid var(--glow-secondary);
   border-radius: 5px;
   font-weight: 200;
   display: flex;
@@ -237,10 +245,13 @@ form .line {
   text-transform: capitalize;
   transition: 0.5s;
   cursor: pointer;
+  box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
 }
 
 .signup-form .google:hover {
   transform: scale(110%);
+  border-color: var(--glow-accent-cool);
+  box-shadow: 0 0 10px var(--glow-primary);
 }
 
 /* Spinner for buttons */
@@ -249,7 +260,7 @@ form .line {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, transparent 0 60deg, var(--glow-accent-cool) 60deg 120deg, transparent 120deg 360deg);
+  background: conic-gradient(from 0deg, transparent 0 60deg, var(--glow-accent-warm) 60deg 120deg, transparent 120deg 360deg);
   animation: spin 1s linear infinite;
   position: relative;
 }
@@ -280,10 +291,6 @@ form .line {
   display: none;
 }
 
-@keyframes animateSubmit {
-  /* Removed since we're using spinner */
-}
-
 .verification-container {
   position: absolute;
   width: 100%;
@@ -291,23 +298,28 @@ form .line {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.438);
+  background: transparent;
   z-index: 100;
+  backdrop-filter: blur(10px);
 }
 
 .verify-contain {
   width: 30%;
   height: 400px;
-  background: white;
+  background: transparent;
   padding: 20px;
   border-radius: 10px;
-  color: black;
+  color: var(--primary-font-color);
+  box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
+  backdrop-filter: blur(5px);
 }
 
 .verify-contain h2 {
   font-weight: 400;
   text-align: center;
   text-transform: capitalize;
+  color: var(--primary-font-color);
+  text-shadow: 0 0 10px var(--glow-primary);
 }
 
 .verify {
@@ -352,15 +364,17 @@ input[type="number"] {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background: #222;
-  color: white;
+  background: var(--glow-accent-cool);
+  color: var(--primary-font-color);
   text-transform: capitalize;
   transition: 0.3s;
+  box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
 }
 
 .submitCode:hover:not(:disabled),
 .sendAgain:hover:not(:disabled) {
-  background: #222222d3;
+  background: var(--glow-secondary);
+  box-shadow: 0 0 10px var(--glow-primary);
 }
 
 .submitCode:disabled,
@@ -387,6 +401,7 @@ input[type="number"] {
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 10;
+  box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
 }
 
 /*! Extra Small Devices (Portrait Phones) */

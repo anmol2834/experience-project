@@ -41,8 +41,8 @@ function Footer({ homeRef }) {
           <div className='footer-links'>
             <a onClick={() => handleLinkClick('/home')}>Home</a>
             <a onClick={() => handleLinkClick('experiences')}>Experiences</a>
-            <a onClick={() => handleLinkClick('/contact')}>Contact</a>
-            <a onClick={() => handleLinkClick('/faq')}>FAQ</a>
+            <a onClick={() => handleLinkClick('/aboutus')}>About Us</a>
+            <a onClick={() => handleLinkClick('/termsAndConditions')}>Terms and Conditions</a>
           </div>
         </div>
         <div className='footer-section newsletter'>

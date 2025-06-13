@@ -86,7 +86,7 @@ const Menubar = () => {
             <span>Contact</span>
             <span>FAQ</span>
             <span>Privacy Policy</span>
-            <span>Terms of Service</span>
+            <span>Terms and Conditions</span>
             <span className="logout-button">Logout</span>
           </div>
         </div>
