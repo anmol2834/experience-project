@@ -120,6 +120,7 @@
   padding: 2rem;
   border-radius: 16px;
   box-shadow: 0 0 20px rgba(106, 90, 205, 0.2);
+  overflow-y: auto;
   max-height: 100%;
   z-index: 10;
   border: 1px solid var(--glow-secondary);
@@ -468,7 +469,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
     height: auto;
-    padding: 0 1.5rem 1.5rem;
+    padding: 0 1rem 1rem;
   }
   
   .book-page-content .experience-gallery {
@@ -487,6 +488,7 @@
     grid-column: 1 / 2;
     grid-row: 3 / 4;
     max-height: none;
+    overflow: none;
   }
 
   .participants-selector button {
@@ -526,6 +528,10 @@
   .price {
     font-size: 1.5rem;
   }
+
+  .booking-form {
+    padding: 1rem;
+  }
   
   .calendar-day {
     font-size: 0.9rem;
@@ -548,11 +554,18 @@
     cursor: none;
   }
 
+  .coupon-input {
+    flex-direction: column;
+  }
+
   .coupon-input button {
+    height: 40px;
     cursor: none;
   }
 
   .checkout-button {
     cursor: none;
+    font-size: 1rem;
   }
+  
 }
