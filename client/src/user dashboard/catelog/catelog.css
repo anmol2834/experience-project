@@ -53,23 +53,16 @@
 .wireframe-header {
     height: 40px;
     width: 200px;
-    background: rgba(26, 26, 46, 0.5);
+    background: linear-gradient(90deg, rgba(15, 52, 96, 0.3) 25%, rgba(106, 90, 205, 0.3) 50%, rgba(15, 52, 96, 0.3) 75%);
+    -webkit-background-size: 400% 100%;
+    background-size: 400% 100%;
     margin-bottom: 30px;
     border-radius: 8px;
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--glow-secondary);
-}
-
-.wireframe-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, transparent, rgba(106, 90, 205, 0.3), transparent);
-    animation: shimmer 1.5s infinite;
+    box-shadow: 0 0 10px rgba(41, 39, 39, 0.2);
+    -webkit-animation: shimmer 1.5s infinite linear;
+    animation: shimmer 1.5s infinite linear;
 }
 
 .wireframe-grid {
@@ -84,38 +77,29 @@
 .wireframe-card {
     position: relative;
     height: 400px;
-    display: flex;
+    display: flex;  
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     border-radius: 10px;
-    background: rgba(26, 26, 46, 0.5);
-    box-shadow: 0 0 20px rgba(106, 90, 205, 0.2);
+    background: var(--bg-primary);
+    box-shadow: 0 0 10px rgba(41, 39, 39, 0.2);
     backdrop-filter: blur(3.5px);
     -webkit-backdrop-filter: blur(3.5px);
     overflow: hidden;
-    border: 1px solid var(--glow-secondary);
 }
 
 .wireframe-image {
     width: 100%;
     height: 60%;
-    background: rgba(15, 52, 96, 0.3);
-    padding: 15px;
+    background: linear-gradient(90deg, rgba(15, 52, 96, 0.4) 25%, rgba(106, 90, 205, 0.4) 50%, rgba(15, 52, 96, 0.4) 75%);
+    -webkit-background-size: 400% 100%;
+    background-size: 400% 100%;
+    padding: 0;
     position: relative;
     overflow: hidden;
-    border-bottom: 1px solid var(--glow-secondary);
-}
-
-.wireframe-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, transparent, rgba(106, 90, 205, 0.3), transparent);
-    animation: shimmer 1.5s infinite;
+    -webkit-animation: shimmer 1.5s infinite linear;
+    animation: shimmer 1.5s infinite linear;
 }
 
 .wireframe-details {
@@ -131,111 +115,75 @@
 .wireframe-title {
     height: 30px;
     width: 80%;
-    background: rgba(15, 52, 96, 0.3);
+    background: linear-gradient(90deg, rgba(15, 52, 96, 0.3) 25%, rgba(106, 90, 205, 0.3) 50%, rgba(15, 52, 96, 0.3) 75%);
+    -webkit-background-size: 400% 100%;
+    background-size: 400% 100%;
     border-radius: 4px;
     position: relative;
     overflow: hidden;
-}
-
-.wireframe-title::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, transparent, rgba(106, 90, 205, 0.3), transparent);
-    animation: shimmer 1.5s infinite;
+    -webkit-animation: shimmer 1.5s infinite linear;
+    animation: shimmer 1.5s infinite linear;
 }
 
 .wireframe-location {
     height: 15px;
     width: 60%;
-    background: rgba(15, 52, 96, 0.3);
+    background: linear-gradient(90deg, rgba(15, 52, 96, 0.3) 25%, rgba(106, 90, 205, 0.3) 50%, rgba(15, 52, 96, 0.3) 75%);
+    -webkit-background-size: 400% 100%;
+    background-size: 400% 100%;
     border-radius: 4px;
     position: relative;
     overflow: hidden;
-}
-
-.wireframe-location::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, transparent, rgba(106, 90, 205, 0.3), transparent);
-    animation: shimmer 1.5s infinite;
+    -webkit-animation: shimmer 1.5s infinite linear;
+    animation: shimmer 1.5s infinite linear;
 }
 
 .wireframe-price {
     height: 20px;
     width: 40%;
-    background: rgba(15, 52, 96, 0.3);
+    background: linear-gradient(90deg, rgba(15, 52, 96, 0.3) 25%, rgba(106, 90, 205, 0.3) 50%, rgba(15, 52, 96, 0.3) 75%);
+    -webkit-background-size: 400% 100%;
+    background-size: 400% 100%;
     border-radius: 4px;
     position: relative;
     overflow: hidden;
-}
-
-.wireframe-price::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, transparent, rgba(106, 90, 205, 0.3), transparent);
-    animation: shimmer 1.5s infinite;
+    -webkit-animation: shimmer 1.5s infinite linear;
+    animation: shimmer 1.5s infinite linear;
 }
 
 .wireframe-ratings {
     height: 20px;
     width: 50%;
-    background: rgba(15, 52, 96, 0.3);
+    background: linear-gradient(90deg, rgba(15, 52, 96, 0.3) 25%, rgba(106, 90, 205, 0.3) 50%, rgba(15, 52, 96, 0.3) 75%);
+    -webkit-background-size: 400% 100%;
+    background-size: 400% 100%;
     border-radius: 4px;
     position: relative;
     overflow: hidden;
-}
-
-.wireframe-ratings::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, transparent, rgba(106, 90, 205, 0.3), transparent);
-    animation: shimmer 1.5s infinite;
+    -webkit-animation: shimmer 1.5s infinite linear;
+    animation: shimmer 1.5s infinite linear;
 }
 
 .wireframe-button {
     width: 50%;
     height: 45px;
-    background: rgba(106, 90, 205, 0.5);
+    background: linear-gradient(90deg, rgba(15, 52, 96, 0.3) 25%, rgba(106, 90, 205, 0.3) 50%, rgba(15, 52, 96, 0.3) 75%);
+    -webkit-background-size: 400% 100%;
+    background-size: 400% 100%;
     border-radius: 10px;
     align-self: flex-end;
     position: relative;
     overflow: hidden;
-    border: 1px solid var(--glow-primary);
-}
-
-.wireframe-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255, 0, 255, 0.3), transparent);
-    animation: shimmer 1.5s infinite;
+    -webkit-animation: shimmer 1.5s infinite linear;
+    animation: shimmer 1.5s infinite linear;
 }
 
 @keyframes shimmer {
     0% {
-        left: -100%;
+        background-position: 100% 0;
     }
     100% {
-        left: 100%;
+        background-position: -100% 0;
     }
 }
 
