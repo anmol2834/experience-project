@@ -19,7 +19,6 @@ function Catelog() {
                   <div className="wireframe-title"></div>
                   <div className="wireframe-location"></div>
                   <div className="wireframe-price"></div>
-                  <div className="wireframe-ratings"></div>
                   <div className="wireframe-button"></div>
                 </div>
               </div>
@@ -32,7 +31,7 @@ function Catelog() {
 
   return (
     <div className="catelogs">
-      <h1>Explore Experiences :</h1>
+      <h1>Explore Experiences</h1>
       <div className="catelog-aligner">
         {productInfo.length > 0 ? (
           productInfo.map((value) => {

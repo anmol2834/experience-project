@@ -7,7 +7,6 @@
   padding: 0;
   box-sizing: border-box;
   user-select: none;
-  overscroll-behavior: none;
   scroll-behavior: smooth;
   scrollbar-width: none;
 }
@@ -38,7 +37,7 @@ body {
 
   --bg-color: #fff;
   --primary-color: rgb(240, 253, 252);
-  --secondary-color: rgb(26, 106, 255);
+  --secondary-color: rgb(47, 116, 242);
   --main-element-color: #222;
   --accent-details: #ff684e;
 }

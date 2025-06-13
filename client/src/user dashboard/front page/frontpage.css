@@ -59,8 +59,8 @@
 }
 
 .dot.active {
-  background-color: var(--glow-primary);
-  box-shadow: 0 0 10px var(--glow-primary);
+  background-color: var(--bg-color);
+  box-shadow: 0 0 10px var(--bg-color);
 }
 
 .loading {
@@ -86,7 +86,7 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  background: rgba(106, 90, 205, 0.7);
+  background: rgba(105, 90, 205, 0.814);
   color: var(--primary-font-color);
   font-size: 1.1rem;
   text-transform: capitalize;
@@ -188,7 +188,7 @@
 .logo img {
   width: 200px;
   height: 200px;
-  filter: invert(100%) drop-shadow(0 0 5px var(--glow-primary));
+  filter: invert(100%) drop-shadow(0 0 5px var(--bg-color));
 }
 
 .app-info-menu {
@@ -212,8 +212,8 @@
 .app-info-menu span:hover {
   transition: 0.5s;
   transform: scale(1.1);
-  color: var(--glow-primary);
-  text-shadow: 0 0 10px var(--glow-primary);
+  color: var(--bg-color);
+  text-shadow: 0 0 10px var(--bg-color);
 }
 
 .homepage {
@@ -232,8 +232,8 @@
 .user-icon:hover {
   transition: 0.5s;
   transform: scale(1.2);
-  color: var(--glow-primary);
-  text-shadow: 0 0 10px var(--glow-primary);
+  color: var(--bg-color);
+  text-shadow: 0 0 10px var(--bg-color);
 }
 
 /* Loading Animation */
@@ -251,7 +251,7 @@ ul li {
   list-style: none;
   width: 40px;
   height: 40px;
-  background: var(--glow-primary);
+  background: var(--bg-color);
   border-radius: 50%;
   animation: grow 1.6s ease-in-out infinite;
 }
@@ -267,8 +267,8 @@ ul li {
 
 ul li:nth-child(1) {
   animation-delay: -1.4s;
-  background: var(--glow-primary);
-  box-shadow: 0 0 20px var(--glow-primary);
+  background: var(--bg-color);
+  box-shadow: 0 0 20px var(--bg-color);
 }
 
 ul li:nth-child(2) {
@@ -291,8 +291,8 @@ ul li:nth-child(4) {
 
 ul li:nth-child(5) {
   animation-delay: -0.6s;
-  background: var(--glow-primary);
-  box-shadow: 0 0 20px var(--glow-primary);
+  background: var(--bg-color);
+  box-shadow: 0 0 20px var(--bg-color);
 }
 
 /* Responsive Styles */

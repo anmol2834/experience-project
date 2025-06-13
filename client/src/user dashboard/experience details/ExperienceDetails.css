@@ -30,11 +30,11 @@
 .back-btn .back-ico {
   color: var(--primary-font-color);
   transition: 0.5s;
-  text-shadow: 0 0 10px var(--glow-primary);
+  text-shadow: 0 0 10px var(--secondary-color);
 }
 
 .back-btn .back-ico:hover {
-  color: var(--glow-primary);
+  color: var(--secondary-color);
   transform: scale(1.1);
 }
 
@@ -61,7 +61,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--glow-primary);
+  background: var(--secondary-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,7 +116,7 @@
 
 .loader {
   border: 5px solid rgba(255, 255, 255, 0.3);
-  border-top: 5px solid var(--glow-primary);
+  border-top: 5px solid var(--secondary-color);
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -125,7 +125,7 @@
 
 .spinner {
   border: 3px solid rgba(255, 255, 255, 0.3);
-  border-top: 3px solid var(--glow-primary);
+  border-top: 3px solid var(--secondary-color);
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -178,8 +178,8 @@
 
 .thumbnail-grid .thumb.active-thumb {
   transform: scale(1.05);
-  border: 2px solid var(--glow-primary) !important;
-  box-shadow: 0 0 5px var(--glow-primary);
+  border: 2px solid var(--secondary-color) !important;
+  box-shadow: 0 0 5px var(--secondary-color);
   z-index: 1;
 }
 
@@ -209,8 +209,8 @@
 .reviews-header h2 {
   font-size: 1.8rem;
   font-weight: 600;
-  color: var(--glow-primary);
-  text-shadow: 0 0 10px var(--glow-primary);
+  color: var(--bg-color);
+  text-shadow: 0 0 10px var(--bg-color);
 }
 
 .review-period {
@@ -281,7 +281,7 @@
 
 .rating-bar .fill {
   height: 100%;
-  background: var(--glow-primary);
+  background: var(--secondary-color);
   transition: width 0.3s ease;
 }
 
@@ -390,7 +390,7 @@
 }
 
 .like-icon.active {
-  color: var(--glow-primary);
+  color: var(--secondary-color);
 }
 
 .dislike-icon.active {
@@ -409,7 +409,7 @@
 }
 
 .see-more-reviews {
-  background: var(--glow-primary);
+  background: var(--secondary-color);
   border: none;
   padding: 0.8rem 1.5rem;
   border-radius: 0.5rem;
@@ -424,7 +424,7 @@
 
 .see-more-reviews:hover {
   background: var(--glow-secondary);
-  box-shadow: 0 0 15px var(--glow-primary);
+  box-shadow: 0 0 15px var(--secondary-color);
 }
 
 .thumb:hover {
@@ -490,7 +490,7 @@
 }
 
 .locate-and-share-icon .shareAlt:hover, .location-dot:hover {
-  color: var(--glow-primary);
+  color: var(--secondary-color);
   transform: scale(1.1);
 }
 
@@ -561,7 +561,7 @@
 }
 
 .book-now {
-  background: var(--glow-primary);
+  background: var(--secondary-color);
   color: var(--primary-font-color);
 }
 
@@ -573,7 +573,7 @@
 .book-now:hover,
 .addCart:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 15px var(--glow-primary);
+  box-shadow: 0 0 15px var(--secondary-color);
 }
 
 /* Map Styling */
@@ -597,7 +597,7 @@
   height: 90%;
   max-height: 800px;
   border-radius: 15px;
-  box-shadow: 0 0 10px var(--glow-primary);
+  box-shadow: 0 0 10px var(--secondary-color);
 }
 
 .map-close-btn, .map-toggle-btn {
@@ -624,7 +624,7 @@
 }
 
 .map-close-btn:hover, .map-toggle-btn:hover {
-  background: var(--glow-primary);
+  background: var(--secondary-color);
   transform: translateY(-2px);
 }
 
