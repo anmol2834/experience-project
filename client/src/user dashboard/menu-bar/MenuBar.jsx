@@ -83,10 +83,9 @@ const Menubar = () => {
 
           <div className="menu-type3">
             <span onClick={() => navigate('/aboutus')}>About Us</span>
-            <span>Contact</span>
+            <span>Admin</span>
             <span>FAQ</span>
-            <span>Privacy Policy</span>
-            <span>Terms and Conditions</span>
+            <span onClick={() => navigate('/termsAndConditions')}>Terms and Conditions</span>
             <span className="logout-button">Logout</span>
           </div>
         </div>

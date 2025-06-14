@@ -117,8 +117,8 @@ const FrontPage = () => {
         <div className="app-info-menu">
           <span>Experience</span>
           <span onClick={() => navigate('/aboutus')}>About Us</span>
-          <span>Contact</span>
-          <span>Terms and Conditions</span>
+          <span>Admin</span>
+          <span onClick={() => navigate('/termsAndConditions')}>Terms and Conditions</span>
         </div>
         <div className="header-btn">
           {token ? (
