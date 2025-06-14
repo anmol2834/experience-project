@@ -19,7 +19,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 30px;
   font-weight: 300;
   padding: 20px 0;
   z-index: 10;
@@ -220,7 +221,6 @@ form .line {
 }
 
 .signup-form .submit:hover:not(:disabled) {
-  transform: scale(110%);
   background: var(--glow-secondary);
   box-shadow: 0 0 10px var(--glow-primary);
 }
@@ -228,30 +228,6 @@ form .line {
 .signup-form .submit:disabled {
   opacity: 0.7;
   cursor: not-allowed;
-}
-
-.signup-form .google {
-  width: 30%;
-  height: 45px;
-  background: transparent;
-  color: var(--primary-font-color);
-  border: 2px solid var(--glow-secondary);
-  border-radius: 5px;
-  font-weight: 200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  text-transform: capitalize;
-  transition: 0.5s;
-  cursor: pointer;
-  box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
-}
-
-.signup-form .google:hover {
-  transform: scale(110%);
-  border-color: var(--glow-accent-cool);
-  box-shadow: 0 0 10px var(--glow-primary);
 }
 
 /* Spinner for buttons */
@@ -449,11 +425,6 @@ input[type="number"] {
     transform: scale(1);
   }
 
-  .signup-form .google {
-    width: 60%;
-    cursor: none;
-  }
-
   .checkbox {
     gap: 5px;
     cursor: none;
@@ -536,11 +507,6 @@ input[type="number"] {
     transform: scale(1);
   }
 
-  .signup-form .google {
-    width: 40%;
-    cursor: none;
-  }
-
   .verify-contain {
     width: 80%;
     height: 400px;
@@ -618,10 +584,6 @@ input[type="number"] {
     transform: scale(1);
   }
 
-  .signup-form .google {
-    width: 30%;
-  }
-
   .verify-contain {
     width: 70%;
   }
@@ -685,10 +647,6 @@ input[type="number"] {
 
   .signup-form .submit {
     width: 20%;
-  }
-
-  .signup-form .google {
-    width: 25%;
   }
 
   .verify-contain {

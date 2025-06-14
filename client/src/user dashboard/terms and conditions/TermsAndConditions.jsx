@@ -28,7 +28,7 @@ const TermsAndConditions = () => {
 
   return (
     <div className={`terms-container ${isVisible ? 'visible' : ''}`}>
-      <button className='back-to-dashboard' onClick={() => navigate('/home')}>
+      <button className='back-to-dashboard' onClick={() => navigate(-1)}>
         <FontAwesomeIcon icon={faLongArrowLeft} />
       </button>
       <div className="terms-header">
@@ -279,7 +279,7 @@ const TermsAndConditions = () => {
       
       <div className="terms-footer">
         <p>By using WanderCall services, you acknowledge that you have read, understood, and agreed to these Terms and Conditions.</p>
-        <div className="acceptance-box">
+        <div className="acceptance-box" onClick={() => navigate(-1)}>
           <p>I agree to the Terms and Conditions and Privacy Policy</p>
         </div>
       </div>
