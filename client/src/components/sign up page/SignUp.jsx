@@ -1,13 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import './signup.css';
-import banner from './lake-banner.jpg';
 import { useNavigate } from 'react-router-dom';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLongArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faLongArrowLeft, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
+import fpvDrone from './fpv-drone.png';
+import horrorStory from './story-session.png';
+import movieNight from './movie-night.png';
+import lateNightParty from './party.png';
+import gamerBash from './gaming.png';
+import wisdomHours from './wisdom-hours.png';
 
 function SignUp() {
   const navigate = useNavigate();
@@ -19,6 +24,9 @@ function SignUp() {
   const [isLoading, setLoading] = useState(false);
   const [isVerifying, setVerifying] = useState(false);
   const [isResending, setResending] = useState(false);
+  const [currentCard, setCurrentCard] = useState(0);
+  const canvasRef = useRef(null);
+  const bannerRef = useRef(null);
 
   const handleEye = () => setEye(!eye);
 
@@ -127,9 +135,166 @@ function SignUp() {
     }
   };
 
-  const responseGoogle = (response) => {
-    console.log(response);
+  // Banner experience data
+  const experiences = [
+    {
+      title: "FPV Drone Experience",
+      description: "Immerse yourself in breathtaking aerial views with our high-speed FPV drones",
+      image: fpvDrone
+    },
+    {
+      title: "Horror Story Sessions",
+      description: "Get chills with spine-tingling horror stories told by master storytellers",
+      image: horrorStory
+    },
+    {
+      title: "Movie Nights Under Stars",
+      description: "Experience cinema like never before with our open-air screenings",
+      image: movieNight
+    },
+    {
+      title: "Late Night Parties",
+      description: "Dance the night away with exclusive celebrations and top DJs",
+      image: lateNightParty
+    },
+    {
+      title: "Gamer Bash",
+      description: "Compete in epic gaming tournaments with fellow enthusiasts",
+      image: gamerBash
+    },
+    {
+      title: "Wisdom Hours",
+      description: "Gain insights from experts in intimate knowledge-sharing sessions",
+      image: wisdomHours
+    }
+  ];
+
+  // Handle card navigation
+  const nextCard = () => {
+    setCurrentCard((prev) => (prev + 1) % experiences.length);
   };
+
+  const prevCard = () => {
+    setCurrentCard((prev) => (prev - 1 + experiences.length) % experiences.length);
+  };
+
+  // Auto-rotate cards
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextCard();
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  // Holographic particle animation
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width = canvas.offsetWidth;
+    const height = canvas.height = canvas.offsetHeight;
+    
+    // Create particles
+    const particles = [];
+    const particleCount = 150;
+    const colors = [
+      'rgba(106, 90, 205, 0.8)', // rebeccapurple
+      'rgba(66, 133, 244, 0.8)', // blue
+      'rgba(234, 67, 53, 0.8)',  // red
+      'rgba(251, 188, 5, 0.8)',  // yellow
+      'rgba(52, 168, 83, 0.8)',  // green
+      'rgba(103, 58, 183, 0.8)'  // purple
+    ];
+    
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 4 + 1,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        speedX: (Math.random() - 0.5) * 0.5,
+        speedY: (Math.random() - 0.5) * 0.5,
+        angle: 0,
+        angleSpeed: Math.random() * 0.05,
+        distance: Math.random() * 100 + 50,
+        baseSize: Math.random() * 3 + 1
+      });
+    }
+    
+    // Animation loop
+    let animationId;
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+      
+      // Draw holographic grid
+      ctx.strokeStyle = 'rgba(106, 90, 205, 0.1)';
+      ctx.lineWidth = 1;
+      
+      // Vertical lines
+      for (let x = 0; x < width; x += 30) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
+        ctx.stroke();
+      }
+      
+      // Horizontal lines
+      for (let y = 0; y < height; y += 30) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+      }
+      
+      // Update and draw particles
+      const time = Date.now() * 0.001;
+      particles.forEach(p => {
+        p.angle += p.angleSpeed;
+        const wave = Math.sin(time + p.distance * 0.01) * 20;
+        
+        // Draw particle with pulsing effect
+        ctx.beginPath();
+        ctx.arc(p.x + wave, p.y, p.radius + Math.sin(p.angle) * p.baseSize, 0, Math.PI * 2);
+        
+        // Create holographic glow effect
+        const gradient = ctx.createRadialGradient(
+          p.x + wave, p.y, 0,
+          p.x + wave, p.y, p.radius * 3
+        );
+        gradient.addColorStop(0, p.color);
+        gradient.addColorStop(1, 'transparent');
+        
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        
+        // Create connection lines between close particles
+        particles.forEach(other => {
+          const dx = p.x - other.x;
+          const dy = p.y - other.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < 150) {
+            ctx.beginPath();
+            ctx.moveTo(p.x + wave, p.y);
+            ctx.lineTo(other.x + wave, other.y);
+            ctx.strokeStyle = `rgba(106, 90, 205, ${0.2 - dist/750})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        });
+      });
+      
+      animationId = requestAnimationFrame(animate);
+    };
+    
+    animate();
+    
+    return () => {
+      cancelAnimationFrame(animationId);
+    };
+  }, []);
 
   return (
     <div className="signup-contain">
@@ -264,7 +429,59 @@ function SignUp() {
         </div>
       </div>
 
-      <div className="side-banner" style={{ backgroundImage: `url(${banner})` }}></div>
+      <div className="signup-banner" ref={bannerRef}>
+        <canvas ref={canvasRef} className="signup-particle-canvas"></canvas>
+        <div className="signup-banner-content">
+          <div className="signup-banner-title">
+            <h2>BEGIN YOUR <span>Experiences</span></h2>
+            <p>Join our community of thrill-seekers and experience the extraordinary</p>
+          </div>
+          
+          <div className="signup-hologram-container">
+            <div className="signup-hologram">
+              {experiences.map((exp, index) => (
+                <div 
+                  key={index}
+                  className={`signup-hologram-card ${index === currentCard ? 'active' : ''}`}
+                >
+                  <div 
+                    className="signup-hologram-image" 
+                    style={{ backgroundImage: `url(${exp.image})` }}
+                  ></div>
+                  <div className="signup-hologram-content">
+                    <h3>{exp.title}</h3>
+                    <p>{exp.description}</p>
+                  </div>
+                  <div className="signup-hologram-glow"></div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="signup-carousel-controls">
+            <button className="signup-carousel-prev" onClick={prevCard}>
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </button>
+            <div className="signup-carousel-indicators">
+              {experiences.map((_, index) => (
+                <div 
+                  key={index}
+                  className={`signup-indicator ${index === currentCard ? 'active' : ''}`}
+                  onClick={() => setCurrentCard(index)}
+                />
+              ))}
+            </div>
+            <button className="signup-carousel-next" onClick={nextCard}>
+              <FontAwesomeIcon icon={faChevronRight} />
+            </button>
+          </div>
+          
+          <div className="signup-coming-soon">
+            <div className="signup-coming-soon-glow"></div>
+            <p>More experiences launching soon: Skydiving • Survival Training • Crafting Workshops</p>
+          </div>
+        </div>
+      </div>
 
       <div style={{ position: 'absolute' }}>
         <ToastContainer
