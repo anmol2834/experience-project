@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AboutUs.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLongArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const AboutUs = () => {
   const navigate = useNavigate();
@@ -25,10 +27,11 @@ const AboutUs = () => {
 
   const experiences = [
     { title: "FPV Drone", icon: "🚁", delay: 0, desc: "First-person view drone racing experience" },
-    { title: "Story Nights", icon: "📖", delay: 0.2, desc: "Interactive horror and adventure storytelling" },
+    { title: "Story Session", icon: "📖", delay: 0.2, desc: "Interactive horror and adventure storytelling" },
     { title: "Movie Nights", icon: "🎬", delay: 0.4, desc: "Themed cinematic experiences under the stars" },
     { title: "Late Night Party", icon: "🎉", delay: 0.6, desc: "Energetic parties with immersive themes" },
-    { title: "Gamer Bash", icon: "🎮", delay: 0.8, desc: "Competitive gaming tournaments and VR experiences" }
+    { title: "Gamer Bash", icon: "🎮", delay: 0.8, desc: "Competitive gaming tournaments and VR experiences" },
+    { title: "Wisdom Hour", icon: "🧠", delay: 1, desc: "Wisdom Hour lets you learn real-world skills and insights from experts in just one powerful hour" }
   ];
 
   return (
@@ -37,7 +40,7 @@ const AboutUs = () => {
         className="aboutus-back-btn"
         onClick={() => navigate("/home")}
       >
-        &larr; Back to Home
+        <FontAwesomeIcon icon={faLongArrowLeft} /> Back to Home
       </button>
       
       <div className="aboutus-container">

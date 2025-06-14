@@ -23,6 +23,7 @@ import { AddressProvider } from './context/AddressContext';
 import Reviews from './user dashboard/user account/reviews/Reviews';
 import AboutUs from './user dashboard/about us/AboutUs';
 import { useEffect } from 'react';
+import TermsAndConditions from './user dashboard/terms and conditions/TermsAndConditions';
 
 function App() {
   // Prevent zooming
@@ -112,6 +113,7 @@ function App() {
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path='/aboutus' element={<AboutUs />} />
+                <Route path='termsAndConditions' element={<TermsAndConditions/>} />
               </Routes>
             </div>
           </AddressProvider>
