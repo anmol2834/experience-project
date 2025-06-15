@@ -41,26 +41,6 @@
   cursor: pointer;
 }
 
-.admin-btn {
-  top: 10px;
-  right: 10px;
-  width: 100px;
-  height: 40px;
-  border: none;
-  outline: none;
-  border-radius: 10px;
-  background: var(--glow-accent-cool);
-  color: var(--primary-font-color);
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 0 5px rgba(106, 90, 205, 0.2);
-}
-
-.admin-btn:hover {
-  background: var(--glow-secondary);
-  box-shadow: 0 0 10px var(--glow-primary); 
-}
-
 .signin-contain p span:hover {
   color: var(--glow-accent-cool);
 }

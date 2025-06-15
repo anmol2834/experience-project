@@ -666,6 +666,67 @@
   }
 }
 
+
+/* Empty Journal State */
+.empty-journal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  min-height: 60vh;
+}
+
+.empty-illustration2 {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 30px;
+  opacity: 0.8;
+}
+
+.empty-illustration2 svg {
+  width: 100%;
+  height: 100%;
+}
+
+.empty-journal h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: var(--primary-font-color);
+  text-shadow: 0 0 10px var(--glow-primary);
+}
+
+.empty-journal p {
+  color: var(--shade-primary-color);
+  max-width: 500px;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+.explore-button {
+  padding: 14px 40px;
+  background: linear-gradient(45deg, var(--glow-primary), var(--glow-secondary));
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 5px 15px rgba(106, 90, 205, 0.4);
+  transition: all 0.3s ease;
+}
+
+.explore-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(106, 90, 205, 0.6);
+}
+
+
 /* Dark mode adjustments for mobile/tablet */
 @media (max-width: 1070px) {
   .skeleton-heading,

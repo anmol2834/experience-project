@@ -264,11 +264,6 @@ function SignIn() {
     setCanResendOtp(true);
   };
 
-  const handleAdminBtn = (e) => {
-    e.preventDefault();
-    navigate('/admin/signin');
-  }
-
   // Card data for the banner
   const bannerCards = [
     {
@@ -415,7 +410,6 @@ function SignIn() {
         </button>
         <h1>sign in</h1>
         <p>Don't have an Account? <span onClick={() => navigate('/signup')}>sign up</span></p>
-        <button type="button" className='admin-btn' onClick={handleAdminBtn}>Admin</button>
         <div className='input-area'>
           <div className={`input input-email ${emailFocused || emailValue ? 'focused' : ''}`}>
             <label htmlFor="email" className='label email-label'>Email / Phone no.</label>

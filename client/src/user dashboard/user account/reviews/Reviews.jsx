@@ -3,46 +3,47 @@ import './Reviews.css';
 import { useAuth } from '../../../context/AuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faChevronRight, faXmark, faPencil } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faChevronRight, faXmark, faPencil, faCompass } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 // Mock data - replace with actual API calls
 const mockExperiences = [
-  {
-    id: 1,
-    name: "Skydiving Adventure",
-    image: "skydiving.jpg",
-    reviewed: true,
-    rating: 5,
-    review: "Absolutely breathtaking experience! The instructors were professional and made me feel safe throughout the entire jump. The view from 15,000 feet was incredible. Would do it again in a heartbeat!",
-    date: "2023-05-15"
-  },
-  {
-    id: 2,
-    name: "Wilderness Survival Camp",
-    image: "survival.jpg",
-    reviewed: true,
-    rating: 4,
-    review: "Challenging but incredibly rewarding. Learned essential survival skills that I'll remember for life. The instructors were knowledgeable and patient. The overnight solo experience pushed me beyond my comfort zone in the best way possible.",
-    date: "2023-07-22"
-  },
-  {
-    id: 3,
-    name: "Artisan Pottery Workshop",
-    image: "pottery.jpg",
-    reviewed: false,
-    rating: null,
-    review: null,
-    date: "2023-09-10"
-  },
-  {
-    id: 4,
-    name: "Deep Sea Diving Expedition",
-    image: "diving.jpg",
-    reviewed: false,
-    rating: null,
-    review: null,
-    date: "2023-08-05"
-  }
+  // {
+  //   id: 1,
+  //   name: "Skydiving Adventure",
+  //   image: "skydiving.jpg",
+  //   reviewed: true,
+  //   rating: 5,
+  //   review: "Absolutely breathtaking experience! The instructors were professional and made me feel safe throughout the entire jump. The view from 15,000 feet was incredible. Would do it again in a heartbeat!",
+  //   date: "2023-05-15"
+  // },
+  // {
+  //   id: 2,
+  //   name: "Wilderness Survival Camp",
+  //   image: "survival.jpg",
+  //   reviewed: true,
+  //   rating: 4,
+  //   review: "Challenging but incredibly rewarding. Learned essential survival skills that I'll remember for life. The instructors were knowledgeable and patient. The overnight solo experience pushed me beyond my comfort zone in the best way possible.",
+  //   date: "2023-07-22"
+  // },
+  // {
+  //   id: 3,
+  //   name: "Artisan Pottery Workshop",
+  //   image: "pottery.jpg",
+  //   reviewed: false,
+  //   rating: null,
+  //   review: null,
+  //   date: "2023-09-10"
+  // },
+  // {
+  //   id: 4,
+  //   name: "Deep Sea Diving Expedition",
+  //   image: "diving.jpg",
+  //   reviewed: false,
+  //   rating: null,
+  //   review: null,
+  //   date: "2023-08-05"
+  // }
 ];
 
 function Reviews() {
@@ -59,6 +60,8 @@ function Reviews() {
     review: '',
     hoverRating: 0
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleResize = () => {
@@ -229,65 +232,97 @@ function Reviews() {
         </button>
       </div>
 
-      <motion.div 
-        className="reviews-grid"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-      >
-        {getFilteredExperiences().map(experience => (
-          <motion.div
-            key={experience.id}
-            className={`review-card ${experience.reviewed ? 'reviewed' : 'not-reviewed'}`}
-            whileHover={{ y: -10, boxShadow: "0 15px 30px rgba(0,0,0,0.15)" }}
-            transition={{ type: "spring", stiffness: 300 }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            layout
+      {getFilteredExperiences().length === 0 ? (
+        <motion.div 
+          className="empty-journal"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          <div className="empty-illustration2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3C12 2.17157 11.3284 1.5 10.5 1.5C9.67157 1.5 9 2.17157 9 3H12ZM9 5C9 5.82843 9.67157 6.5 10.5 6.5C11.3284 6.5 12 5.82843 12 5H9ZM10.5 8.5C9.11929 8.5 8 9.61929 8 11C8 12.3807 9.11929 13.5 10.5 13.5C11.8807 13.5 13 12.3807 13 11C13 9.61929 11.8807 8.5 10.5 8.5ZM3 11C3 6.58172 6.58172 3 11 3V1.5C5.75329 1.5 1.5 5.75329 1.5 11H3ZM11 19C6.58172 19 3 15.4183 3 11H1.5C1.5 16.2467 5.75329 20.5 11 20.5V19ZM19 11C19 15.4183 15.4183 19 11 19V20.5C16.2467 20.5 20.5 16.2467 20.5 11H19ZM11 3C15.4183 3 19 6.58172 19 11H20.5C20.5 5.75329 16.2467 1.5 11 1.5V3ZM9 3V5H12V3H9Z" 
+                    fill="url(#emptyGradient)"/>
+              <defs>
+                <linearGradient id="emptyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#6a5acd" />
+                  <stop offset="100%" stopColor="#ff694e" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <h2>Your Adventure Journal is Empty</h2>
+          <p>Start your journey by exploring new experiences and creating memories worth remembering.</p>
+          <motion.button 
+            className="explore-button"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => navigate('/home')}
           >
-            <div className="card-image" style={{ backgroundImage: `url(${experience.image})` }}></div>
-            
-            <div className="card-content">
-              <h3>{experience.name}</h3>
-              <p className="experience-date">Experienced on: {experience.date}</p>
+            <FontAwesomeIcon icon={faCompass} /> Discover Experiences
+          </motion.button>
+        </motion.div>
+      ) : (
+        <motion.div 
+          className="reviews-grid"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          {getFilteredExperiences().map(experience => (
+            <motion.div
+              key={experience.id}
+              className={`review-card ${experience.reviewed ? 'reviewed' : 'not-reviewed'}`}
+              whileHover={{ y: -10, boxShadow: "0 15px 30px rgba(0,0,0,0.15)" }}
+              transition={{ type: "spring", stiffness: 300 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              layout
+            >
+              <div className="card-image" style={{ backgroundImage: `url(${experience.image})` }}></div>
               
-              {experience.reviewed ? (
-                <>
-                  <div className="rating-container">
-                    {renderStars(experience.rating)}
-                  </div>
-                  <p className="review-excerpt">
-                    {experience.review.substring(0, 100)}...
-                  </p>
-                  <button 
-                    className="see-review-btn"
-                    onClick={() => openReview(experience)}
-                  >
-                    See Full Review <FontAwesomeIcon icon={faChevronRight} />
-                  </button>
-                </>
-              ) : (
-                <>
-                  <p className="encouragement-text">
-                    <span className="highlight">Share your adventure!</span> Your insights help others discover amazing experiences.
-                  </p>
-                  <div className="pulse-animation">
-                    <motion.button
-                      className="write-review-btn"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => openReviewForm(experience)}
+              <div className="card-content">
+                <h3>{experience.name}</h3>
+                <p className="experience-date">Experienced on: {experience.date}</p>
+                
+                {experience.reviewed ? (
+                  <>
+                    <div className="rating-container">
+                      {renderStars(experience.rating)}
+                    </div>
+                    <p className="review-excerpt">
+                      {experience.review.substring(0, 100)}...
+                    </p>
+                    <button 
+                      className="see-review-btn"
+                      onClick={() => openReview(experience)}
                     >
-                      <FontAwesomeIcon icon={faPencil} /> Write Review
-                    </motion.button>
-                  </div>
-                </>
-              )}
-            </div>
-          </motion.div>
-        ))}
-      </motion.div>
+                      See Full Review <FontAwesomeIcon icon={faChevronRight} />
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p className="encouragement-text">
+                      <span className="highlight">Share your adventure!</span> Your insights help others discover amazing experiences.
+                    </p>
+                    <div className="pulse-animation">
+                      <motion.button
+                        className="write-review-btn"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => openReviewForm(experience)}
+                      >
+                        <FontAwesomeIcon icon={faPencil} /> Write Review
+                      </motion.button>
+                    </div>
+                  </>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      )}
 
       <AnimatePresence>
         {selectedReview && (

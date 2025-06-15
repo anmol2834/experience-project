@@ -3,19 +3,24 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowLeft, FiZap, FiGift, FiAward, FiActivity } from 'react-icons/fi';
 import './Rewards.css';
 
-const allActivities = [
-  { icon: '🪂', name: 'Skydiving', xp: 500, date: '2023-08-15' },
-  { icon: '🧗', name: 'Rock Climbing', xp: 300, date: '2023-08-14' },
-  { icon: '🏕️', name: 'Wilderness Survival', xp: 450, date: '2023-08-13' },
-  { icon: '🚣', name: 'Kayaking', xp: 400, date: '2023-08-12' },
-  { icon: '🏂', name: 'Snowboarding', xp: 550, date: '2023-08-11' },
-  { icon: '🚴', name: 'Mountain Biking', xp: 350, date: '2023-08-10' },
-];
 
 const Rewards = ({ isMobile, handleBack }) => {
+  const [allActivities, setAllActivities] = useState([
+    // { icon: '🪂', name: 'Skydiving', xp: 500, date: '2023-08-15' },
+    // { icon: '🧗', name: 'Rock Climbing', xp: 300, date: '2023-08-14' },
+    // { icon: '🏕️', name: 'Wilderness Survival', xp: 450, date: '2023-08-13' },
+    // { icon: '🚣', name: 'Kayaking', xp: 400, date: '2023-08-12' },
+    // { icon: '🏂', name: 'Snowboarding', xp: 550, date: '2023-08-11' },
+    // { icon: '🚴', name: 'Mountain Biking', xp: 350, date: '2023-08-10' },
+  ]);
+  
   const [activityPage, setActivityPage] = useState(0);
   const currentActivities = allActivities.slice(activityPage * 3, (activityPage * 3) + 3);
-
+  
+  // Calculate total XP dynamically
+  const totalXP = allActivities.reduce((sum, activity) => sum + activity.xp, 0);
+  const progressPercentage = Math.min(Math.floor((totalXP / 3000) * 100), 100);
+  
   return (
     <div className="rewards-container">
       {isMobile && (
@@ -35,11 +40,11 @@ const Rewards = ({ isMobile, handleBack }) => {
           <div className="xp-card">
             <div className="xp-details">
               <span className="label">Total XP</span>
-              <h2>1,731</h2>
+              <h2>{totalXP.toLocaleString()}</h2>
               <div className="progress-contain">
-                <div className="progress-bar" style={{ width: '65%' }} />
+                <div className="progress-bar" style={{ width: `${progressPercentage}%` }} />
               </div>
-              <span className="progress-text">65% to next level</span>
+              <span className="progress-text">{progressPercentage}% to next level</span>
             </div>
             <div className="xp-badge">
               <FiAward size={40} />
@@ -68,39 +73,61 @@ const Rewards = ({ isMobile, handleBack }) => {
         <div className="adventure-feed">
           <h3><FiActivity /> Recent Experience</h3>
           <div className="feed-list">
-            <AnimatePresence initial={false} key={activityPage}>
-              {currentActivities.map((activity) => (
-                <motion.div
-                  key={activity.name}
-                  layout
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="feed-item"
-                >
-                  <div className="activity-icon">{activity.icon}</div>
-                  <div className="activity-info">
-                    <h4>{activity.name}</h4>
-                    <span>{activity.date}</span>
-                  </div>
-                  <div className="xp-gain">+{activity.xp} XP</div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-          <div className="activity-navigation">
-            {activityPage > 0 && (
-              <button className="view-more" onClick={() => setActivityPage(prev => prev - 1)}>Previous</button>
+            {allActivities.length > 0 ? (
+              <AnimatePresence initial={false} key={activityPage}>
+                {currentActivities.map((activity) => (
+                  <motion.div
+                    key={activity.name}
+                    layout
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="feed-item"
+                  >
+                    <div className="activity-icon">{activity.icon}</div>
+                    <div className="activity-info">
+                      <h4>{activity.name}</h4>
+                      <span>{activity.date}</span>
+                    </div>
+                    <div className="xp-gain">+{activity.xp} XP</div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            ) : (
+              <div className="empty-experience">
+                <div className="empty-illustration">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                    <path d="M13.5 3C13.5 2.17157 12.8284 1.5 12 1.5C11.1716 1.5 10.5 2.17157 10.5 3H13.5ZM10.5 5C10.5 5.82843 11.1716 6.5 12 6.5C12.8284 6.5 13.5 5.82843 13.5 5H10.5ZM12 8.5C10.6193 8.5 9.5 9.61929 9.5 11C9.5 12.3807 10.6193 13.5 12 13.5C13.3807 13.5 14.5 12.3807 14.5 11C14.5 9.61929 13.3807 8.5 12 8.5ZM3 11C3 6.58172 6.58172 3 11 3V1.5C5.75329 1.5 1.5 5.75329 1.5 11H3ZM11 19C6.58172 19 3 15.4183 3 11H1.5C1.5 16.2467 5.75329 20.5 11 20.5V19ZM19 11C19 15.4183 15.4183 19 11 19V20.5C16.2467 20.5 20.5 16.2467 20.5 11H19ZM11 3C15.4183 3 19 6.58172 19 11H20.5C20.5 5.75329 16.2467 1.5 11 1.5V3ZM10.5 3V5H13.5V3H10.5Z" 
+                          fill="url(#emptyGradient)"/>
+                    <defs>
+                      <linearGradient id="emptyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#6a5acd" />
+                        <stop offset="100%" stopColor="#ff694e" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+                <h4>No Experience Yet</h4>
+                <p>Complete experiences to earn XP and unlock rewards!</p>
+              </div>
             )}
-            {(activityPage + 1) * 3 < allActivities.length && (
-              <button className="view-more" onClick={() => setActivityPage(prev => prev + 1)}>See More</button>
-            )}
           </div>
+          
+          {allActivities.length > 0 && (
+            <div className="activity-navigation">
+              {activityPage > 0 && (
+                <button className="view-more" onClick={() => setActivityPage(prev => prev - 1)}>Previous</button>
+              )}
+              {(activityPage + 1) * 3 < allActivities.length && (
+                <button className="view-more" onClick={() => setActivityPage(prev => prev + 1)}>See More</button>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="experience-gallery">
-          <h3>Available Experience</h3>
+          <h3>Upcoming Experiences</h3>
           <div className="gallery-grid">
             {[
               { title: 'Mountain Trek', xp: 1500, image: 'https://wittypen.com/blog/wp-content/uploads/2017/08/Trekking-the-himalayas.webp' },

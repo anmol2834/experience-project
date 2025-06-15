@@ -246,6 +246,113 @@
   margin-top: 5px;
 }
 
+
+/* Empty Experience State */
+.empty-experience {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 30px;
+  text-align: center;
+  background: rgba(26, 26, 46, 0.3);
+  border-radius: 15px;
+  border: 1px dashed var(--glow-secondary);
+}
+
+.empty-illustration {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+.empty-experience h4 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+  color: var(--primary-font-color);
+}
+
+.empty-experience p {
+  color: var(--shade-primary-color);
+  max-width: 300px;
+  line-height: 1.5;
+}
+
+/* XP Card Enhancements */
+.xp-card {
+  background: rgba(26, 26, 46, 0.7);
+  border-radius: 20px;
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  position: relative;
+  overflow: hidden;
+  color: var(--primary-font-color);
+  box-shadow: 0 0 10px rgba(106, 90, 205, 0.2);
+  border: 1px solid var(--glow-secondary);
+  backdrop-filter: blur(10px);
+}
+
+.xp-details h2 {
+  font-size: 2.5rem;
+  margin: 10px 0;
+  text-shadow: 0 0 10px var(--glow-primary);
+  background: linear-gradient(45deg, var(--glow-accent-cool), var(--glow-accent-warm));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Animation Enhancements */
+.action-card {
+  transition: all 0.3s ease, transform 0.2s ease;
+}
+
+.redeem-card:hover, .earn-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(106, 90, 205, 0.3);
+}
+
+.feed-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feed-item:hover {
+  transform: translateX(10px);
+  box-shadow: 0 5px 15px rgba(106, 90, 205, 0.3);
+}
+
+/* Progress Bar Animation */
+.progress-bar {
+  background: var(--glow-accent-cool);
+  height: 100%;
+  border-radius: 3px;
+  transition: width 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .empty-experience {
+    padding: 20px;
+  }
+  
+  .empty-illustration {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .empty-experience h4 {
+    font-size: 1.2rem;
+  }
+  
+  .xp-details h2 {
+    font-size: 2rem;
+  }
+}
+
 @media (max-width: 768px) {
   .rewards-container {
     padding: 15px;
