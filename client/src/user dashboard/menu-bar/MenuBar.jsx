@@ -19,6 +19,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { context_of_product } from '../../context/ProductProvider';
+import './menubar.css'
 
 const Menubar = () => {
   const navigate = useNavigate();
