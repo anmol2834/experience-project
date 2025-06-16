@@ -48,6 +48,19 @@
     padding: 15px;
 }
 
+.catelog-img .catelog-tag {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40%;
+    height: 10%;
+    background: var(--glow-accent-warm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 0 0px 0;
+}
+
 .catelog-details {
     position: relative;
     width: 100%;

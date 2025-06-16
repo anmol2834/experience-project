@@ -71,6 +71,9 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
   return (
     <div className="catelog-card" data-product-id={productId}>
       <div className="catelog-img" style={{ backgroundImage: `url(${img || ''})` }}>
+
+        <div className="catelog-tag">Coming Soon</div>
+
         <div className="heart-contain" onClick={handleLike}>
           {wishlistLoading ? (
             <div className="spinner"></div>
@@ -84,6 +87,7 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
             </svg>
           )}
         </div>
+
       </div>
       <div className="catelog-details">
         <div className="heading">
