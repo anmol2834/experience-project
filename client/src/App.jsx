@@ -24,6 +24,7 @@ import Reviews from './user dashboard/user account/reviews/Reviews';
 import AboutUs from './user dashboard/about us/AboutUs';
 import { useEffect } from 'react';
 import TermsAndConditions from './user dashboard/terms and conditions/TermsAndConditions';
+import GetInFirst from './user dashboard/get in first/GetInFirst';
 
 function App() {
   // Prevent zooming
@@ -113,7 +114,8 @@ function App() {
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path='/aboutus' element={<AboutUs />} />
-                <Route path='termsAndConditions' element={<TermsAndConditions/>} />
+                <Route path='/termsAndConditions' element={<TermsAndConditions/>} />
+                <Route path="/get-in-first" element={<GetInFirst/>} />
               </Routes>
             </div>
           </AddressProvider>

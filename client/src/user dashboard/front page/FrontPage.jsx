@@ -4,7 +4,7 @@ import slide1 from './slide1.jpg';
 import slide2 from './slide2.jpg';
 import slide3 from './slide3.jpg';
 import slide4 from './slide4.jpg';
-import wandercall from './wandercall-logo1.svg'; 
+import wandercall from './wandercall-logo1.svg';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import HomePage from '../home page/HomePage';
@@ -90,24 +90,6 @@ const FrontPage = () => {
     }
   };
 
-  const [showMenu, setShowMenu] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-
-      if (scrollPosition > windowHeight * 0.09) {
-        setShowMenu(true);
-      } else {
-        setShowMenu(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <div className="front-contain">
       <div className="headers">
@@ -172,7 +154,7 @@ const FrontPage = () => {
       <div>
         <Footer homeRef={homePageRef} />
       </div>
-      <div className={`menu-div ${showMenu ? "show" : "hide"}`}>
+      <div>
         <MenuBar />
       </div>
     </div>

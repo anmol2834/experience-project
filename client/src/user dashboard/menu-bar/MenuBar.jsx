@@ -1,19 +1,12 @@
 import { useState, useEffect, useContext } from "react";
 import {
-  faCommentAlt,
   faGift,
   faHeart,
   faList,
   faTicket,
   faUser,
-  faCrown,
-  faStore,
-  faRocket,
   faTimes,
   faSearch,
-  faPhone,
-  faEnvelope,
-  faLocationDot,
   faGlobe
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
