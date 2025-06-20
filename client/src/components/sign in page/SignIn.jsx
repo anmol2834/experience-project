@@ -498,7 +498,7 @@ function SignIn() {
                   <div className="card-icon">
                     <img src={card.icon} alt={card.title} className="card-image" />
                   </div>
-                  <div className="card-content">
+                  <div className="signin-card-content">
                     <h3>{card.title}</h3>
                     <p>{card.description}</p>
                   </div>

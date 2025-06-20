@@ -197,14 +197,14 @@
     position: relative;
 }
 
-.card-content {
+.review-card-content {
     padding: 25px;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
 }
 
-.card-content h3 {
+.review-card-content h3 {
     font-size: 1.6rem;
     margin-bottom: 8px;
     color: var(--primary-font-color);
@@ -793,7 +793,7 @@
         font-size: 0.9rem;
     }
     
-    .card-content {
+    .review-card-content {
         padding: 20px;
     }
     

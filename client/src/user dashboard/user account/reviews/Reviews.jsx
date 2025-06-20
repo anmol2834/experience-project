@@ -282,7 +282,7 @@ function Reviews() {
             >
               <div className="card-image" style={{ backgroundImage: `url(${experience.image})` }}></div>
               
-              <div className="card-content">
+              <div className="review-card-content">
                 <h3>{experience.name}</h3>
                 <p className="experience-date">Experienced on: {experience.date}</p>
                 
