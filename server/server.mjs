@@ -8,6 +8,7 @@ import Product from './models/products.js';
 import Cart from './models/cart.js';
 import Checkout from './models/checkout.js';
 import Address from './models/address.js';
+import Waitlist from './models/waitlist.js';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { generateToken, verifyToken } from './middlewares/middleware.js';
@@ -66,6 +67,50 @@ const isValidOTP = (user, providedOTP) => {
   return user.otp === providedOTP;
 };
 
+// Waitlist routes
+app.post('/waitlist/join', async (req, res) => {
+  const { name, age, email, phone } = req.body;
+  try {
+    const existingWaitlist = await Waitlist.findOne({ $or: [{ email }, { phone }] });
+    if (existingWaitlist) {
+      return res.status(400).json({ message: 'You have already joined the waitlist' });
+    }
+
+    const waitlistEntry = new Waitlist({ name, age, email, phone });
+    await waitlistEntry.save();
+
+    const existingUser = await User.findOne({ $or: [{ email }, { phone }] });
+    if (existingUser && existingUser.verified) {
+      existingUser.discountVouchers = 50;
+      existingUser.priorityAccess = true;
+      existingUser.xp += 5000;
+      existingUser.vipEvents = true;
+      waitlistEntry.claimed = true;
+      await existingUser.save();
+      await waitlistEntry.save();
+    }
+
+    res.status(201).json({ message: 'Joined waitlist successfully' });
+  } catch (err) {
+    if (err.code === 11000) {
+      res.status(400).json({ message: 'Email or phone already in use' });
+    } else {
+      console.error(err);
+      res.status(500).json({ message: 'Server error' });
+    }
+  }
+});
+
+app.get('/waitlist/count', async (req, res) => {
+  try {
+    const count = await Waitlist.countDocuments();
+    res.json({ count });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 // Register route
 app.post('/register', async (req, res) => {
   const { firstname, lastname, phone, email, password } = req.body;
@@ -81,7 +126,18 @@ app.post('/register', async (req, res) => {
     }
 
     const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-    const user = new User({ firstname, lastname, phone, email, password, verificationCode });
+    const user = new User({
+      firstname,
+      lastname,
+      phone,
+      email,
+      password,
+      verificationCode,
+      remainingDiscountBookings: 0,
+      priorityAccess: false,
+      xp: 0,
+      vipEvents: false,
+    });
     await user.save();
 
     const mailOptions = {
@@ -99,6 +155,7 @@ app.post('/register', async (req, res) => {
       res.status(200).send('Verification code sent');
     });
   } catch (err) {
+    console.error(err);
     res.status(500).send('Server error');
   }
 });
@@ -169,7 +226,9 @@ app.get('/validate-token', verifyToken, async (req, res) => {
 // Get user details (requires token)
 app.get('/user', verifyToken, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id).select('firstname lastname email phone dob gender street city state zip');
+    const user = await User.findById(req.user.id).select(
+      'firstname lastname email phone dob gender street city state zip remainingDiscountBookings priorityAccess xp vipEvents'
+    );
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -185,7 +244,6 @@ app.put('/user', verifyToken, async (req, res) => {
   try {
     const { firstname, lastname, email, phone, dob, gender, street, city, state, zip } = req.body;
 
-    // Check if email is provided and already exists for another user
     if (email) {
       const emailExists = await User.findOne({ email, _id: { $ne: req.user.id } });
       if (emailExists) {
@@ -193,7 +251,6 @@ app.put('/user', verifyToken, async (req, res) => {
       }
     }
 
-    // Check if phone is provided and already exists for another user
     if (phone) {
       const phoneExists = await User.findOne({ phone, _id: { $ne: req.user.id } });
       if (phoneExists) {
@@ -201,9 +258,7 @@ app.put('/user', verifyToken, async (req, res) => {
       }
     }
 
-    // Prepare update data with provided fields
     const updateData = { firstname, lastname, email, phone, dob, gender, street, city, state, zip };
-
     const user = await User.findByIdAndUpdate(req.user.id, updateData, { new: true });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
@@ -225,10 +280,22 @@ app.post('/verify', async (req, res) => {
     }
     user.verified = true;
     user.verificationCode = undefined;
+
+    const waitlistEntry = await Waitlist.findOne({ $or: [{ email: user.email }, { phone: user.phone }] });
+    if (waitlistEntry && !waitlistEntry.claimed) {
+      user.discountVouchers = 50;
+      user.priorityAccess = true;
+      user.xp += 5000;
+      user.vipEvents = true;
+      waitlistEntry.claimed = true;
+      await waitlistEntry.save();
+    }
+
     await user.save();
     const token = generateToken(user);
     res.status(200).json({ token });
   } catch (err) {
+    console.error(err);
     res.status(500).send('Server error');
   }
 });

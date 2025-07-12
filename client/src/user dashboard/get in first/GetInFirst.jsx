@@ -1,4 +1,3 @@
-// GetInFirst.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './GetInFirst.css';
@@ -12,15 +11,24 @@ function GetInFirst() {
     phone: ''
   });
   const [errors, setErrors] = useState({});
+  const [generalError, setGeneralError] = useState('');
   const [showConfetti, setShowConfetti] = useState(false);
-  const [joinCount, setJoinCount] = useState(1428);
+  const [joinCount, setJoinCount] = useState(0);
   const containerRef = useRef(null);
   const [progressWidth, setProgressWidth] = useState('33%');
   const navigate = useNavigate();
-  
+
   // Refs for input auto-focus
   const nameRef = useRef(null);
   const emailRef = useRef(null);
+
+  // Fetch waitlist count on mount
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/waitlist/count`)
+      .then(res => res.json())
+      .then(data => setJoinCount(data.count))
+      .catch(err => console.error('Error fetching waitlist count:', err));
+  }, []);
 
   // Set focus to first input when step changes
   useEffect(() => {
@@ -50,7 +58,6 @@ function GetInFirst() {
     if (step === 3) {
       setShowConfetti(true);
       const timer = setTimeout(() => setShowConfetti(false), 3000);
-      setJoinCount(prev => prev + 1);
       return () => clearTimeout(timer);
     }
   }, [step]);
@@ -58,10 +65,10 @@ function GetInFirst() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
+    setGeneralError('');
   };
 
   const validateStep1 = () => {
@@ -69,44 +76,51 @@ function GetInFirst() {
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.age) newErrors.age = 'Age is required';
     else if (parseInt(formData.age) < 13) newErrors.age = 'You must be at least 13 years old';
-    
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return false;
-    }
-    return true;
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const validateStep2 = () => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^[0-9]{10}$/;
-    
     if (!formData.email) newErrors.email = 'Email is required';
     else if (!emailRegex.test(formData.email)) newErrors.email = 'Invalid email format';
-    
     if (!formData.phone) newErrors.phone = 'Phone number is required';
     else if (!phoneRegex.test(formData.phone)) newErrors.phone = 'Invalid phone number (10 digits)';
-    
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return false;
-    }
-    return true;
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (step === 1 && validateStep1()) {
       setStep(2);
     } else if (step === 2 && validateStep2()) {
-      setStep(3);
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/waitlist/join`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+        if (response.ok) {
+          setStep(3);
+          setJoinCount(prev => prev + 1);
+        } else {
+          const errorData = await response.json();
+          setGeneralError(errorData.message || 'Failed to join waitlist');
+        }
+      } catch (err) {
+        setGeneralError('Server error, please try again later');
+        console.error('Error submitting form:', err);
+      }
     }
   };
 
   const handleBack = () => {
     if (step > 1) setStep(step - 1);
-
-    if (step == 1) {
+    if (step === 1) {
       navigate(-1);
     }
   };
@@ -253,7 +267,6 @@ function GetInFirst() {
                   <div className="stat-value">24</div>
                   <div className="stat-label">Hours Remaining</div>
                 </div>
-                
               </div>
               
               <div className="action-section">
@@ -332,6 +345,7 @@ function GetInFirst() {
                   />
                   {errors.phone && <span className="error-message">{errors.phone}</span>}
                 </div>
+                {generalError && <span className="error-message">{generalError}</span>}
               </div>
               
               <div className="warning-card animate-pop">
@@ -382,7 +396,6 @@ function GetInFirst() {
                 <h2 className="section-title">Your Founding Member Rewards</h2>
                 
                 <div className="rewards-grid">
-                  
                   <div className="reward-card animate-delay-1">
                     <div className="reward-icon">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -422,7 +435,6 @@ function GetInFirst() {
                     <h4>VIP Member Events</h4>
                     <p>Exclusive invites to member-only gatherings</p>
                   </div>
-                  
                 </div>
               </div>
             </div>
