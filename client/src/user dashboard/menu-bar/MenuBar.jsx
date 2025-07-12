@@ -89,7 +89,7 @@ const Menubar = () => {
     );
   };
 
-  return (
+  return (  
     <div className={`menu-bar-container ${showMenuBar ? 'show' : ''}`}>
       {/* Desktop Menu */}
       <div className="desktop-menu">
@@ -130,7 +130,7 @@ const Menubar = () => {
               <span className="icon-label">Bookings</span>
             </div>
 
-            <div className="menu-icon-item">
+            <div className="menu-icon-item" onClick={() => navigate('/community')}>
               <FontAwesomeIcon icon={faGlobe} className="icon" />
               <span className="icon-label">Community</span>
             </div>
@@ -239,7 +239,7 @@ const Menubar = () => {
                 <p className="menu-label">Bookings</p>
               </div>
 
-              <div className="mobile-menu-item">
+              <div className="mobile-menu-item" onClick={() => navigate('/community')}>
                 <FontAwesomeIcon icon={faGlobe} className="menu-icon" />
                 <p className="menu-label">Community</p>
               </div>

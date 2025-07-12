@@ -25,6 +25,7 @@ import AboutUs from './user dashboard/about us/AboutUs';
 import { useEffect } from 'react';
 import TermsAndConditions from './user dashboard/terms and conditions/TermsAndConditions';
 import GetInFirst from './user dashboard/get in first/GetInFirst';
+import Community from './user dashboard/community/Community';
 
 function App() {
   // Prevent zooming
@@ -116,6 +117,8 @@ function App() {
                 <Route path='/aboutus' element={<AboutUs />} />
                 <Route path='/termsAndConditions' element={<TermsAndConditions/>} />
                 <Route path="/get-in-first" element={<GetInFirst/>} />
+                <Route path="/community" element={<Community/>} />
+                <Route path="*" element={<div className="not-found">Page Not Found</div>} />
               </Routes>
             </div>
           </AddressProvider>
