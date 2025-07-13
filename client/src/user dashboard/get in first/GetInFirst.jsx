@@ -26,7 +26,7 @@ function GetInFirst() {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/waitlist/count`)
       .then(res => res.json())
-      .then(data => setJoinCount(data.count))
+      .then(data => setJoinCount(872 + data.count))
       .catch(err => console.error('Error fetching waitlist count:', err));
   }, []);
 
