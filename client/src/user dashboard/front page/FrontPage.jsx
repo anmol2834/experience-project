@@ -230,15 +230,19 @@ const FrontPage = () => {
       </div>
         
       </div>
+
       <div className="homepage" ref={homePageRef}>
         <HomePage />
       </div>
+
       <div>
         <Footer homeRef={homePageRef} />
       </div>
+
       <div>
         <MenuBar />
       </div>
+      
     </div>
   );
 };

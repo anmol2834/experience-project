@@ -28,42 +28,42 @@ function ExperienceDetails() {
   const scrollPosition = location.state?.scrollPosition || 0;
 
   const sampleReviews = [
-    {
-      name: 'Towhidur Rahman',
-      avatar: 'https://via.placeholder.com/50',
-      rating: 5,
-      text: 'My first and only mala ordered on Etsy, and I’M beyond delighted! I requested a custom mala based on two stones I was called to invite together in this kind of creation. The fun and genuine joy I invite together in this kind of creation.',
-      date: '24-10-2022',
-      likes: 10,
-      dislikes: 2,
-    },
-    {
-      name: 'Jane Smith',
-      avatar: 'https://via.placeholder.com/50',
-      rating: 4,
-      text: 'Great experience overall. The service was excellent, though it felt a bit pricey for what was offered.',
-      date: '15-01-2023',
-      likes: 8,
-      dislikes: 3,
-    },
-    {
-      name: 'Alex Johnson',
-      avatar: 'https://via.placeholder.com/50',
-      rating: 5,
-      text: 'Absolutely fantastic! Exceeded all my expectations, and I’ll definitely be coming back.',
-      date: '10-02-2023',
-      likes: 15,
-      dislikes: 1,
-    },
-    {
-      name: 'Emily Davis',
-      avatar: 'https://via.placeholder.com/50',
-      rating: 3,
-      text: 'It was okay, but I expected more for the price.',
-      date: '05-03-2023',
-      likes: 5,
-      dislikes: 4,
-    },
+    //  {
+    //   name: 'Towhidur Rahman',
+    //   avatar: 'https://via.placeholder.com/50',
+    //   rating: 5,
+    //   text: 'My first and only mala ordered on Etsy, and I’M beyond delighted! I requested a custom mala based on two stones I was called to invite together in this kind of creation. The fun and genuine joy I invite together in this kind of creation.',
+    //   date: '24-10-2022',
+    //   likes: 10,
+    //   dislikes: 2,
+    // },
+    // {
+    //   name: 'Jane Smith',
+    //   avatar: 'https://via.placeholder.com/50',
+    //   rating: 4,
+    //   text: 'Great experience overall. The service was excellent, though it felt a bit pricey for what was offered.',
+    //   date: '15-01-2023',
+    //   likes: 8,
+    //   dislikes: 3,
+    // },
+    // {
+    //   name: 'Alex Johnson',
+    //   avatar: 'https://via.placeholder.com/50',
+    //   rating: 5,
+    //   text: 'Absolutely fantastic! Exceeded all my expectations, and I’ll definitely be coming back.',
+    //   date: '10-02-2023',
+    //   likes: 15,
+    //   dislikes: 1,
+    // },
+    // {
+    //   name: 'Emily Davis',
+    //   avatar: 'https://via.placeholder.com/50',
+    //   rating: 3,
+    //   text: 'It was okay, but I expected more for the price.',
+    //   date: '05-03-2023',
+    //   likes: 5,
+    //   dislikes: 4,
+    // }
   ];
 
   const [like, setLike] = useState(false);
@@ -417,13 +417,6 @@ function ExperienceDetails() {
           <p className="description">{product.description || 'No description available.'}</p>
 
           <div className="price-rating">
-            <div className="rating">
-              <span>
-                <FontAwesomeIcon icon={faStar} color='var(--glow-accent-warm)' />
-              </span>
-              <span>{product.rating || 'N/A'}</span>
-              <span className="reviews">(0 reviews)</span>
-            </div>
             <div className="price">
               <span className="amount">₹{product.price}</span>
               <span className="per-person">/person</span>
@@ -431,13 +424,7 @@ function ExperienceDetails() {
           </div>
 
           <div className="book-and-cart">
-            <button className="book-now" onClick={handleBookNow}>Book Now</button>
-            <button className="addCart" onClick={handleAddToCart}>
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
-                <path d="M252.31-100Q222-100 201-121q-21-21-21-51.31v-455.38Q180-658 201-679q21-21 51.31-21H330v-10q0-62.15 43.92-106.08Q417.85-860 480-860t106.08 43.92Q630-772.15 630-710v10h77.69Q738-700 759-679q21 21 21 51.31v455.38Q780-142 759-121q-21 21-51.31 21H252.31Zm0-60h455.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46v-455.38q0-4.62-3.85-8.46-3.84-3.85-8.46-3.85H630v90q0 12.77-8.62 21.38Q612.77-520 600-520t-21.38-8.62Q570-537.23 570-550v-90H390v90q0 12.77-8.62 21.38Q372.77-520 360-520t-21.38-8.62Q330-537.23 330-550v-90h-77.69q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v455.38q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85ZM390-700h180v-10q0-37.61-26.19-63.81Q517.62-800 480-800q-37.62 0-63.81 26.19Q390-747.61 390-710v10ZM240-160v-480 480Z" />
-              </svg>
-              <span>add to cart</span>
-            </button>
+            <button className="get-in-first-btn" onClick={() => navigate('/get-in-first')}>Get In First</button>
           </div>
         </div>
       </div>
@@ -476,85 +463,105 @@ function ExperienceDetails() {
         </div>
         <div className="reviews-summary">
           <div className="total-reviews">
-            <h3>10.0K</h3>
+            <h3>0</h3>
             <p>
-              Total Reviews <span className="growth">21% <span className="growth-icon">↗</span></span>
+              Total Reviews <span className="growth">0% <span className="growth-icon">↗</span></span>
             </p>
           </div>
           <div className="average-rating">
-            <h3>4.0 <span className="stars"><FontAwesomeIcon icon={faStar} /></span></h3>
+            <h3>0 <span className="stars"><FontAwesomeIcon icon={faStar} /></span></h3>
             <p>Average rating on this year</p>
           </div>
           <div className="rating-distribution">
             <div className="rating-bar">
               <span>5</span>
-              <div className="bar"><div className="fill" style={{ width: '80%' }}></div></div>
-              <span>2.0K</span>
+              <div className="bar"><div className="fill" style={{ width: '5%' }}></div></div>
+              <span>0</span>
             </div>
             <div className="rating-bar">
               <span>4</span>
-              <div className="bar"><div className="fill" style={{ width: '40%' }}></div></div>
-              <span>1.0K</span>
+              <div className="bar"><div className="fill" style={{ width: '5%' }}></div></div>
+              <span>0</span>
             </div>
             <div className="rating-bar">
               <span>3</span>
-              <div className="bar"><div className="fill" style={{ width: '20%' }}></div></div>
-              <span>500</span>
+              <div className="bar"><div className="fill" style={{ width: '5%' }}></div></div>
+              <span>0</span>
             </div>
             <div className="rating-bar">
               <span>2</span>
-              <div className="bar"><div className="fill" style={{ width: '10%' }}></div></div>
-              <span>200</span>
+              <div className="bar"><div className="fill" style={{ width: '5%' }}></div></div>
+              <span>0</span>
             </div>
             <div className="rating-bar">
               <span>1</span>
               <div className="bar"><div className="fill" style={{ width: '5%' }}></div></div>
-              <span>0K</span>
+              <span>0</span>
             </div>
           </div>
         </div>
-        <div className={`reviews-list ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
-          {currentReviews.map((review, localIndex) => {
-            const globalIndex = reviewPage * 3 + localIndex;
-            return (
-              <div key={globalIndex} className="review-item">
-                <div className="reviewer-info">
-                  <FontAwesomeIcon icon={faUserCircle} style={{ fontSize: '50px', width: '50px', height: '50px' }} />
-                  <div className="reviewer-details">
-                    <h4>{review.name}</h4>
+        
+        {sampleReviews.length === 0 ? (
+          <div className="no-reviews">
+            <div className="illustration">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <circle cx="50" cy="35" r="15" fill="#6a5acd" opacity="0.7"/>
+                <circle cx="50" cy="75" r="20" fill="#6a5acd" opacity="0.7"/>
+                <path d="M70,25c0-5.5-4.5-10-10-10s-10,4.5-10,10s4.5,10,10,10S70,30.5,70,25z" fill="white"/>
+                <path d="M65,35c0,2.8-2.2,5-5,5s-5-2.2-5-5" stroke="white" fill="none" strokeWidth="2"/>
+                <circle cx="60" cy="20" r="5" fill="#6a5acd" opacity="0.4"/>
+                <circle cx="40" cy="15" r="3" fill="#6a5acd" opacity="0.4"/>
+                <circle cx="70" cy="30" r="2" fill="#6a5acd" opacity="0.4"/>
+              </svg>
+            </div>
+            <p>There are no reviews on this experience yet.<br/>They will come soon if you book it!</p>
+          </div>
+        ) : (
+          <>
+            <div className={`reviews-list ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
+              {currentReviews.map((review, localIndex) => {
+                const globalIndex = reviewPage * 3 + localIndex;
+                return (
+                  <div key={globalIndex} className="review-item">
+                    <div className="reviewer-info">
+                      <FontAwesomeIcon icon={faUserCircle} style={{ fontSize: '50px', width: '50px', height: '50px' }} />
+                      <div className="reviewer-details">
+                        <h4>{review.name}</h4>
+                      </div>
+                      <div className="review-meta">
+                        <span className="review-rating">
+                          {Array.from({ length: 5 }, (_, i) => (
+                            <span key={i} className={i < review.rating ? 'star filled' : 'star'}>★</span>
+                          ))}
+                        </span>
+                        <span className="review-date">{review.date}</span>
+                      </div>
+                    </div>
+                    <p className="review-text">{review.text}</p>
+                    <div className="review-actions">
+                      <button className="action-btn like-btn" onClick={() => handleLikeReview(globalIndex)}>
+                        <FontAwesomeIcon icon={faThumbsUp} className={`like-icon ${reviewInteractions[globalIndex].userLiked ? 'active' : ''}`} />
+                        <span className="like-count">{reviewInteractions[globalIndex].likes}</span>
+                      </button>
+                      <button className="action-btn dislike-btn" onClick={() => handleDislikeReview(globalIndex)}>
+                        <FontAwesomeIcon icon={faThumbsDown} className={`dislike-icon ${reviewInteractions[globalIndex].userDisliked ? 'active' : ''}`} />
+                        <span className="dislike-count">{reviewInteractions[globalIndex].dislikes}</span>
+                      </button>
+                    </div>
                   </div>
-                  <div className="review-meta">
-                    <span className="review-rating">
-                      {Array.from({ length: 5 }, (_, i) => (
-                        <span key={i} className={i < review.rating ? 'star filled' : 'star'}>★</span>
-                      ))}
-                    </span>
-                    <span className="review-date">{review.date}</span>
-                  </div>
-                </div>
-                <p className="review-text">{review.text}</p>
-                <div className="review-actions">
-                  <button className="action-btn like-btn" onClick={() => handleLikeReview(globalIndex)}>
-                    <FontAwesomeIcon icon={faThumbsUp} className={`like-icon ${reviewInteractions[globalIndex].userLiked ? 'active' : ''}`} />
-                    <span className="like-count">{reviewInteractions[globalIndex].likes}</span>
-                  </button>
-                  <button className="action-btn dislike-btn" onClick={() => handleDislikeReview(globalIndex)}>
-                    <FontAwesomeIcon icon={faThumbsDown} className={`dislike-icon ${reviewInteractions[globalIndex].userDisliked ? 'active' : ''}`} />
-                    <span className="dislike-count">{reviewInteractions[globalIndex].dislikes}</span>
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="reviews-navigation">
-          {reviewPage > 0 && (
-            <button className="see-more-reviews" onClick={handlePrevPage}>Previous Reviews</button>
-          )}
-          {sampleReviews.length > 3 && (reviewPage + 1) * 3 < sampleReviews.length && (
-            <button className="see-more-reviews" onClick={handleNextPage}>See More Reviews</button>
-          )}
-        </div>
+                );
+              })}
+            </div>
+            <div className="reviews-navigation">
+              {reviewPage > 0 && (
+                <button className="see-more-reviews" onClick={handlePrevPage}>Previous Reviews</button>
+              )}
+              {sampleReviews.length > 3 && (reviewPage + 1) * 3 < sampleReviews.length && (
+                <button className="see-more-reviews" onClick={handleNextPage}>See More Reviews</button>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
