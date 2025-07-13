@@ -126,7 +126,7 @@ const FrontPage = () => {
     <div className="front-contain">
       <div className="headers">
         <div className="logo">
-          <img src={wandercall} alt="wandercall logo" />
+          <img src={wandercall} alt="wandercall logo" priority/>
         </div>
         <div className="app-info-menu">
           <span>Experience</span>
@@ -163,6 +163,7 @@ const FrontPage = () => {
               alt={`Slide ${index + 1}`}
               className="slide"
               style={getSlideStyle(index)}
+              priority
             />
           ))}
           <button className="explore" onClick={handleExploreClick}>
