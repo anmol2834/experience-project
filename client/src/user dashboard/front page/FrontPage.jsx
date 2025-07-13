@@ -11,7 +11,7 @@ import HomePage from '../home page/HomePage';
 import MenuBar from '../menu-bar/MenuBar';
 import Footer from '../../components/footer/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faFire, faUserClock } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faFire, faUserClock, faBell } from '@fortawesome/free-solid-svg-icons';
 
 const slides = [slide1, slide2, slide3, slide4];
 
@@ -41,7 +41,7 @@ const FrontPage = () => {
     fetchStats();
   }, []);
 
-   useEffect(() => {
+  useEffect(() => {
     // Text animation sequence
     const interval = setInterval(() => {
       setAnimationStep(prev => (prev + 1) % 4);
@@ -51,7 +51,7 @@ const FrontPage = () => {
   }, []);
 
   const handleJoinWaitingList = () => {
-    navigate('/get-in-first'); 
+    navigate('/get-in-first');
   };
 
 
@@ -126,7 +126,7 @@ const FrontPage = () => {
     <div className="front-contain">
       <div className="headers">
         <div className="logo">
-          <img src={wandercall} alt="wandercall logo" priority/>
+          <img src={wandercall} alt="wandercall logo" priority="true" />
         </div>
         <div className="app-info-menu">
           <span>Experience</span>
@@ -135,13 +135,19 @@ const FrontPage = () => {
         </div>
         <div className="header-btn">
           {token ? (
-            <span
-              style={{ display: 'block' }}
-              className="user-icon"
-              onClick={() => navigate('/account')}
-            >
-              <FontAwesomeIcon icon={faUser} />
-            </span>
+            <>
+              <span className='notification-icon' data-content={0} onClick={() => navigate('/notifications')}>
+                <FontAwesomeIcon icon={faBell} className="notification-icon" />
+              </span>
+
+              <span
+                style={{ display: 'block' }}
+                className="user-icon"
+                onClick={() => navigate('/account')}
+              >
+                <FontAwesomeIcon icon={faUser} />
+              </span>
+            </>
           ) : (
             <>
               <button className="sign-btn signin" onClick={() => navigate('/signin')}>
@@ -163,7 +169,7 @@ const FrontPage = () => {
               alt={`Slide ${index + 1}`}
               className="slide"
               style={getSlideStyle(index)}
-              priority
+              priority="true"
             />
           ))}
           <button className="explore" onClick={handleExploreClick}>
@@ -181,54 +187,54 @@ const FrontPage = () => {
         </div>
 
         <div className="web-info-container">
-        <div className="inner-web-info-container">
-          <div className="engagement-stats">
-            <div className="stat-item">
-              <FontAwesomeIcon icon={faUser} className="stat-icon" />
-              <div className="stat-value">{stats.users.toLocaleString()}+</div>
-              <div className="stat-label">Adventurers</div>
+          <div className="inner-web-info-container">
+            <div className="engagement-stats">
+              <div className="stat-item">
+                <FontAwesomeIcon icon={faUser} className="stat-icon" />
+                <div className="stat-value">{stats.users.toLocaleString()}+</div>
+                <div className="stat-label">Adventurers</div>
+              </div>
+
+              <div className="stat-divider"></div>
+
+              <div className="stat-item">
+                <FontAwesomeIcon icon={faUserClock} className="stat-icon" />
+                <div className="stat-value">{stats.waitingList.toLocaleString()}+</div>
+                <div className="stat-label">Waiting</div>
+              </div>
             </div>
-            
-            <div className="stat-divider"></div>
-            
-            <div className="stat-item">
-              <FontAwesomeIcon icon={faUserClock} className="stat-icon" />
-              <div className="stat-value">{stats.waitingList.toLocaleString()}+</div>
-              <div className="stat-label">Waiting</div>
+
+            <div className="callout-text">
+              {animationStep === 0 && (
+                <div className="text-slide active">
+                  <FontAwesomeIcon icon={faFire} className="pulse" />
+                  <span>Be among the first to experience</span>
+                </div>
+              )}
+              {animationStep === 1 && (
+                <div className="text-slide active">
+                  <span>Exclusive access for early joiners</span>
+                </div>
+              )}
+              {animationStep === 2 && (
+                <div className="text-slide active">
+                  <span>Limited spots available</span>
+                </div>
+              )}
+              {animationStep === 3 && (
+                <div className="text-slide active">
+                  <span>Join the movement today</span>
+                </div>
+              )}
             </div>
+
+            <button className="waiting-list-btn" onClick={handleJoinWaitingList}>
+              Join Waiting List
+              <div className="btn-arrow">→</div>
+            </button>
           </div>
-          
-          <div className="callout-text">
-            {animationStep === 0 && (
-              <div className="text-slide active">
-                <FontAwesomeIcon icon={faFire} className="pulse" />
-                <span>Be among the first to experience</span>
-              </div>
-            )}
-            {animationStep === 1 && (
-              <div className="text-slide active">
-                <span>Exclusive access for early joiners</span>
-              </div>
-            )}
-            {animationStep === 2 && (
-              <div className="text-slide active">
-                <span>Limited spots available</span>
-              </div>
-            )}
-            {animationStep === 3 && (
-              <div className="text-slide active">
-                <span>Join the movement today</span>
-              </div>
-            )}
-          </div>
-          
-          <button className="waiting-list-btn" onClick={handleJoinWaitingList}>
-            Join Waiting List
-            <div className="btn-arrow">→</div>
-          </button>
         </div>
-      </div>
-        
+
       </div>
 
       <div className="homepage" ref={homePageRef}>
@@ -242,7 +248,7 @@ const FrontPage = () => {
       <div>
         <MenuBar />
       </div>
-      
+
     </div>
   );
 };

@@ -225,11 +225,45 @@
   cursor: pointer;
   z-index: 5;
   transition: 0.5s;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  color: var(--primary-font-color);
+  margin-left: 8px;
+}
+
+.notification-icon{
+  position: relative;
+  cursor: pointer;
+  z-index: 5;
+  transition: 0.5s;
+  font-size: 1.5rem;
+  margin-right: 8px;
   color: var(--primary-font-color);
 }
 
+.notification-icon::after {
+  content: attr(data-content);
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 18px;
+  height: 18px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: red;
+  border-radius: 50%;
+}
+
 .user-icon:hover {
+  transition: 0.5s;
+  transform: scale(1.2);
+  color: var(--bg-color);
+  text-shadow: 0 0 10px var(--bg-color);
+}
+
+.notification-icon:hover {
   transition: 0.5s;
   transform: scale(1.2);
   color: var(--bg-color);
@@ -520,6 +554,14 @@ ul li:nth-child(5) {
 
   .web-info-container {
     display: block;
+  }
+
+  .user-icon {
+    cursor: none;
+  }
+
+  .notification-icon {
+    cursor: none;
   }
 
 }

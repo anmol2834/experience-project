@@ -93,10 +93,10 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
         <div className="heading">
           <div>
             <h3>{title}</h3>
-            <div className="star-ratings">
+            {/* <div className="star-ratings">
               <span>{rating}</span>
               <FontAwesomeIcon icon={faStar} className="star-icon" />
-            </div>
+            </div> */}
           </div>
           <div className="place_title">
             <FontAwesomeIcon icon={faLocationDot} className="location-icon" />
