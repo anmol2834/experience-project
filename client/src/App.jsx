@@ -27,6 +27,7 @@ import TermsAndConditions from './user dashboard/terms and conditions/TermsAndCo
 import GetInFirst from './user dashboard/get in first/GetInFirst';
 import Community from './user dashboard/community/Community';
 import NotificationsPage from './user dashboard/notification/NotificationsPage';
+import NotFound from './components/not found page/NotFound';
 
 function App() {
   // Prevent zooming
@@ -119,7 +120,7 @@ function App() {
                 <Route path='/termsAndConditions' element={<TermsAndConditions/>} />
                 <Route path="/get-in-first" element={<GetInFirst/>} />
                 <Route path="/community" element={<Community/>} />
-                <Route path="*" element={<div className="not-found">Page Not Found</div>} />
+                <Route path="*" element={<NotFound/>} />
                 <Route path="/notifications" element={<NotificationsPage/>} />
               </Routes>
             </div>

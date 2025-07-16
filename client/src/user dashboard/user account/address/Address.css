@@ -73,6 +73,7 @@
   border-radius: 10px;
   background: rgba(15, 52, 96, 0.3);
   color: var(--primary-font-color);
+  background: var(--bg-secondary);
 }
 
 .new-address-form .state-selector:focus {

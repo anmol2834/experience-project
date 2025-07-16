@@ -4,6 +4,10 @@ import slide1 from '../../assets/slide1.jpg';
 import slide2 from '../../assets/slide2.jpg';
 import slide3 from '../../assets/slide3.jpg';
 import slide4 from '../../assets/slide4.jpg';
+import slide5 from '../../assets/slide5.png';
+import slide6 from '../../assets/slide6.png';
+import slide7 from '../../assets/slide7.png';
+import slide8 from '../../assets/slide8.png';
 import wandercall from '../../assets/wandercall-logo1.svg';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -12,8 +16,6 @@ import MenuBar from '../menu-bar/MenuBar';
 import Footer from '../../components/footer/Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faFire, faUserClock, faBell } from '@fortawesome/free-solid-svg-icons';
-
-const slides = [slide1, slide2, slide3, slide4];
 
 const FrontPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,6 +31,7 @@ const FrontPage = () => {
   });
 
   const [animationStep, setAnimationStep] = useState(0);
+  const [slides, setSlides] = useState(window.innerWidth < 900 ? [slide5, slide6, slide7, slide8] : [slide1, slide2, slide3, slide4]);
 
   useEffect(() => {
     const fetchStats = () => {
@@ -54,7 +57,6 @@ const FrontPage = () => {
     navigate('/get-in-first');
   };
 
-
   useEffect(() => {
     const scrollToProductId = location.state?.scrollToProductId;
     const fallbackScrollPosition = location.state?.fallbackScrollPosition || 0;
@@ -79,6 +81,18 @@ const FrontPage = () => {
   }, [location, navigate]);
 
   useEffect(() => {
+    const handleResize = () => {
+      setSlides(window.innerWidth < 900 ? [slide5, slide6, slide7, slide8] : [slide1, slide2, slide3, slide4]);
+      setCurrentIndex(0); // Reset index to avoid out-of-bounds errors
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initial check
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
     const preloadImages = slides.map((slide) => {
       return new Promise((resolve) => {
         const img = new Image();
@@ -90,7 +104,7 @@ const FrontPage = () => {
     Promise.all(preloadImages).then(() => {
       setIsLoading(false);
     });
-  }, []);
+  }, [slides]);
 
   useEffect(() => {
     if (!isLoading) {
@@ -100,7 +114,7 @@ const FrontPage = () => {
 
       return () => clearInterval(interval);
     }
-  }, [isLoading]);
+  }, [isLoading, slides]);
 
   const getSlideStyle = (index) => {
     const offset = (index - currentIndex + slides.length) % slides.length;

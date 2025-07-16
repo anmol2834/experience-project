@@ -1,0 +1,110 @@
+/* NotFound.css */
+.not-found-page-container {
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+.not-found-content {
+  text-align: center;
+  max-width: 600px;
+  padding: 40px;
+  background-color: var(--bg-primary);
+  border-radius: 10px;
+  z-index: 10;
+  box-shadow: 0 5px 15px rgba(169, 169, 169, 0.175);
+}
+
+.not-found-code {
+  font-size: 8rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--secondary-color);
+  margin-bottom: 20px;
+  text-shadow: 3px 3px 0 #f8f9fa, 6px 6px 0 rgba(0, 0, 0, 0.05);
+}
+
+.not-found-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0 0 15px;
+  color: white;
+}
+
+.not-found-message {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #dedede;
+  margin-bottom: 30px;
+}
+
+.not-found-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(13, 110, 253, 0.2);
+}
+
+.not-found-button:hover {
+  background-color: #0b5ed7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(13, 110, 253, 0.3);
+}
+
+.not-found-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(13, 110, 253, 0.2);
+}
+
+.arrow {
+  font-size: 1.2rem;
+  margin-right: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .not-found-code {
+    font-size: 6rem;
+  }
+  
+  .not-found-title {
+    font-size: 2rem;
+  }
+  
+  .not-found-message {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .not-found-content {
+    padding: 30px 20px;
+  }
+  
+  .not-found-code {
+    font-size: 5rem;
+  }
+  
+  .not-found-title {
+    font-size: 1.7rem;
+  }
+  
+  .not-found-button {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+}
