@@ -18,7 +18,7 @@ import { fileURLToPath } from 'url';
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://wandercall.onrender.com'],
+  origin: ['http://localhost:3000', 'https://wandercall.onrender.com', 'https://wandercall.com'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
 }));
