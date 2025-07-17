@@ -6,22 +6,17 @@
    </url>
    <url>
      <loc>https://wandercall.com/aboutus</loc>
-     <priority>0.8</priority>
    </url>
    <url>
-     <loc>https://wandercall.com//termsAndConditions</loc>
-     <priority>0.8</priority>
+     <loc>https://wandercall.com/termsAndConditions</loc>
    </url>
    <url>
      <loc>https://wandercall.com/get-in-first</loc>
-     <priority>0.8</priority>
-   </url>
-   <url>
-     <loc>https://wandercall.com/signin</loc>
-     <priority>0.8</priority>
    </url>
    <url>
      <loc>https://wandercall.com/signup</loc>
-     <priority>0.8</priority>
+   </url>
+   <url>
+     <loc>https://wandercall.com/signin</loc>
    </url>
 </urlset>
