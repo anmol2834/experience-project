@@ -141,10 +141,25 @@ app.post('/register', async (req, res) => {
     await user.save();
 
     const mailOptions = {
-      from: 'From Gabriyol',
+      from: 'Wandercall Team',
       to: email,
       subject: 'Email Verification',
-      text: `Your verification code is: ${verificationCode}`,
+      html: `
+    <div style="max-width: 600px; margin: auto; padding: 20px; font-family: Arial, sans-serif; background: #111; color: #fff; border-radius: 10px;">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <img src="https://res.cloudinary.com/dxkjxauun/image/upload/v1752848182/wandercall-logo2_wqetq9.png" alt="wandercall" style="height: 50px; fileter : invert(100%);">
+      </div>
+      <h2 style="text-align: center;">Hi ${user.firstname || ''},</h2>
+      <p style="font-size: 16px; text-align: center;">Use the code below to verify your email:</p>
+      <div style="font-size: 32px; font-weight: bold; text-align: center; background: #333; padding: 10px 0; border-radius: 8px; letter-spacing: 2px;">
+        ${verificationCode}
+      </div>
+      <p style="text-align: center; margin-top: 20px; font-size: 14px; color: #bbb;">This code will expire in 15 minutes. If you did not request this, please ignore this email.</p>
+      <div style="text-align: center; margin-top: 30px;">
+        <a href="https://wandercall.com" style="color: #6c63ff; text-decoration: none;">Visit wandercall</a>
+      </div>
+    </div>
+  `,
     };
 
     transporter.sendMail(mailOptions, (error) => {
@@ -316,10 +331,25 @@ app.post('/resend', async (req, res) => {
     await user.save();
 
     const mailOptions = {
-      from: 'anmolsinha4321@gmail.com',
+      from: 'Wandercall Team',
       to: email,
-      subject: 'Email Verification',
-      text: `Your new verification code is: ${verificationCode}`,
+      subject: 'Resend Verification Code',
+      html: `
+    <div style="max-width: 600px; margin: auto; padding: 20px; font-family: Arial, sans-serif; background: #111; color: #fff; border-radius: 10px;">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <img src="https://res.cloudinary.com/dxkjxauun/image/upload/v1752848182/wandercall-logo2_wqetq9.png" alt="wandercall" style="height: 50px; fileter : invert(100%);">
+      </div>
+      <h2 style="text-align: center;">Hi ${user.firstname || ''},</h2>
+      <p style="font-size: 16px; text-align: center;">Use the code below to verify your email:</p>
+      <div style="font-size: 32px; font-weight: bold; text-align: center; background: #333; padding: 10px 0; border-radius: 8px; letter-spacing: 2px;">
+        ${verificationCode}
+      </div>
+      <p style="text-align: center; margin-top: 20px; font-size: 14px; color: #bbb;">This code will expire in 15 minutes. If you did not request this, please ignore this email.</p>
+      <div style="text-align: center; margin-top: 30px;">
+        <a href="https://wandercall.com" style="color: #6c63ff; text-decoration: none;">Visit wandercall</a>
+      </div>
+    </div>
+  `,
     };
 
     transporter.sendMail(mailOptions, (error) => {
@@ -372,10 +402,27 @@ app.post('/send-otp', verifyToken, async (req, res) => {
     await user.save();
 
     const mailOptions = {
-      from: 'anmolsinha4321@gmail.com',
+      from: 'Wandercall Team',
       to: user.email,
       subject: 'Password Change OTP',
-      text: `Your OTP is: ${otp}`,
+      html: `
+    <div style="max-width: 600px; margin: auto; padding: 20px; font-family: Arial, sans-serif; background: #0d0d0d; color: #f2f2f2; border-radius: 10px;">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <img src="https://res.cloudinary.com/dxkjxauun/image/upload/v1752848182/wandercall-logo2_wqetq9.png" alt="Wandercall" style="height: 50px; fileter : invert(100%);">
+      </div>
+      <h2 style="text-align: center; color: #00aaff;">Password Change Request</h2>
+      <p style="font-size: 16px; text-align: center;">We received a request to change your password. Use the OTP below to continue:</p>
+      <div style="font-size: 32px; font-weight: bold; text-align: center; background: #1a1a1a; padding: 12px 0; border-radius: 8px; letter-spacing: 2px; margin: 20px 0;">
+        ${otp}
+      </div>
+      <p style="text-align: center; font-size: 14px; color: #bbbbbb;">
+        This OTP is valid for the next 10 minutes. If you didn't request a password change, please ignore this email.
+      </p>
+      <div style="text-align: center; margin-top: 30px;">
+        <a href="https://wandercall.com" style="color: #00aaff; text-decoration: none; font-size: 14px;">Visit Wandercall</a>
+      </div>
+    </div>
+  `,
     };
 
     transporter.sendMail(mailOptions, (error) => {
@@ -414,10 +461,27 @@ app.post('/resend-otp', verifyToken, async (req, res) => {
     await user.save();
 
     const mailOptions = {
-      from: 'anmolsinha4321@gmail.com',
+      from: 'Wandercall Team',
       to: user.email,
       subject: 'Password Change OTP',
-      text: `Your new OTP is: ${otp}`,
+      html: `
+    <div style="max-width: 600px; margin: auto; padding: 20px; font-family: Arial, sans-serif; background: #0d0d0d; color: #f2f2f2; border-radius: 10px;">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <img src="https://res.cloudinary.com/dxkjxauun/image/upload/v1752848182/wandercall-logo2_wqetq9.png" alt="Wandercall" style="height: 50px; fileter : invert(100%);">
+      </div>
+      <h2 style="text-align: center; color: #00aaff;">New OTP Generated</h2>
+      <p style="font-size: 16px; text-align: center;">As requested, here’s your new OTP to complete your password change:</p>
+      <div style="font-size: 32px; font-weight: bold; text-align: center; background: #1a1a1a; padding: 12px 0; border-radius: 8px; letter-spacing: 2px; margin: 20px 0;">
+        ${otp}
+      </div>
+      <p style="text-align: center; font-size: 14px; color: #bbbbbb;">
+        This OTP is valid for the next 10 minutes. If you didn't request a new OTP, you can safely ignore this email.
+      </p>
+      <div style="text-align: center; margin-top: 30px;">
+        <a href="https://wandercall.com" style="color: #00aaff; text-decoration: none; font-size: 14px;">Visit Wandercall</a>
+      </div>
+    </div>
+  `,
     };
 
     transporter.sendMail(mailOptions, (error) => {
@@ -529,11 +593,28 @@ app.post('/send-reset-otp', async (req, res) => {
     user.otpExpiration = expiration;
     await user.save();
 
-    const mailOptions = {
-      from: 'anmolsinha4321@gmail.com',
+     const mailOptions = {
+      from: 'Wandercall Team',
       to: user.email,
       subject: 'Password Reset OTP',
-      text: `Your OTP for password reset is: ${otp}`,
+      html: `
+    <div style="max-width:600px; margin:auto; padding:20px; font-family:Arial,sans-serif; background:#0d0d0d; color:#f2f2f2; border-radius:10px;">
+      <div style="text-align:center; margin-bottom:20px;">
+        <img src="https://res.cloudinary.com/dxkjxauun/image/upload/v1752848182/wandercall-logo2_wqetq9.png" alt="Wandercall" style="height:50px; fileter : invert(100%);">
+      </div>
+      <h2 style="text-align:center; color:#00aaff;">Password Reset OTP</h2>
+      <p style="font-size:16px; text-align:center;">You requested to reset your password — here’s your OTP:</p>
+      <div style="font-size:32px; font-weight:bold; text-align:center; background:#1a1a1a; padding:12px 0; border-radius:8px; letter-spacing:2px; margin:20px 0;">
+        ${otp}
+      </div>
+      <p style="text-align:center; font-size:14px; color:#bbbbbb;">
+        This OTP is valid for 10 minutes. If you didn’t request a password reset, please ignore this email.
+      </p>
+      <div style="text-align:center; margin-top:30px;">
+        <a href="https://wandercall.com" style="color:#00aaff; text-decoration:none; font-size:14px;">Visit Wandercall</a>
+      </div>
+    </div>
+  `,
     };
 
     transporter.sendMail(mailOptions, (error) => {
@@ -593,10 +674,27 @@ app.post('/send-verification-otp', async (req, res) => {
     await user.save();
 
     const mailOptions = {
-      from: 'anmolsinha4321@gmail.com',
+      from: 'Wandercall Team',
       to: user.email,
       subject: 'Email Verification OTP',
-      text: `Your OTP for email verification is: ${otp}`,
+      html: `
+    <div style="max-width:600px; margin:auto; padding:20px; font-family:Arial,sans-serif; background:#0d0d0d; color:#f2f2f2; border-radius:10px; fileter : invert(100%);">
+      <div style="text-align:center; margin-bottom:20px;">
+        <img src="https://res.cloudinary.com/dxkjxauun/image/upload/v1752848182/wandercall-logo2_wqetq9.png" alt="Wandercall" style="height:50px;">
+      </div>
+      <h2 style="text-align:center; color:#00aaff;">Email Verification OTP</h2>
+      <p style="font-size:16px; text-align:center;">To verify your email address, please use the following OTP:</p>
+      <div style="font-size:32px; font-weight:bold; text-align:center; background:#1a1a1a; padding:12px 0; border-radius:8px; letter-spacing:2px; margin:20px 0;">
+        ${otp}
+      </div>
+      <p style="text-align:center; font-size:14px; color:#bbbbbb;">
+        This OTP is valid for 10 minutes. If you didn’t request this, please ignore this email.
+      </p>
+      <div style="text-align:center; margin-top:30px;">
+        <a href="https://wandercall.com" style="color:#00aaff; text-decoration:none; font-size:14px;">Visit Wandercall</a>
+      </div>
+    </div>
+  `,
     };
 
     transporter.sendMail(mailOptions, (error) => {
