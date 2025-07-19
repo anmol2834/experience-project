@@ -1,6 +1,6 @@
 import './footer.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faTwitter, faFacebook, faYoutube, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faTwitter, faFacebook, faYoutube, faLinkedin, faReddit } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope, faPhone, faMapMarkerAlt, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -58,14 +58,14 @@ function Footer({ homeRef }) {
         <div className='footer-section social'>
           <h2>Follow Us</h2>
           <div className='social-icons'>
-            <a href='https://www.instagram.com/sinha_anmol_/' target='_blank' rel='noopener noreferrer'>
+            <a href='https://www.instagram.com/wandercallofficial/' target='_blank' rel='noopener noreferrer'>
               <FontAwesomeIcon icon={faInstagram} />  
             </a>
             <a href='https://twitter.com' target='_blank' rel='noopener noreferrer'>
               <FontAwesomeIcon icon={faTwitter} />
             </a>
-            <a href='https://facebook.com' target='_blank' rel='noopener noreferrer'>
-              <FontAwesomeIcon icon={faFacebook} />
+            <a href='https://www.reddit.com/r/SuratNightoutMeetups/' target='_blank' rel='noopener noreferrer'>
+              <FontAwesomeIcon icon={faReddit} />
             </a>
             <a href='https://youtube.com' target='_blank' rel='noopener noreferrer'>
               <FontAwesomeIcon icon={faYoutube} />
