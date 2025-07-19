@@ -186,4 +186,9 @@
   .footer-section.social .social-icons a {
     font-size: 1.2rem;
   }
+
+  .footer-section.newsletter button {
+    cursor: none;
+  }
+
 }

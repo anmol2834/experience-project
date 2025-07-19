@@ -1159,6 +1159,19 @@
   .confetti-message .subtitle {
     font-size: 1.5rem;
   }
+
+  .back-button {
+    cursor: none;
+  }
+
+  .next-button {
+    cursor: none;
+  }
+
+  .social-button {
+    cursor: none;
+  }
+
 }
 
 @media (max-width: 480px) {
@@ -1210,4 +1223,17 @@
   .confetti-message .subtitle {
     font-size: 1.2rem;
   }
+
+  .back-button {
+    cursor: none;
+  }
+
+  .next-button {
+    cursor: none;
+  }
+
+  .social-button {
+    cursor: none;
+  }
+
 }

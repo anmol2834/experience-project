@@ -156,7 +156,7 @@
 }
 
 .aboutus-card-title {
- 
+
   font-size: 1.5rem;
   color: var(--primary-font-color);
   margin: 0 0 0.8rem 0;
@@ -527,7 +527,13 @@
     margin-bottom: 2.5rem;
   }
 
+  .aboutus-back-btn {
+    cursor: none;
+  }
 
+  .aboutus-contact-btn {
+    cursor: none;
+  }
 
   .aboutus-experience-grid {
     grid-template-columns: 1fr;

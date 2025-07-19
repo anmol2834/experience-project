@@ -608,4 +608,21 @@
     width: 150px;
     height: 150px;
   }
+
+  .explore-button {
+    cursor: none;
+  }
+
+  .booking-actions button {
+    cursor: none;
+  }
+
+  .close-modal {
+    cursor: none;
+  }
+
+  .modal-actions button {
+    cursor: none;
+  }
+
 }

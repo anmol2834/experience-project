@@ -65,7 +65,8 @@
 }
 
 .notif-header-spacer {
-  width: 40px; /* Same as back button for symmetry */
+  width: 40px;
+  /* Same as back button for symmetry */
 }
 
 /* Content wrapper */
@@ -258,18 +259,28 @@
   0% {
     box-shadow: 0 0 0 0 rgba(255, 0, 255, 0.4);
   }
+
   70% {
     box-shadow: 0 0 0 8px rgba(255, 0, 255, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(255, 0, 255, 0);
   }
 }
 
 @keyframes notif-blink {
-  0% { opacity: 1; }
-  50% { opacity: 0.7; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 /* Scrollbar styling */
@@ -297,68 +308,68 @@
   .notif-page-container {
     padding: 25px;
   }
-  
+
   .notif-header-section {
     padding: 20px;
     margin: -25px -25px 25px -25px;
   }
-  
+
   .notif-main-heading {
     font-size: 2.2rem;
   }
-  
+
   .notif-back-button {
     width: 50px;
     height: 50px;
   }
-  
+
   .notif-back-button svg {
     width: 28px;
     height: 28px;
   }
-  
+
   .notif-cards-grid {
     gap: 20px;
   }
-  
+
   .notif-card-item {
     padding: 22px;
   }
-  
+
   .notif-icon-container {
     width: 60px;
     height: 60px;
     margin-right: 20px;
   }
-  
+
   .notif-icon-circle {
     width: 50px;
     height: 50px;
     font-size: 1.8rem;
   }
-  
+
   .notif-card-title {
     font-size: 1.25rem;
   }
-  
+
   .notif-card-message {
     font-size: 1rem;
   }
-  
+
   .notif-empty-state {
     padding: 60px 30px;
   }
-  
+
   .notif-empty-illustration {
     width: 200px;
     height: 200px;
     margin-bottom: 30px;
   }
-  
+
   .notif-empty-title {
     font-size: 2rem;
   }
-  
+
   .notif-empty-text {
     font-size: 1.1rem;
     max-width: 400px;
@@ -370,23 +381,32 @@
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .notif-icon-container {
     margin-right: 0;
     margin-bottom: 15px;
   }
-  
+
   .notif-card-header {
     flex-wrap: wrap;
   }
-  
+
   .notif-unread-badge {
     margin-left: 0;
     margin-top: 8px;
     align-self: flex-start;
   }
-  
+
   .notif-card-title {
     width: 100%;
   }
+
+  .notif-back-button {
+    cursor: none;
+  }
+
+  .notif-card-item {
+    cursor: none;
+  }
+
 }

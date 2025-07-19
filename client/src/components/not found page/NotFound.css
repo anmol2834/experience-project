@@ -106,5 +106,6 @@
   .not-found-button {
     padding: 10px 20px;
     font-size: 0.95rem;
+    cursor: none;
   }
 }

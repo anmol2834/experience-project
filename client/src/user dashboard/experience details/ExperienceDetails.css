@@ -835,6 +835,48 @@
     font-size: 1rem;
   }
 
+  .back-btn {
+    cursor: none;
+  }
+
+  .cart-icon {
+    cursor: none;
+  }
+
+  .wishlist-icon {
+    cursor: none;
+  }
+
+  .thumb {
+    cursor: none;
+  }
+
+  .action-btn {
+    cursor: none;
+  }
+
+  .see-more-reviews {
+    cursor: none;
+  }
+
+  .locate-and-share-icon {
+    cursor: none;
+  }
+
+  .get-in-first-btn {
+    cursor: none;
+  }
+
+  .book-now,
+  .addCart {
+    cursor: none;
+  }
+
+  .map-close-btn,
+  .map-toggle-btn {
+    cursor: none;
+  }
+
 }
 
 @media (max-width: 480px) {

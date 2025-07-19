@@ -192,4 +192,17 @@
     .faq-section h2 {
         color: var(--primary-font-color);
     }
+
+    .contact-card {
+        cursor: none;
+    }
+
+    .faq-item {
+        cursor: none;
+    }
+
+    .support-form button {
+        cursor: none;
+    }
+
 }

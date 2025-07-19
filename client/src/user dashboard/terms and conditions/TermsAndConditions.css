@@ -498,4 +498,13 @@
   .contact-info {
     padding: 1rem;
   }
+
+  .back-to-dashboard {
+    cursor: none;
+  }
+
+  .acceptance-box {
+    cursor: none;
+  }
+
 }

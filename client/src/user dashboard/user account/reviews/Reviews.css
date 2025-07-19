@@ -806,4 +806,29 @@
     .form-modal-hero h2 {
         font-size: 1.8rem;
     }
+
+    .reviews-tabs button {
+        cursor: none;
+    }
+
+    .see-review-btn {
+        cursor: none;
+    }
+
+    .write-review-btn {
+        cursor: none;
+    }
+
+    .close-modal {
+        cursor: none;
+    }
+
+    .submit-review-btn {
+        cursor: none;
+    }
+
+    .explore-button {
+        cursor: none;
+    }
+
 }

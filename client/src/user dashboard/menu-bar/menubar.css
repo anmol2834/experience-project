@@ -214,7 +214,7 @@
 .special-button span {
   position: relative;
   z-index: 2;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Get In First Button */
@@ -229,20 +229,26 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
   transition: 0.5s;
   animation: shine 3s infinite;
 }
 
 @keyframes shine {
-  0% { left: -100%; }
-  20% { left: 100%; }
-  100% { left: 100%; }
+  0% {
+    left: -100%;
+  }
+
+  20% {
+    left: 100%;
+  }
+
+  100% {
+    left: 100%;
+  }
 }
 
 /* Premium Card Button */
@@ -257,16 +263,21 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 20%),
-    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 20%);
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 20%),
+    radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 20%);
   background-size: 200% 200%;
   animation: pulse 4s infinite alternate;
 }
 
 @keyframes pulse {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 100% 100%; }
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 100% 100%;
+  }
 }
 
 /* Become Provider Button */
@@ -281,21 +292,26 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
-    linear-gradient(45deg, 
-      transparent 25%, 
-      rgba(255,255,255,0.1) 25%, 
-      rgba(255,255,255,0.1) 50%, 
-      transparent 50%, 
-      transparent 75%, 
-      rgba(255,255,255,0.1) 75%);
+  background:
+    linear-gradient(45deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.1) 25%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 50%,
+      transparent 75%,
+      rgba(255, 255, 255, 0.1) 75%);
   background-size: 50px 50px;
   animation: stripes 2s linear infinite;
 }
 
 @keyframes stripes {
-  0% { background-position: 0 0; }
-  100% { background-position: 50px 50px; }
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 50px 50px;
+  }
 }
 
 /* Hover effects for all buttons */
@@ -322,7 +338,7 @@
   .desktop-menu {
     display: none;
   }
-  
+
   .mobile-menu-bar {
     display: block;
     width: 100%;
@@ -331,7 +347,7 @@
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   }
-  
+
   .mobile-top-bar {
     display: flex;
     justify-content: space-between;
@@ -339,19 +355,19 @@
     height: 70px;
     padding: 0 5%;
   }
-  
+
   .hamburger-icon {
     font-size: 1.8rem;
     color: var(--primary-font-color);
     z-index: 300;
-    cursor: pointer;
+    cursor: none;
     transition: all 0.3s ease;
   }
-  
+
   .hamburger-icon.open {
     color: var(--glow-accent-cool);
   }
-  
+
   .mobile-menu-items {
     position: fixed;
     top: 0;
@@ -368,11 +384,11 @@
     padding-top: 70px;
     overflow-y: auto;
   }
-  
+
   .mobile-menu-items.show {
     left: 0;
   }
-  
+
   .mobile-menu-header {
     width: 100%;
     padding: 20px 5% 15px;
@@ -380,30 +396,30 @@
     margin-bottom: 15px;
     text-align: center;
   }
-  
+
   .mobile-logo {
     font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: -0.5px;
-    cursor: pointer;
+    cursor: none;
     display: inline-block;
   }
-  
+
   .logo-part-1 {
     color: var(--primary-font-color);
   }
-  
+
   .logo-part-2 {
     color: var(--glow-accent-cool);
   }
-  
+
   .mobile-menu-content {
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
     padding: 0 20px;
   }
-  
+
   .mobile-menu-grid {
     width: 100%;
     display: grid;
@@ -411,7 +427,7 @@
     gap: 15px;
     margin-bottom: 20px;
   }
-  
+
   .mobile-menu-item {
     display: flex;
     flex-direction: column;
@@ -425,20 +441,20 @@
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
-    cursor: pointer;
+    cursor: none;
   }
-  
+
   .mobile-menu-item:hover {
     background: rgba(255, 255, 255, 0.1);
     transform: translateY(-5px);
     box-shadow: 0 6px 25px rgba(106, 90, 205, 0.3);
   }
-  
+
   .menu-icon {
     font-size: 1.8rem;
     color: var(--glow-accent-cool);
   }
-  
+
   .menu-label {
     display: block;
     font-size: 0.9rem;
@@ -446,25 +462,25 @@
     letter-spacing: 0.5px;
     color: var(--shade-primary-color);
   }
-  
+
   .mobile-weather {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 15px 0;
   }
-  
+
   .temperature {
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--glow-accent-cool);
   }
-  
+
   .weather-condition {
     font-size: 1rem;
     color: var(--shade-primary-color);
   }
-  
+
   .mobile-menu-links {
     width: 100%;
     display: flex;
@@ -475,7 +491,7 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     margin-bottom: 20px;
   }
-  
+
   .mobile-menu-links span {
     width: 100%;
     padding: 16px 20px;
@@ -484,13 +500,13 @@
     color: var(--shade-primary-color);
     border-radius: 12px;
     transition: all 0.2s ease;
-    cursor: pointer;
+    cursor: none;
   }
-  
+
   .mobile-menu-links span:not(.mobile-logout-btn):hover {
     background: rgba(255, 255, 255, 0.05);
   }
-  
+
   .mobile-logout-btn {
     background: rgba(255, 255, 255, 0.1);
     color: #ff6b6b;
@@ -498,32 +514,32 @@
     margin-top: 10px;
     border: 1px solid rgba(255, 107, 107, 0.3);
   }
-  
+
   .mobile-logout-btn:hover {
     background: rgba(255, 107, 107, 0.15);
   }
-  
+
   .search-bar-container {
     position: relative;
     width: 50px;
     transition: all 0.3s ease;
   }
-  
+
   .search-bar-container.expanded {
     width: 200px;
   }
-  
+
   .search-icon {
     font-size: 1.4rem;
     color: var(--primary-font-color);
-    cursor: pointer;
+    cursor: none;
     transition: all 0.3s ease;
   }
-  
+
   .search-icon:hover {
     color: var(--glow-accent-cool);
   }
-  
+
   .search-bar {
     width: 100%;
     height: 45px;
@@ -535,12 +551,12 @@
     font-size: 1rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
-  
+
   .search-bar:focus {
     border-color: var(--glow-accent-cool);
     background: rgba(15, 52, 96, 0.2);
   }
-  
+
   .search-close {
     position: absolute;
     right: 15px;
@@ -548,14 +564,14 @@
     transform: translateY(-50%);
     font-size: 1.2rem;
     color: var(--shade-primary-color);
-    cursor: pointer;
+    cursor: none;
     transition: all 0.3s ease;
   }
-  
+
   .search-close:hover {
     color: var(--glow-accent-cool);
   }
-  
+
   .user-avatar {
     width: 42px;
     height: 42px;
@@ -565,15 +581,15 @@
     border-radius: 50%;
     background: linear-gradient(135deg, var(--glow-primary) 0%, var(--glow-accent-cool) 100%);
     font-size: 1.2rem;
-    cursor: pointer;
+    cursor: none;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(106, 90, 205, 0.3);
   }
-  
+
   .user-avatar:hover {
     transform: scale(1.05);
   }
-  
+
   .mobile-footer {
     width: 100%;
     padding: 25px 0 15px;
@@ -582,7 +598,7 @@
     font-size: 0.8rem;
     color: var(--shade-primary-color);
   }
-  
+
   .social-links {
     display: flex;
     justify-content: center;
@@ -590,20 +606,41 @@
     margin: 15px 0;
     font-size: 0.9rem;
   }
-  
+
   .social-links span {
-    cursor: pointer;
+    cursor: none;
     transition: all 0.3s ease;
   }
-  
+
   .social-links span:hover {
     color: var(--glow-accent-cool);
   }
-  
+
   .promo-text {
     margin-top: 15px;
     font-style: italic;
   }
+
+  .menu-icon-item {
+    cursor: none;
+  }
+
+  .user-icon-container {
+    cursor: none;
+  }
+
+  .admin-links span {
+    cursor: none;
+  }
+
+  .social-links span {
+    cursor: none;
+  }
+
+  .special-button {
+    cursor: none;
+  }
+
 }
 
 /* Responsive adjustments */
@@ -611,7 +648,7 @@
   .desktop-special-button {
     display: none;
   }
-  
+
   .mobile-special-buttons {
     display: flex;
   }
