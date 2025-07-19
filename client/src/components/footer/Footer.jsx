@@ -22,7 +22,7 @@ function Footer({ homeRef }) {
         <div className='footer-section about'>
           <h2>About Us</h2>
           <p>
-            We provide unique experiences like skydiving, bungee jumping, crafting, survival experiences, and more. Join us for unforgettable memories!
+            Wandercall is a new way to live — a space where real stories, shared passions, and human connections come alive. We craft unforgettable moments with people you’ve never met, but will never forget.
           </p>
           <div className='contact'>
             <span>
@@ -61,7 +61,7 @@ function Footer({ homeRef }) {
             <a href='https://www.instagram.com/wandercallofficial/' target='_blank' rel='noopener noreferrer'>
               <FontAwesomeIcon icon={faInstagram} />  
             </a>
-            <a href='https://twitter.com' target='_blank' rel='noopener noreferrer'>
+            {/* <a href='https://twitter.com' target='_blank' rel='noopener noreferrer'>
               <FontAwesomeIcon icon={faTwitter} />
             </a>
             <a href='https://www.reddit.com/r/SuratNightoutMeetups/' target='_blank' rel='noopener noreferrer'>
@@ -72,7 +72,7 @@ function Footer({ homeRef }) {
             </a>
             <a href='https://linkedin.com' target='_blank' rel='noopener noreferrer'>
               <FontAwesomeIcon icon={faLinkedin} />
-            </a>
+            </a> */}
           </div>
         </div>
       </div>
