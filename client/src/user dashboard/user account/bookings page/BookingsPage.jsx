@@ -23,7 +23,7 @@ const BookingsPage = () => {
         //   title: 'FPV Drone Experience',
         //   date: '2025-07-15',
         //   time: '14:00 - 16:00',
-        //   location: 'Adventure Park, San Francisco',
+        //   location: 'experience Park, San Francisco',
         //   status: 'confirmed',
         //   price: '$89.99',
         //   image: 'https://images.unsplash.com/photo-1623874106686-5be7d9a4d6ab?q=80&w=1000'
@@ -167,7 +167,7 @@ const BookingsPage = () => {
               ))}
             </div>
           </div>
-          <h3>Your Adventure Awaits!</h3>
+          <h3>Your experience Awaits!</h3>
           <p>Your journey hasn't started yet. Discover amazing experiences waiting for you to explore.</p>
           <motion.button 
             className="explore-button"

@@ -77,7 +77,7 @@ function Footer({ homeRef }) {
         </div>
       </div>
       <div className='footer-bottom'>
-        © {new Date().getFullYear()} Wandercall Experiences. All rights reserved.
+        © {new Date().getFullYear()} wandercall.com Experiences. All rights reserved.
       </div>
     </div>
   );

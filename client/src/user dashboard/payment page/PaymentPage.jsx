@@ -45,7 +45,7 @@ const PaymentPage = () => {
     const { token, logout } = useAuth();
 
     // Data retrieval from BookPage.jsx
-    const product = location.state?.product || { title: 'Adventure Experience', img1: 'https://images.unsplash.com/photo-1540397106260-e24a507a08ea', price: 99 };
+    const product = location.state?.product || { title: 'experience Experience', img1: 'https://images.unsplash.com/photo-1540397106260-e24a507a08ea', price: 99 };
     const bookingDetails = location.state?.bookingDetails || {};
     const participants = bookingDetails.participants || 2;
     const selectedDate = bookingDetails.selectedDate || new Date();
@@ -329,7 +329,7 @@ const PaymentPage = () => {
                 amount: orderData.amount,
                 currency: orderData.currency,
                 name: 'Wandercall',
-                description: 'Adventure Experience Booking',
+                description: 'experience Experience Booking',
                 order_id: orderData.orderId,
                 handler: async (response) => {
                     // Step 3: Verify payment on server
@@ -982,7 +982,7 @@ const PaymentPage = () => {
                                                     <FontAwesomeIcon icon={faMapMarkedAlt} className="detail-icon" />
                                                     <div>
                                                         <span className="detail-label">Location: </span>
-                                                        <span className="detail-value">Central Adventure Park</span>
+                                                        <span className="detail-value">Central experience Park</span>
                                                     </div>
                                                 </div>
                                             </div>

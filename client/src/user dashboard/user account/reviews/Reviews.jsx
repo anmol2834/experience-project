@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 const mockExperiences = [
   // {
   //   id: 1,
-  //   name: "Skydiving Adventure",
+  //   name: "Skydiving experience",
   //   image: "skydiving.jpg",
   //   reviewed: true,
   //   rating: 5,
@@ -208,7 +208,7 @@ function Reviews() {
         transition={{ duration: 0.5 }}
       >
         <h1>Your Experience Journal</h1>
-        <p>Relive your adventures and share your stories</p>
+        <p>Relive your experiences and share your stories</p>
       </motion.div>
 
       <div className="reviews-tabs">
@@ -251,7 +251,7 @@ function Reviews() {
               </defs>
             </svg>
           </div>
-          <h2>Your Adventure Journal is Empty</h2>
+          <h2>Your experience Journal is Empty</h2>
           <p>Start your journey by exploring new experiences and creating memories worth remembering.</p>
           <motion.button 
             className="explore-button"
@@ -304,7 +304,7 @@ function Reviews() {
                 ) : (
                   <>
                     <p className="encouragement-text">
-                      <span className="highlight">Share your adventure!</span> Your insights help others discover amazing experiences.
+                      <span className="highlight">Share your experience!</span> Your insights help others discover amazing experiences.
                     </p>
                     <div className="pulse-animation">
                       <motion.button
@@ -360,7 +360,7 @@ function Reviews() {
                 <p className="full-review">{selectedReview.review}</p>
                 
                 <div className="signature">
-                  <p>Adventure Journal Entry</p>
+                  <p>experience Journal Entry</p>
                   <div className="signature-line"></div>
                 </div>
               </div>
@@ -412,7 +412,7 @@ function Reviews() {
                 <div className="review-text-section">
                   <h3>Share your experience</h3>
                   <textarea
-                    placeholder="Tell us about your adventure... What did you love? What could be improved?"
+                    placeholder="Tell us about your experience... What did you love? What could be improved?"
                     value={formData.review}
                     onChange={handleReviewChange}
                     className="review-textarea"

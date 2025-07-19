@@ -475,7 +475,7 @@ function SignIn() {
         <div className="banner-content">
           <div className="banner-title">
             <h2>Unlock Extraordinary Experiences</h2>
-            <p>Sign in to access our exclusive adventures</p>
+            <p>Sign in to access our exclusive experiences</p>
           </div>
           
           <div className="feature-carousel">

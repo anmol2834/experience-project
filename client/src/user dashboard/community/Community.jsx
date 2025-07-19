@@ -17,13 +17,13 @@ const Community = () => {
     },
     {
       title: "Experience Sharing Hub",
-      description: "Share your adventure stories, photos, and videos with our passionate community.",
+      description: "Share your experience stories, photos, and videos with our passionate community.",
       icon: "📸",
       color: "#6a5acd"
     },
     {
       title: "Event Coordination",
-      description: "Organize and join local events, meetups, and virtual gatherings with ease.",
+      description: "Organize and join local experience, meetups, and virtual gatherings with ease.",
       icon: "🗓️",
       color: "#8a2be2"
     },
@@ -73,7 +73,7 @@ const Community = () => {
           <h2 className="community-neon-subtitle">Coming Soon</h2>
           <div className="community-neon-divider"></div>
           <p className="community-neon-description">
-            We're building an exclusive space where adventurers connect, share experiences, 
+            We're building an exclusive space where experiencers connect, share experiences, 
             and build lasting connections. Get ready to join fellow thrill-seekers in our 
             vibrant community.
           </p>
@@ -132,18 +132,18 @@ const Community = () => {
             <div className="community-advantage-card">
               <div className="community-advantage-icon">🤝</div>
               <h3>Connect with Like-Minded People</h3>
-              <p>Find others who share your passion for adventure and unique experiences.</p>
+              <p>Find others who share your passion for experience and unique experiences.</p>
             </div>
             
             <div className="community-advantage-card">
               <div className="community-advantage-icon">💡</div>
               <h3>Gain Exclusive Insights</h3>
-              <p>Access expert advice and insider knowledge to enhance your adventures.</p>
+              <p>Access expert advice and insider knowledge to enhance your experiences.</p>
             </div>
             
             <div className="community-advantage-card">
               <div className="community-advantage-icon">🚀</div>
-              <h3>Early Access to Events</h3>
+              <h3>Early Access to experience</h3>
               <p>Be the first to know about upcoming experiences and get priority booking.</p>
             </div>
           </div>
@@ -167,7 +167,7 @@ const Community = () => {
       </div>
       
       <div className="community-neon-footer">
-        <p>Experience the extraordinary • Connecting adventurers worldwide</p>
+        <p>Experience the extraordinary • Connecting experiencers worldwide</p>
       </div>
     </div>
   );

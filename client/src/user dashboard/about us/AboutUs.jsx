@@ -27,7 +27,7 @@ const AboutUs = () => {
 
   const experiences = [
     { title: "FPV Drone", icon: "🚁", delay: 0, desc: "First-person view drone racing experience" },
-    { title: "Story Session", icon: "📖", delay: 0.2, desc: "Interactive horror and adventure storytelling" },
+    { title: "Story Session", icon: "📖", delay: 0.2, desc: "Interactive horror and experience storytelling" },
     { title: "Movie Nights", icon: "🎬", delay: 0.4, desc: "Themed cinematic experiences under the stars" },
     { title: "Late Night Party", icon: "🎉", delay: 0.6, desc: "Energetic parties with immersive themes" },
     { title: "Gamer Bash", icon: "🎮", delay: 0.8, desc: "Competitive gaming tournaments and VR experiences" },
@@ -57,7 +57,7 @@ const AboutUs = () => {
             <div className="aboutus-ornament aboutus-ornament-left">✧</div>
             <p className="aboutus-description">
               Welcome to <span className="aboutus-accent">XperienceX</span>, where we transform ordinary moments into 
-              <span className="aboutus-highlight"> unforgettable adventures</span>. We're pioneers in crafting unique 
+              <span className="aboutus-highlight"> unforgettable experiences</span>. We're pioneers in crafting unique 
               experiences that push boundaries and ignite your senses. From the adrenaline rush of FPV drone racing 
               to the chilling atmosphere of horror story nights, we create immersive worlds that stay with you long 
               after the experience ends.
@@ -88,7 +88,7 @@ const AboutUs = () => {
           
           <div className="aboutus-future-section aboutus-animate-in" style={{ animationDelay: "2.1s" }}>
             <div className="aboutus-section-header">
-              <h3>The <span className="aboutus-glowing-text">Future</span> of Adventure</h3>
+              <h3>The <span className="aboutus-glowing-text">Future</span> of experience</h3>
               <div className="aboutus-stars">
                 <span className="aboutus-star">✦</span>
                 <span className="aboutus-star">✦</span>
@@ -123,7 +123,7 @@ const AboutUs = () => {
         
         <div className="aboutus-footer">
           <div className="aboutus-contact">
-            <p>Ready for an adventure?</p>
+            <p>Ready for an experience?</p>
             <button className="aboutus-contact-btn">Contact Us</button>
           </div>
         </div>

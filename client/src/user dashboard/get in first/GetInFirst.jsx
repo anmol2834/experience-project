@@ -183,7 +183,7 @@ function GetInFirst() {
         <div className="step-content animate-in">
           <div className="header-section">
             <h1 className="neon-heading">Join the <span className="highlight">Exclusive</span> Waiting List</h1>
-            <p className="subtitle">Be among the first to experience our revolutionary adventure platform</p>
+            <p className="subtitle">Be among the first to experience our revolutionary experience platform</p>
           </div>
           
           <div className="content-grid">
@@ -464,7 +464,7 @@ function GetInFirst() {
                     <div className="timeline-icon">3</div>
                     <div className="timeline-content">
                       <h4>Launch Notification</h4>
-                      <p>We'll notify you as soon as our platform is ready for your first adventure</p>
+                      <p>We'll notify you as soon as our platform is ready for your first experience</p>
                     </div>
                   </div>
                 </div>

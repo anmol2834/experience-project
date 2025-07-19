@@ -206,7 +206,7 @@ const FrontPage = () => {
               <div className="stat-item">
                 <FontAwesomeIcon icon={faUser} className="stat-icon" />
                 <div className="stat-value">{stats.users.toLocaleString()}+</div>
-                <div className="stat-label">Adventurers</div>
+                <div className="stat-label">experiencers</div>
               </div>
 
               <div className="stat-divider"></div>
