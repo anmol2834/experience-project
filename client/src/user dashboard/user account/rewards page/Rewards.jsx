@@ -1,25 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiArrowLeft, FiZap, FiGift, FiAward, FiActivity } from 'react-icons/fi';
 import './Rewards.css';
 
-
 const Rewards = ({ isMobile, handleBack }) => {
-  const [allActivities, setAllActivities] = useState([
-    // { icon: '🪂', name: 'Skydiving', xp: 500, date: '2023-08-15' },
-    // { icon: '🧗', name: 'Rock Climbing', xp: 300, date: '2023-08-14' },
-    // { icon: '🏕️', name: 'Wilderness Survival', xp: 450, date: '2023-08-13' },
-    // { icon: '🚣', name: 'Kayaking', xp: 400, date: '2023-08-12' },
-    // { icon: '🏂', name: 'Snowboarding', xp: 550, date: '2023-08-11' },
-    // { icon: '🚴', name: 'Mountain Biking', xp: 350, date: '2023-08-10' },
-  ]);
-  
+  const [allActivities, setAllActivities] = useState([]);
+  const [totalXP, setTotalXP] = useState(0);
   const [activityPage, setActivityPage] = useState(0);
+  
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        const data = await response.json();
+        setAllActivities(data.xpHistory || []);
+        setTotalXP(data.xp || 0);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   const currentActivities = allActivities.slice(activityPage * 3, (activityPage * 3) + 3);
   
-  // Calculate total XP dynamically
-  const totalXP = allActivities.reduce((sum, activity) => sum + activity.xp, 0);
-  const progressPercentage = Math.min(Math.floor((totalXP / 3000) * 100), 100);
+  // Calculate progress percentage and level based on total XP
+  const levelThreshold = 3000;
+  const currentLevel = Math.floor(totalXP / levelThreshold) + 1;
+  const progressPercentage = Math.min(Math.floor(((totalXP % levelThreshold) / levelThreshold) * 100), 100);
   
   return (
     <div className="rewards-container">
@@ -41,13 +54,14 @@ const Rewards = ({ isMobile, handleBack }) => {
             <div className="xp-details">
               <span className="label">Total XP</span>
               <h2>{totalXP.toLocaleString()}</h2>
-              <div className="progress-contain">
+              <div className="reward-progress-container">
                 <div className="progress-bar" style={{ width: `${progressPercentage}%` }} />
               </div>
               <span className="progress-text">{progressPercentage}% to next level</span>
             </div>
             <div className="xp-badge">
               <FiAward size={40} />
+              <p>lvl. {currentLevel}</p>
             </div>
           </div>
         </div>
