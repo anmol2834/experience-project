@@ -206,6 +206,14 @@
     .description {
         font-size: 0.8rem;
     }
+
+    .bottom-section button {
+        cursor: none;
+    }
+
+    .heart-contain {
+        cursor: none;
+    }
 }
 
 @media (min-width: 575px) and (max-width: 768px) {
@@ -227,6 +235,10 @@
     }
 
     .heart-contain {
+        cursor: none;
+    }
+
+    .bottom-section button {
         cursor: none;
     }
 }
