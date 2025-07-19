@@ -418,8 +418,9 @@ function ExperienceDetails() {
 
           <div className="price-rating">
             <div className="price">
-              <span className="amount">₹{product.price}</span>
-              <span className="per-person">/person</span>
+              {/* <span className="amount">₹{product.price}</span> */}
+              <span className="amount">₹ To be Announced</span>
+              {/* <span className="per-person">/person</span> */}
             </div>
           </div>
 

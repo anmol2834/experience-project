@@ -108,7 +108,8 @@ function Catelogcard({ title, desc, state, city, price, img, ratings, productId,
         </div>
         <div className="bottom-section">
           <section>
-            <p className="selling-price">₹{price !== undefined ? price : 'N/A'}/Person</p>
+            {/* <p className="selling-price">₹{price !== undefined ? price : 'N/A'}/Person</p> */}
+            <p className="selling-price">₹ To be Announced</p>
           </section>
           <section>
             <button onClick={handleViewDetails}>View Details</button>

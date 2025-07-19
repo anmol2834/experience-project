@@ -341,7 +341,7 @@ function GetInFirst() {
                     value={formData.phone}
                     onChange={handleChange}
                     className={errors.phone ? 'error' : ''}
-                    placeholder="8983745627"
+                    placeholder="89****5627"
                   />
                   {errors.phone && <span className="error-message">{errors.phone}</span>}
                 </div>

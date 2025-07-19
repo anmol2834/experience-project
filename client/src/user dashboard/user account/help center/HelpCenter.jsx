@@ -22,9 +22,9 @@ const HelpCenter = () => {
   ];
 
   const contactMethods = [
-    { icon: '📧', title: 'Email', info: 'anmolsinha4321@gmail.com', action: 'Write to Us' },
+    { icon: '📧', title: 'Email', info: 'teamwandercall@gmail.com', action: 'Write to Us' },
     { icon: '💬', title: 'Live Chat', info: 'Available 24/7', action: 'Start Chat' },
-    { icon: '📞', title: 'Phone', info: '+91 8733942557', action: 'Call Now' }
+    { icon: '📧', title: '2nd email', info: 'anmolsinha4321@gmail.com', action: 'main us' }
   ];
 
   const handleSubmit = (e) => {

@@ -22,14 +22,14 @@ function Footer({ homeRef }) {
         <div className='footer-section about'>
           <h2>About Us</h2>
           <p>
-            We provide unique experiences like skydiving, bungee jumping, crafting, survival adventures, and more. Join us for unforgettable memories!
+            We provide unique experiences like skydiving, bungee jumping, crafting, survival experiences, and more. Join us for unforgettable memories!
           </p>
           <div className='contact'>
             <span>
-              <FontAwesomeIcon icon={faPhone} /> +91 8733942557
+              {/* <FontAwesomeIcon icon={faPhone} /> +91 8733942557 */}
             </span>
             <span>
-              <FontAwesomeIcon icon={faEnvelope} /> anmolsinha4321@gmail.com
+              <FontAwesomeIcon icon={faEnvelope} /> teamwandercall@gmail.com
             </span>
             <span>
               <FontAwesomeIcon icon={faMapMarkerAlt} /> Surat, Gujarat
@@ -47,7 +47,7 @@ function Footer({ homeRef }) {
         </div>
         <div className='footer-section newsletter'>
           <h2>Subscribe to Our Newsletter</h2>
-          <p>Stay updated with our latest adventures and offers.</p>
+          <p>Stay updated with our latest experiences and offers.</p>
           <form onSubmit={(e) => e.preventDefault()}>
             <input type='email' placeholder='Enter your email' required />
             <button type='submit'>
@@ -77,7 +77,7 @@ function Footer({ homeRef }) {
         </div>
       </div>
       <div className='footer-bottom'>
-        © {new Date().getFullYear()} Unique Experiences. All rights reserved.
+        © {new Date().getFullYear()} Wandercall Experiences. All rights reserved.
       </div>
     </div>
   );
