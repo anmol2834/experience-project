@@ -28,7 +28,6 @@ const AboutUs = () => {
   const experiences = [
     { title: "FPV Drone", icon: "🚁", delay: 0, desc: "First-person view drone racing experience" },
     { title: "Story Session", icon: "📖", delay: 0.2, desc: "Interactive horror and experience storytelling" },
-    { title: "Movie Nights", icon: "🎬", delay: 0.4, desc: "Themed cinematic experiences under the stars" },
     { title: "Late Night Party", icon: "🎉", delay: 0.6, desc: "Energetic parties with immersive themes" },
     { title: "Gamer Bash", icon: "🎮", delay: 0.8, desc: "Competitive gaming tournaments and VR experiences" },
     { title: "Wisdom Hour", icon: "🧠", delay: 1, desc: "Wisdom Hour lets you learn real-world skills and insights from experts in just one powerful hour" }

@@ -75,7 +75,7 @@ const TermsAndConditions = () => {
             <h2>1. Introduction</h2>
             <p>Welcome to WanderCall! These Terms and Conditions ("Terms") govern your use of our website and services. By accessing or using our platform, you agree to be bound by these Terms. If you do not agree with any part of these Terms, you must not use our services.</p>
             
-            <p>WanderCall provides unique experiential services including but not limited to FPV drone experiences, story nights, movie nights, late night parties, gamer bashes, and other immersive activities ("Experiences"). Our mission is to create unforgettable moments through carefully curated experiences.</p>
+            <p>WanderCall provides unique experiential services including but not limited to FPV drone experiences, story nights, late night parties, gamer bashes, and other immersive activities ("Experiences"). Our mission is to create unforgettable moments through carefully curated experiences.</p>
             
             <p>These Terms constitute a legally binding agreement between you ("User", "Participant", or "you") and WanderCall ("Company", "we", "us", or "our"). We reserve the right to modify these Terms at any time, with changes becoming effective immediately upon posting on our platform. Your continued use of our services after such changes constitutes your acceptance of the revised Terms.</p>
           </section>

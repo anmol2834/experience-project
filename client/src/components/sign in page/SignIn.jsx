@@ -279,12 +279,6 @@ function SignIn() {
       icon: horrorImg
     },
     {
-      title: "Movie Nights Under Stars",
-      description: "Experience cinema like never before with our open-air screenings. Watch classic and contemporary films under the night sky with premium sound.",
-      color: "#fbbc05",
-      icon: movieImg
-    },
-    {
       title: "Late Night Parties",
       description: "Dance the night away with our exclusive late-night celebrations. Featuring top DJs, themed events, and vibrant atmospheres.",
       color: "#34a853",

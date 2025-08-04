@@ -148,11 +148,6 @@ function SignUp() {
       image: horrorStory
     },
     {
-      title: "Movie Nights Under Stars",
-      description: "Experience cinema like never before with our open-air screenings",
-      image: movieNight
-    },
-    {
       title: "Late Night Parties",
       description: "Dance the night away with exclusive celebrations and top DJs",
       image: lateNightParty
