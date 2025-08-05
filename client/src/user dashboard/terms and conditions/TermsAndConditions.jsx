@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import './TermsAndConditions.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLongArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from '../../context/AuthContext';
 
 const TermsAndConditions = () => {
   const [activeSection, setActiveSection] = useState('');
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
+  const { token } = useAuth(); 
   
   useEffect(() => {
     setIsVisible(true);
@@ -275,9 +277,11 @@ const TermsAndConditions = () => {
       
       <div className="terms-footer">
         <p>By using WanderCall services, you acknowledge that you have read, understood, and agreed to these Terms and Conditions.</p>
-        <div className="acceptance-box" onClick={() => navigate(-1)}>
-          <p>I agree to the Terms and Conditions and Privacy Policy</p>
-        </div>
+        {!token && ( // Show acceptance box only if user is not logged in
+          <div className="acceptance-box" onClick={() => navigate('/signup?agree=true')}>
+            <p>I agree to the Terms and Conditions and Privacy Policy</p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -279,6 +279,12 @@ function SignIn() {
       icon: horrorImg
     },
     {
+      title: "Movie Nights Under Stars",
+      description: "Experience cinema like never before with our open-air screenings. Watch classic and contemporary films under the night sky with premium sound.",
+      color: "#fbbc05",
+      icon: movieImg
+    },
+    {
       title: "Late Night Parties",
       description: "Dance the night away with our exclusive late-night celebrations. Featuring top DJs, themed events, and vibrant atmospheres.",
       color: "#34a853",
@@ -406,7 +412,7 @@ function SignIn() {
         <p>Don't have an Account? <span onClick={() => navigate('/signup')}>sign up</span></p>
         <div className='input-area'>
           <div className={`input input-email ${emailFocused || emailValue ? 'focused' : ''}`}>
-            <label htmlFor="email" className='label email-label'>Email / Phone no.</label>
+            <label htmlFor="email" className='label email-label'>Email</label>
             <input
               {...register('email', {
                 required: 'Email is required',

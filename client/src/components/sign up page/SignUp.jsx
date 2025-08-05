@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import './signup.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,17 +16,25 @@ import wisdomHours from './wisdom-hours.png';
 
 function SignUp() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [eye, setEye] = useState(false);
   const [verifyBox, setVerifyBox] = useState(false);
   const [registeredEmail, setRegisteredEmail] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, setValue, control } = useForm();
   const [isLoading, setLoading] = useState(false);
   const [isVerifying, setVerifying] = useState(false);
   const [isResending, setResending] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
   const canvasRef = useRef(null);
   const bannerRef = useRef(null);
+
+  useEffect(() => {
+    const agreeFromTerms = new URLSearchParams(location.search).get('agree') === 'true';
+    if (agreeFromTerms) {
+      setValue('user Agree', true);
+    }
+  }, [location, setValue]);
 
   const handleEye = () => setEye(!eye);
 
@@ -48,6 +56,7 @@ function SignUp() {
           phone: data.phone,
           email: data.email,
           password: data.password,
+          agreedToTerms: data.userAgree,
         }),
       });
       const result = await response.text();
@@ -72,11 +81,6 @@ function SignUp() {
     if (firstError) {
       toast.error(firstError.message, { toastId: 'signup-error' });
     }
-  };
-
-  const handlePhoneInput = (e) => {
-    const formattedNumber = e.target.value.replace(/\D/g, '').slice(0, 10);
-    e.target.value = formattedNumber;
   };
 
   const handleCodeInput = (e) => {
@@ -135,7 +139,6 @@ function SignUp() {
     }
   };
 
-  // Banner experience data
   const experiences = [
     {
       title: "FPV Drone Experience",
@@ -146,6 +149,11 @@ function SignUp() {
       title: "Horror Story Sessions",
       description: "Get chills with spine-tingling horror stories told by master storytellers",
       image: horrorStory
+    },
+    {
+      title: "Movie Nights Under Stars",
+      description: "Experience cinema like never before with our open-air screenings",
+      image: movieNight
     },
     {
       title: "Late Night Parties",
@@ -164,7 +172,6 @@ function SignUp() {
     }
   ];
 
-  // Handle card navigation
   const nextCard = () => {
     setCurrentCard((prev) => (prev + 1) % experiences.length);
   };
@@ -173,7 +180,6 @@ function SignUp() {
     setCurrentCard((prev) => (prev - 1 + experiences.length) % experiences.length);
   };
 
-  // Auto-rotate cards
   useEffect(() => {
     const interval = setInterval(() => {
       nextCard();
@@ -182,7 +188,6 @@ function SignUp() {
     return () => clearInterval(interval);
   }, []);
 
-  // Holographic particle animation
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -191,16 +196,15 @@ function SignUp() {
     const width = canvas.width = canvas.offsetWidth;
     const height = canvas.height = canvas.offsetHeight;
     
-    // Create particles
     const particles = [];
     const particleCount = 150;
     const colors = [
-      'rgba(106, 90, 205, 0.8)', // rebeccapurple
-      'rgba(66, 133, 244, 0.8)', // blue
-      'rgba(234, 67, 53, 0.8)',  // red
-      'rgba(251, 188, 5, 0.8)',  // yellow
-      'rgba(52, 168, 83, 0.8)',  // green
-      'rgba(103, 58, 183, 0.8)'  // purple
+      'rgba(106, 90, 205, 0.8)',
+      'rgba(66, 133, 244, 0.8)',
+      'rgba(234, 67, 53, 0.8)',
+      'rgba(251, 188, 5, 0.8)',
+      'rgba(52, 168, 83, 0.8)',
+      'rgba(103, 58, 183, 0.8)'
     ];
     
     for (let i = 0; i < particleCount; i++) {
@@ -218,16 +222,13 @@ function SignUp() {
       });
     }
     
-    // Animation loop
     let animationId;
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
       
-      // Draw holographic grid
       ctx.strokeStyle = 'rgba(106, 90, 205, 0.1)';
       ctx.lineWidth = 1;
       
-      // Vertical lines
       for (let x = 0; x < width; x += 30) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
@@ -235,7 +236,6 @@ function SignUp() {
         ctx.stroke();
       }
       
-      // Horizontal lines
       for (let y = 0; y < height; y += 30) {
         ctx.beginPath();
         ctx.moveTo(0, y);
@@ -243,20 +243,18 @@ function SignUp() {
         ctx.stroke();
       }
       
-      // Update and draw particles
       const time = Date.now() * 0.001;
       particles.forEach(p => {
         p.angle += p.angleSpeed;
         const wave = Math.sin(time + p.distance * 0.01) * 20;
+        const radius = Math.max(0.1, p.radius + Math.sin(p.angle) * p.baseSize);
         
-        // Draw particle with pulsing effect
         ctx.beginPath();
-        ctx.arc(p.x + wave, p.y, p.radius + Math.sin(p.angle) * p.baseSize, 0, Math.PI * 2);
+        ctx.arc(p.x + wave, p.y, radius, 0, Math.PI * 2);
         
-        // Create holographic glow effect
         const gradient = ctx.createRadialGradient(
           p.x + wave, p.y, 0,
-          p.x + wave, p.y, p.radius * 3
+          p.x + wave, p.y, radius * 3
         );
         gradient.addColorStop(0, p.color);
         gradient.addColorStop(1, 'transparent');
@@ -264,7 +262,6 @@ function SignUp() {
         ctx.fillStyle = gradient;
         ctx.fill();
         
-        // Create connection lines between close particles
         particles.forEach(other => {
           const dx = p.x - other.x;
           const dy = p.y - other.y;
@@ -319,8 +316,11 @@ function SignUp() {
         <div className="user-detail">
           <div className="num-div">
             <span>+91</span>
-            <input
-              {...register('phone', {
+            <Controller
+              name="phone"
+              control={control}
+              defaultValue=""
+              rules={{
                 required: 'Phone number required',
                 minLength: {
                   value: 10,
@@ -330,10 +330,26 @@ function SignUp() {
                   value: 10,
                   message: 'Invalid phone number',
                 },
-              })}
-              type="number"
-              placeholder="Enter Phone Number"
-              onInput={handlePhoneInput}
+              }}
+              render={({ field }) => (
+                <input
+                  type="tel"
+                  placeholder="Enter Phone Number"
+                  {...field}
+                  onChange={(e) => {
+                    let value = e.target.value;
+                    const plusIndex = value.indexOf('+');
+                    if (plusIndex !== -1) {
+                      const afterPlus = value.slice(plusIndex + 1);
+                      const countryCodeLength = afterPlus.match(/^\d{1,2}/)?.[0].length || 0;
+                      value = value.slice(plusIndex + 1 + countryCodeLength).replace(/\D/g, '').slice(0, 10);
+                    } else {
+                      value = value.replace(/\D/g, '').slice(0, 10);
+                    }
+                    field.onChange(value);
+                  }}
+                />
+              )}
             />
           </div>
           <input
@@ -385,7 +401,7 @@ function SignUp() {
 
           <div className="checkbox">
             <input
-              {...register('userAgree', {
+              {...register('user Agree', {
                 required: 'Please accept the Terms and Conditions to proceed',
               })}
               type="checkbox"

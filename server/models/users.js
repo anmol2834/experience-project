@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
   phone: { type: String, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  agreedToTerms: { type: Boolean, default: false },
   verificationCode: { type: String },
   verified: { type: Boolean, default: false },
   dob: { type: Date },

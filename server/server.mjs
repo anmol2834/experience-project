@@ -113,7 +113,7 @@ app.get('/waitlist/count', async (req, res) => {
 
 // Register route
 app.post('/register', async (req, res) => {
-  const { firstname, lastname, phone, email, password } = req.body;
+  const { firstname, lastname, phone, email, password, agreedToTerms } = req.body;
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -132,6 +132,7 @@ app.post('/register', async (req, res) => {
       phone,
       email,
       password,
+      agreedToTerms: agreedToTerms || false,
       verificationCode,
       remainingDiscountBookings: 0,
       priorityAccess: false,
