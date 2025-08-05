@@ -75,7 +75,7 @@ const TermsAndConditions = () => {
             <h2>1. Introduction</h2>
             <p>Welcome to WanderCall! These Terms and Conditions ("Terms") govern your use of our website and services. By accessing or using our platform, you agree to be bound by these Terms. If you do not agree with any part of these Terms, you must not use our services.</p>
             
-            <p>WanderCall provides unique experiential services including but not limited to FPV drone experiences, story nights, late night parties, gamer bashes, and other immersive activities ("Experiences"). Our mission is to create unforgettable moments through carefully curated experiences.</p>
+            <p>WanderCall provides unique experiential services including but not limited to FPV drone experiences, story nights, movie nights, late night parties, gamer bashes, and other immersive activities ("Experiences"). Our mission is to create unforgettable moments through carefully curated experiences.</p>
             
             <p>These Terms constitute a legally binding agreement between you ("User", "Participant", or "you") and WanderCall ("Company", "we", "us", or "our"). We reserve the right to modify these Terms at any time, with changes becoming effective immediately upon posting on our platform. Your continued use of our services after such changes constitutes your acceptance of the revised Terms.</p>
           </section>
@@ -84,7 +84,7 @@ const TermsAndConditions = () => {
             <h2>2. User Accounts</h2>
             <p>To access certain features of our services, you must create an account. When creating your account, you agree to provide accurate, current, and complete information. You are solely responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
             
-            <p>You must be at least 18 years old to create an account and participate in our Experiences. For participants between 13-17 years old, a parent or legal guardian must create the account and provide consent for participation. We reserve the right to suspend or terminate accounts that provide false information or violate these Terms.</p>
+            <p>You must be at least 16 years old to create an account and participate in our Experiences. For participants between 13-15 years old, a parent or legal guardian must create the account and provide consent for participation. We reserve the right to suspend or terminate accounts that provide false information or violate these Terms.</p>
             
             <p>By creating an account, you consent to receive electronic communications from WanderCall, including booking confirmations, experience updates, promotional offers, and important service announcements. You may opt-out of promotional communications at any time through your account settings.</p>
           </section>
@@ -95,7 +95,7 @@ const TermsAndConditions = () => {
             
             <p>We accept various payment methods including credit/debit cards, digital wallets, and other payment options displayed during checkout. By providing payment information, you represent that you are authorized to use the payment method.</p>
             
-            <p>For certain high-risk Experiences (such as FPV drone sessions), we may require a signed liability waiver before participation. Failure to complete required waivers may result in cancellation of your booking without refund.</p>
+            <p>For certain high-risk Experiences, we may require a signed liability waiver before participation. Failure to complete required waivers may result in cancellation of your booking without refund.</p>
             
             <div className="highlight-box">
               <h3>Important Booking Information</h3>
@@ -120,7 +120,7 @@ const TermsAndConditions = () => {
           
           <section id="liability" className="terms-section">
             <h2>4. Liability & Waivers</h2>
-            <p>Participation in WanderCall Experiences involves inherent risks, especially for activities like FPV drone experiences. By booking an Experience, you acknowledge and voluntarily assume all risks associated with participation, including risk of injury, disability, death, or property damage.</p>
+            <p>Participation in WanderCall Experiences involves inherent risks. By booking an Experience, you acknowledge and voluntarily assume all risks associated with participation, including risk of injury, disability, death, or property damage.</p>
             
             <p>To the maximum extent permitted by law, WanderCall, its affiliates, employees, and partners shall not be liable for any direct, indirect, incidental, special, or consequential damages resulting from your participation in any Experience.</p>
             
@@ -139,36 +139,32 @@ const TermsAndConditions = () => {
                 <h3>Standard Experiences</h3>
                 <div className="policy-item">
                   <div className="policy-bullet">-</div>
-                  <div className="policy-text">Cancellation 48+ hours before: Full refund</div>
+                  <div className="policy-text">Cancellations made 48 hours or more before the experience starts are eligible for a full refund.</div>
                 </div>
                 <div className="policy-item">
                   <div className="policy-bullet">-</div>
-                  <div className="policy-text">Cancellation 24-48 hours before: 50% refund</div>
-                </div>
-                <div className="policy-item">
-                  <div className="policy-bullet">-</div>
-                  <div className="policy-text">Cancellation less than 24 hours: No refund</div>
+                  <div className="policy-text">Cancellations made within 48 hours of the start time are non-refundable.</div>
                 </div>
               </div>
               
-              <div className="policy-card">
+              {/* <div className="policy-card">
                 <div className="policy-icon">🚁</div>
                 <h3>Premium Experiences</h3>
                 <div className="policy-item">
                   <div className="policy-bullet">-</div>
-                  <div className="policy-text">Cancellation 7+ days before: Full refund</div>
+                  <div className="policy-text">Cancellation 5+ days before experience: Full refund</div>
                 </div>
                 <div className="policy-item">
                   <div className="policy-bullet">-</div>
-                  <div className="policy-text">Cancellation 3-7 days before: 50% refund</div>
+                  <div className="policy-text">Cancellation 3-5 days before experience: 50% refund</div>
                 </div>
                 <div className="policy-item">
                   <div className="policy-bullet">-</div>
                   <div className="policy-text">Cancellation less than 72 hours: No refund</div>
                 </div>
-              </div>
+              </div> */}
               
-              <div className="policy-card">
+              {/* <div className="policy-card">
                 <div className="policy-icon">🎟️</div>
                 <h3>Special Events</h3>
                 <div className="policy-item">
@@ -183,7 +179,7 @@ const TermsAndConditions = () => {
                   <div className="policy-bullet">-</div>
                   <div className="policy-text">Cancellation less than 7 days: No refund</div>
                 </div>
-              </div>
+              </div> */}
             </div>
             
             <p>WanderCall reserves the right to cancel any Experience due to weather conditions, safety concerns, insufficient bookings, or other unforeseen circumstances. In such cases, we will provide a full refund or offer to reschedule your booking.</p>
@@ -222,7 +218,7 @@ const TermsAndConditions = () => {
               </div>
             </div>
             
-            <p>For FPV drone experiences specifically, participants must follow all safety instructions provided by our certified operators. Any reckless operation or violation of safety protocols will result in immediate termination of the session without refund.</p>
+            <p>for riskful experiences specifically, participants must follow all safety instructions provided by our certified operators. Any reckless operation or violation of safety protocols will result in immediate termination of the session without refund.</p>
           </section>
           
           <section id="intellectual" className="terms-section">
@@ -262,16 +258,16 @@ const TermsAndConditions = () => {
             <div className="contact-info">
               <div className="contact-item">
                 <span className="contact-label">Email:</span>
-                <span className="contact-value">support@wandercall.com</span>
+                <span className="contact-value">teamwandercall@gmail.com</span>
               </div>
               <div className="contact-item">
                 <span className="contact-label">Phone:</span>
-                <span className="contact-value">+1 (415) 555-EXPR (3977)</span>
+                <span className="contact-value">+91 8733942557</span>
               </div>
-              <div className="contact-item">
+              {/* <div className="contact-item">
                 <span className="contact-label">Mail:</span>
                 <span className="contact-value">WanderCall Inc., 123 Experience Lane, San Francisco, CA 94107</span>
-              </div>
+              </div> */}
             </div>
           </section>
         </div>
